@@ -3,6 +3,7 @@ package com.tcc.cinematic.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.UUID;
@@ -18,5 +19,6 @@ public class Categoria {
     @GeneratedValue
     @Setter(AccessLevel.NONE)
     private UUID id;
+    @NotNull
     private String nome;
 }
