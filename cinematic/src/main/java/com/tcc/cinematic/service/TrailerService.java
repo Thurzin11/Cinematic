@@ -1,5 +1,7 @@
 package com.tcc.cinematic.service;
 
+import com.tcc.cinematic.DTO.TrailerRegisterDTO;
+import com.tcc.cinematic.DTO.TrailerUpdateDTO;
 import com.tcc.cinematic.entity.Trailer;
 import com.tcc.cinematic.repository.TrailerRepository;
 import org.springframework.beans.BeanUtils;
@@ -22,16 +24,21 @@ public class TrailerService {
         return this.repository.findById(id).orElse(null);
     }
 
-    public Trailer create(Trailer trailer) {
+    public Trailer create(TrailerRegisterDTO trailerRegisterDTO) {
+        var trailer = new Trailer();
+        trailer.setUrlTrailer(trailerRegisterDTO.urlTrailer());
+        if(trailerRegisterDTO.urlCapa() != null) {
+            trailer.setUrlCapa(trailerRegisterDTO.urlCapa());
+        }
         return this.repository.save(trailer);
     }
 
-    public Trailer update(Trailer trailer) {
-        var trailerFound = this.findById(trailer.getId());
+    public Trailer update(TrailerUpdateDTO trailerUpdateDTO) {
+        var trailerFound = this.findById(trailerUpdateDTO.id());
         if(trailerFound == null)
             return null;
 
-        BeanUtils.copyProperties(trailer, trailerFound);
+        BeanUtils.copyProperties(trailerUpdateDTO, trailerFound);
         return this.repository.save(trailerFound);
     }
 
