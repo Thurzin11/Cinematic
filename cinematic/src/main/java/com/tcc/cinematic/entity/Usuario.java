@@ -1,8 +1,7 @@
 package com.tcc.cinematic.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.tcc.cinematic.enums.TipoUsuario;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -23,6 +22,7 @@ public class Usuario {
     private String email;
     private String senha;
     private Boolean status;
-    private String tipoUsuario;
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario tipoUsuario;
     private String login;
 }
