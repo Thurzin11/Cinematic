@@ -8,11 +8,9 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @PropertySource("classpath:application.properties")
 @Getter
-public class IBGEConfiguration {
-    @Value("${ibge.base-url}")
+public class ViaCepConfiguration {
+    @Value("${viacep.base-url}")
     private String urlBase;
-    @Value("${ibge.estados}")
-    private String urlEstados;
-    @Value("${ibge.cidades")
-    private String urlCidades;
+    @Value("${viacep.cep}")
+    private String cep;
 }

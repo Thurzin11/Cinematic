@@ -8,15 +8,15 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class BeanConfiguration {
-    private String ibgeUrlBase;
+    private String viaCepUrlBase;
 
-    public BeanConfiguration(IBGEConfiguration ibgeConfiguration) {
-        this.ibgeUrlBase = ibgeConfiguration.getUrlBase();
+    public BeanConfiguration(ViaCepConfiguration viaCepConfiguration) {
+        this.viaCepUrlBase = viaCepConfiguration.getUrlBase();
     }
 
     @Bean
     public WebClient webClient(WebClient.Builder builder) {
-        return builder.baseUrl(this.ibgeUrlBase)
+        return builder.baseUrl(this.viaCepUrlBase)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }
