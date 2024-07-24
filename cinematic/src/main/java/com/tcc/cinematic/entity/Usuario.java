@@ -26,4 +26,6 @@ public class Usuario {
     private TipoUsuario tipoUsuario;
     private String login;
     private Boolean isGerente;
+    private String cidade;
+    private String estado;
 }
