@@ -23,6 +23,9 @@ public class Sessao {
     private UUID id;
     @ManyToOne
     @NotNull
+    private Sala sala;
+    @ManyToOne
+    @NotNull
     private Horario horario;
     @ManyToOne
     @NotNull

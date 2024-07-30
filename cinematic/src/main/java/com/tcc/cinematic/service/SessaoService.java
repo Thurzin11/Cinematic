@@ -1,11 +1,9 @@
 package com.tcc.cinematic.service;
 
 import com.tcc.cinematic.DTO.SessaoUpdateDTO;
-import com.tcc.cinematic.entity.Estabelecimento;
-import com.tcc.cinematic.entity.Filme;
-import com.tcc.cinematic.entity.Horario;
-import com.tcc.cinematic.entity.Sessao;
+import com.tcc.cinematic.entity.*;
 import com.tcc.cinematic.enums.Idioma;
+import com.tcc.cinematic.enums.TamanhoSala;
 import com.tcc.cinematic.enums.TipoSessao;
 import com.tcc.cinematic.repository.SessaoRepository;
 import org.springframework.beans.BeanUtils;
@@ -13,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +19,9 @@ import java.util.UUID;
 public class SessaoService {
     @Autowired
     private SessaoRepository repository;
+
+    @Autowired
+    private AssentoService assentoService;
 
     public List<Sessao> findAll() {
         return this.repository.findAll();
@@ -62,6 +64,7 @@ public class SessaoService {
     }
 
     public Sessao create(Sessao sessao) {
+        sessao.setAssentos(this.gerarAssentos(sessao.getSala()));
         return this.repository.save(sessao);
     }
 
@@ -106,5 +109,32 @@ public class SessaoService {
             case "NORMAL" -> Idioma.NORMAL;
             default -> null;
         };
+    }
+
+    private List<Assento> gerarAssentos(Sala sala) {
+        var assentos = new ArrayList<Assento>();
+
+        if(sala.getTamanho() == TamanhoSala.PEQUENA) {
+            for(var i=0;i<50;i++) {
+                var assento = Assento.builder().nome(sala.getNumero() + "a").build();
+                assentos.add(assento);
+            }
+        }
+
+        if(sala.getTamanho() == TamanhoSala.MEDIA) {
+            for(var i=0;i<100;i++) {
+                var assento = Assento.builder().nome(sala.getNumero() + "a").build();
+                assentos.add(assento);
+            }
+        }
+
+        if(sala.getTamanho() == TamanhoSala.GRANDE) {
+            for (var i=0;i<150;i++) {
+                var assento = Assento.builder().nome(sala.getNumero() + "a").build();
+                assentos.add(assento);
+            }
+        }
+
+        return assentos;
     }
 }

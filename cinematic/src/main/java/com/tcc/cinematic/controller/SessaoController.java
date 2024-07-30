@@ -1,6 +1,7 @@
 package com.tcc.cinematic.controller;
 
 import com.tcc.cinematic.DTO.SessaoUpdateDTO;
+import com.tcc.cinematic.entity.Estabelecimento;
 import com.tcc.cinematic.entity.Filme;
 import com.tcc.cinematic.entity.Horario;
 import com.tcc.cinematic.entity.Sessao;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -49,6 +51,16 @@ public class SessaoController {
     @GetMapping("/tipo")
     public ResponseEntity<List<Sessao>> findByTipo(@RequestBody Map<String, String> params) {
         return ResponseEntity.ok(this.service.findByTipo(params.get("tipo")));
+    }
+
+    @GetMapping("/estabelecimento")
+    public ResponseEntity<List<Sessao>> findByEstabelecimento(@RequestBody Estabelecimento estabelecimento) {
+        return ResponseEntity.ok(this.service.findByEstabelecimento(estabelecimento));
+    }
+
+    @GetMapping("/data")
+    public ResponseEntity<List<Sessao>> findByData(@RequestBody Map<String, LocalDate> params) {
+        return ResponseEntity.ok(this.service.findByData(params.get("data")));
     }
 
     @GetMapping("/{id}")
