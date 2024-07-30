@@ -2,6 +2,8 @@ package com.tcc.cinematic.service;
 
 import com.tcc.cinematic.DTO.SalaRecordDTO;
 import com.tcc.cinematic.entity.Sala;
+import com.tcc.cinematic.enums.TamanhoSala;
+import com.tcc.cinematic.enums.TipoSala;
 import com.tcc.cinematic.repository.SalaRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +27,29 @@ public class SalaService {
 
     public Sala create(SalaRecordDTO salaRecordDTO) {
         var sala = new Sala();
+        sala.setNumero(this.findAll().size()+1);
+        sala.setTamanho(this.setTamanho(salaRecordDTO.tamanho()));
+        sala.setTipo(this.setTipo(salaRecordDTO.tipo()));
         BeanUtils.copyProperties(salaRecordDTO, sala);
         return this.repository.save(sala);
+    }
+
+    private TamanhoSala setTamanho(String tamanho) {
+        return switch (tamanho.toUpperCase()) {
+            case "GRANDE" -> TamanhoSala.GRANDE;
+            case "MEDIA" -> TamanhoSala.MEDIA;
+            case "PEQUENA" -> TamanhoSala.PEQUENA;
+            default -> null;
+        };
+    }
+
+    private TipoSala setTipo(String tipo) {
+        return switch (tipo.toUpperCase()) {
+            case "CINEMA" -> TipoSala.CINEMA;
+            case "TEATRO" -> TipoSala.TEATRO;
+            case "EVENTO" -> TipoSala.EVENTO;
+            default ->  null;
+        };
     }
 
     public Sala update(SalaRecordDTO salaRecordDTO) {
