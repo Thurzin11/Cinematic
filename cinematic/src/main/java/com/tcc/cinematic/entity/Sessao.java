@@ -37,5 +37,6 @@ public class Sessao {
     private Idioma idioma;
     @Enumerated(EnumType.STRING)
     private TipoSessao tipo;
+    @NotNull
     private LocalDate data;
 }
