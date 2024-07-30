@@ -74,7 +74,7 @@ public class SessaoController {
 
     @PostMapping
     public ResponseEntity<Sessao> create(@RequestBody @Valid Sessao sessao) {
-        return new ResponseEntity(this.service.create(sessao), HttpStatus.CREATED);
+        return new ResponseEntity<Sessao>(this.service.create(sessao), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{id}")
