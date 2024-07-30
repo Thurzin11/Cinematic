@@ -1,6 +1,8 @@
 package com.tcc.cinematic.controller;
 
 import com.tcc.cinematic.DTO.SessaoUpdateDTO;
+import com.tcc.cinematic.entity.Filme;
+import com.tcc.cinematic.entity.Horario;
 import com.tcc.cinematic.entity.Sessao;
 import com.tcc.cinematic.service.SessaoService;
 import jakarta.validation.Valid;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -21,6 +24,31 @@ public class SessaoController {
     @GetMapping
     public ResponseEntity<List<Sessao>> findAll() {
         return ResponseEntity.ok(this.service.findAll());
+    }
+
+    @GetMapping("/horario")
+    public ResponseEntity<List<Sessao>> findByHorarioBetween(@RequestBody Map<String, Horario> params) {
+        return ResponseEntity.ok(this.service.findByHorarioBetween(params.get("horarioInicial"), params.get("horarioFinal")));
+    }
+
+    @GetMapping("/filme")
+    public ResponseEntity<List<Sessao>> findByFilme(@RequestBody Filme filme) {
+        return ResponseEntity.ok(this.service.findByFilme(filme));
+    }
+
+    @GetMapping("/disponibilidade")
+    public ResponseEntity<List<Sessao>> findByDisponibilidade() {
+        return ResponseEntity.ok(this.service.findByDisponibilidade());
+    }
+
+    @GetMapping("/idioma")
+    public ResponseEntity<List<Sessao>> findByIdioma(@RequestBody Map<String, String> params) {
+        return ResponseEntity.ok(this.service.findByIdioma(params.get("idioma")));
+    }
+
+    @GetMapping("/tipo")
+    public ResponseEntity<List<Sessao>> findByTipo(@RequestBody Map<String, String> params) {
+        return ResponseEntity.ok(this.service.findByTipo(params.get("tipo")));
     }
 
     @GetMapping("/{id}")
