@@ -1,6 +1,9 @@
 package com.tcc.cinematic.service;
 
 import com.tcc.cinematic.DTO.SessaoUpdateDTO;
+import com.tcc.cinematic.entity.Estabelecimento;
+import com.tcc.cinematic.entity.Filme;
+import com.tcc.cinematic.entity.Horario;
 import com.tcc.cinematic.entity.Sessao;
 import com.tcc.cinematic.enums.Idioma;
 import com.tcc.cinematic.enums.TipoSessao;
@@ -9,6 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,6 +23,38 @@ public class SessaoService {
 
     public List<Sessao> findAll() {
         return this.repository.findAll();
+    }
+
+    public List<Sessao> findByHorarioBetween(Horario horarioInicial, Horario horarioFinal) {
+        return this.repository.findByHorarioBetween(horarioInicial, horarioFinal);
+    }
+
+    public List<Sessao> findByFilme(Filme filme) {
+        return this.repository.findByFilme(filme);
+    }
+
+    public List<Sessao> findByDisponibilidade() {
+        return this.repository.findByDisponibilidadeTrue();
+    }
+
+    public List<Sessao> findByEstabelecimento(Estabelecimento estabelecimento) {
+        return this.repository.findByEstabelecimento(estabelecimento);
+    }
+
+    public List<Sessao> findByIdioma(String idioma) {
+        return this.repository.findByIdioma(this.setIdioma(idioma));
+    }
+
+    public List<Sessao> findByTipo(String tipo) {
+        return this.repository.findByTipo(this.setTipo(tipo));
+    }
+
+    public List<Sessao> findByDataBetween(LocalDate dataInicial, LocalDate dataFinal) {
+        return this.repository.findByDataBetween(dataInicial, dataFinal);
+    }
+
+    public List<Sessao> findByData(LocalDate data) {
+        return this.repository.findByData(data);
     }
 
     public Sessao findById(UUID id) {
@@ -35,7 +71,7 @@ public class SessaoService {
             return null;
 
         if(!sessaoUpdateDTO.tipo().isEmpty())
-            sessaoFound.setTipo(this.setSessao(sessaoUpdateDTO.tipo()));
+            sessaoFound.setTipo(this.setTipo(sessaoUpdateDTO.tipo()));
 
         if(!sessaoUpdateDTO.idioma().isEmpty())
             sessaoFound.setIdioma(this.setIdioma(sessaoUpdateDTO.idioma()));
@@ -53,8 +89,8 @@ public class SessaoService {
         return true;
     }
 
-    private TipoSessao setSessao(String sessao) {
-        return switch (sessao.toUpperCase()) {
+    private TipoSessao setTipo(String tipo) {
+        return switch (tipo.toUpperCase()) {
             case "2D" -> TipoSessao.A;
             case "3D" -> TipoSessao.B;
             case "4D" -> TipoSessao.C;
