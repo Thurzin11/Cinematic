@@ -32,8 +32,8 @@ public class AssentoController {
     }
 
     @PostMapping
-    public ResponseEntity<Assento> create(@RequestBody @Valid AssentoRecordDTO assentoRecordDTO){
-        var assentoReturn = this.service.create(assentoRecordDTO);
+    public ResponseEntity<Assento> create(@RequestBody @Valid Assento assento){
+        var assentoReturn = this.service.create(assento);
         return new ResponseEntity(assentoReturn, HttpStatus.CREATED);
     }
 

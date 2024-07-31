@@ -20,9 +20,7 @@ public class AssentoService {
 
     public Assento findById(UUID id) { return this.repository.findById(id).orElse(null);}
 
-    public Assento create(AssentoRecordDTO assentoRecordDTO){
-        var assento = new Assento();
-        BeanUtils.copyProperties(assentoRecordDTO, assento);
+    public Assento create(Assento assento){
         return this.repository.save(assento);
     }
 
