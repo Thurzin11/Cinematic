@@ -114,27 +114,6 @@ public class SessaoService {
     private List<Assento> gerarAssentos(Sala sala) {
         var assentos = new ArrayList<Assento>();
 
-        if(sala.getTamanho() == TamanhoSala.PEQUENA) {
-            for(var i=0;i<50;i++) {
-                var assento = Assento.builder().nome(sala.getNumero() + "a").build();
-                assentos.add(assento);
-            }
-        }
-
-        if(sala.getTamanho() == TamanhoSala.MEDIA) {
-            for(var i=0;i<100;i++) {
-                var assento = Assento.builder().nome(sala.getNumero() + "a").build();
-                assentos.add(assento);
-            }
-        }
-
-        if(sala.getTamanho() == TamanhoSala.GRANDE) {
-            for (var i=0;i<150;i++) {
-                var assento = Assento.builder().nome(sala.getNumero() + "a").build();
-                assentos.add(assento);
-            }
-        }
-
         return assentos;
     }
 }
