@@ -21,7 +21,7 @@ public class Horario {
 
     private String horario;
 
-    private boolean status;
+    private boolean status = true;
 
 
 }

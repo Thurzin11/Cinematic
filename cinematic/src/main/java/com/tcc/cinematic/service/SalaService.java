@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,12 +27,33 @@ public class SalaService {
     }
 
     public Sala create(SalaRecordDTO salaRecordDTO) {
-        var sala = new Sala();
-        sala.setNumero(this.findAll().size()+1);
-        sala.setTamanho(this.setTamanho(salaRecordDTO.tamanho()));
-        sala.setTipo(this.setTipo(salaRecordDTO.tipo()));
-        BeanUtils.copyProperties(salaRecordDTO, sala);
+        var sala = Sala.builder()
+                .numero(this.findAll().size()+1)
+                .tamanho(this.setTamanho(salaRecordDTO.tamanho()))
+                .tipo(this.setTipo(salaRecordDTO.tipo()))
+                .fileiras(this.setFileiras(salaRecordDTO.quantidadeFileiras()))
+                .quantidadeColunas(salaRecordDTO.quantidadeColunas())
+                .build();
+
         return this.repository.save(sala);
+    }
+
+    public Sala update(SalaRecordDTO salaRecordDTO) {
+        var salaFound = this.findById(salaRecordDTO.id());
+        if(salaFound == null)
+            return null;
+
+        BeanUtils.copyProperties(salaRecordDTO, salaFound);
+        return this.repository.save(salaFound);
+    }
+
+    public Boolean delete(UUID id) {
+        var salaFound = this.findById(id);
+        if(salaFound == null)
+            return false;
+
+        this.repository.delete(salaFound);
+        return true;
     }
 
     private TamanhoSala setTamanho(String tamanho) {
@@ -52,21 +74,18 @@ public class SalaService {
         };
     }
 
-    public Sala update(SalaRecordDTO salaRecordDTO) {
-        var salaFound = this.findById(salaRecordDTO.id());
-        if(salaFound == null)
-            return null;
+    private List<String> setFileiras(int quantidadeFileiras) {
+        var character = new ArrayList<Character>();
+        var fileiras = new ArrayList<String>();
 
-        BeanUtils.copyProperties(salaRecordDTO, salaFound);
-        return this.repository.save(salaFound);
-    }
+        for(var ch='A'; ch<='Z';ch++) {
+            character.add(ch);
+        }
 
-    public Boolean delete(UUID id) {
-        var salaFound = this.findById(id);
-        if(salaFound == null)
-            return false;
+        for(var i=0; i<quantidadeFileiras; i++) {
+            fileiras.add(Character.toString(character.get(i)));
+        }
 
-        this.repository.delete(salaFound);
-        return true;
+        return fileiras;
     }
 }

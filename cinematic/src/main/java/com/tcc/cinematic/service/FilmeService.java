@@ -27,6 +27,7 @@ public class FilmeService {
     public Filme create(FilmeRegisterDTO filmeRegisterDTO) {
         var filme = new Filme();
         filme.setClassificacao(this.setClassificacao(filmeRegisterDTO.classificacao()));
+        BeanUtils.copyProperties(filmeRegisterDTO, filme);
         return this.repository.save(filme);
     }
 

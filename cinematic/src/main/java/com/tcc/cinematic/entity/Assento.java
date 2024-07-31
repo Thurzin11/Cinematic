@@ -3,7 +3,6 @@ package com.tcc.cinematic.entity;
 import com.tcc.cinematic.enums.StatusAssento;
 import com.tcc.cinematic.enums.TipoAssento;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.UUID;
