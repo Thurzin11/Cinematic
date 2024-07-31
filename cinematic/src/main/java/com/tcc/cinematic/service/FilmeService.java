@@ -1,8 +1,10 @@
 package com.tcc.cinematic.service;
 
 import com.tcc.cinematic.DTO.FilmeRegisterDTO;
+import com.tcc.cinematic.DTO.FilmeUpdateDTO;
 import com.tcc.cinematic.entity.Filme;
 import com.tcc.cinematic.enums.Classificacao;
+import com.tcc.cinematic.enums.StatusFilme;
 import com.tcc.cinematic.repository.FilmeRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,24 +33,14 @@ public class FilmeService {
         return this.repository.save(filme);
     }
 
-    private Classificacao setClassificacao(String classificacao) {
-        return switch (classificacao.toUpperCase()) {
-          case "LIVRE" -> Classificacao.LIVRE;
-          case "10+" -> Classificacao.DEZ;
-          case "12+" -> Classificacao.DOZE;
-          case "14+" -> Classificacao.QUATORZE;
-          case "16+" -> Classificacao.DEZESSEIS;
-          case "18+" -> Classificacao.DEZOITO;
-          default -> null;
-        };
-    }
-
-    public Filme update(Filme filme) {
-        var filmeFound = this.findById(filme.getId());
+    public Filme update(FilmeUpdateDTO filmeUpdateDTO, UUID id) {
+        var filmeFound = this.findById(id);
         if(filmeFound == null)
             return null;
 
-        BeanUtils.copyProperties(filme, filmeFound);
+        BeanUtils.copyProperties(filmeUpdateDTO, filmeFound);
+        filmeFound.setClassificacao(this.setClassificacao(filmeUpdateDTO.classificacao()));
+        filmeFound.setStatus(this.setStatus(filmeUpdateDTO.status()));
         return this.repository.save(filmeFound);
     }
 
@@ -59,5 +51,28 @@ public class FilmeService {
 
         this.repository.delete(filmeFound);
         return true;
+    }
+
+    private Classificacao setClassificacao(String classificacao) {
+        return switch (classificacao.toUpperCase()) {
+            case "LIVRE" -> Classificacao.LIVRE;
+            case "DEZ" -> Classificacao.DEZ;
+            case "DOZE" -> Classificacao.DOZE;
+            case "QUATORZE" -> Classificacao.QUATORZE;
+            case "DEZESSEIS" -> Classificacao.DEZESSEIS;
+            case "DEZOITO" -> Classificacao.DEZOITO;
+            default -> null;
+        };
+    }
+
+    private StatusFilme setStatus(String status) {
+        return switch (status.toUpperCase()) {
+            case "CARTAZ" -> StatusFilme.CARTAZ;
+            case "DESTAQUE" -> StatusFilme.DESTAQUE;
+            case "LANCAMENTO" -> StatusFilme.LANCAMENTO;
+            case "ESTREIA" -> StatusFilme.ESTREIA;
+            case "PRE_ESTREIA" -> StatusFilme.PRE_ESTREIA;
+            default -> null;
+        };
     }
 }
