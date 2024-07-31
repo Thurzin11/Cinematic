@@ -29,9 +29,5 @@ public class Sala {
     private TipoSala tipo;
     @Enumerated(EnumType.STRING)
     private TamanhoSala tamanho;
-<<<<<<< HEAD
-    private boolean disponibilidade;
-=======
     private boolean disponibilidade = true;
->>>>>>> mateus
 }
