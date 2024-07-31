@@ -33,7 +33,7 @@ public class SalaController {
 
     @PostMapping
     public ResponseEntity<Sala> create(@RequestBody SalaRecordDTO salaRecordDTO) {
-        return new ResponseEntity(this.service.create(salaRecordDTO), HttpStatus.CREATED);
+        return new ResponseEntity<Sala>(this.service.create(salaRecordDTO), HttpStatus.CREATED);
     }
 
     @PatchMapping

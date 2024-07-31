@@ -25,11 +25,9 @@ public class Sala {
     private List<String> fileiras;
     @NotNull
     private int quantidadeColunas;
-    @NotNull
-    private int quantidadeAssentos;
     @Enumerated(EnumType.STRING)
     private TipoSala tipo;
     @Enumerated(EnumType.STRING)
     private TamanhoSala tamanho;
-    private boolean disponibilidad;
+    private boolean disponibilidade = true;
 }

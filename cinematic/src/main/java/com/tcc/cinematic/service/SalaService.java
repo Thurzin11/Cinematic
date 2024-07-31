@@ -27,12 +27,14 @@ public class SalaService {
     }
 
     public Sala create(SalaRecordDTO salaRecordDTO) {
-        var sala = new Sala();
-        sala.setNumero(this.findAll().size()+1);
-        sala.setTamanho(this.setTamanho(salaRecordDTO.tamanho()));
-        sala.setTipo(this.setTipo(salaRecordDTO.tipo()));
-        sala.setFileiras(this.setFileiras(salaRecordDTO.quantidadeFileiras()));
-        BeanUtils.copyProperties(salaRecordDTO, sala);
+        var sala = Sala.builder()
+                .numero(this.findAll().size()+1)
+                .tamanho(this.setTamanho(salaRecordDTO.tamanho()))
+                .tipo(this.setTipo(salaRecordDTO.tipo()))
+                .fileiras(this.setFileiras(salaRecordDTO.quantidadeFileiras()))
+                .quantidadeColunas(salaRecordDTO.quantidadeColunas())
+                .build();
+
         return this.repository.save(sala);
     }
 

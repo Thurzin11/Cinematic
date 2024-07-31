@@ -2,9 +2,7 @@ package com.tcc.cinematic.service;
 
 import com.tcc.cinematic.DTO.SessaoUpdateDTO;
 import com.tcc.cinematic.entity.*;
-import com.tcc.cinematic.enums.Idioma;
-import com.tcc.cinematic.enums.TamanhoSala;
-import com.tcc.cinematic.enums.TipoSessao;
+import com.tcc.cinematic.enums.*;
 import com.tcc.cinematic.repository.SessaoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,8 +61,15 @@ public class SessaoService {
         return this.repository.findById(id).orElse(null);
     }
 
-    public Sessao create(Sessao sessao) {
-        sessao.setAssentos(this.gerarAssentos(sessao.getSala()));
+    public Sessao create(SessaoUpdateDTO sessaoParams) {
+        var sessao = Sessao.builder()
+                .tipo(this.setTipo(sessaoParams.tipo()))
+                .idioma(this.setIdioma(sessaoParams.idioma()))
+                .assentos(this.gerarAssentos(sessaoParams.sala()))
+                .build();
+
+        BeanUtils.copyProperties(sessaoParams, sessao);
+        sessao.setTipo(this.setTipo(sessaoParams.tipo()));
         return this.repository.save(sessao);
     }
 
@@ -113,6 +118,17 @@ public class SessaoService {
 
     private List<Assento> gerarAssentos(Sala sala) {
         var assentos = new ArrayList<Assento>();
+        for(var fileira:sala.getFileiras()) {
+            for(var i=0;i<sala.getQuantidadeColunas();i++) {
+                var assento = this.assentoService.create(Assento.builder()
+                                .nome(fileira+(i+1))
+                                .status(StatusAssento.DISPONIVEL)
+                                .tipo(TipoAssento.NORMAL)
+                                .build());
+
+                assentos.add(assento);
+            }
+        }
 
         return assentos;
     }

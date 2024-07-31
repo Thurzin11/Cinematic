@@ -73,7 +73,7 @@ public class SessaoController {
     }
 
     @PostMapping
-    public ResponseEntity<Sessao> create(@RequestBody @Valid Sessao sessao) {
+    public ResponseEntity<Sessao> create(@RequestBody @Valid SessaoUpdateDTO sessao) {
         return new ResponseEntity<Sessao>(this.service.create(sessao), HttpStatus.CREATED);
     }
 
