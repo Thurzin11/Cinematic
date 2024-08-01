@@ -1,6 +1,7 @@
 package com.tcc.cinematic.controller;
 
 import com.tcc.cinematic.DTO.FilmeRegisterDTO;
+import com.tcc.cinematic.DTO.FilmeUpdateDTO;
 import com.tcc.cinematic.entity.Filme;
 import com.tcc.cinematic.service.FilmeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,9 @@ public class FilmeController {
         return ResponseEntity.ok(this.service.create(filmeRegisterDTO));
     }
 
-    @PatchMapping
-    public ResponseEntity<Filme> update(@RequestBody Filme filme) {
-        var filmeReturn = this.service.update(filme);
+    @PatchMapping("/{id}")
+    public ResponseEntity<Filme> update(@RequestBody FilmeUpdateDTO filmeUpdateDTO, @PathVariable UUID id) {
+        var filmeReturn = this.service.update(filmeUpdateDTO, id);
         if(filmeReturn == null)
             return ResponseEntity.badRequest().build();
 
