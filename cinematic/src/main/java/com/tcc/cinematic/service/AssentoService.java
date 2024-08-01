@@ -2,7 +2,6 @@ package com.tcc.cinematic.service;
 
 import com.tcc.cinematic.DTO.AssentoRecordDTO;
 import com.tcc.cinematic.entity.Assento;
-import com.tcc.cinematic.enums.StatusAssento;
 import com.tcc.cinematic.repository.AssentoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +42,5 @@ public class AssentoService {
         return true;
     }
 
-    public Assento reservarAssento(Assento assento){
-        if (assento.getStatus()== StatusAssento.RESERVADO)
-            return null;
-        this.repository.reservarAssento(assento.getId());
-        return assento;
-    }
 
 }
