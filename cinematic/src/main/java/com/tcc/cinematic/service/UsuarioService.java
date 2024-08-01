@@ -3,6 +3,8 @@ package com.tcc.cinematic.service;
 import com.tcc.cinematic.DTO.UsuarioRegisterDTO;
 import com.tcc.cinematic.DTO.UsuarioUpdateDTO;
 import com.tcc.cinematic.entity.Usuario;
+import com.tcc.cinematic.enums.Idioma;
+import com.tcc.cinematic.enums.TipoUsuario;
 import com.tcc.cinematic.repository.UsuarioRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,14 @@ public class UsuarioService {
     public Usuario findById(UUID id){
         return this.repository.findById(id).orElse(null);
     }
+
+    public List<Usuario> findByNomeAndTipoUsuario(String nome, String tipoUsuario){
+        if (this.setTipo(tipoUsuario)==TipoUsuario.FUNCIONARIO)
+            return this.repository.findByNomeAndTipoUsuario(nome,this.setTipo(tipoUsuario));
+
+        return null;
+    }
+
 
     public Usuario create(UsuarioRegisterDTO usuarioRegisterDTO){
         var user  = new Usuario();
@@ -47,5 +57,15 @@ public class UsuarioService {
         this.repository.delete(userFound);
         return true;
     }
+
+    public TipoUsuario setTipo(String tipo){
+        return switch (tipo.toUpperCase()){
+            case "FUNCIONARIO" -> TipoUsuario.FUNCIONARIO;
+            case "GERENTE" -> TipoUsuario.GERENTE;
+            case "CLIENTE" -> TipoUsuario.CLIENTE;
+            default -> null;
+        };
+    }
+
 
 }
