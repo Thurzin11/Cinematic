@@ -36,37 +36,30 @@ public class UsuarioController {
 
         return ResponseEntity.ok(userReturn);
     }
-
     @GetMapping("/funcionario")
     public ResponseEntity<List<Usuario>> findByNomeAndTipoUsuario(@RequestBody Map<String,String> params){
-        var retorno = this.service.findByNomeAndTipoUsuario(params.get("nome"),params.get("tipo"));
-        if (retorno == null)
+        var usuarioList = this.service.findByNomeAndTipoUsuario(params.get("nome"),params.get("tipo"));
+        if (usuarioList == null)
             return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(retorno);
+        return ResponseEntity.ok(usuarioList);
     }
-
     @PostMapping
     public ResponseEntity<Usuario> create(@RequestBody @Valid UsuarioRegisterDTO usuarioRegisterDTO){
-        var userReturn = this.service.create(usuarioRegisterDTO);
-        return new ResponseEntity(userReturn, HttpStatus.CREATED);
+        var user = this.service.create(usuarioRegisterDTO);
+        return new ResponseEntity(user, HttpStatus.CREATED);
     }
-
     @PatchMapping
     public ResponseEntity<Usuario> update(@RequestBody @Valid UsuarioUpdateDTO usuarioUpdateDTO){
-        var userReturn = this.service.update(usuarioUpdateDTO);
-        if (userReturn == null)
+        var user = this.service.update(usuarioUpdateDTO);
+        if (user == null)
             return ResponseEntity.notFound().build();
-
-        return ResponseEntity.ok(userReturn);
+        return ResponseEntity.ok(user);
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable UUID id){
         var isDelete = this.service.delete(id);
         if (!isDelete)
             return ResponseEntity.badRequest().build();
-
         return ResponseEntity.ok(isDelete);
     }
-
 }
