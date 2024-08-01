@@ -29,35 +29,27 @@ public class UsuarioService {
     public List<Usuario> findByNomeAndTipoUsuario(String nome, String tipoUsuario){
         if (this.setTipo(tipoUsuario)==TipoUsuario.FUNCIONARIO)
             return this.repository.findByNomeAndTipoUsuario(nome,this.setTipo(tipoUsuario));
-
         return null;
     }
-
-
     public Usuario create(UsuarioRegisterDTO usuarioRegisterDTO){
         var user  = new Usuario();
         BeanUtils.copyProperties(usuarioRegisterDTO,user);
         return this.repository.save(user);
     }
-
     public Usuario update(UsuarioUpdateDTO usuarioUpdateDTO){
         var userFound = this.findById(usuarioUpdateDTO.id());
         if (userFound == null)
             return null;
-
         BeanUtils.copyProperties(usuarioUpdateDTO,userFound);
         return this.repository.save(userFound);
     }
-
     public Boolean delete(UUID id){
         var userFound = this.findById(id);
         if (userFound ==  null)
             return false;
-
         this.repository.delete(userFound);
         return true;
     }
-
     public TipoUsuario setTipo(String tipo){
         return switch (tipo.toUpperCase()){
             case "FUNCIONARIO" -> TipoUsuario.FUNCIONARIO;
@@ -66,6 +58,4 @@ public class UsuarioService {
             default -> null;
         };
     }
-
-
 }
