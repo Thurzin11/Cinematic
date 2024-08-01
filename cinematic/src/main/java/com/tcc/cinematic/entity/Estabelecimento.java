@@ -7,21 +7,19 @@ import lombok.*;
 
 import java.util.UUID;
 
-@Getter
-@Setter
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
-public class Horario {
+@Getter
+@Setter
+public class Estabelecimento {
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
     private UUID id;
-
-    private String horario;
-
-    private boolean status = true;
-
-
+    private String nome;
+    private String endereco;
+    private String cidade;
+    private String estado;
 }
