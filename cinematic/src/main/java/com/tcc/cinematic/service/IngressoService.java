@@ -13,6 +13,8 @@ import java.util.UUID;
 public class IngressoService {
     @Autowired
     private IngressoRepository repository;
+    @Autowired
+    private AssentoService assentoService;
 
     public List<Ingresso> findAll(){
         return this.repository.findAll();
@@ -23,8 +25,13 @@ public class IngressoService {
     }
 
     public Ingresso create(Ingresso ingresso){
+        var retorno = this.assentoService.reservarAssento(ingresso.getAssento());
+        if (retorno==null)
+            return null;
+        ingresso.setAssento(retorno);
         return this.repository.save(ingresso);
     }
+
     public Ingresso edit(Ingresso ingresso){
         var ingressoFound = this.findById(ingresso.getId());
         if (ingressoFound == null)

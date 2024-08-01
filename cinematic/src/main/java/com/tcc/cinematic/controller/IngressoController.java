@@ -21,6 +21,15 @@ public class IngressoController {
         return ResponseEntity.ok(this.service.findAll());
     }
 
+    @PostMapping
+    public ResponseEntity<Ingresso> create(@RequestBody Ingresso ingresso){
+        var retorno = this.service.create(ingresso);
+        if (retorno==null)
+            return ResponseEntity.badRequest().build();
+
+        return ResponseEntity.ok(retorno);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Ingresso> findById(@PathVariable UUID id){
         var ingressoFound = this.service.findById(id);

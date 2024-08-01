@@ -20,11 +20,14 @@ public class Ingresso {
     @Setter(AccessLevel.NONE)
     private UUID id;
     @NotNull
+    @ManyToOne
     private Sessao sessao;
     private LocalDate Horario = LocalDate.now();
     @NotNull
+    @ManyToOne
     private Assento assento;
     @NotNull
+    @ManyToOne
     private Usuario cliente;
     @NotNull
     @Enumerated(EnumType.STRING)
