@@ -3,14 +3,17 @@ package com.tcc.cinematic.controller;
 import com.tcc.cinematic.DTO.UsuarioRegisterDTO;
 import com.tcc.cinematic.DTO.UsuarioUpdateDTO;
 import com.tcc.cinematic.entity.Usuario;
+import com.tcc.cinematic.enums.TipoUsuario;
 import com.tcc.cinematic.service.UsuarioService;
 import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -32,6 +35,14 @@ public class UsuarioController {
             return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(userReturn);
+    }
+
+    @GetMapping("/funcionario")
+    public ResponseEntity<List<Usuario>> findByNomeAndTipoUsuario(@RequestBody Map<String,String> params){
+        var retorno = this.service.findByNomeAndTipoUsuario(params.get("nome"),params.get("tipo"));
+        if (retorno == null)
+            return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(retorno);
     }
 
     @PostMapping
