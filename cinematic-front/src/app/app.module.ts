@@ -4,11 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuSistemaComponent } from './components/menu-sistema/menu-sistema.component';
+import { HeaderSistemaComponent } from './components/header-sistema/header-sistema.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuSistemaComponent
+    MenuSistemaComponent,
+    HeaderSistemaComponent
   ],
   imports: [
     BrowserModule,
