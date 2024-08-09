@@ -1,0 +1,39 @@
+@import "../../style/color";
+.body{
+  box-shadow: 0 1rem 1rem black;
+  background-image: linear-gradient($ROXO-ESCURO,$ROXO-CLARO);
+  .graficos{
+    border: 3px black solid;
+    border-radius: 20px;
+    background-color: $ROXO-CLARO;
+    // padding-left: 50px;
+  }
+}
+h2{
+  color: #FFF;
+  font-size: 1.5rem;
+}
+.btnIngresso{
+  border: none;
+  background-color: $AMARELO;
+  font-size: .5rem;
+  border-radius: 10px;
+  height: 40px;
+  width: 244px;
+}
+// width="1350" height="160"
+.pizza{
+  max-width: 300px;
+  max-height: 300px;
+}
+.predio{
+  max-width: 1200px;
+  max-height: 160px;
+}
+.home{
+  position: relative;
+  app-menu-sistema{
+    position: absolute;
+    top: 5rem;
+  }
+}

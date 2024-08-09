@@ -1,0 +1,33 @@
+<div class="home">
+  <app-menu-sistema></app-menu-sistema>
+  <div class="vh-100 body d-flex flex-column justify-content-center align-items-center">
+    <h2 class="col-8">Estabelecimento 1</h2>
+    <div class="graficos col-8">
+      <div class="graficos-top col-12">
+        <div class="d-flex col-12 justify-content-center">
+          <h2 class="col-11">Caixa</h2>
+        </div>
+        <div class="rendimento d-flex justify-content-center">
+          <canvas #rendimento class="predio"></canvas>
+        </div>
+      </div>
+      <hr class="col-11 m-auto my-3">
+      <div class="graficos-bottom col-12 d-flex">
+        <div class="graficos-bottom-left col-6">
+          <div class="graficos-bottom-left-header d-flex col-10 justify-content-around align-items-center">
+            <h2>Ingressos</h2>
+            <button class="btnIngresso col-2">Ultimo mes</button>
+          </div>
+          <canvas #ingresso></canvas>
+        </div>
+        <div class="graficos-bottom-left col-6 d-flex flex-column align-items-center">
+          <h2 class="col-12">Gêneros</h2>
+          <canvas #genero class="pizza"></canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
