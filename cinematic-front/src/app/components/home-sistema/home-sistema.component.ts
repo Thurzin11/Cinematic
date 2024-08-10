@@ -12,11 +12,17 @@ export class HomeSistemaComponent implements OnInit {
   @ViewChild("ingresso", { static: true }) ingresso!: ElementRef;
   @ViewChild("genero", { static: true }) genero!: ElementRef;
 
+  filtro: boolean = false;
+
 
   ngOnInit(){
     this.generateChartRendimento();
     this.generateChartIngresso();
     this.generateChartGeneros();
+  }
+
+  toggleFiltro(): void {
+    this.filtro = !this.filtro;
   }
 
   private generateChartRendimento(): void{
