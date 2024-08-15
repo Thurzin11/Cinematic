@@ -44,24 +44,30 @@ export class HomeSistemaComponent implements OnInit {
         ]
       },
       options: {
-        color: '#FFF',
+        color: '#000',
         responsive: true,
         maintainAspectRatio: true,
         scales: {
           y: {
             beginAtZero: true,
             title: {
-              color: '#FFF'
+              color: '#000'
+            },
+            ticks:{
+              color: "#000"
             }
           },
           x: {
             beginAtZero: true,
+            ticks:{
+              color: "#000"
+            }
           }
         },
         plugins: {
           legend: {
             labels: {
-              color: '#FFF',
+              color: '#000',
             }
           },
           subtitle: {
@@ -112,20 +118,26 @@ export class HomeSistemaComponent implements OnInit {
         maintainAspectRatio: true,
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            ticks:{
+              color: "#000"
+            }
           },
           x: {
-            beginAtZero: true
+            beginAtZero: true,
+            ticks:{
+              color: "#000"
+            }
           }
         },
         plugins: {
           legend: {
             labels: {
-              color: '#FFF'
+              color: '#000'
             }
           },
           subtitle: {
-            color: '#FFF'
+            color: '#000'
           }
         }
       }
@@ -150,11 +162,11 @@ export class HomeSistemaComponent implements OnInit {
         plugins: {
           legend: {
             labels: {
-              color: '#FFF'
+              color: '#000'
             }
           },
           subtitle: {
-            color: '#FFF'
+            color: '#000'
           }
         }
       },

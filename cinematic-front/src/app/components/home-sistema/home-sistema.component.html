@@ -1,33 +1,39 @@
-<div class="home">
-  <app-menu-sistema></app-menu-sistema>
+
   <div class="body d-flex flex-column justify-content-center align-items-center">
-    <h2 class="col-8">Estabelecimento 1</h2>
-    <div class="graficos col-8 py-2">
+    <h2 class="col-8 text-light">Estabelecimento 1</h2>
+    <div class="graficos col-8 py-2 mt-3">
       <div class="graficos-top col-12">
         <div class="d-flex col-12 justify-content-center">
-          <h2 class="col-11">Caixa</h2>
+          <h3 class="col-11 text-light">Caixa</h3>
         </div>
         <div class="rendimento d-flex justify-content-center">
-          <canvas #rendimento class="predio"></canvas>
+          <canvas #rendimento  class="predio"></canvas>
         </div>
       </div>
       <hr class="col-11 m-auto my-3">
       <div class="graficos-bottom col-12 d-flex px-4">
         <div class="graficos-bottom-left col-6">
           <div class="graficos-bottom-left-header d-flex col-10 justify-content-around align-items-center">
-            <h2>Ingressos</h2>
-            <button class="btnIngresso col-2">Ultimo mes</button>
+            <h3 class="text-light">Ingressos</h3>
+            <!-- <button class="text-start col-5 py-1 rounded border-0">
+              <p>Ultimo mes</p>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
+              </svg>
+            </button> -->
+            <select name="filter" id="filter" class="p-2 text-start col-5 py-1 rounded border-0">
+              <option value="last month" class="">Ultimo mes</option>
+              <option value="first month">Primeiro mes</option>
+            </select>
           </div>
           <canvas #ingresso></canvas>
         </div>
         <div class="graficos-bottom-left col-6 d-flex flex-column align-items-center">
-          <h2 class="col-12">Gêneros</h2>
+          <h3 class="col-12 text-light">Gêneros</h3>
           <canvas #genero class="pizza"></canvas>
         </div>
       </div>
     </div>
-
   </div>
-</div>
 
 

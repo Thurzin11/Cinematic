@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { MenuSistemaComponent } from './components/menu-sistema/menu-sistema.component';
 import { HomeSistemaComponent } from './components/home-sistema/home-sistema.component';
 import { HeaderSistemaComponent } from './components/header-sistema/header-sistema.component';
+import { LoginFuncionarioComponent } from './components/login-funcionario/login-funcionario.component';
 import { FiltroSistemaComponent } from './components/filtro-sistema/filtro-sistema.component';
 import { FilmeCardComponent } from './components/filme-sistema/filme-card/filme-card.component';
 import { FilmeSistemaComponent } from './components/filme-sistema/filme-sistema/filme-sistema.component';
@@ -17,6 +18,7 @@ import { FilmeSistemaComponent } from './components/filme-sistema/filme-sistema/
     MenuSistemaComponent,
     HomeSistemaComponent,
     HeaderSistemaComponent,
+    LoginFuncionarioComponent,
     FiltroSistemaComponent,
     FilmeCardComponent,
     FilmeSistemaComponent
