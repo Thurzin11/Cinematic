@@ -1,0 +1,17 @@
+@import "../../../style/color";
+
+.div-img {
+    position: relative;
+
+    span {
+        position: absolute;
+        bottom: .5rem;
+        left: .5rem;
+        background-color: $VERDE-IDIOMA;
+    }
+
+}
+
+p {
+    font-size: .7rem;
+}

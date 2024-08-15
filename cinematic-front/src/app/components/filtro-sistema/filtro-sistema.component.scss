@@ -1,0 +1,42 @@
+@import '../../style/color';
+
+.body {
+    background-color: $ROXO-CLARO;
+    max-width: 8rem;
+    position: relative;
+
+    span {
+        position: absolute;
+        top: 0;
+        left: .5rem;
+        cursor: pointer;
+        border-top-left-radius: .2rem;
+    }
+
+    span:hover {
+        transition: .2s;
+        color: red;
+    }
+}
+
+p {
+    font-size: .8rem;
+}
+
+button {
+    margin-bottom: .2rem;
+    font-size: .6rem;
+    background-color: transparent;
+    opacity: .7;
+}
+
+button:hover {
+    transition: .2s;
+    scale: 105%;
+    background-color: $BRANCO;
+}
+
+button:focus {
+    background-color: $AMARELO;
+    color: $BRANCO
+}
