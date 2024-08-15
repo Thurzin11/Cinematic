@@ -1,42 +1,41 @@
 @import '../../style/color';
 
 nav {
-    max-width: 2.5rem;
     background-color: $ROXO-CLARO;
-    border-radius: 0 .5rem .5rem 0;
+    max-width: 4rem;
     cursor: pointer;
+    border-radius: 0 1rem 1rem 0;
 
     div {
-        padding: .8rem .5rem;
+        padding: 1.5rem 1rem;
+        width: 100%;
 
-        p{
+        p {
             display: none;
             color: $BRANCO;
             padding-top: 1rem;
         }
     }
+
+    div:first-child {
+        border-radius: 0 .5rem 0 0;
+    }
+
+    div:last-child {
+        border-radius: 0 0 .5rem 0;
+    }
 }
 
 nav:hover {
     transition: .2s;
-    max-width: 10rem;
-
+    max-width: 15rem;
+     
     div {
-        width: 100%;
-        max-height: 2.85rem;
+        max-height: 5rem;
 
         p {
-            display: flex;
-            font-size: 1rem;
+            display: block;
         }
-    }
-
-    div:first-child:hover {
-        border-radius: 0 .5rem 0 0;
-    }
-
-    div:last-child:hover {
-        border-radius: 0 0 .5rem 0;
     }
 
     div:hover {
