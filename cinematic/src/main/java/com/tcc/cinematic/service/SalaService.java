@@ -47,7 +47,7 @@ public class SalaService {
         return this.repository.save(salaFound);
     }
 
-    public Boolean delete(UUID id) {
+    public boolean delete(UUID id) {
         var salaFound = this.findById(id);
         if(salaFound == null)
             return false;
@@ -78,7 +78,7 @@ public class SalaService {
         var character = new ArrayList<Character>();
         var fileiras = new ArrayList<String>();
 
-        for(var ch='A'; ch<='Z';ch++) {
+        for(Character ch = 'A'; ch<='Z'; ch++) {
             character.add(ch);
         }
 

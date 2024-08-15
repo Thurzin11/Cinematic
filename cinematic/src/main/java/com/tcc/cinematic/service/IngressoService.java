@@ -41,7 +41,7 @@ public class IngressoService {
         return this.repository.save(ingressoFound);
     }
 
-    public Boolean delete(UUID id){
+    public boolean delete(UUID id){
         var ingressoFound = this.findById(id);
         if (ingressoFound == null)
             return false;

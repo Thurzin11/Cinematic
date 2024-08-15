@@ -36,7 +36,7 @@ public class EstabelecimentoService {
         return this.repository.save(estabelecimentoFound);
     }
 
-    public Boolean delete(UUID id) {
+    public boolean delete(UUID id) {
         var estabelecimentoFound = this.findById(id);
         if(estabelecimentoFound == null)
             return false;

@@ -33,7 +33,7 @@ public class HorarioService {
         return this.repository.save(horarioFound);
     }
 
-    public Boolean delete(UUID id) {
+    public boolean delete(UUID id) {
         var horarioFound = this.findById(id);
         if (horarioFound == null){
             return false;

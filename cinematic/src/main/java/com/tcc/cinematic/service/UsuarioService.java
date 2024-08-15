@@ -39,7 +39,7 @@ public class UsuarioService {
         return this.repository.save(userFound);
     }
 
-    public Boolean delete(UUID id){
+    public boolean delete(UUID id){
         var userFound = this.findById(id);
         if (userFound ==  null)
             return false;

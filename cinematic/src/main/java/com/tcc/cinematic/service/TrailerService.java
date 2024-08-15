@@ -42,7 +42,7 @@ public class TrailerService {
         return this.repository.save(trailerFound);
     }
 
-    public Boolean delete(UUID id) {
+    public boolean delete(UUID id) {
         var trailerFound = this.findById(id);
         if(trailerFound == null)
             return false;

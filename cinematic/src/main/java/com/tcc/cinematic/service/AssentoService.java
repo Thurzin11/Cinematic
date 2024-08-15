@@ -34,7 +34,7 @@ public class AssentoService {
         return this.repository.save(assentoFound);
     }
 
-    public Boolean delete(UUID id) {
+    public boolean delete(UUID id) {
         var assentofound = this.findById(id);
         if (assentofound == null){
             return false;

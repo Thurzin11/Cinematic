@@ -35,7 +35,7 @@ public class CategoriaService {
         return this.repository.save(categoriaFound);
     }
 
-    public Boolean delete(UUID id) {
+    public boolean delete(UUID id) {
         var categoriaFound = this.findById(id);
         if(categoriaFound == null)
             return false;

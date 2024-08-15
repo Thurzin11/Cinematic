@@ -44,7 +44,7 @@ public class FilmeService {
         return this.repository.save(filmeFound);
     }
 
-    public Boolean delete(UUID id) {
+    public boolean delete(UUID id) {
         var filmeFound = this.findById(id);
         if(filmeFound == null)
             return false;
