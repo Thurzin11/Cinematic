@@ -11,6 +11,8 @@ import { LoginFuncionarioComponent } from './components/login-funcionario/login-
 import { FiltroSistemaComponent } from './components/filtro-sistema/filtro-sistema.component';
 import { FilmeCardComponent } from './components/filme-sistema/filme-card/filme-card.component';
 import { FilmeSistemaComponent } from './components/filme-sistema/filme-sistema/filme-sistema.component';
+import { FuncionarioCadastroComponent } from './components/funcionario-sistema/funcionario-cadastro/funcionario-cadastro.component';
+import { FuncionarioListComponent } from './components/funcionario-sistema/funcionario-list/funcionario-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { FilmeSistemaComponent } from './components/filme-sistema/filme-sistema/
     LoginFuncionarioComponent,
     FiltroSistemaComponent,
     FilmeCardComponent,
-    FilmeSistemaComponent
+    FilmeSistemaComponent,
+    FuncionarioCadastroComponent,
+    FuncionarioListComponent
   ],
   imports: [
     BrowserModule,

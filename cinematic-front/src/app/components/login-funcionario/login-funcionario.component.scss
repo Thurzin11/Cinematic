@@ -6,16 +6,26 @@
   box-shadow: 0 .4rem .4rem $PRETO;
   input{
     border-radius: 5px;
-    border: 2px solid #FFF;
+
+  }
+  input:focus{
+    outline: 0;
+    box-shadow: 0 .4rem .4rem $PRETO;
+    scale: 105%;
+  }
+  input:hover, .btn-logar:hover{
+    transition: .2s;
+    box-shadow: 0 .4rem .4rem $PRETO;
+    scale: 105%;
   }
   // label{
-  //   font-size: 2.2rem;
-  // }
-  .btn-logar{
-    background-color: $AMARELO;
-    border-radius: 10px;
-    color: $PRETO;
-    padding: 10px;
-  }
+    //   font-size: 2.2rem;
+    // }
+    .btn-logar{
+      background-color: $AMARELO;
+      border-radius: 10px;
+      color: $PRETO;
+      padding: 10px;
+    }
 
 }
