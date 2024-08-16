@@ -21,7 +21,7 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
-    private Boolean status = true;
+    private Boolean status;
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
     private String login;
