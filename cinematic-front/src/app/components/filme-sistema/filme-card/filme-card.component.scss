@@ -1,17 +1,38 @@
-@import "../../../style/color";
+@import '../../../style/color';
 
-.div-img {
-    position: relative;
-
-    span {
-        position: absolute;
-        bottom: .5rem;
-        left: .5rem;
-        background-color: $VERDE-IDIOMA;
-    }
-
+.body:hover {
+    cursor: pointer;
+    transition: .2s;
+    scale: 103%;
 }
 
-p {
-    font-size: .7rem;
+img {
+    width: 100%;
+    box-shadow: 0 .2rem .2rem $PRETO;
+}
+
+span {
+    bottom: .5rem;
+    left: .5rem;
+    box-shadow: 0 .2rem .2rem $PRETO;
+    min-width: 2rem;
+}
+
+.livre {
+    background-color: $VERDE-CLASSIFICACAO-L;
+}
+.dez {
+    background-color: $AZUL-CLASSIFICACAO-10;
+}
+.doze {
+    background-color: $AMARELO-CLASSIFICACAO-12;
+}
+.quatorze {
+    background-color: $LARANJA-CLASSIFICACAO-14;
+}
+.dezesseis {
+    background-color: $VERMELHO;
+}
+.dezoito {
+    background-color: $PRETO;
 }

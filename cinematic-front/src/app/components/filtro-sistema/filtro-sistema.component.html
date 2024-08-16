@@ -1,44 +1,104 @@
-<div class="rounded body py-2 d-flex flex-column border border-black">
-    <span>x</span>
-    <div class="mb-1">
-        <p class="text-light text-center">Categoria</p>
-        <div class="d-flex flex-wrap justify-content-around align-items-center px-1">
-            <button class="rounded border col-5 text-center">Aventura</button>
-            <button class="rounded border col-5 text-center">Ficção</button>
-            <button class="rounded border col-5 text-center">Ação</button>
-            <button class="rounded border col-5 text-center">Drama</button>
-            <button class="rounded border col-5 text-center">Terror</button>
-            <button class="rounded border col-5 text-center">Comédia</button>
-            <button class="rounded border col-5 text-center">Infantil</button>
+<div class="filtro col-12 d-flex flex-column p-2 position-relative rounded-start border border-black">
+    <span class="filtro-close position-absolute" (click)="this.closeFilter()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg"
+            viewBox="0 0 16 16">
+            <path
+                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+        </svg>
+    </span>
+    <span class="filtro-title text-center 
+                    col-5 rounded-5 text-dark 
+                    fw-semibold fst-italic m-auto 
+                    text-light border border-black fs-3 my-2">Filtro</span>
+    <div class="p-2 col-12" *ngIf="this.categoriaList.length > 0">
+        <p class="text-light fs-4 fw-semibold">Categoria</p>
+        <div class="d-flex flex-wrap align-items-center justify-content-around">
+            <button *ngFor="let categoria of this.categoriaList"
+                class="rounded-4 border border-black text-center mb-3 col-5 p-1">{{ categoria.nome }}</button>
         </div>
     </div>
-    <div class="mb-1">
-        <p class="text-light text-center">Classificação</p>
-        <div class="d-flex flex-wrap justify-content-around align-items-center px-1">
-            <button class="rounded border col-5 text-center">Livre</button>
-            <button class="rounded border col-5 text-center">10+</button>
-            <button class="rounded border col-5 text-center">12+</button>
-            <button class="rounded border col-5 text-center">14+</button>
-            <button class="rounded border col-5 text-center">16+</button>
-            <button class="rounded border col-5 text-center">18+</button>
+    <div class="p-2" *ngIf="this.classificacaoList.length > 0">
+        <p class="text-light fs-4 fw-semibold">Classificação</p>
+        <div class="d-flex flex-wrap justify-content-around">
+            <button *ngFor="let classificacao of this.classificacaoList"
+                class="rounded-4 border border-black text-center mb-3 col-5 p-1">{{ classificacao }}</button>
         </div>
     </div>
-    <div class="mb-1">
-        <p class="text-light text-center">Duração</p>
-        <div class="d-flex flex-wrap justify-content-around align-items-center px-1">
-            <button class="rounded border col-5 text-center">1hr</button>
-            <button class="rounded border col-5 text-center">1hr30</button>
-            <button class="rounded border col-5 text-center">2hr</button>
-            <button class="rounded border col-5 text-center">2hr30</button>
-            <button class="rounded border col-5 text-center">2hr30+</button>
+    <div class="p-2" *ngIf="this.duracaoList.length > 0">
+        <p class="text-light fs-4 fw-semibold">Duração</p>
+        <div class="d-flex flex-wrap justify-content-around">
+            <button *ngFor="let duracao of this.duracaoList"
+                class="rounded-4 border border-black text-center mb-3 col-5 p-1">{{ duracao }}</button>
         </div>
     </div>
-    <div class="mb-1">
-        <p class="text-light text-center">Status</p>
-        <div class="d-flex flex-wrap justify-content-center align-items-center px-1">
-            <button class="rounded border col-10 text-center">Lançamento</button>
-            <button class="rounded border col-10 text-center">Cartaz</button>
-            <button class="rounded border col-10 text-center">Destaque</button>
+    <div class="p-2" *ngIf="this.statusFilmeList.length > 0">
+        <p class="text-light fs-4 fw-semibold">Status</p>
+        <div class="d-flex flex-wrap justify-content-around">
+            <button *ngFor="let status of this.statusFilmeList"
+                class="rounded-4 border border-black text-center mb-3 col-5 p-1">{{ status }}</button>
+        </div>
+    </div>
+    <div class="p-2" *ngIf="this.cargoList.length > 0">
+        <p class="text-light fs-4 fw-semibold">Cargo</p>
+        <div class="d-flex flex-wrap justify-content-around">
+            <button *ngFor="let cargo of this.cargoList"
+                class="rounded-4 border border-black text-center mb-3 col-10 p-1">{{ cargo }}</button>
+        </div>
+    </div>
+    <div class="p-2" *ngIf="this.tipo.toUpperCase() === 'FUNCIONARIO'">
+        <label for="email" class="text-light fs-4 fw-semibold pb-2">Email</label>
+        <input type="text" id="email" placeholder="Digite o email"
+            class="col-11 align-self-center rounded-4 border border-black ps-3 mb-3 py-1" [(ngModel)]="this.email">
+    </div>
+    <div class="p-2" *ngIf="this.tipoSalaList.length > 0">
+        <p class="text-light fs-4 fw-semibold">Tipo</p>
+        <div class="d-flex flex-wrap justify-content-around">
+            <button *ngFor="let tipoSala of this.tipoSalaList"
+                class="rounded-4 border border-black text-center mb-3 col-10 p-1">{{ tipoSala }}</button>
+        </div>
+    </div>
+    <div class="p-2" *ngIf="this.tamanhoSalaList.length > 0">
+        <p class="text-light fs-4 fw-semibold">Tamanho</p>
+        <div class="d-flex flex-wrap justify-content-around">
+            <button *ngFor="let tamanhoSala of this.tamanhoSalaList"
+                class="rounded-4 border border-black text-center mb-3 col-10 p-1">{{ tamanhoSala }}</button>
+        </div>
+    </div>
+    <div class="p-2" *ngIf="this.tipoSessaoList.length > 0">
+        <p class="text-light fs-4 fw-semibold">Tipo</p>
+        <div class="d-flex flex-wrap justify-content-around">
+            <button *ngFor="let tipoSessao of this.tipoSessaoList"
+                class="rounded-4 border border-black text-center mb-3 col-10 p-1">{{ tipoSessao }}</button>
+        </div>
+    </div>
+    <div class="p-2" *ngIf="this.estabelecimentoList.length > 0">
+        <p class="text-light fs-4 fw-semibold">Estabelecimento</p>
+        <select name="estabelecimento" id="estabelecimento" class="rounded-4 border border-black text-center mb-3 col-5 p-1">
+            <option *ngFor="let estabelecimento of this.estabelecimentoList" [value]="estabelecimento">{{ estabelecimento.nome }}</option>
+        </select>
+    </div>
+    <div class="p-2" *ngIf="this.estabelecimentoList.length > 0">
+        <p class="text-light fs-4 fw-semibold">Cidade</p>
+        <select name="estabelecimento" id="estabelecimento" class="rounded-4 border border-black text-center mb-3 col-5 p-1">
+            <option *ngFor="let estabelecimento of this.estabelecimentoList" [value]="estabelecimento.cidade">{{ estabelecimento.cidade }}</option>
+        </select>
+    </div>
+    <div class="p-2 d-flex flex-column" *ngIf="this.tipo.toUpperCase() === 'SESSAO'">
+        <label for="data" class="text-light fs-4 fw-semibold pb-2">Data</label>
+        <input type="date" id="data" class="col-10 align-self-center rounded-4 border border-black text-center mb-3 p-1">
+    </div>
+    <div class="p-2" *ngIf="this.periodoList.length > 0">
+        <p class="text-light fs-4 fw-semibold">Período</p>
+        <div class="d-flex flex-wrap justify-content-around">
+            <button *ngFor="let periodo of this.periodoList"
+                class="rounded-4 border border-black text-center mb-3 col-10 p-1">{{ periodo }}</button>
+        </div>
+    </div>
+    <div class="p-2" *ngIf="this.statusList.length > 0">
+        <p class="text-light fs-4 fw-semibold">Status</p>
+        <div class="d-flex flex-wrap justify-content-around">
+            <button *ngFor="let status of this.statusList"
+                class="rounded-4 border border-black text-center mb-3 col-10 p-1">{{ status }}</button>
         </div>
     </div>
 </div>

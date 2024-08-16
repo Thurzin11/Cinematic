@@ -6,4 +6,13 @@ import { Component } from '@angular/core';
   styleUrl: './menu-sistema.component.scss'
 })
 export class MenuSistemaComponent {
+  menuIsOpen = false;
+
+  closeMenu(): void {
+    this.menuIsOpen = false;
+  }
+
+  openMenu(): void {
+    this.menuIsOpen = true;
+  }
 }

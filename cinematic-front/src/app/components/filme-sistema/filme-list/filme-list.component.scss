@@ -1,0 +1,49 @@
+@import "../../../style/color";
+
+app-menu-sistema {
+    z-index: 1;
+}
+
+.body {
+    box-shadow: 0 .4rem .4rem $PRETO;
+}
+
+app-filme-card {
+    height: 51.3rem;
+    max-height: 51.3rem;
+}
+
+.list {
+    span {
+        cursor: pointer;
+    }
+
+    input {
+        opacity: .7;
+        box-shadow: 0 .2rem .2rem $PRETO;
+    }
+
+    input:hover {
+        transition: .2s;
+        scale: 102%;
+        opacity: 1;
+    }
+
+    input:focus {
+        scale: 105%;
+        opacity: 1;
+        outline: 0;
+    }
+
+    button {
+        opacity: .7;
+        box-shadow: 0 .2rem .2rem $PRETO;
+    }
+
+    button:hover {
+        transition: .2s;
+        scale: 105%;
+        background-color: $AMARELO;
+        opacity: 1;
+    }
+}

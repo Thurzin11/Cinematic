@@ -8,12 +8,15 @@ import { MenuSistemaComponent } from './components/menu-sistema/menu-sistema.com
 import { HomeSistemaComponent } from './components/home-sistema/home-sistema.component';
 import { HeaderSistemaComponent } from './components/header-sistema/header-sistema.component';
 import { LoginFuncionarioComponent } from './components/login-funcionario/login-funcionario.component';
-import { FiltroSistemaComponent } from './components/filtro-sistema/filtro-sistema.component';
-import { FilmeCardComponent } from './components/filme-sistema/filme-card/filme-card.component';
-import { FilmeSistemaComponent } from './components/filme-sistema/filme-sistema/filme-sistema.component';
 import { FuncionarioCadastroComponent } from './components/funcionario-sistema/funcionario-cadastro/funcionario-cadastro.component';
 import { FuncionarioListComponent } from './components/funcionario-sistema/funcionario-list/funcionario-list.component';
 import { FuncionarioCardComponent } from './components/funcionario-sistema/funcionario-card/funcionario-card.component';
+import { FilmeListComponent } from './components/filme-sistema/filme-list/filme-list.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { FilmeCardComponent } from './components/filme-sistema/filme-card/filme-card.component';
+import { FilmeCadastroComponent } from './components/filme-sistema/filme-cadastro/filme-cadastro.component';
+import { FiltroSistemaComponent } from './components/filtro-sistema/filtro-sistema.component';
 
 @NgModule({
   declarations: [
@@ -22,16 +25,19 @@ import { FuncionarioCardComponent } from './components/funcionario-sistema/funci
     HomeSistemaComponent,
     HeaderSistemaComponent,
     LoginFuncionarioComponent,
-    FiltroSistemaComponent,
-    FilmeCardComponent,
-    FilmeSistemaComponent,
     FuncionarioCadastroComponent,
     FuncionarioListComponent,
-    FuncionarioCardComponent
+    FuncionarioCardComponent,
+    FilmeListComponent,
+    FilmeCardComponent,
+    FilmeCadastroComponent,
+    FiltroSistemaComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

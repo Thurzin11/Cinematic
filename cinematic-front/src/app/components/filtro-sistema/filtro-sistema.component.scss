@@ -1,42 +1,37 @@
 @import '../../style/color';
 
-.body {
+.filtro {
     background-color: $ROXO-CLARO;
-    max-width: 8rem;
-    position: relative;
 
-    span {
-        position: absolute;
-        top: 0;
-        left: .5rem;
-        cursor: pointer;
-        border-top-left-radius: .2rem;
-    }
-
-    span:hover {
+    .filtro-close:hover {
         transition: .2s;
+        cursor: pointer;
         color: red;
     }
-}
 
-p {
-    font-size: .8rem;
-}
+    .filtro-title {
+        background-color: $AMARELO;
+        box-shadow: 0 .2rem .4rem $PRETO;
+    }
 
-button {
-    margin-bottom: .2rem;
-    font-size: .6rem;
-    background-color: transparent;
-    opacity: .7;
-}
+    button, input {
+        font-size: 1rem;
+        margin: 0 .5rem;
+        background-color: transparent;
+        box-shadow: 0 .2rem .2rem $PRETO;
+    }
 
-button:hover {
-    transition: .2s;
-    scale: 105%;
-    background-color: $BRANCO;
-}
+    input::placeholder {
+        color: $PRETO;
+    }
 
-button:focus {
-    background-color: $AMARELO;
-    color: $BRANCO
+    input:focus {
+        outline: 0;
+    }
+
+    button:hover, input:hover {
+        transition: .2s;
+        scale: 105%;
+        background-color: $AMARELO;
+    }
 }
