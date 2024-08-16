@@ -1,7 +1,7 @@
 @import "../../../style/color";
 
 .list{
-  border: 3px solid black;
+  // border: 3px solid black;
   // height: 700px;
 
 }
@@ -25,4 +25,17 @@ input:focus,button:focus{
 input,button{
   box-shadow: 0 .2rem .2rem $PRETO;
   opacity: 50%;
+}
+.filter{
+  background-color: $ROXO-CLARO;
+}
+.span-filtro{
+  background-color: $AMARELO;
+  box-shadow: 0 .4rem .4rem $PRETO;
+}
+button,input{
+  opacity: 100%;
+  border: 2px solid $PRETO;
+  box-shadow: 0 .4rem .4rem $PRETO;
+  background-color: $ROXO-CLARO;
 }
