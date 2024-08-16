@@ -1,5 +1,7 @@
-<nav class="d-flex flex-column align-items-start">
-    <div class="d-flex align-items-center">
+<nav class="d-flex flex-column align-items-start border border-black" 
+    (mouseleave)="this.closeMenu()"
+    [ngClass]="this.menuIsOpen ? '' : 'leave'">
+    <div class="d-flex align-items-center" routerLink="/sistema/filme">
         <img src="../../../assets/img/claquete.png" alt="">
         <p class="fs-4 ps-3 fw-bold">Filmes</p>
     </div>
@@ -11,7 +13,7 @@
         <img src="../../../assets/img/calendario.png" alt="">
         <p class="fs-4 ps-3 fw-bold">Evento</p>
     </div>
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center" routerLink="funcionario">
         <img src="../../../assets/img/funcionarios.png" alt="">
         <p class="fs-4 ps-3 fw-bold">Funcionários</p>
     </div>

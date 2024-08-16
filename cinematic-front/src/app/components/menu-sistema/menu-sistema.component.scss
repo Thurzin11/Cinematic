@@ -26,6 +26,11 @@ nav {
     }
 }
 
+.leave {
+    transition: .5s;
+    max-width: 4rem;
+}
+
 nav:hover {
     transition: .2s;
     max-width: 15rem;

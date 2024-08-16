@@ -1,0 +1,3 @@
+export enum IStatusFilme {
+    LANCAMENTO, ESTREIA, PRE_ESTREIA, CARTAZ, DESTAQUE
+}
