@@ -3,12 +3,14 @@ package com.tcc.cinematic.service;
 import com.tcc.cinematic.DTO.UsuarioRegisterDTO;
 import com.tcc.cinematic.DTO.UsuarioUpdateDTO;
 import com.tcc.cinematic.entity.Usuario;
+import com.tcc.cinematic.enums.TipoUsuario;
 import com.tcc.cinematic.repository.UsuarioRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -16,7 +18,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
-    public List<Usuario> finAll(){
+    public List<Usuario> findAll(){
         return this.repository.findAll();
     }
 
@@ -47,5 +49,36 @@ public class UsuarioService {
         this.repository.delete(userFound);
         return true;
     }
+     public List<Usuario> findByTipoUsuario(String tipoUsuario){
+        if (tipoUsuario.equalsIgnoreCase(String.valueOf(TipoUsuario.FUNCIONARIO)))
+            return this.repository.findByTipoUsuario(TipoUsuario.FUNCIONARIO);
+        else {
+            return this.repository.findByTipoUsuario(TipoUsuario.GERENTE);
+        }
+     }
+     public List<Usuario> findByStatus(Boolean status){
+        return this.repository.findByStatus(status);
+     }
+     public List<Usuario> findByEmail(String email){
+        return this.repository.findByEmail(email);
+     }
+
+
+     public List<Usuario> findByGerenteAndFuncionario(){
+        var funcionariosList = this.repository.findByTipoUsuario(TipoUsuario.GERENTE);
+        funcionariosList.addAll(this.repository.findByTipoUsuario(TipoUsuario.FUNCIONARIO));
+        return funcionariosList;
+     }
+
+//     public List<Usuario> filtros(Map<String,String> map){
+//        var cargo = map.get("cargo");
+//        var status = map.get("status");
+//        var email = map.get("email");
+//        List<Usuario> usuarioList;
+//        if (cargo!=null)
+//           usuarioList =  this.findByTipoUsuario(cargo);
+//        if (status!null)
+//
+//     }
 
 }

@@ -1,0 +1,44 @@
+@import "../../../style/color";
+
+h2{
+  color: $AMARELO;
+  
+}
+.cadastra-funcionario{
+  background: $ROXO-CLARO;
+  // height: 526px;
+  box-shadow: 0 .4rem .4rem $PRETO;
+  border: solid 2 px $PRETO;
+}
+.inputName,.inputEmail,.last{
+  margin: 0 auto;
+}
+button{
+  background-color: $AMARELO;
+}
+input{
+  padding: 10px 10px;
+  background-color: $BRANCO;
+  opacity: 70%;
+  box-shadow: 0 .2rem .2rem $PRETO;
+}
+input:hover,select:hover{
+  opacity: 100%;
+  scale: 102%;
+  transition: .2s;
+}
+input:focus,select:focus{
+  opacity: 100%;
+  scale: 102%;
+  transition: .2s;
+  outline: 0;
+}
+input::placeholder{
+  color: $PRETO;
+  opacity: 35%;
+}
+select{
+  background-color: $BRANCO;
+  box-shadow: 0 .2rem .2rem $PRETO;
+  opacity: 70%;
+}

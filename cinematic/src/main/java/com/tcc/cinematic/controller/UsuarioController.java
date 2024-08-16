@@ -25,7 +25,7 @@ public class UsuarioController {
 
     @GetMapping
     public ResponseEntity<List<Usuario>> findAll(){
-        return ResponseEntity.ok(this.service.finAll());
+        return ResponseEntity.ok(this.service.findAll());
     }
 
     @GetMapping("/{id}")
@@ -33,16 +33,22 @@ public class UsuarioController {
         var userReturn = this.service.findById(id);
         if (userReturn == null)
             return ResponseEntity.notFound().build();
-
         return ResponseEntity.ok(userReturn);
     }
-    //@GetMapping("/funcionario")
-    //public ResponseEntity<List<Usuario>> findByNomeAndTipoUsuario(@RequestBody Map<String,String> params){
-      //  var usuarioList = this.service.findByNomeAndTipoUsuario(params.get("nome"),params.get("tipo"));
-       // if (usuarioList == null)
-         //   return ResponseEntity.badRequest().build();
-        //return ResponseEntity.ok(usuarioList);
-    //}
+    @GetMapping("/funcionarios")
+    public ResponseEntity<List<Usuario>> findByGerenteAndFuncionario(){
+       return ResponseEntity.ok(this.service.findByGerenteAndFuncionario());
+    }
+//    @GetMapping("/filtros")
+//    public ResponseEntity<List<Usuario>> filtros(@RequestBody Map<String,String> map){
+//        return ResponseEntity.ok(this.service.filtros(map));
+//    }
+
+    @GetMapping("/email")
+    public ResponseEntity<List<Usuario>> findByEmail(@RequestBody Map<String,String> map){
+        var email = map.get("email");
+        return ResponseEntity.ok(this.service.findByEmail(email));
+    }
     @PostMapping
     public ResponseEntity<Usuario> create(@RequestBody @Valid UsuarioRegisterDTO usuarioRegisterDTO){
         var user = this.service.create(usuarioRegisterDTO);
