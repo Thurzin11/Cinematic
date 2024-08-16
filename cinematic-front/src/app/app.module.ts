@@ -13,6 +13,7 @@ import { FilmeCardComponent } from './components/filme-sistema/filme-card/filme-
 import { FilmeSistemaComponent } from './components/filme-sistema/filme-sistema/filme-sistema.component';
 import { FuncionarioCadastroComponent } from './components/funcionario-sistema/funcionario-cadastro/funcionario-cadastro.component';
 import { FuncionarioListComponent } from './components/funcionario-sistema/funcionario-list/funcionario-list.component';
+import { FuncionarioCardComponent } from './components/funcionario-sistema/funcionario-card/funcionario-card.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FuncionarioListComponent } from './components/funcionario-sistema/funci
     FilmeCardComponent,
     FilmeSistemaComponent,
     FuncionarioCadastroComponent,
-    FuncionarioListComponent
+    FuncionarioListComponent,
+    FuncionarioCardComponent
   ],
   imports: [
     BrowserModule,

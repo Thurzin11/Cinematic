@@ -1,0 +1,28 @@
+@import "../../../style/color";
+
+.list{
+  border: 3px solid black;
+  // height: 700px;
+
+}
+input:hover{
+  scale: 102%;
+  transition: .2s;
+  opacity: 100%;
+}
+button:hover{
+  scale: 102%;
+  transition: .2s;
+  background-color: $AMARELO;
+  opacity: 100%;
+}
+input:focus,button:focus{
+  scale: 102%;
+  transition: .2s;
+  outline: 0;
+  opacity: 100%;
+}
+input,button{
+  box-shadow: 0 .2rem .2rem $PRETO;
+  opacity: 50%;
+}
