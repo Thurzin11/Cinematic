@@ -22,6 +22,10 @@ public class CategoriaService {
         return this.repository.findById(id).orElse(null);
     }
 
+    public Categoria findByNome(String nome) {
+        return this.repository.findByNome(nome).orElse(null);
+    }
+
     public Categoria create(Categoria categoria) {
         return this.repository.save(categoria);
     }

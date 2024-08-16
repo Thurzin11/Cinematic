@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -43,6 +44,11 @@ public class FilmeController {
             return ResponseEntity.badRequest().build();
 
         return ResponseEntity.ok(filmeReturn);
+    }
+
+    @PatchMapping("/filtro")
+    public ResponseEntity<List<Filme>> filter(@RequestBody Map<String, List<String>> filters) {
+        return ResponseEntity.ok(this.service.filters(filters));
     }
 
     @DeleteMapping("/{id}")

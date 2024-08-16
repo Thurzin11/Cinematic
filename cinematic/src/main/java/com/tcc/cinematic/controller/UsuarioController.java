@@ -36,13 +36,13 @@ public class UsuarioController {
 
         return ResponseEntity.ok(userReturn);
     }
-    @GetMapping("/funcionario")
-    public ResponseEntity<List<Usuario>> findByNomeAndTipoUsuario(@RequestBody Map<String,String> params){
-        var usuarioList = this.service.findByNomeAndTipoUsuario(params.get("nome"),params.get("tipo"));
-        if (usuarioList == null)
-            return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(usuarioList);
-    }
+    //@GetMapping("/funcionario")
+    //public ResponseEntity<List<Usuario>> findByNomeAndTipoUsuario(@RequestBody Map<String,String> params){
+      //  var usuarioList = this.service.findByNomeAndTipoUsuario(params.get("nome"),params.get("tipo"));
+       // if (usuarioList == null)
+         //   return ResponseEntity.badRequest().build();
+        //return ResponseEntity.ok(usuarioList);
+    //}
     @PostMapping
     public ResponseEntity<Usuario> create(@RequestBody @Valid UsuarioRegisterDTO usuarioRegisterDTO){
         var user = this.service.create(usuarioRegisterDTO);
