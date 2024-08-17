@@ -1,0 +1,22 @@
+<app-header-sistema></app-header-sistema>
+<div class="position-relative">
+  <app-menu-sistema class="position-absolute"></app-menu-sistema>
+  <div class="col-10 mx-auto">
+    <h2 class="mb-5 fs-1">Horários</h2>
+    <div class="border border-black rounded-bottom-0 p-3 d-flex rounded-3 body pb-4">
+      <div class="col-6">
+        <label class="text-light fs-3 d-flex fw-bold pb-2" for="hora">Hora</label>
+        <input class="rounded-3 border border-black py-2 ps-2 col-8" id="hora" type="text" placeholder="Digite o horário">
+      </div>
+      <div class="col-6">
+        <label class="text-light fs-3 d-flex fw-bold pb-2" for="status">Status</label>
+        <select class="rounded-3 border border-black py-2 ps-2 col-4" name="status" id="status">
+          <option value="ativo">Ativo</option>
+          <option value="inativo">Inativo</option>
+        </select>
+      </div>
+    </div>
+    <button class="fw-bold fs-3 col-12 rounded-bottom-3 border border-black border-top-0 py-2">Salvar</button>
+  </div>
+</div>
+
