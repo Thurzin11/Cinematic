@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -24,7 +25,7 @@ public class Filme {
     private String nome;
     @ManyToOne
     private Categoria categoria;
-    private int duracao;
+    private Integer duracao;
     @Enumerated(EnumType.STRING)
     private Classificacao classificacao;
     private String descricao;

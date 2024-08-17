@@ -1,9 +1,11 @@
 package com.tcc.cinematic.controller;
 
+import com.tcc.cinematic.DTO.FilmeFilterParams;
 import com.tcc.cinematic.DTO.FilmeRegisterDTO;
 import com.tcc.cinematic.DTO.FilmeUpdateDTO;
 import com.tcc.cinematic.entity.Filme;
 import com.tcc.cinematic.service.FilmeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,8 +49,8 @@ public class FilmeController {
     }
 
     @PatchMapping("/filtro")
-    public ResponseEntity<List<Filme>> filter(@RequestBody Map<String, List<String>> filters) {
-        return ResponseEntity.ok(this.service.filters(filters));
+    public ResponseEntity<List<Filme>> filter(@RequestBody @Valid FilmeFilterParams filterParams) {
+        return ResponseEntity.ok(this.service.filters(filterParams));
     }
 
     @DeleteMapping("/{id}")

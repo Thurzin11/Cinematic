@@ -1,5 +1,6 @@
 package com.tcc.cinematic.service;
 
+import com.tcc.cinematic.DTO.FilmeFilterParams;
 import com.tcc.cinematic.DTO.FilmeRegisterDTO;
 import com.tcc.cinematic.DTO.FilmeUpdateDTO;
 import com.tcc.cinematic.entity.Categoria;
@@ -7,21 +8,29 @@ import com.tcc.cinematic.entity.Filme;
 import com.tcc.cinematic.enums.Classificacao;
 import com.tcc.cinematic.enums.StatusFilme;
 import com.tcc.cinematic.repository.FilmeRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class FilmeService {
     @Autowired
     private FilmeRepository repository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     private CategoriaService categoriaService;
@@ -50,41 +59,44 @@ public class FilmeService {
         return this.repository.findByStatus(status);
     }
 
-    public List<Filme> filters(Map<String, List<String>> filters) {
-        List<Filme> filmes = new ArrayList<>();
+    public List<Filme> filters(FilmeFilterParams filterParams) {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT f FROM Filme f WHERE 1=1 ");
+        Map<String, Object> params = new HashMap<>();
 
-        filters.forEach((key, value) -> {
-            switch (key.toUpperCase()) {
-                case "CATEGORIA": {
-                    System.out.println(value);
-                    for(var str:value)
-                        filmes.addAll(this.findByCategoria(this.setCategoria(str)));
+        if(filterParams.categorias() != null && !filterParams.categorias().isEmpty()) {
+            sql.append("AND f.categoria IN (:CATEGORIAS) ");
+            params.put("CATEGORIAS", filterParams.categorias());
+        }
 
-                    break;
-                }
-                case "CLASSIFICACAO": {
-                    for(var str:value)
-                        filmes.addAll(this.findByClassificacao(this.setClassificacao(str)));
+        if(filterParams.classificacoes() != null && !filterParams.classificacoes().isEmpty()) {
+            sql.append("AND f.classificacao IN (:CLASSIFICACOES) ");
+            params.put("CLASSIFICACOES", this.setClassificacoes(filterParams.classificacoes()));
+        }
 
-                    break;
-                }
-                case "DURACAO": {
-                    for(var str:value)
-                        filmes.addAll(this.findByDuracao(str));
+        if(filterParams.duracoes() != null && !filterParams.duracoes().isEmpty()) {
+            sql.append("AND f.duracao IN (:DURACOES) ");
+            params.put("DURACOES", filterParams.duracoes());
+        }
 
-                    break;
-                }
-                case "STATUS": {
-                    for(var str:value)
-                        filmes.addAll(this.findByStatus(this.setStatus(str)));
+        if(filterParams.status() != null && !filterParams.status().isEmpty()) {
+            sql.append("AND f.status IN (:STATUS)");
+            params.put("STATUS", filterParams.status());
+        }
 
-                    break;
-                }
-                default: break;
-            }
+        Query query = this.entityManager.createQuery(sql.toString());
+        params.forEach((key, value) -> {
+            query.setParameter(key, value);
         });
 
-        return filmes;
+        return query.getResultList();
+    }
+
+    private void addFilmeToList(List<Filme> listFilme, List<Filme> listFilmParam) {
+        for(var filme:listFilmParam) {
+            if(!listFilme.contains(filme))
+                listFilme.add(filme);
+        }
     }
 
     private Categoria setCategoria(String nomeCategoria) {
@@ -137,6 +149,42 @@ public class FilmeService {
             case "DEZOITO" -> Classificacao.DEZOITO;
             default -> null;
         };
+    }
+
+    private List<Classificacao> setClassificacoes(List<String> classificacoesParam) {
+        List<Classificacao> classificacoes = new ArrayList<>();
+
+        for(String classificacao:classificacoesParam) {
+            switch (classificacao.toUpperCase()) {
+                case "LIVRE": {
+                    classificacoes.add(Classificacao.LIVRE);
+                    break;
+                }
+                case "DEZ": {
+                    classificacoes.add(Classificacao.DEZ);
+                    break;
+                }
+                case "DOZE": {
+                    classificacoes.add(Classificacao.DOZE);
+                    break;
+                }
+                case "QUATORZE": {
+                    classificacoes.add(Classificacao.QUATORZE);
+                    break;
+                }
+                case "DEZESSEIS": {
+                    classificacoes.add(Classificacao.DEZESSEIS);
+                    break;
+                }
+                case "DEZOITO": {
+                    classificacoes.add(Classificacao.DEZOITO);
+                    break;
+                }
+                default: break;
+            };
+        }
+
+        return classificacoes;
     }
 
     private StatusFilme setStatus(String status) {
