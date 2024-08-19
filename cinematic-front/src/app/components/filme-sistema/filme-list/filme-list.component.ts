@@ -16,6 +16,26 @@ export class FilmeListComponent implements OnInit{
   duracaoList: string[] = ['1hr-', '1hr30-', '2h-', '2hr30-'];
   statusList: string[] = ['Lançamento', 'Cartaz', 'Destaque', 'Pré-Estreia', 'Estreia'];
   filterIsOpen: boolean = false;
+  filmeDetails: IFilme = {
+    id: '',
+    nome: '',
+    categoria: {
+      id: '',
+      nome: ''
+    },
+    duracao: 0,
+    classificacao: '',
+    descricao: '',
+    dataEstreia: '',
+    disponibilidade: false,
+    banner: '',
+    direcao: '',
+    distribuidora: '',
+    statusFilme: '',
+    capas: [],
+    trailers: []
+  };
+  openFilmeDetailes: boolean = false;
   
   constructor(
     private categoriaService: CategoriaService,
@@ -28,5 +48,17 @@ export class FilmeListComponent implements OnInit{
 
   toggleFiltro(): void {
     this.filterIsOpen = !this.filterIsOpen;
+  }
+
+  seeFilmeDetails(id: string): void {
+    let filme = this.filmes.find((filme) => filme.id == id);
+    if(filme) {
+      this.filmeDetails = filme;
+      this.openFilmeDetailes = true;
+    }
+  }
+
+  closeDetails(): void {
+    this.openFilmeDetailes = false;
   }
 }

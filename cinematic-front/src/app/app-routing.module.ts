@@ -12,6 +12,7 @@ const routes: Routes = [
   {path: "sistema/funcionario/cadastro",component: FuncionarioCadastroComponent},
   {path: "sistema/filme", component: FilmeListComponent},
   {path: "sistema/filme/cadastro", component: FilmeCadastroComponent},
+  {path: "sistema/filme/editar/:id", component: FilmeCadastroComponent},
   {path: "", redirectTo: "sistema/login", pathMatch: 'full'}
 ];
 

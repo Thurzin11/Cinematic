@@ -85,9 +85,7 @@ public class FilmeService {
         }
 
         Query query = this.entityManager.createQuery(sql.toString());
-        params.forEach((key, value) -> {
-            query.setParameter(key, value);
-        });
+        params.forEach(query::setParameter);
 
         return query.getResultList();
     }
@@ -108,10 +106,9 @@ public class FilmeService {
     }
 
     public Filme create(FilmeRegisterDTO filmeRegisterDTO) {
-        var format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         var filme = Filme.builder()
                 .classificacao(this.setClassificacao(filmeRegisterDTO.classificacao()))
-                .dataEstreia(LocalDate.parse(filmeRegisterDTO.dataEstreia(), format))
+                .dataEstreia(filmeRegisterDTO.dataEstreia())
                 .status(this.setStatus(filmeRegisterDTO.status()))
                 .build();
 

@@ -5,7 +5,7 @@
         <h2 class="text-light fs-1 fw-bold">Filmes</h2>
         <div class="body col-12 d-flex rounded">
             <app-filtro-sistema *ngIf="this.filterIsOpen" class="col-2" [tipo]="'filme'" (onCloseFilter)="this.toggleFiltro()"></app-filtro-sistema>
-            <div class="list border border-black p-3" [ngClass]="this.filterIsOpen ? 'col-10 rounded-end border-start-0':'col-12 rounded'">
+            <div class="list border border-black p-3 position-relative" [ngClass]="this.filterIsOpen ? 'col-10 rounded-end border-start-0':'col-12 rounded'">
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center col-6">
                         <span class="pe-4"
@@ -26,9 +26,20 @@
                     </div>
                     <button class="p-1 col-2 rounded-2 fst-italic" routerLink="cadastro">Adicionar</button>
                 </div>
-                <div class="pt-3 col-12">
-                    <app-filme-card [filmes]="this.filmes" class="d-flex flex-wrap py-2 px-5 overflow-auto"></app-filme-card>
+                <div class="cards p-3 d-flex flex-wrap py-3 col-12 overflow-y-auto">
+                    <app-filme-card 
+                        *ngFor="let filme of this.filmes" 
+                        [banner]="filme.banner" 
+                        [classificacao]="filme.classificacao.toString()"
+                        [nome]="filme.nome"
+                        class="col-1 mx-3"
+                        (click)="this.seeFilmeDetails(filme.id)"></app-filme-card>
                 </div>
+                <app-filme-detalhe 
+                        [filme]="this.filmeDetails" 
+                        (onCloseDetails)="this.closeDetails()"
+                        *ngIf="this.openFilmeDetailes"
+                        class="d-flex justify-content-center align-items-center position-absolute"></app-filme-detalhe>
             </div>
         </div>
     </div>

@@ -1,0 +1,64 @@
+@import "../../../style/color";
+
+.body {
+    background-color: $ROXO-ESCURO;
+    box-shadow: 0 .4rem .4rem $PRETO;
+}
+
+img {
+    width: 20%;
+    box-shadow: 0 .4rem .4rem $PRETO;
+}
+
+.close-details {
+    top: .5rem;
+    left: .5rem;
+}
+
+.close-details:hover {
+    cursor: pointer;
+    transition: .2s;
+    color: $VERMELHO;
+}
+
+.classificacao {
+    box-shadow: 0 .2rem .2rem $PRETO;
+    min-width: 2rem;
+}
+
+button {
+    opacity: .7;
+}
+
+button:hover {
+    transition: .2s;
+    scale: 103%;
+    opacity: 1;
+}
+
+button:first-child {
+    background-color: $AMARELO;
+}
+
+button:last-child {
+    background-color: $VERMELHO;
+}
+
+.livre {
+    background-color: $VERDE-CLASSIFICACAO-L;
+}
+.dez {
+    background-color: $AZUL-CLASSIFICACAO-10;
+}
+.doze {
+    background-color: $AMARELO-CLASSIFICACAO-12;
+}
+.quatorze {
+    background-color: $LARANJA-CLASSIFICACAO-14;
+}
+.dezesseis {
+    background-color: $VERMELHO;
+}
+.dezoito {
+    background-color: $PRETO;
+}

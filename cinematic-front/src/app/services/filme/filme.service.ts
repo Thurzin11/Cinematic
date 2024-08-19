@@ -14,4 +14,22 @@ export class FilmeService {
   findAll(): Observable<IFilme[]> {
     return this.http.get<IFilme[]>(`${Environment.urlApi}/filme`);
   }
+
+  findById(id: string): Observable<IFilme> {
+    return this.http.get<IFilme>(`${Environment.urlApi}/filme/${id}`);
+  }
+
+  create(filme: IFilme): Observable<IFilme> {
+    return this.http.post<IFilme>(`${Environment.urlApi}/filme`, {
+      nome: filme.nome,
+      categoria: filme.categoria,
+      classificacao: filme.classificacao,
+      descricao: filme.descricao,
+      duracao: filme.duracao,
+      dataEstreia: filme.dataEstreia,
+      banner: filme.banner,
+      status: filme.statusFilme,
+      trailers: filme.trailers
+    })
+  }
 }

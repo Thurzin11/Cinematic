@@ -4,12 +4,21 @@ app-menu-sistema {
     z-index: 1;
 }
 
+app-filme-detalhe {
+    right: 25%;
+    top: 10%;
+    width: 50%;
+}
+
+.opacity {
+    
+}
+
 .body {
     box-shadow: 0 .4rem .4rem $PRETO;
 }
 
-app-filme-card {
-    height: 51.3rem;
+.cards {
     max-height: 51.3rem;
 }
 
