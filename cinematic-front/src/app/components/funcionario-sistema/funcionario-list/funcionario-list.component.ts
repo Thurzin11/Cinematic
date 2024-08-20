@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { IUsuario } from '../../../model/IUsuario';
 
@@ -7,7 +7,7 @@ import { IUsuario } from '../../../model/IUsuario';
   templateUrl: './funcionario-list.component.html',
   styleUrl: './funcionario-list.component.scss'
 })
-export class FuncionarioListComponent {
+export class FuncionarioListComponent  {
   filterIsOpen: boolean = false;
   detalheIsOpen: boolean = false;
   usuarios: IUsuario[]=[]
@@ -25,6 +25,7 @@ export class FuncionarioListComponent {
   };
 
   constructor(private usuarioService: UsuarioService){}
+
 
   ngOnInit(): void {
     this.usuarioService.findAll().subscribe(usuarios => this.usuarios = usuarios)
@@ -44,5 +45,16 @@ export class FuncionarioListComponent {
   closeDetalhe(): void{
     this.detalheIsOpen = false;
   }
-
+  filtro: any;
+  filtrar(event:any){
+    this.filtro = event;
+    console.log(this.filtro);
+  }
+  filtroNome(nome: string):void{
+    if (nome) {
+      this.usuarioService.findByNome(nome).subscribe(usuarios => this.usuarios = usuarios);
+    }else{
+      this.usuarioService.findAll().subscribe(usuarios => this.usuarios = usuarios)
+    }
+  }
 }

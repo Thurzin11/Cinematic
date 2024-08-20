@@ -12,7 +12,7 @@ export class UsuarioService {
   constructor(private http: HttpClient) { }
 
   findAll(): Observable<IUsuario[]>{
-    return this.http.get<IUsuario[]>(`${Environment.urlApi}/usuario`);
+    return this.http.get<IUsuario[]>(`${Environment.urlApi}/usuario/funcionarios`);
   }
 
   create(usuario:IUsuario): Observable<IUsuario>{
@@ -29,5 +29,8 @@ export class UsuarioService {
 
   update(funcionario: IUsuario): Observable<IUsuario>{
     return this.http.patch<IUsuario>(`${Environment.urlApi}/usuario`,funcionario);
+  }
+  findByNome(nome: string): Observable<IUsuario[]>{
+    return this.http.get<IUsuario[]>(`${Environment.urlApi}/usuario/nome/${nome}`);
   }
 }

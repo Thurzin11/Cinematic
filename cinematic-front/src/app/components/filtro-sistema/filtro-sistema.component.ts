@@ -12,6 +12,7 @@ import { IEstabelecimento } from '../../model/IEstabelecimento';
 export class FiltroSistemaComponent implements OnInit {
   @Input() tipo: string = '';
   @Output() onCloseFilter = new EventEmitter();
+  @Output() onFiltroFuncionario = new EventEmitter();
 
   categoriaList: ICategoria[] = [];
   classificacaoList: string[] = [];
@@ -25,6 +26,7 @@ export class FiltroSistemaComponent implements OnInit {
   periodoList: string[] = [];
   tipoSessaoList: string[] = [];
   estabelecimentoList: IEstabelecimento[] = [];
+  cargoCheckbox: string ='';
 
   constructor(
     private categoriaService: CategoriaService,
@@ -73,6 +75,21 @@ export class FiltroSistemaComponent implements OnInit {
   private caseFuncionario(): void {
     this.cargoList = ['Funcionario', 'Gerente'];
     this.statusList = ['Ativo', 'Inativo'];
+  }
+  filtroFuncionarioCargo(cargosFilter?: string[],status?: boolean,email?: string){
+    this.onFiltroFuncionario.emit({
+      cargosFilter,
+      status,
+      email
+    });
+  }
+  selectCargo(cargo: string): void{
+    if (cargo==this.cargoCheckbox) {
+      this.cargoCheckbox = '';
+    }else{
+      this.cargoCheckbox = cargo;
+    }
+    console.log(this.cargoCheckbox);
   }
 
   private caseSala(): void {
