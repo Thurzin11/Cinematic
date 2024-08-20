@@ -75,6 +75,10 @@ public class UsuarioService {
         return funcionariosList;
      }
 
+     public List<Usuario> findByName(String nome){
+        return this.repository.findByName("%"+nome+"%");
+     }
+
      public List<Usuario> findByFilters(UsuarioFilterParams params){
 //        return this.repository.findByFilter(params.tipo(),params.status(), params.email());
          StringBuilder sql = new StringBuilder();

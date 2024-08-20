@@ -18,12 +18,16 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
     List<Usuario> findByStatus(Boolean status);
     List<Usuario> findByEmail(String email);
 
-    @Query(value = "SELECT * FROM usuario " +
-            "WHERE 1=1 " +
-            "AND (:TIPO_USUARIO ISNULL OR tipo_usuario IN (:TIPO_USUARIO)) " +
-            "AND (:STATUS ISNULL OR status = :STATUS) " +
-            "AND (:EMAIL ISNULL OR email LIKE '%:EMAIL%')", nativeQuery = true)
-    List<Usuario> findByFilter(@Param("TIPO_USUARIO") List<TipoUsuario> tipos,
-                               @Param("STATUS") Boolean status,
-                               @Param("EMAIL") String email);
+    @Query(value = "SELECT * FROM usuario "+
+            "WHERE nome LIKE :NOME",nativeQuery = true)
+    List<Usuario> findByName(@Param("NOME") String nome);
+
+//    @Query(value = "SELECT * FROM usuario " +
+//            "WHERE 1=1 " +
+//            "AND (:TIPO_USUARIO ISNULL OR tipo_usuario IN (:TIPO_USUARIO)) " +
+//            "AND (:STATUS ISNULL OR status = :STATUS) " +
+//            "AND (:EMAIL ISNULL OR email LIKE '%:EMAIL%')", nativeQuery = true)
+//    List<Usuario> findByFilter(@Param("TIPO_USUARIO") List<TipoUsuario> tipos,
+//                               @Param("STATUS") Boolean status,
+//                               @Param("EMAIL") String email);
 }

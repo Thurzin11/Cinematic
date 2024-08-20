@@ -38,6 +38,12 @@ public class UsuarioController {
     public ResponseEntity<List<Usuario>> findByGerenteAndFuncionario(){
        return ResponseEntity.ok(this.service.findByGerenteAndFuncionario());
     }
+
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<List<Usuario>> findByName(@PathVariable String nome){
+        return ResponseEntity.ok(this.service.findByName(nome));
+    }
+
     @GetMapping("/filtros")
     public ResponseEntity<List<Usuario>> filtros(@RequestBody UsuarioFilterParams params){
         return ResponseEntity.ok(this.service.findByFilters(params));
