@@ -19,7 +19,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
     List<Usuario> findByEmail(String email);
 
     @Query(value = "SELECT * FROM usuario "+
-            "WHERE nome LIKE :NOME",nativeQuery = true)
+            "WHERE nome LIKE :NOME "+
+            "AND (tipo_usuario LIKE 'GERENTE' OR tipo_usuario LIKE 'FUNCIONARIO')",nativeQuery = true)
     List<Usuario> findByName(@Param("NOME") String nome);
 
 //    @Query(value = "SELECT * FROM usuario " +
