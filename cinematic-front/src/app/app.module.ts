@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FilmeCardComponent } from './components/filme-sistema/filme-card/filme-card.component';
 import { FilmeCadastroComponent } from './components/filme-sistema/filme-cadastro/filme-cadastro.component';
 import { FiltroSistemaComponent } from './components/filtro-sistema/filtro-sistema.component';
+import { FuncionarioDetalheComponent } from './components/funcionario-sistema/funcionario-detalhe/funcionario-detalhe.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FiltroSistemaComponent } from './components/filtro-sistema/filtro-siste
     FilmeListComponent,
     FilmeCardComponent,
     FilmeCadastroComponent,
-    FiltroSistemaComponent
+    FiltroSistemaComponent,
+    FuncionarioDetalheComponent,
   ],
   imports: [
     BrowserModule,

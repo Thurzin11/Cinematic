@@ -1,10 +1,17 @@
 @import "../../../style/color";
 
-.list{
+app-menu-sistema{
+  z-index: 1;
+}
+.body-bottom{
+  height: 33rem;
+}
+
+// .list{
   // border: 3px solid black;
   // height: 700px;
 
-}
+// }
 input:hover{
   scale: 102%;
   transition: .2s;
@@ -24,6 +31,7 @@ input:focus,button:focus{
 }
 input,button{
   box-shadow: 0 .2rem .2rem $PRETO;
+  background-color: $ROXO-CLARO;
   opacity: 50%;
 }
 .filter{
@@ -33,9 +41,24 @@ input,button{
   background-color: $AMARELO;
   box-shadow: 0 .4rem .4rem $PRETO;
 }
-button,input{
-  opacity: 100%;
-  border: 2px solid $PRETO;
-  box-shadow: 0 .4rem .4rem $PRETO;
+input::placeholder{
+  color: $BRANCO;
+}
+app-funcionario-card{
   background-color: $ROXO-CLARO;
+  box-shadow: 0 .4rem .4rem $PRETO;
+}
+app-funcionario-detalhe{
+  right: 25%;
+  top: 10%;
+  width: 50%;
+  z-index: 2;
+}
+app-funcionario-card:hover{
+  scale: 102%;
+  transition: .2s;
+  cursor: pointer;
+}
+.listBottom{
+  max-height: 29.1rem;
 }

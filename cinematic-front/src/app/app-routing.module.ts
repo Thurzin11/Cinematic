@@ -5,6 +5,7 @@ import { LoginFuncionarioComponent } from './components/login-funcionario/login-
 import { FuncionarioCadastroComponent } from './components/funcionario-sistema/funcionario-cadastro/funcionario-cadastro.component';
 import { FilmeListComponent } from './components/filme-sistema/filme-list/filme-list.component';
 import { FilmeCadastroComponent } from './components/filme-sistema/filme-cadastro/filme-cadastro.component';
+import { FuncionarioListComponent } from './components/funcionario-sistema/funcionario-list/funcionario-list.component';
 
 const routes: Routes = [
   {path: "sistema/home", component: HomeSistemaComponent},
@@ -12,6 +13,8 @@ const routes: Routes = [
   {path: "sistema/funcionario/cadastro",component: FuncionarioCadastroComponent},
   {path: "sistema/filme", component: FilmeListComponent},
   {path: "sistema/filme/cadastro", component: FilmeCadastroComponent},
+  {path: "sistema/funcionario",component: FuncionarioListComponent},
+  {path: "sistema/funcionario/editar/:id",component: FuncionarioCadastroComponent},
   {path: "", redirectTo: "sistema/login", pathMatch: 'full'}
 ];
 
