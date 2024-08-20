@@ -1,12 +1,11 @@
 package com.tcc.cinematic.controller;
 
-import com.tcc.cinematic.DTO.UsuarioRegisterDTO;
-import com.tcc.cinematic.DTO.UsuarioUpdateDTO;
+import com.tcc.cinematic.DTO.FuncionarioRegisterDTO;
+import com.tcc.cinematic.DTO.UsuarioFilterParams;
 import com.tcc.cinematic.entity.Usuario;
 import com.tcc.cinematic.enums.TipoUsuario;
 import com.tcc.cinematic.service.UsuarioService;
 import jakarta.validation.Valid;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +39,8 @@ public class UsuarioController {
        return ResponseEntity.ok(this.service.findByGerenteAndFuncionario());
     }
     @GetMapping("/filtros")
-    public ResponseEntity<List<Usuario>> filtros(@RequestBody Map<String,String> map){
-        return ResponseEntity.ok(this.service.filtros(map));
+    public ResponseEntity<List<Usuario>> filtros(@RequestBody UsuarioFilterParams params){
+        return ResponseEntity.ok(this.service.findByFilters(params));
     }
 
     @GetMapping("/email")
@@ -62,13 +61,15 @@ public class UsuarioController {
 
 
     @PostMapping
-    public ResponseEntity<Usuario> create(@RequestBody @Valid UsuarioRegisterDTO usuarioRegisterDTO){
-        var user = this.service.create(usuarioRegisterDTO);
-        return new ResponseEntity(user, HttpStatus.CREATED);
+    public ResponseEntity<Usuario> create(@RequestBody @Valid FuncionarioRegisterDTO funcionarioRegisterDTO){
+        var user = this.service.create(funcionarioRegisterDTO);
+        return new ResponseEntity<Usuario>(user, HttpStatus.CREATED);
     }
+
+
     @PatchMapping
-    public ResponseEntity<Usuario> update(@RequestBody @Valid UsuarioUpdateDTO usuarioUpdateDTO){
-        var user = this.service.update(usuarioUpdateDTO);
+    public ResponseEntity<Usuario> update(@RequestBody @Valid FuncionarioRegisterDTO funcionarioRegisterDTO){
+        var user = this.service.update(funcionarioRegisterDTO);
         if (user == null)
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(user);
