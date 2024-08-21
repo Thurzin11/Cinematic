@@ -14,7 +14,7 @@
         box-shadow: 0 .2rem .4rem $PRETO;
     }
 
-    button, input {
+    button, input, .btn-filter {
         font-size: 1rem;
         margin: 0 .5rem;
         background-color: transparent;
@@ -29,13 +29,26 @@
         outline: 0;
     }
 
-    button:hover, input:hover {
+    button:hover, input:hover,.btn-filter:hover {
         transition: .2s;
         scale: 105%;
         background-color: $AMARELO;
     }
+<<<<<<< HEAD
 }
 
 .selected.active {
     background-color: $AMARELO;
 }
+=======
+    .inpt-none{
+      display: none;
+    }
+    .ativo{
+      background-color: $AMARELO;
+    }
+    .inativo{
+      background-color: $ROXO-CLARO;
+    }
+}
+>>>>>>> arthur

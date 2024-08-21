@@ -1,12 +1,11 @@
 package com.tcc.cinematic.controller;
 
-import com.tcc.cinematic.DTO.UsuarioRegisterDTO;
-import com.tcc.cinematic.DTO.UsuarioUpdateDTO;
+import com.tcc.cinematic.DTO.FuncionarioRegisterDTO;
+import com.tcc.cinematic.DTO.UsuarioFilterParams;
 import com.tcc.cinematic.entity.Usuario;
 import com.tcc.cinematic.enums.TipoUsuario;
 import com.tcc.cinematic.service.UsuarioService;
 import jakarta.validation.Valid;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,24 +38,52 @@ public class UsuarioController {
     public ResponseEntity<List<Usuario>> findByGerenteAndFuncionario(){
        return ResponseEntity.ok(this.service.findByGerenteAndFuncionario());
     }
-//    @GetMapping("/filtros")
-//    public ResponseEntity<List<Usuario>> filtros(@RequestBody Map<String,String> map){
-//        return ResponseEntity.ok(this.service.filtros(map));
-//    }
+
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<List<Usuario>> findByName(@PathVariable String nome){
+        return ResponseEntity.ok(this.service.findByName(nome));
+    }
+    @PatchMapping("/funcionarios/inativar/{id}")
+    public ResponseEntity<Usuario> inativarUsuario(@PathVariable UUID id){
+        return ResponseEntity.ok(this.service.inativarUsuario(id));
+    }
+    @PatchMapping("/funcionarios/ativar/{id}")
+    public ResponseEntity<Usuario> ativarUsuario(@PathVariable UUID id){
+        return ResponseEntity.ok(this.service.ativarUsuario(id));
+    }
+
+    @PatchMapping("/filtros")
+    public ResponseEntity<List<Usuario>> filtros(@RequestBody UsuarioFilterParams params){
+        return ResponseEntity.ok(this.service.findByFilters(params));
+    }
 
     @GetMapping("/email")
     public ResponseEntity<List<Usuario>> findByEmail(@RequestBody Map<String,String> map){
         var email = map.get("email");
         return ResponseEntity.ok(this.service.findByEmail(email));
     }
-    @PostMapping
-    public ResponseEntity<Usuario> create(@RequestBody @Valid UsuarioRegisterDTO usuarioRegisterDTO){
-        var user = this.service.create(usuarioRegisterDTO);
-        return new ResponseEntity(user, HttpStatus.CREATED);
+
+    @GetMapping("/status")
+    public ResponseEntity<List<Usuario>> findByStatus(@RequestBody Map<String,Boolean> map){
+        return ResponseEntity.ok(this.service.findByStatus(map.get("status")));
     }
+
+    @GetMapping("/tipoUser")
+    public ResponseEntity<List<Usuario>> findByTipoUsuario(@RequestBody Map<String,TipoUsuario> map){
+        return ResponseEntity.ok(this.service.findByTipoUsuario(map.get("tipoUsuario")));
+    }
+
+
+    @PostMapping
+    public ResponseEntity<Usuario> create(@RequestBody @Valid FuncionarioRegisterDTO funcionarioRegisterDTO){
+        var user = this.service.create(funcionarioRegisterDTO);
+        return new ResponseEntity<Usuario>(user, HttpStatus.CREATED);
+    }
+
+
     @PatchMapping
-    public ResponseEntity<Usuario> update(@RequestBody @Valid UsuarioUpdateDTO usuarioUpdateDTO){
-        var user = this.service.update(usuarioUpdateDTO);
+    public ResponseEntity<Usuario> update(@RequestBody @Valid FuncionarioRegisterDTO funcionarioRegisterDTO){
+        var user = this.service.update(funcionarioRegisterDTO);
         if (user == null)
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(user);
