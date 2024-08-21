@@ -43,8 +43,16 @@ public class UsuarioController {
     public ResponseEntity<List<Usuario>> findByName(@PathVariable String nome){
         return ResponseEntity.ok(this.service.findByName(nome));
     }
+    @PatchMapping("/funcionarios/inativar/{id}")
+    public ResponseEntity<Usuario> inativarUsuario(@PathVariable UUID id){
+        return ResponseEntity.ok(this.service.inativarUsuario(id));
+    }
+    @PatchMapping("/funcionarios/ativar/{id}")
+    public ResponseEntity<Usuario> ativarUsuario(@PathVariable UUID id){
+        return ResponseEntity.ok(this.service.ativarUsuario(id));
+    }
 
-    @GetMapping("/filtros")
+    @PatchMapping("/filtros")
     public ResponseEntity<List<Usuario>> filtros(@RequestBody UsuarioFilterParams params){
         return ResponseEntity.ok(this.service.findByFilters(params));
     }

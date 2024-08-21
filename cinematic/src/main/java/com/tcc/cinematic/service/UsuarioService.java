@@ -79,6 +79,18 @@ public class UsuarioService {
         return this.repository.findByName("%"+nome+"%");
      }
 
+     public Usuario inativarUsuario(UUID id){
+        var usuario = this.findById(id);
+        usuario.setStatus(false);
+        return this.repository.save(usuario);
+     }
+    public Usuario ativarUsuario(UUID id){
+        var usuario = this.findById(id);
+        usuario.setStatus(true);
+        return this.repository.save(usuario);
+    }
+
+
      public List<Usuario> findByFilters(UsuarioFilterParams params){
 //        return this.repository.findByFilter(params.tipo(),params.status(), params.email());
          StringBuilder sql = new StringBuilder();
