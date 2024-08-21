@@ -14,6 +14,7 @@ export class FiltroSistemaComponent implements OnInit {
   @Input() tipo: string = '';
   @Output() onCloseFilter = new EventEmitter();
   @Output() onFilter = new EventEmitter();
+  email: string = '';
 
   botoes: IBotao[] = [];
   filterList: IFilter[] = [];
@@ -79,59 +80,6 @@ export class FiltroSistemaComponent implements OnInit {
     this.setBotao('Cargo', this.setBotaoValue(cargoList));
     this.setBotao('Status', this.setBotaoValue(statusList));
   }
-  // filtroFuncionario(tipo?: string[],status?: boolean | null,email?: string | null):void{
-  //   this.onFiltroFuncionario.emit({
-  //     tipo,
-  //     status,
-  //     email
-  //   });
-  // }
-  // listCargosFilter: string[]=[];
-  // status: boolean | null | undefined = null;
-  // removeDuplicates = (array:Array<string>) =>[...new Set(array)];
-
-  // checkFuncionario(check: boolean):void{
-  //   if (check) {
-  //     this.listCargosFilter.push('FUNCIONARIO');
-  //   }else{
-  //     this.listCargosFilter = this.listCargosFilter.filter(cargo => cargo !== 'FUNCIONARIO');
-  //   }
-  //   check = !check;
-  //   this.listCargosFilter = this.removeDuplicates(this.listCargosFilter);
-  //   // console.log(this.listCargosFilter);
-  //   this.filtroFuncionario(this.listCargosFilter,this.status,this.email);
-  // }
-  // checkGerente(check: boolean):void{
-  //   if (check) {
-  //     this.listCargosFilter.push('GERENTE');
-  //   }else{
-  //     this.listCargosFilter = this.listCargosFilter.filter(cargo => cargo !== 'GERENTE');
-  //   }
-  //   check = !check;
-  //   this.listCargosFilter = this.removeDuplicates(this.listCargosFilter);
-  //   // console.log(this.listCargosFilter);
-  //   this.filtroFuncionario(this.listCargosFilter,this.status,this.email);
-  // }
-  // getFilterEmail(email: string): void{
-  //   // console.log(email);
-  //   this.email = email;
-  //   this.filtroFuncionario(this.listCargosFilter,this.status,this.email);
-  // }
-
-  // getFilterStatus(ativo: boolean,inativo: boolean): void{
-  //   if (ativo && inativo || !ativo && !inativo) {
-  //     this.filtroFuncionario(this.listCargosFilter,null,this.email);
-  //     return
-  //   }
-  //   if (ativo) {
-  //     this.filtroFuncionario(this.listCargosFilter,ativo,this.email);
-  //     return
-  //   }
-  //   if (inativo) {
-  //     this.filtroFuncionario(this.listCargosFilter,!inativo,this.email);
-  //     return
-  //   }
-  // }
 
   private caseSala(): void {
     let listTipoSala: string[] = ['Cinema', 'Teatro', 'Evento'];
