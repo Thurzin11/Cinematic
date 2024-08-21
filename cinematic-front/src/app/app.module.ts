@@ -18,6 +18,8 @@ import { FilmeCardComponent } from './components/filme-sistema/filme-card/filme-
 import { FilmeCadastroComponent } from './components/filme-sistema/filme-cadastro/filme-cadastro.component';
 import { FiltroSistemaComponent } from './components/filtro-sistema/filtro-sistema.component';
 import { HorarioCadastroComponent } from './components/horario-sistema/horario-cadastro/horario-cadastro.component';
+import { HorarioListComponent } from './components/horario-sistema/horario-list/horario-list.component';
+import { HorarioCardComponent } from './components/horario-sistema/horario-card/horario-card.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { HorarioCadastroComponent } from './components/horario-sistema/horario-c
     FilmeCardComponent,
     FilmeCadastroComponent,
     FiltroSistemaComponent,
-    HorarioCadastroComponent
+    HorarioCadastroComponent,
+    HorarioListComponent,
+    HorarioCardComponent
   ],
   imports: [
     BrowserModule,
