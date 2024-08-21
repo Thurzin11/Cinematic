@@ -10,16 +10,22 @@
                     col-5 rounded-5 text-dark
                     fw-semibold fst-italic m-auto
                     text-light border border-black fs-3 my-2">Filtro</span>
-    <div *ngFor="let botao of this.botoes" class="p-2 col-12">
-        <div *ngIf="botao.values.length > 0">
-                <p class="text-light fs-4 fw-semibold">{{ botao.label }}</p>
-                <div class="d-flex flex-wrap align-items-center justify-content-around">
-                    <button
-                    *ngFor="let value of botao.values"
-                    [ngStyle]="this.getButtonStyle(value)"
-                    (click)="this.toggleButton(value, botao.label)"
-                        class="rounded-4 border border-black text-center mb-3 col-5 p-1">{{ value.nome }}</button>
-                </div>
+    <div>
+      <div *ngFor="let botao of this.botoes" class="p-2 col-12">
+          <div *ngIf="botao.values.length > 0">
+                  <p class="text-light fs-4 fw-semibold">{{ botao.label }}</p>
+                  <div class="d-flex flex-wrap align-items-center justify-content-around">
+                      <button
+                      *ngFor="let value of botao.values"
+                      [ngStyle]="this.getButtonStyle(value)"
+                      (click)="this.toggleButton(value, botao.label)"
+                          class="rounded-4 border border-black text-center mb-3 col-5 p-1">{{ value.nome }}</button>
+                  </div>
+          </div>
+        </div>
+        <div *ngIf="this.tipo.toUpperCase() === 'FUNCIONARIO'" class="d-flex flex-column p-2">
+          <label for="email" class="text-light fs-4 fw-semibold pb-2">Email</label>
+          <input type="text" id="email" placeholder="Digite um email" class="mx-auto rounded-4 border border-black text-start ps-2 mb-3 col-10 p-1" name="email" [(ngModel)]="this.email">
         </div>
     </div>
 </div>

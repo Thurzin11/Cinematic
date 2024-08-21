@@ -14,6 +14,7 @@ export class FiltroSistemaComponent implements OnInit {
   @Input() tipo: string = '';
   @Output() onCloseFilter = new EventEmitter();
   @Output() onFilter = new EventEmitter();
+  email: string = '';
 
   botoes: IBotao[] = [];
   filterList: IFilter[] = [];
