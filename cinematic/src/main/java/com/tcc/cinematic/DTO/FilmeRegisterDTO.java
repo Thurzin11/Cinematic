@@ -11,6 +11,8 @@ public record FilmeRegisterDTO(
         @NotNull Categoria categoria,
         @NotNull String classificacao,
         @NotNull String descricao,
+        @NotNull String direcao,
+        @NotNull String distribuidor,
         @NotNull int duracao,
         @NotNull LocalDate dataEstreia,
         @NotNull String banner,

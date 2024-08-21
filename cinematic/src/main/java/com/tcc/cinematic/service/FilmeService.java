@@ -1,8 +1,6 @@
 package com.tcc.cinematic.service;
 
-import com.tcc.cinematic.DTO.FilmeFilterParams;
-import com.tcc.cinematic.DTO.FilmeRegisterDTO;
-import com.tcc.cinematic.DTO.FilmeUpdateDTO;
+import com.tcc.cinematic.DTO.*;
 import com.tcc.cinematic.entity.Categoria;
 import com.tcc.cinematic.entity.Filme;
 import com.tcc.cinematic.enums.Classificacao;
@@ -11,17 +9,10 @@ import com.tcc.cinematic.repository.FilmeRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -39,66 +30,42 @@ public class FilmeService {
         return this.repository.findAll();
     }
 
-    private List<Filme> findByCategoria(Categoria categoria) {
-        return this.repository.findByCategoria(categoria);
+    public List<Filme> findByNomeIlike(String nome) {
+        return this.repository.findByNomeIlike(nome);
     }
 
-    private List<Filme> findByClassificacao(Classificacao classificacao) {
-        return this.repository.findByClassificacao(classificacao);
-    }
+    public List<Filme> filters(Map<String, List<String>> filter) {
+        if(filter == null || filter.isEmpty())
+            return null;
 
-    private List<Filme> findByDuracao(String duracaoFiltro) {
-        int duracao = this.setDuracao(duracaoFiltro);
-        if(duracao == 0)
-            return this.repository.findByDuracaoGreaterThan(150);
-
-        return this.repository.findByDuracaoLessThanEqual(duracao);
-    }
-
-    private List<Filme> findByStatus(StatusFilme status) {
-        return this.repository.findByStatus(status);
-    }
-
-    public List<Filme> filters(FilmeFilterParams filterParams) {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT f FROM Filme f WHERE 1=1 ");
         Map<String, Object> params = new HashMap<>();
 
-        if(filterParams.categorias() != null && !filterParams.categorias().isEmpty()) {
+        if(filter.get("categoria") != null && !filter.get("categoria").isEmpty()) {
             sql.append("AND f.categoria IN (:CATEGORIAS) ");
-            params.put("CATEGORIAS", filterParams.categorias());
+            params.put("CATEGORIAS", this.setCategoriaFilter(filter.get("categoria")));
         }
 
-        if(filterParams.classificacoes() != null && !filterParams.classificacoes().isEmpty()) {
+        if(filter.get("classificacao") != null && !filter.get("classificacao").isEmpty()) {
             sql.append("AND f.classificacao IN (:CLASSIFICACOES) ");
-            params.put("CLASSIFICACOES", this.setClassificacoes(filterParams.classificacoes()));
+            params.put("CLASSIFICACOES", this.setClassificacaoFilter(filter.get("classificacao")));
         }
 
-        if(filterParams.duracoes() != null && !filterParams.duracoes().isEmpty()) {
+        if(filter.get("duracao") != null && !filter.get("duracao").isEmpty()) {
             sql.append("AND f.duracao IN (:DURACOES) ");
-            params.put("DURACOES", filterParams.duracoes());
+            params.put("DURACOES", this.setDuracaoFilter(filter.get("duracao")));
         }
 
-        if(filterParams.status() != null && !filterParams.status().isEmpty()) {
+        if(filter.get("status") != null && !filter.get("status").isEmpty()) {
             sql.append("AND f.status IN (:STATUS)");
-            params.put("STATUS", filterParams.status());
+            params.put("STATUS", this.setStatusFilter(filter.get("status")));
         }
 
         Query query = this.entityManager.createQuery(sql.toString());
         params.forEach(query::setParameter);
 
         return query.getResultList();
-    }
-
-    private void addFilmeToList(List<Filme> listFilme, List<Filme> listFilmParam) {
-        for(var filme:listFilmParam) {
-            if(!listFilme.contains(filme))
-                listFilme.add(filme);
-        }
-    }
-
-    private Categoria setCategoria(String nomeCategoria) {
-        return this.categoriaService.findByNome(nomeCategoria);
     }
 
     public Filme findById(UUID id) {
@@ -148,11 +115,11 @@ public class FilmeService {
         };
     }
 
-    private List<Classificacao> setClassificacoes(List<String> classificacoesParam) {
+    private List<Classificacao> setClassificacaoFilter(List<String> params) {
         List<Classificacao> classificacoes = new ArrayList<>();
 
-        for(String classificacao:classificacoesParam) {
-            switch (classificacao.toUpperCase()) {
+        for(String param:params) {
+            switch (param.toUpperCase()) {
                 case "LIVRE": {
                     classificacoes.add(Classificacao.LIVRE);
                     break;
@@ -184,15 +151,81 @@ public class FilmeService {
         return classificacoes;
     }
 
-    private StatusFilme setStatus(String status) {
-        return switch (status.toUpperCase()) {
-            case "CARTAZ" -> StatusFilme.CARTAZ;
-            case "DESTAQUE" -> StatusFilme.DESTAQUE;
-            case "LANCAMENTO" -> StatusFilme.LANCAMENTO;
-            case "ESTREIA" -> StatusFilme.ESTREIA;
-            case "PRE_ESTREIA" -> StatusFilme.PRE_ESTREIA;
-            default -> null;
-        };
+    private List<Categoria> setCategoriaFilter(List<String> params) {
+        List<Categoria> categoriasReturn = new ArrayList<>();
+
+        for(Categoria categoria:this.categoriaService.findAll()) {
+            for(String param:params) {
+                if(param.toUpperCase().equals(categoria.getNome().toUpperCase()))
+                    categoriasReturn.add(categoria);
+            }
+        }
+
+        return categoriasReturn;
+    }
+
+    private List<StatusFilme> setStatusFilter(List<String> params) {
+        List<StatusFilme> status = new ArrayList<>();
+
+        for(String param:params) {
+            switch (param.toUpperCase()) {
+                case "CARTAZ" -> {
+                    status.add(StatusFilme.CARTAZ);
+                    break;
+                }
+                case "DESTAQUE" -> {
+                    status.add(StatusFilme.DESTAQUE);
+                    break;
+                }
+                case "LANCAMENTO" -> {
+                    status.add(StatusFilme.LANCAMENTO);
+                    break;
+                }
+                case "ESTREIA" -> {
+                    status.add(StatusFilme.ESTREIA);
+                    break;
+                }
+                case "PRE_ESTREIA" -> {
+                    status.add(StatusFilme.PRE_ESTREIA);
+                    break;
+                }
+                default -> {
+                    break;
+                }
+            };
+        }
+
+        return status;
+    }
+
+    private List<Integer> setDuracaoFilter(List<String> params) {
+        List<Integer> duracoes = new ArrayList<>();
+
+        for(String param:params) {
+            switch (param.toUpperCase()) {
+                case "1HR" -> {
+                    duracoes.add(60);
+                    break;
+                }
+                case "1HR30" -> {
+                    duracoes.add(90);
+                    break;
+                }
+                case "2HR" -> {
+                    duracoes.add(120);
+                    break;
+                }
+                case "2HR30" -> {
+                    duracoes.add(150);
+                    break;
+                }
+                default -> {
+                    break;
+                }
+            };
+        }
+
+        return duracoes;
     }
 
     private int setDuracao(String duracao) {
@@ -202,6 +235,17 @@ public class FilmeService {
             case "2HR" -> 120;
             case "2HR30" -> 150;
             default -> 0;
+        };
+    }
+
+    private StatusFilme setStatus(String status) {
+        return switch (status.toUpperCase()) {
+            case "CARTAZ" -> StatusFilme.CARTAZ;
+            case "ESTREIA" -> StatusFilme.ESTREIA;
+            case "DESTAQUE" -> StatusFilme.DESTAQUE;
+            case "PRE_ESTREIA" -> StatusFilme.PRE_ESTREIA;
+            case "LANCAMENTO" -> StatusFilme.LANCAMENTO;
+            default -> null;
         };
     }
 }

@@ -16,8 +16,8 @@ export class FiltroSistemaComponent implements OnInit {
   @Output() onFilter = new EventEmitter();
 
   botoes: IBotao[] = [];
-  listFilter: IFilter[] = [];
-  filterRequest: Map<string, string[]> = new Map();
+  filterList: IFilter[] = [];
+  filterMap: Map<string, string[]> = new Map();
 
   constructor(
     private categoriaService: CategoriaService,
@@ -136,21 +136,21 @@ export class FiltroSistemaComponent implements OnInit {
   }
 
   filter(): void {
-    this.listFilter.forEach(filter => {
-      if (this.filterRequest.has(filter.label.toLowerCase())) {
-        let list: string[] | undefined = this.filterRequest.get(filter.label.toLowerCase());
+    this.filterList.forEach(filter => {
+      if (this.filterMap.has(filter.label.toLowerCase())) {
+        let list: string[] | undefined = this.filterMap.get(filter.label.toLowerCase());
         if (list) {
-          let str: string | undefined = list.find(value => filter.value.nome === value)
+          let str: string | undefined = list.find(value => filter.value.nome.toLowerCase() === value.toLowerCase())
           if (!str)
-            list.push(filter.value.nome);
+            list.push(filter.value.nome.toLowerCase());
         }
       }
 
-      if (!this.filterRequest.has(filter.label.toLowerCase()))
-        this.filterRequest.set(filter.label.toLowerCase(), [filter.value.nome]);
+      if (!this.filterMap.has(filter.label.toLowerCase()))
+        this.filterMap.set(filter.label.toLowerCase(), [filter.value.nome.toLowerCase()]);
     })
 
-    this.filmeService.filter(this.mapToObject(this.filterRequest)).subscribe(filmes => {
+    this.filmeService.filter(this.mapToObject(this.filterMap)).subscribe(filmes => {
       this.onFilter.emit(filmes);
     });
   }
@@ -168,37 +168,32 @@ export class FiltroSistemaComponent implements OnInit {
       return;
     }
 
-
-    this.listFilter.push({
-      label: label,
+    botaoValue.isSelected = true;
+    this.filterList.push({
+      label,
       value: botaoValue
     });
-    botaoValue.isSelected = true;
     this.filter();
   }
 
   private removeFilter(botaoValue: IBotaoValue, label: string): void {
-    let index: number = this.listFilter.findIndex(botao => botao.value === botaoValue);
-    this.listFilter.splice(index, 1);
+    let index: number = this.filterList.findIndex(botao => botao.value.nome.toLowerCase() === botaoValue.nome.toLowerCase());
+    this.filterList.splice(index, 1);
     botaoValue.isSelected = false;
-    if (this.filterRequest.get(label.toLowerCase())) {
-      let list: string[] | undefined = this.filterRequest.get(label.toLowerCase());
 
-      if (list) {
-        list.forEach(value => {
-          if (botaoValue.nome === value && list) {
-            let index: number = list.findIndex(str => value === str);
-            list.splice(index, 1);
-          }
-        })
+    let filter: string[] | undefined = this.filterMap.get(label.toLowerCase());
+    filter?.forEach(value => {
+      if(filter) {
+        let index: number = filter.findIndex(str => value === str);
+        filter.splice(index, 1);
       }
-    }
+    })
   }
 
   getButtonStyle(botaoParams: IBotaoValue): {} {
     let objeto: { [key: string]: string } = {};
-    this.listFilter.find(botao => {
-      botaoParams === botao.value ? objeto = { 'background-color': '#ffa930' } : {};
+    this.filterList.forEach(botao => {
+      botaoParams.nome === botao.value.nome ? objeto = { 'background-color': '#ffa930' } : {};
     })
     return objeto;
   }

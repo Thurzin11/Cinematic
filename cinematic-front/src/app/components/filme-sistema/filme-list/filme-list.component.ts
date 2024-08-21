@@ -56,6 +56,15 @@ export class FilmeListComponent implements OnInit{
       this.findAllFilmes();
   }
 
+  findByNomeIlike(nome: string): void {
+    if(nome === '') {
+      this.findAllFilmes();
+      return;
+    }
+
+    this.filmeService.findByNomeIlike(nome).subscribe(filmes => this.filmes = filmes);
+  }
+
   seeFilmeDetails(id: string): void {
     let filme = this.filmes.find((filme) => filme.id == id);
     if(filme) {
