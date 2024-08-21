@@ -13,12 +13,9 @@ const routes: Routes = [
   {path: "sistema/funcionario/cadastro",component: FuncionarioCadastroComponent},
   {path: "sistema/filme", component: FilmeListComponent},
   {path: "sistema/filme/cadastro", component: FilmeCadastroComponent},
-<<<<<<< HEAD
   {path: "sistema/filme/editar/:id", component: FilmeCadastroComponent},
-=======
   {path: "sistema/funcionario",component: FuncionarioListComponent},
   {path: "sistema/funcionario/editar/:id",component: FuncionarioCadastroComponent},
->>>>>>> arthur
   {path: "", redirectTo: "sistema/login", pathMatch: 'full'}
 ];
 
