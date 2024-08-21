@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/horario")
-public class HorarioController {
+public class  HorarioController {
 
     @Autowired
     private HorarioService service;
