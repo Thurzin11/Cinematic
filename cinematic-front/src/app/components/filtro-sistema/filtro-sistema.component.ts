@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CategoriaService } from '../../services/categoria/categoria.service';
-import { ICategoria } from '../../model/ICategoria';
 import { EstabelecimentoService } from '../../services/estabelecimento/estabelecimento.service';
-import { IEstabelecimento } from '../../model/IEstabelecimento';
-
+import { IBotao } from '../../model/IBotao';
+import { IFilter } from '../../model/IFilter';
+import { FilmeService } from '../../services/filme/filme.service';
+import { IBotaoValue } from '../../model/IBotaoValue';
 @Component({
   selector: 'app-filtro-sistema',
   templateUrl: './filtro-sistema.component.html',
@@ -12,23 +13,16 @@ import { IEstabelecimento } from '../../model/IEstabelecimento';
 export class FiltroSistemaComponent implements OnInit {
   @Input() tipo: string = '';
   @Output() onCloseFilter = new EventEmitter();
-
-  categoriaList: ICategoria[] = [];
-  classificacaoList: string[] = [];
-  duracaoList: string[] = [];
-  statusFilmeList: string[] = [];
-  cargoList: string[] = [];
-  statusList: string[] = [];
+  @Output() onFilter = new EventEmitter();
   email: string = '';
-  tipoSalaList: string[] = [];
-  tamanhoSalaList: string[] = [];
-  periodoList: string[] = [];
-  tipoSessaoList: string[] = [];
-  estabelecimentoList: IEstabelecimento[] = [];
 
+  botoes: IBotao[] = [];
+  filterList: IFilter[] = [];
+  filterMap: Map<string, string[]> = new Map();
   constructor(
     private categoriaService: CategoriaService,
-    private estabelecimentoService: EstabelecimentoService) { }
+    private estabelecimentoService: EstabelecimentoService,
+    private filmeService: FilmeService) { }
 
   ngOnInit(): void {
     this.initLists();
@@ -64,32 +58,143 @@ export class FiltroSistemaComponent implements OnInit {
   }
 
   private caseFilme(): void {
-    this.categoriaService.findAll().subscribe(categoriaList => this.categoriaList = categoriaList);
-    this.classificacaoList = ['Livre', 'Dez', 'Doze', 'Quatorze', 'Dezesseis', 'Dezoito'];
-    this.duracaoList = ['1hr-', '1hr30-', '2h-', '2hr30-'];
-    this.statusFilmeList = ['Lançamento', 'Cartaz', 'Destaque', 'Pré-Estreia', 'Estreia'];
+    let classificacaoList: string[] = ['Livre', 'Dez', 'Doze', 'Quatorze', 'Dezesseis', 'Dezoito'];
+    let duracaoList: string[] = ['1hr-', '1hr30-', '2h-', '2hr30-'];
+    let statusList: string[] = ['Lançamento', 'Cartaz', 'Destaque', 'Pré-Estreia', 'Estreia'];
+
+    this.categoriaService.findAll().subscribe(categoriaList => {
+      const categorias: string[] = [];
+      categoriaList.forEach(categoria => categorias.push(categoria.nome));
+      this.setBotao('Categoria', this.setBotaoValue(categorias))
+    });
+
+    this.setBotao('Classificacao', this.setBotaoValue(classificacaoList));
+    this.setBotao('Duracao', this.setBotaoValue(duracaoList));
+    this.setBotao('Status', this.setBotaoValue(statusList));
   }
 
   private caseFuncionario(): void {
-    this.cargoList = ['Funcionario', 'Gerente'];
-    this.statusList = ['Ativo', 'Inativo'];
+    let cargoList: string[] = ['Funcionario', 'Gerente'];
+    let statusList: string[] = ['Ativo', 'False'];
+
+    this.setBotao('Cargo', this.setBotaoValue(cargoList));
+    this.setBotao('Status', this.setBotaoValue(statusList));
   }
 
   private caseSala(): void {
-    this.tipoSalaList = ['Cinema', 'Teatro', 'Evento'];
-    this.statusList = ['Ativo', 'Inativo'];
-    this.tamanhoSalaList = ['Grande', 'Media', 'Pequena'];
+    let listTipoSala: string[] = ['Cinema', 'Teatro', 'Evento'];
+    let listStatusSala: string[] = ['Ativo', 'Inativo'];
+    let listTamanhoSala: string[] = ['Grande', 'Media', 'Pequena'];
+
+    this.setBotao('Tipo', this.setBotaoValue(listTipoSala));
+    this.setBotao('Status', this.setBotaoValue(listStatusSala));
+    this.setBotao('Tamanho', this.setBotaoValue(listTamanhoSala));
   }
 
   private caseHorario(): void {
-    this.periodoList = ['Manha', 'Tarde', 'Noite'];
-    this.statusList = ['Ativo', 'Inativo'];
+    let listPeriodo: string[] = ['Manha', 'Tarde', 'Noite'];
+    let listStatus: string[] = ['Ativo', 'Inativo'];
+
+    this.setBotao('Periodo', this.setBotaoValue(listPeriodo));
+    this.setBotao('Status', this.setBotaoValue(listStatus));
   }
 
   private caseSessao(): void {
-    this.periodoList = ['Manha', 'Tarde', 'Noite'];
-    this.statusList = ['Ativo', 'Inativo'];
-    this.tipoSessaoList = ['Legendado', 'Dublado', 'Normal'];
-    this.estabelecimentoService.findAll().subscribe(estabelecimentoList => this.estabelecimentoList = estabelecimentoList);
+    let listPeriodo: string[] = ['Manha', 'Tarde', 'Noite'];
+    let listStatus: string[] = ['Ativo', 'Inativo'];
+    let listTipoSessao: string[] = ['Legendado', 'Dublado', 'Normal'];
+    let listIdioma: string[] = ['Legendado', 'Dublado', 'Normal'];
+
+    this.setBotao('Periodo', this.setBotaoValue(listPeriodo));
+    this.setBotao('Status', this.setBotaoValue(listStatus));
+    this.setBotao('Tipo', this.setBotaoValue(listTipoSessao));
+    this.setBotao('Idioma', this.setBotaoValue(listIdioma));
+
+    this.estabelecimentoService.findAll().subscribe(estabelecimentoList => {
+      let estabelecimentos: string[] = [];
+      estabelecimentoList.forEach(estabelecimento => estabelecimentos.push(estabelecimento.nome));
+      this.setBotao('Estabelecimento', this.setBotaoValue(estabelecimentos));
+    });
+  }
+
+  private setBotaoValue(list: string[]): IBotaoValue[] {
+    let listBotaoValue: IBotaoValue[] = [];
+
+    list.forEach(string => listBotaoValue.push({
+      nome: string,
+      isSelected: false
+    }))
+
+    return listBotaoValue;
+  }
+
+  private setBotao(label: string, values: IBotaoValue[]): void {
+    this.botoes.push({
+      label,
+      values
+    })
+  }
+
+  filter(): void {
+    this.filterList.forEach(filter => {
+      if (this.filterMap.has(filter.label.toLowerCase())) {
+        let list: string[] | undefined = this.filterMap.get(filter.label.toLowerCase());
+        if (list) {
+          let str: string | undefined = list.find(value => filter.value.nome.toLowerCase() === value.toLowerCase())
+          if (!str)
+            list.push(filter.value.nome.toLowerCase());
+        }
+      }
+
+      if (!this.filterMap.has(filter.label.toLowerCase()))
+        this.filterMap.set(filter.label.toLowerCase(), [filter.value.nome.toLowerCase()]);
+    })
+
+    this.filmeService.filter(this.mapToObject(this.filterMap)).subscribe(filmes => {
+      this.onFilter.emit(filmes);
+    });
+  }
+
+  private mapToObject(map: Map<string, string[]>): { [key: string]: string[] } {
+    let obj: { [key: string]: string[] } = {};
+    map.forEach((value, key) => obj[key] = value);
+    return obj;
+  }
+
+  toggleButton(botaoValue: IBotaoValue, label: string): void {
+    if (botaoValue.isSelected) {
+      this.removeFilter(botaoValue, label);
+      this.filter();
+      return;
+    }
+
+    botaoValue.isSelected = true;
+    this.filterList.push({
+      label,
+      value: botaoValue
+    });
+    this.filter();
+  }
+
+  private removeFilter(botaoValue: IBotaoValue, label: string): void {
+    let index: number = this.filterList.findIndex(botao => botao.value.nome.toLowerCase() === botaoValue.nome.toLowerCase());
+    this.filterList.splice(index, 1);
+    botaoValue.isSelected = false;
+
+    let filter: string[] | undefined = this.filterMap.get(label.toLowerCase());
+    filter?.forEach(value => {
+      if(filter) {
+        let index: number = filter.findIndex(str => value === str);
+        filter.splice(index, 1);
+      }
+    })
+  }
+
+  getButtonStyle(botaoParams: IBotaoValue): {} {
+    let objeto: { [key: string]: string } = {};
+    this.filterList.forEach(botao => {
+      botaoParams.nome === botao.value.nome ? objeto = { 'background-color': '#ffa930' } : {};
+    })
+    return objeto;
   }
 }

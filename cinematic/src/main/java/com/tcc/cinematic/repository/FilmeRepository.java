@@ -14,20 +14,6 @@ import java.util.UUID;
 
 @Repository
 public interface FilmeRepository extends JpaRepository<Filme, UUID> {
-    List<Filme> findByCategoria(Categoria categoria);
-    List<Filme> findByClassificacao(Classificacao classificacao);
-    List<Filme> findByDuracaoLessThanEqual(int duracao);
-    List<Filme> findByDuracaoGreaterThan(int duracao);
-    List<Filme> findByStatus(StatusFilme status);
-
-    @Query("SELECT f FROM Filme f " +
-            "INNER JOIN f.categoria c" +
-            "WHERE c.nome LIKE %:CATEGORIA% AND" +
-            "f.classificacao = :CLASSIFICACAO AND" +
-            "f.duracao >= :DURACAO AND" +
-            "f.status = :STATUS")
-    List<Filme> filtro(@Param("CATEGORIA") Categoria categoria,
-                       @Param("CLASSIFICACAO") Classificacao classificacao,
-                       @Param("DURACAO") int duracao,
-                       @Param("STATUS")StatusFilme status);
+    @Query("SELECT f FROM Filme f WHERE f.nome ILIKE %:NOME%")
+    List<Filme> findByNomeIlike(@Param("NOME") String nome);
 }

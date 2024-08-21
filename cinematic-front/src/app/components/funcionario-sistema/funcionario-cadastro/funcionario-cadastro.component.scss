@@ -2,7 +2,7 @@
 
 h2{
   color: $AMARELO;
-  
+
 }
 .cadastra-funcionario{
   background: $ROXO-CLARO;
@@ -27,6 +27,7 @@ input:hover,select:hover{
   scale: 102%;
   transition: .2s;
 }
+
 input:focus,select:focus{
   opacity: 100%;
   scale: 102%;
@@ -36,9 +37,14 @@ input:focus,select:focus{
 input::placeholder{
   color: $PRETO;
   opacity: 35%;
+  font-weight: 500;
 }
 select{
   background-color: $BRANCO;
   box-shadow: 0 .2rem .2rem $PRETO;
+  opacity: 70%;
+}
+
+select:optional{
   opacity: 70%;
 }
