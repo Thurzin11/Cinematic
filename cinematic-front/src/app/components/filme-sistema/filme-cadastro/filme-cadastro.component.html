@@ -3,72 +3,72 @@
     <app-menu-sistema class="position-absolute"></app-menu-sistema>
     <div class="col-10 m-auto">
         <h2 class="text-light fs-1 fw-bold">Filmes</h2>
-        <div class="border border-black rounded col-12 d-flex flex-column align-items-center flex-wrap px-2 py-3 rounded-bottom-0 border-bottom-0">
-            <div class="col-12 d-flex justify-content-around py-2">
+        <div class="border border-black rounded col-12 d-flex flex-column align-items-center flex-wrap px-2 rounded-bottom-0 border-bottom-0">
+            <div class="col-12 d-flex justify-content-around pt-4">
                 <div class="d-flex flex-column col-3">
                     <label for="nome" class="text-light fs-3">Nome</label>
                     <input id="nome" type="text" placeholder="Digite o nome do filme"
-                        class="p-2 rounded fs-5 mt-2 border border-black" [(ngModel)]="this.filme.nome" name="nome">
+                        class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.nome" name="nome">
                 </div>
                 <div class="d-flex flex-column col-3">
                     <label for="categoria" class="text-light fs-3">Categoria</label>
-                    <select name="categoria" id="categoria" class="p-2 rounded fs-5 mt-2 border border-black" [(ngModel)]="this.filme.categoria" name="categoria">
+                    <select name="categoria" id="categoria" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.categoria" name="categoria">
                         <option *ngFor="let categoria of this.categoriaList" [ngValue]="categoria">{{ categoria.nome }}</option>
                     </select>
                 </div>
                 <div class="d-flex flex-column col-3">
                     <label for="duracao" class="text-light fs-3">Duração</label>
                     <input id="duracao" type="text" placeholder="Digite o duração do filme"
-                        class="p-2 rounded fs-5 mt-2 border border-black" [(ngModel)]="this.filme.duracao" name="duracao">
+                        class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.duracao" name="duracao">
                 </div>
             </div>
             <div class="col-12 d-flex justify-content-around py-2">
                 <div class="d-flex flex-column col-3">
                     <label for="dataEstreia" class="text-light fs-3">Data de Estreia</label>
                     <input id="dataEstreia" type="date"
-                        class="p-2 rounded fs-5 mt-2 border border-black" [(ngModel)]="this.filme.dataEstreia" name="dataEstreia">
+                        class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.dataEstreia" name="dataEstreia">
                 </div>
                 <div class="d-flex flex-column col-3">
                     <label for="classificacao" class="text-light fs-3">Classificação</label>
-                    <select name="classificacao" id="classificacao" class="p-2 rounded fs-5 mt-2 border border-black" [(ngModel)]="this.filme.classificacao" name="classificacao">
+                    <select name="classificacao" id="classificacao" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.classificacao" name="classificacao">
                         <option *ngFor="let classificacao of this.classificacaoList" [value]="classificacao">{{ classificacao }}</option>
                     </select>
                 </div>
                 <div class="d-flex flex-column col-3">
                     <label for="distribuidora" class="text-light fs-3">Distribuidora</label>
                     <input id="distribuidora" type="text" placeholder="Digite o nome da distribuidora"
-                        class="p-2 rounded fs-5 mt-2 border border-black" [(ngModel)]="this.filme.distribuidora" name="distribuidora">
+                        class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.distribuidora" name="distribuidora">
                 </div>
             </div>
-            <div class="col-12 d-flex justify-content-around">
+            <div class="col-12 d-flex justify-content-around pb-4">
                 <div class="col-4 d-flex flex-column justify-content-center">
                     <div class="d-flex flex-column m-auto col-9 pt-2">
                         <label for="direcao" class="text-light fs-3">Direção</label>
                         <input id="direcao" type="text" placeholder="Digite quem faz parte da direção"
-                            class="p-2 rounded fs-5 mt-2 border border-black" [(ngModel)]="this.filme.direcao" name="direcao">
+                            class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.direcao" name="direcao">
                     </div>
                     <div class="d-flex flex-column m-auto col-9 pt-2">
                         <label for="poster" class="text-light fs-3">Banner</label>
                         <input id="poster" type="text" placeholder="Digite a url do banner"
-                            class="p-2 rounded fs-5 mt-2 border border-black" [(ngModel)]="this.filme.banner">
+                            class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.banner">
                     </div>
                 </div>
                 <div class="col-8 d-flex justify-content-between">
                     <div class="d-flex flex-column col-6 mx-auto pt-2">
                         <label for="descricao" class="text-light fs-3 col-9 mx-auto text-wrap">Descrição</label>
                         <input id="descricao" type="text" placeholder="Digite a descrição do filme"
-                            class="p-2 h-75 rounded fs-5 mt-2 mx-auto col-9 border border-black" [(ngModel)]="this.filme.descricao" name="descricao">
+                            class="p-2 h-75 rounded fs-5 mt-2 mx-auto col-9 border border" [(ngModel)]="this.filme.descricao" name="descricao">
                     </div>
                     <div class="col-6">
                         <div class="d-flex flex-column col-9 mx-auto pt-2">
                             <label for="trailers" class="text-light fs-3">Trailers</label>
                             <input id="trailers" type="text" placeholder="Digite a url do trailer"
-                                class="p-2 rounded fs-5 mt-2 border border-black" [(ngModel)]="this.trailer" name="trailers">
+                                class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.trailer" name="trailers">
                         </div>
-                        <div class="d-flex flex-column col-9 mx-auto pt-2">
+                        <div class="d-flex flex-column col-9 mx-auto">
                             <label for="capas" class="text-light fs-3 col-9">Capas</label>
                             <input id="capas" type="text" placeholder="Digite a url da capa"
-                                class="p-2 rounded fs-5 mt-2 border border-black" [(ngModel)]="this.filme.capas" name="capas">
+                                class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.capas" name="capas">
                         </div>
                     </div>
                 </div>

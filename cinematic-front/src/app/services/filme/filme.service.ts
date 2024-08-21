@@ -15,6 +15,10 @@ export class FilmeService {
     return this.http.get<IFilme[]>(`${Environment.urlApi}/filme`);
   }
 
+  filter(filters: { [key: string]: string[] }): Observable<IFilme[]> {
+    return this.http.patch<IFilme[]>(`${Environment.urlApi}/filme/filtro`, filters);
+  }
+
   findById(id: string): Observable<IFilme> {
     return this.http.get<IFilme>(`${Environment.urlApi}/filme/${id}`);
   }

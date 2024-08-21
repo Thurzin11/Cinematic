@@ -16,33 +16,35 @@
                 <p class="text-light fst-italic fs-5">{{ this.filme.duracao }} min</p>
             </div>
             <span class="classificacao text-light col-1 my-3 p-1 fs-5 border border-black rounded text-center"
-                [ngClass]="this.classificacaoClass">{{ this.filme.classificacao }}</span>
-            <p class="text-light">{{ this.filme.descricao }}</p>
+                [ngClass]="this.classificacaoClass">{{ this.classificacao }}</span>
+            <p class="text-light descricao overflow-y-auto">{{ this.filme.descricao }}</p>
         </div>
     </div>
     <div class="d-flex pt-3">
         <div class="col-6 d-flex flex-column">
-            <div class="overflow-y-aut">
+            <div>
                 <p class="text-light fs-3 fw-semibold">Trailers</p>
-                <video *ngFor="let trailer of this.filme.trailers" [src]="trailer"></video>
+                <div class="div-trailers overflow-y-auto">
+                    <video *ngFor="let trailer of this.filme.trailers" [src]="trailer"></video>
+                </div>
             </div>
         </div>
         <div class="col-6 d-flex justify-content-between flex-wrap">
             <div class="col-5">
-                <p class="text-light fs-3 fw-semibold">Categoria</p>
-                <p class="text-light fs-4">{{ this.filme.categoria.nome }}</p>
+                <p class="text-light fs-3 fw-semibold m-0">Categoria</p>
+                <p class="text-light fs-4 ps-2">{{ this.filme.categoria.nome }}</p>
             </div>
             <div class="col-5">
-                <p class="text-light fs-3 fw-semibold">Distribuidor</p>
-                <p class="text-light fs-4">{{ this.filme.distribuidora }}</p>
+                <p class="text-light fs-3 fw-semibold m-0">Distribuidor</p>
+                <p class="text-light fs-4 ps-2">{{ this.filme.distribuidora }}</p>
             </div>
             <div class="col-5">
-                <p class="text-light fs-3 fw-semibold">Direção</p>
-                <p class="text-light fs-4">{{ this.filme.direcao }}</p>
+                <p class="text-light fs-3 fw-semibold m-0">Direção</p>
+                <p class="text-light fs-4 ps-2">{{ this.filme.direcao }}</p>
             </div>
             <div class="col-5">
-                <p class="text-light fs-3 fw-semibold">Data de Estreia</p>
-                <p class="text-light fs-4">{{ this.filme.dataEstreia }}</p>
+                <p class="text-light fs-3 fw-semibold m-0">Data de Estreia</p>
+                <p class="text-light fs-4 ps-2">{{ this.filme.dataEstreia }}</p>
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@ export class FilmeCardComponent implements OnInit {
 
   setClassificacao(): void {
     switch(this.classificacao.toLowerCase()) {
-      case 'live': {
+      case 'livre': {
         this.classificacao = 'L';
         this.classificacaoClass = 'livre';
         break; 

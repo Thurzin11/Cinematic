@@ -4,7 +4,7 @@
     <div class="col-10 m-auto">
         <h2 class="text-light fs-1 fw-bold">Filmes</h2>
         <div class="body col-12 d-flex rounded">
-            <app-filtro-sistema *ngIf="this.filterIsOpen" class="col-2" [tipo]="'filme'" (onCloseFilter)="this.toggleFiltro()"></app-filtro-sistema>
+            <app-filtro-sistema *ngIf="this.filterIsOpen" class="col-2" [tipo]="'filme'" (onFilter)="this.filmes = $event" (onCloseFilter)="this.toggleFiltro()"></app-filtro-sistema>
             <div class="list border border-black p-3 position-relative" [ngClass]="this.filterIsOpen ? 'col-10 rounded-end border-start-0':'col-12 rounded'">
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center col-6">

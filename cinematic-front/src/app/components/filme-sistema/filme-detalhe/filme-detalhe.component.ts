@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { IFilme } from '../../../model/IFilme';
 
 @Component({
@@ -6,7 +6,7 @@ import { IFilme } from '../../../model/IFilme';
   templateUrl: './filme-detalhe.component.html',
   styleUrl: './filme-detalhe.component.scss'
 })
-export class FilmeDetalheComponent {
+export class FilmeDetalheComponent implements OnInit, OnChanges{
   @Input() filme: IFilme = {
     id: '',
     nome: '',
@@ -29,41 +29,46 @@ export class FilmeDetalheComponent {
   @Output() onCloseDetails = new EventEmitter();
 
   classificacaoClass: string = '';
+  classificacao: string = '';
 
   ngOnInit(): void {
     this.setClassificacao()
     console.log(this.filme);
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.setClassificacao();
+  }
+
   setClassificacao(): void {
     switch(this.filme.classificacao.toString().toLowerCase()) {
-      case 'live': {
-        this.filme.classificacao = 'L';
+      case 'livre': {
+        this.classificacao = 'L';
         this.classificacaoClass = 'livre';
         break; 
       };
       case 'dez': {
-        this.filme.classificacao = '10';
+        this.classificacao = '10';
         this.classificacaoClass = 'dez';
         break;
       };
       case 'doze': {
-        this.filme.classificacao = '12';
+        this.classificacao = '12';
         this.classificacaoClass = 'doze';
         break;
       };
       case 'quatorze': {
-        this.filme.classificacao = '14';
+        this.classificacao = '14';
         this.classificacaoClass = 'quatorze';
         break;
       };
       case 'dezesseis': {
-        this.filme.classificacao = '16';
+        this.classificacao = '16';
         this.classificacaoClass = 'dezesseis';
         break;
       };
       case 'dezoito': {
-        this.filme.classificacao = '18';
+        this.classificacao = '18';
         this.classificacaoClass = 'dezoito';
         break;
       };

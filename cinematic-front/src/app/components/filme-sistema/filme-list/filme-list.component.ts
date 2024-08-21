@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ICategoria } from '../../../model/ICategoria';
 import { CategoriaService } from '../../../services/categoria/categoria.service';
 import { FilmeService } from '../../../services/filme/filme.service';
@@ -43,11 +43,17 @@ export class FilmeListComponent implements OnInit{
 
   ngOnInit(): void {
     this.categoriaService.findAll().subscribe(categoriaList => this.categoriaList = categoriaList); 
+    this.findAllFilmes();
+  }
+
+  private findAllFilmes(): void {
     this.filmeService.findAll().subscribe(filmes => this.filmes = filmes);
   }
 
   toggleFiltro(): void {
     this.filterIsOpen = !this.filterIsOpen;
+    if(!this.filterIsOpen)
+      this.findAllFilmes();
   }
 
   seeFilmeDetails(id: string): void {

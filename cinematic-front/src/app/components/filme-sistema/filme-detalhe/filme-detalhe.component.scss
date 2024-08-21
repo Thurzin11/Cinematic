@@ -21,6 +21,14 @@ img {
     color: $VERMELHO;
 }
 
+.descricao {
+    max-height: 8rem;
+}
+
+.div-trailers {
+    max-height: 15rem;
+}
+
 .classificacao {
     box-shadow: 0 .2rem .2rem $PRETO;
     min-width: 2rem;
