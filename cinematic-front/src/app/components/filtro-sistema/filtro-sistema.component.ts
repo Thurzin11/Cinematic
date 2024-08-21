@@ -76,20 +76,58 @@ export class FiltroSistemaComponent implements OnInit {
     this.cargoList = ['Funcionario', 'Gerente'];
     this.statusList = ['Ativo', 'Inativo'];
   }
-  filtroFuncionarioCargo(cargosFilter?: string[],status?: boolean,email?: string){
+  filtroFuncionario(tipo?: string[],status?: boolean | null,email?: string | null):void{
     this.onFiltroFuncionario.emit({
-      cargosFilter,
+      tipo,
       status,
       email
     });
   }
-  selectCargo(cargo: string): void{
-    if (cargo==this.cargoCheckbox) {
-      this.cargoCheckbox = '';
+  listCargosFilter: string[]=[];
+  status: boolean | null | undefined = null;
+  removeDuplicates = (array:Array<string>) =>[...new Set(array)];
+
+  checkFuncionario(check: boolean):void{
+    if (check) {
+      this.listCargosFilter.push('FUNCIONARIO');
     }else{
-      this.cargoCheckbox = cargo;
+      this.listCargosFilter = this.listCargosFilter.filter(cargo => cargo !== 'FUNCIONARIO');
     }
-    console.log(this.cargoCheckbox);
+    check = !check;
+    this.listCargosFilter = this.removeDuplicates(this.listCargosFilter);
+    // console.log(this.listCargosFilter);
+    this.filtroFuncionario(this.listCargosFilter,this.status,this.email);
+  }
+  checkGerente(check: boolean):void{
+    if (check) {
+      this.listCargosFilter.push('GERENTE');
+    }else{
+      this.listCargosFilter = this.listCargosFilter.filter(cargo => cargo !== 'GERENTE');
+    }
+    check = !check;
+    this.listCargosFilter = this.removeDuplicates(this.listCargosFilter);
+    // console.log(this.listCargosFilter);
+    this.filtroFuncionario(this.listCargosFilter,this.status,this.email);
+  }
+  getFilterEmail(email: string): void{
+    // console.log(email);
+    this.email = email;
+    this.filtroFuncionario(this.listCargosFilter,this.status,this.email);
+  }
+
+  getFilterStatus(ativo: boolean,inativo: boolean): void{
+    if (ativo && inativo || !ativo && !inativo) {
+      this.filtroFuncionario(this.listCargosFilter,null,this.email);
+      return
+    }
+    if (ativo) {
+      this.filtroFuncionario(this.listCargosFilter,ativo,this.email);
+      return
+    }
+    if (inativo) {
+      this.filtroFuncionario(this.listCargosFilter,!inativo,this.email);
+      return
+    }
   }
 
   private caseSala(): void {

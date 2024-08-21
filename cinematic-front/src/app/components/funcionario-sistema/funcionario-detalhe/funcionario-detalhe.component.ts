@@ -1,3 +1,4 @@
+import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { IUsuario } from './../../../model/IUsuario';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
@@ -21,6 +22,7 @@ export class FuncionarioDetalheComponent {
     cidade: '',
     estado: ''
   };
+  constructor(private usuarioService: UsuarioService){}
 
   close():void{
     this.onClose.emit();
@@ -28,6 +30,9 @@ export class FuncionarioDetalheComponent {
   editar(usuario: IUsuario):void{
     // console.log(usuario);
     this.onEditar.emit(usuario);
+  }
+  inativarUsuario(id:string):void{
+    this.usuarioService.inativarUsuario(id).subscribe();
   }
 
 }

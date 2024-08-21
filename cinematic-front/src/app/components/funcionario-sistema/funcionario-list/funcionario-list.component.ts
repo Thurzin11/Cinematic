@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { IUsuario } from '../../../model/IUsuario';
+import { IUsuarioFilterParams } from '../../../model/IUsuarioFilterParams';
 
 @Component({
   selector: 'app-funcionario-list',
@@ -45,16 +46,16 @@ export class FuncionarioListComponent  {
   closeDetalhe(): void{
     this.detalheIsOpen = false;
   }
-  filtro: any;
-  filtrar(event:any){
-    this.filtro = event;
-    console.log(this.filtro);
-  }
   filtroNome(nome: string):void{
     if (nome) {
       this.usuarioService.findByNome(nome).subscribe(usuarios => this.usuarios = usuarios);
     }else{
-      this.usuarioService.findAll().subscribe(usuarios => this.usuarios = usuarios)
+      this.usuarioService.findAll().subscribe(usuarios => this.usuarios = usuarios);
     }
+  }
+
+  filtrar(event: IUsuarioFilterParams): void{
+    console.log(event);
+    this.usuarioService.filter(event).subscribe(usuarios => this.usuarios = usuarios);
   }
 }
