@@ -1,6 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IFilme } from '../../../model/IFilme';
-import { FilmeService } from '../../../services/filme/filme.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IClassificacao } from '../../../model/IClassificacao';
 
 @Component({
@@ -9,24 +7,49 @@ import { IClassificacao } from '../../../model/IClassificacao';
   styleUrl: './filme-card.component.scss'
 })
 export class FilmeCardComponent implements OnInit {
-  @Input() filmes: IFilme[] = [];
-  classificacao: string = '';
-  
-  constructor(private filmeService: FilmeService) {}
+  @Input() classificacao: string = '';
+  @Input() banner: string = '';
+  @Input() nome: string = ''
+
+  classificacaoClass: string = '';
 
   ngOnInit(): void {
-    
+    this.setClassificacao()
   }
 
-  setClassificacao(classificacao: IClassificacao): string {
-    switch(classificacao.toString().toUpperCase()) {
-      case 'LIVRE': return this.classificacao = 'L';
-      case 'DEZ': return this.classificacao = '10';
-      case 'DOZE': return  this.classificacao = '12';
-      case 'QUATORZE': return this.classificacao = '14';
-      case 'DEZESSEIS': return this.classificacao = '16';
-      case 'DEZOITO': return this.classificacao = '18';
-      default: return '';
+  setClassificacao(): void {
+    switch(this.classificacao.toLowerCase()) {
+      case 'livre': {
+        this.classificacao = 'L';
+        this.classificacaoClass = 'livre';
+        break; 
+      };
+      case 'dez': {
+        this.classificacao = '10';
+        this.classificacaoClass = 'dez';
+        break;
+      };
+      case 'doze': {
+        this.classificacao = '12';
+        this.classificacaoClass = 'doze';
+        break;
+      };
+      case 'quatorze': {
+        this.classificacao = '14';
+        this.classificacaoClass = 'quatorze';
+        break;
+      };
+      case 'dezesseis': {
+        this.classificacao = '16';
+        this.classificacaoClass = 'dezesseis';
+        break;
+      };
+      case 'dezoito': {
+        this.classificacao = '18';
+        this.classificacaoClass = 'dezoito';
+        break;
+      };
+      default: break;;
     }
   }
 }

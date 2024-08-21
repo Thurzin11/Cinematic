@@ -1,13 +1,11 @@
-<div class="card col-3 p-2">
-  <div class="d-flex justify-content-between ">
-    <div class="">
-      <p class="m-0 fw-semibold text-light">Mateus Reisdorfer</p>
-      <p class="fst-italic text-light">mateusreisdorfergmail.com</p>
-    </div>
-    <span class=" border rounded-circle border-black bg-dark"></span>
+<div class="d-flex justify-content-between">
+  <div class="">
+    <p class="m-0 fw-semibold text-light">{{nome}}</p>
+    <p class="fst-italic text-light">{{email}}</p>
   </div>
-  <div class="d-flex justify-content-between pt-3">
-    <p class="text-light">Tipo:</p>
-    <p class="fw-semibold text-light">Gerente</p>
-  </div>
+  <span class="border rounded-circle border-black" [ngClass]="this.usuarioIsAtivo(status)? 'ativo':'inativo'"></span>
+</div>
+<div class="d-flex justify-content-between pt-3">
+  <p class="text-light">Tipo:</p>
+  <p class="fw-semibold text-light">{{tipoUsuario}}</p>
 </div>

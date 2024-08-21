@@ -3,7 +3,10 @@ span{
   width: 1.6rem;
   height: 1.6rem;
 }
-.card{
-  background-color: $ROXO-CLARO;
-  box-shadow: 0 .4rem .4rem $PRETO;
+.ativo{
+  background-color: $VERDE-ATIVO;
 }
+.inativo{
+  background-color: $VERMELHO;
+}
+

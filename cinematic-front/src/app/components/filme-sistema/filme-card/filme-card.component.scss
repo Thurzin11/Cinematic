@@ -1,6 +1,6 @@
 @import '../../../style/color';
 
-.body:hover {
+:host:hover {
     cursor: pointer;
     transition: .2s;
     scale: 103%;

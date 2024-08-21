@@ -1,22 +1,22 @@
 <app-header-sistema></app-header-sistema>
-<div class="position-relative">
+<div class="position-relative" >
   <app-menu-sistema class="position-absolute"></app-menu-sistema>
   <div class="body d-flex flex-column justify-content-center align-items-center">
     <h2 class="col-8 mb-5 fs-1">Funcionários</h2>
-    <div class="cadastra-funcionario col-8 rounded-3 ">
+    <div class="cadastra-funcionario col-8 rounded-3">
       <div class="inputName col-11 d-flex flex-column mt-3">
         <label for="name" class="fs-3 fw-semibold text-light">Nome</label>
-        <input type="text" class="rounded-3 border-0 fst-italic" id="name" placeholder="Digite o nome do funcionário">
+        <input type="text" class="rounded-3 border-0 fst-italic" [(ngModel)]="usuario.nome" id="name" name="name" placeholder="Digite o nome do funcionário">
       </div>
       <div class="inputEmail col-11 d-flex flex-column mt-3">
         <label for="email" class="fs-3 fw-semibold text-light">Email</label>
-        <input type="text" id="email" class="rounded-3 border-0 fst-italic" placeholder="Digite o email do funcionário">
+        <input type="text" id="email" class="rounded-3 border-0 fst-italic" [(ngModel)]="usuario.email" name="email" placeholder="Digite o email do funcionário">
       </div>
       <div class="last col-11 d-flex mt-3">
         <div class="status d-flex flex-column col-6">
           <label for="status" class="col-8 text-light fs-3 fw-semibold">Status</label>
           <!-- <input type="text" id="status" class="col-10"> -->
-          <select name="status" id="status" class="rounded-3 border-0 col-5 p-2 fst-italic">
+          <select name="status" id="status" [(ngModel)]="usuario.status" class="rounded-3 border-0 col-5 p-2 fst-italic">
             <option value=true>Ativo</option>
             <option value=false>Inativo</option>
           </select>
@@ -24,13 +24,13 @@
         <div class="cargo d-flex flex-column col-6">
           <label for="cargo" class="col-8 text-light fs-3 fw-semibold">Cargo</label>
           <!-- <input type="text" id="cargo" class="col-12"> -->
-          <select name="cargo" id="cargo" class="rounded-3 border-0 col-12 p-2 fst-italic">
-            <option value="funcionario">Funcionario</option>
-            <option value="gerente">Gerente</option>
+          <select name="cargo" id="cargo" class="rounded-3 border-0 col-12 p-2 fst-italic" [(ngModel)]="usuario.tipoUsuario">
+            <option value="FUNCIONARIO">Funcionario</option>
+            <option value="GERENTE">Gerente</option>
           </select>
         </div>
       </div>
-      <button class="fw-bold fs-3 col-12 rounded-bottom-3 border-0 mt-5 py-2">Salvar</button>
+      <button class="fw-bold fs-3 col-12 rounded-bottom-3 border-0 mt-5 py-2" (click)="cadastraUsuario(usuario)">Salvar</button>
     </div>
   </div>
 </div>

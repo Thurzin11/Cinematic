@@ -1,21 +1,20 @@
 import { ICategoria } from "./ICategoria";
 import { IClassificacao } from "./IClassificacao";
 import { IStatusFilme } from "./IStatusFilme";
-import { ITrailer } from "./ITrailer";
 
 export interface IFilme {
     id: string,
     nome: string,
     categoria: ICategoria,
     duracao: number,
-    classificacao: IClassificacao,
+    classificacao: IClassificacao | string,
     descricao: string,
-    dataEstreia: Date,
+    dataEstreia: Date | string,
     disponibilidade: boolean,
-    posterUrl: string,
+    banner: string,
     direcao: string,
     distribuidora: string,
-    statusFilme: IStatusFilme,
+    statusFilme: IStatusFilme | string,
     capas: string[],
-    trailers: ITrailer[],
+    trailers: string[],
 }
