@@ -1,3 +1,4 @@
+import { UsuarioService } from './../../services/usuario/usuario.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CategoriaService } from '../../services/categoria/categoria.service';
 import { EstabelecimentoService } from '../../services/estabelecimento/estabelecimento.service';
@@ -20,6 +21,7 @@ export class FiltroSistemaComponent implements OnInit {
   filterList: IFilter[] = [];
   filterMap: Map<string, string[]> = new Map();
   constructor(
+    private usuarioService: UsuarioService,
     private categoriaService: CategoriaService,
     private estabelecimentoService: EstabelecimentoService,
     private filmeService: FilmeService) { }
@@ -150,7 +152,8 @@ export class FiltroSistemaComponent implements OnInit {
         this.filterMap.set(filter.label.toLowerCase(), [filter.value.nome.toLowerCase()]);
     })
 
-    this.filmeService.filter(this.mapToObject(this.filterMap)).subscribe(filmes => {
+
+    this.usuarioService.filter(this.mapToObject(this.filterMap)).subscribe(filmes => {
       this.onFilter.emit(filmes);
     });
   }

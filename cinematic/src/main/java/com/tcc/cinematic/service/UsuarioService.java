@@ -2,6 +2,7 @@ package com.tcc.cinematic.service;
 
 import com.tcc.cinematic.DTO.FuncionarioRegisterDTO;
 import com.tcc.cinematic.DTO.UsuarioFilterParams;
+import com.tcc.cinematic.entity.Categoria;
 import com.tcc.cinematic.entity.Usuario;
 import com.tcc.cinematic.enums.TipoUsuario;
 import com.tcc.cinematic.repository.UsuarioRepository;
@@ -91,7 +92,7 @@ public class UsuarioService {
     }
 
 
-     public List<Usuario> findByFilters(UsuarioFilterParams params){
+     public List<Usuario> findByFilters(UsuarioFilterParams filtro){
 //        return this.repository.findByFilter(params.tipo(),params.status(), params.email());
          StringBuilder sql = new StringBuilder();
          sql.append(" " +
@@ -100,22 +101,22 @@ public class UsuarioService {
 
          Map<String, Object> map = new HashMap<>();
 
-         if ( params.tipo()!=null && !params.tipo().isEmpty()){
+         if (filtro.tipo()!=null && !filtro.tipo().isEmpty()){
              sql.append("AND tipo_usuario IN (:TIPO_USUARIO) ");
-             map.put("TIPO_USUARIO",params.tipo());
+             map.put("TIPO_USUARIO",filtro.tipo());
          }
-         if(params.status()!=null){
+         if(filtro.status()!=null){
              sql.append("AND status = :STATUS ");
-             map.put("STATUS",params.status());
+             map.put("STATUS",filtro.status());
          }
-         if (params.email()!=null && !params.email().isEmpty()){
+         if (filtro.email()!=null && !filtro.email().isEmpty()){
              sql.append("AND email LIKE :EMAIL");
-             map.put("EMAIL","%"+params.email()+"%");
+             map.put("EMAIL","%"+filtro.email()+"%");
          }
          Query query = entityManager.createNativeQuery(sql.toString(), Usuario.class);
          map.forEach(query::setParameter);
-
          return query.getResultList();
      }
+
 
 }

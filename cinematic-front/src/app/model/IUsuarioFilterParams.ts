@@ -1,5 +1,5 @@
 export interface IUsuarioFilterParams{
-  tipo: string[];
-  status: boolean;
-  email: string;
+  tipo?: string[];
+  status?: boolean;
+  email?: string;
 }
