@@ -34,10 +34,7 @@ export class UsuarioService {
   findByNome(nome: string): Observable<IUsuario[]>{
     return this.http.get<IUsuario[]>(`${Environment.urlApi}/usuario/nome/${nome}`);
   }
-
-
-
-
+  
   filter(filter:{ [key:  string]: string[] }): Observable<IUsuario[]>{
     let tipo: string[] = [];
     if(filter['cargo']){

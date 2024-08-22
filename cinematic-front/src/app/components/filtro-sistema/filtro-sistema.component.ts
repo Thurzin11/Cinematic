@@ -86,8 +86,9 @@ export class FiltroSistemaComponent implements OnInit {
   private routes(): void {
     switch(this.tipo.toUpperCase()) {
       case "FUNCIONARIO": {
-        console.log(this.filterMap)
-        console.log('working...');
+        this.usuarioService.filter(this.mapToObject(this.filterMap)).subscribe(usuarios => {
+          this.onFilter.emit(usuarios);
+        })
         break;
       }
       case "SALA": {
