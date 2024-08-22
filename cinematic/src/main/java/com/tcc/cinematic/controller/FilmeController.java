@@ -50,6 +50,7 @@ public class FilmeController {
 
     @PatchMapping("/filtro")
     public ResponseEntity<List<Filme>> filter(@RequestBody Map<String, List<String>> filter) {
+        System.out.println(filter);
         return ResponseEntity.ok(this.service.filters(filter));
     }
 
