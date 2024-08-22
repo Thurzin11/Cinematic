@@ -15,6 +15,7 @@ export class FiltroSistemaComponent implements OnInit {
   @Output() onCloseFilter = new EventEmitter();
   @Output() onFilter = new EventEmitter();
   email: string = '';
+  estabelecimento: string = '';
 
   botoes: IBotao[] = [];
   filterList: IFilter[] = [];
@@ -139,8 +140,11 @@ export class FiltroSistemaComponent implements OnInit {
     this.filterList.forEach(filter => {
       if (this.filterMap.has(filter.label.toLowerCase())) {
         let list: string[] | undefined = this.filterMap.get(filter.label.toLowerCase());
-        if (list) {
-          let str: string | undefined = list.find(value => filter.value.nome.toLowerCase() === value.toLowerCase())
+        if(list && list.length === 0)
+          list.push(filter.value.nome.toLowerCase());
+
+        if (list && list.length > 0) {
+          let str = list.find(value => filter.value.nome.toLowerCase() === value.toLowerCase())
           if (!str)
             list.push(filter.value.nome.toLowerCase());
         }
@@ -181,13 +185,16 @@ export class FiltroSistemaComponent implements OnInit {
     this.filterList.splice(index, 1);
     botaoValue.isSelected = false;
 
-    let filter: string[] | undefined = this.filterMap.get(label.toLowerCase());
-    filter?.forEach(value => {
-      if(filter) {
-        let index: number = filter.findIndex(str => value === str);
-        filter.splice(index, 1);
+    if(this.filterMap.has(label.toLowerCase())) {
+      let filter: string[] | undefined = this.filterMap.get(label.toLowerCase());
+      if(filter && filter.length > 0) {
+        let str: string | undefined  = filter.find(value => botaoValue.nome.toLowerCase() === value);
+        if(str) {
+          let index: number = filter.findIndex(value => str === value);
+          filter.splice(index, 1);
+        }
       }
-    })
+    }
   }
 
   getButtonStyle(botaoParams: IBotaoValue): {} {
