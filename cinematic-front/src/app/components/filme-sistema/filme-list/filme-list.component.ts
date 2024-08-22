@@ -39,7 +39,9 @@ export class FilmeListComponent implements OnInit{
   
   constructor(
     private categoriaService: CategoriaService,
-    private filmeService: FilmeService) {}
+    private filmeService: FilmeService) {
+      this.findAllFilmes();
+    }
 
   ngOnInit(): void {
     this.categoriaService.findAll().subscribe(categoriaList => this.categoriaList = categoriaList); 
