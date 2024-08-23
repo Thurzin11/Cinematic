@@ -2,12 +2,11 @@
 
 nav {
     background-color: $ROXO-CLARO;
-    max-width: 4rem;
+    width: 3.5rem;
     cursor: pointer;
-    border-radius: 0 1rem 1rem 0;
+    // border-radius: 0 1rem 1rem 0;
 
     div {
-        padding: 1.5rem 1rem;
         width: 100%;
 
         p {
@@ -18,25 +17,25 @@ nav {
     }
 
     div:first-child {
-        border-radius: 0 .5rem 0 0;
+        border-radius: 0 1rem 0 0;
     }
 
     div:last-child {
-        border-radius: 0 0 .5rem 0;
+        border-radius: 0 0 1rem 0;
     }
 }
 
 .leave {
-    transition: .5s;
-    max-width: 4rem;
+    transition: .6s;
+    // max-width: 4rem;
 }
 
 nav:hover {
-    transition: .2s;
-    max-width: 15rem;
+    transition: .4s;
+    width: 14rem;
      
     div {
-        max-height: 5rem;
+        max-height: 4rem;
 
         p {
             display: block;
