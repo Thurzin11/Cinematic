@@ -4,7 +4,6 @@ nav {
     background-color: $ROXO-CLARO;
     width: 3.5rem;
     cursor: pointer;
-    // border-radius: 0 1rem 1rem 0;
 
     div {
         width: 100%;
@@ -26,8 +25,7 @@ nav {
 }
 
 .leave {
-    transition: .6s;
-    // max-width: 4rem;
+    transition: .4s;
 }
 
 nav:hover {

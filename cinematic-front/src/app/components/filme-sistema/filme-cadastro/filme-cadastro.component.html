@@ -56,8 +56,7 @@
                 <div class="col-8 d-flex justify-content-between">
                     <div class="d-flex flex-column col-6 mx-auto pt-2">
                         <label for="descricao" class="text-light fs-3 col-9 mx-auto text-wrap">Descrição</label>
-                        <input id="descricao" type="text" placeholder="Digite a descrição do filme"
-                            class="p-2 h-75 rounded fs-5 mt-2 mx-auto col-9 border border" [(ngModel)]="this.filme.descricao" name="descricao">
+                        <textarea name="descricao" id="descricao" class="p-2 h-75 rounded fs-5 mt-2 mx-auto col-9 border border" [(ngModel)]="this.filme.descricao"></textarea>
                     </div>
                     <div class="col-6">
                         <div class="d-flex flex-column col-9 mx-auto pt-2">

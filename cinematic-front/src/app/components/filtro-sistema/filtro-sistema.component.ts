@@ -6,6 +6,7 @@ import { IBotao } from '../../model/IBotao';
 import { IFilter } from '../../model/IFilter';
 import { FilmeService } from '../../services/filme/filme.service';
 import { IBotaoValue } from '../../model/IBotaoValue';
+import { SalaService } from '../../services/sala/sala.service';
 @Component({
   selector: 'app-filtro-sistema',
   templateUrl: './filtro-sistema.component.html',
@@ -25,7 +26,8 @@ export class FiltroSistemaComponent implements OnInit {
     private usuarioService: UsuarioService,
     private categoriaService: CategoriaService,
     private estabelecimentoService: EstabelecimentoService,
-    private filmeService: FilmeService) { }
+    private filmeService: FilmeService,
+    private salaService: SalaService) { }
 
   ngOnInit(): void {
     this.initLists();
@@ -92,7 +94,9 @@ export class FiltroSistemaComponent implements OnInit {
         break;
       }
       case "SALA": {
-        console.log('working...');
+        this.salaService.filter(this.mapToObject(this.filterMap)).subscribe(salas => {
+          this.onFilter.emit(salas);
+        })
         break;
       }
       case "FILME": {

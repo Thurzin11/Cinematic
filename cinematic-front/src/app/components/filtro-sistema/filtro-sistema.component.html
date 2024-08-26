@@ -28,8 +28,8 @@
           <input type="text" id="email" placeholder="Digite um email" class="mx-auto rounded-4 border border-black text-start ps-2 mb-3 col-10 p-1" name="email" (change)="this.verificarEmail()" [(ngModel)]="this.email">
         </div>
         <div *ngIf="this.tipo.toUpperCase() === 'SESSAO'" class="d-flex flex-column p-2">
-          <label for="email" class="text-light fs-4 fw-semibold pb-2">Estabelecimento</label>
-          <input type="text" id="email" placeholder="Digite um email" class="mx-auto rounded-4 border border-black text-start ps-2 mb-3 col-10 p-1" name="estabelecimento" [(ngModel)]="this.estabelecimento">
+          <label for="estabelecimento" class="text-light fs-4 fw-semibold pb-2">Estabelecimento</label>
+          <input type="text" id="estabelecimento" placeholder="Digite um email" class="mx-auto rounded-4 border border-black text-start ps-2 mb-3 col-10 p-1" name="estabelecimento" [(ngModel)]="this.estabelecimento">
         </div>
     </div>
 </div>

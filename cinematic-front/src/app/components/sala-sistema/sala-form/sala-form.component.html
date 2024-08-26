@@ -1,0 +1,23 @@
+<app-header-sistema></app-header-sistema>
+<div class="position-relative">
+    <app-menu-sistema class="position-absolute"></app-menu-sistema>
+    <div class="col-10 m-auto">
+        <h2 class="text-light fs-1 fw-bold">Salas</h2>
+        <div class="border border-black rounded col-12 d-flex flex-column align-items-center flex-wrap px-2 pb-4 rounded-bottom-0 border-bottom-0">
+            <div class="col-12 d-flex justify-content-around pt-4">
+                <div class="d-flex flex-column col-5">
+                    <label for="tipo" class="text-light fs-3">Tipo</label>
+                    <select name="tipo" id="tipo" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.sala.tipo">
+                        <option *ngFor="let tipo of this.tipos" [ngValue]="tipo">{{ tipo.toString() }}</option>
+                    </select>
+                </div>
+                <div class="d-flex flex-column col-5">
+                    <label for="tamanho" class="text-light fs-3">Tamanho</label>
+                    <select name="tamanho" id="tamanho" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.sala.tamanho">
+                        <option *ngFor="let tamanho of this.tamanhos" [ngValue]="tamanho">{{ tamanho.toString() }}</option>
+                    </select>
+                </div>
+        </div>
+    </div>
+    <button class="col-12 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" (click)="this.register()">Salvar</button>
+</div>
