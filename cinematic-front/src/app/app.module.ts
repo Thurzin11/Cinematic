@@ -22,6 +22,12 @@ import { HorarioListComponent } from './components/horario-sistema/horario-list/
 import { HorarioCardComponent } from './components/horario-sistema/horario-card/horario-card.component';
 import { FuncionarioDetalheComponent } from './components/funcionario-sistema/funcionario-detalhe/funcionario-detalhe.component';
 import { FilmeDetalheComponent } from './components/filme-sistema/filme-detalhe/filme-detalhe.component';
+import { SalaListComponent } from './components/sala-sistema/sala-list/sala-list.component';
+import { SalaFormComponent } from './components/sala-sistema/sala-form/sala-form.component';
+import { SalaCardComponent } from './components/sala-sistema/sala-card/sala-card.component';
+import { SalaDetalheComponent } from './components/sala-sistema/sala-detalhe/sala-detalhe.component';
+import { SessaoListComponent } from './components/sessao-sistema/sessao-list/sessao-list.component';
+import { SessaoFormComponent } from './components/sessao-sistema/sessao-form/sessao-form.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +48,12 @@ import { FilmeDetalheComponent } from './components/filme-sistema/filme-detalhe/
     HorarioCardComponent,
     FilmeDetalheComponent,
     FuncionarioDetalheComponent,
+    SalaListComponent,
+    SalaFormComponent,
+    SalaCardComponent,
+    SalaDetalheComponent,
+    SessaoListComponent,
+    SessaoFormComponent,
   ],
   imports: [
     BrowserModule,

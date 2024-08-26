@@ -1,0 +1,29 @@
+@import "../../../style/color";
+
+app-menu-sistema {
+    z-index: 1;
+}
+
+app-sala-detalhe {
+    right: 25%;
+    top: 10%;
+    width: 50%;
+}
+
+.list {
+    span {
+        cursor: pointer;
+    }
+
+    button {
+        opacity: .7;
+        box-shadow: 0 .2rem .2rem $PRETO;
+    }
+
+    button:hover {
+        transition: .2s;
+        scale: 105%;
+        background-color: $AMARELO;
+        opacity: 1;
+    }
+}

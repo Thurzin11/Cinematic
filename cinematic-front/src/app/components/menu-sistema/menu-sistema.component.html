@@ -1,32 +1,32 @@
-<nav class="d-flex flex-column align-items-start border border-black"
+<nav class="d-flex flex-column align-items-start border border-black col-sm-10 rounded-end-4"
     (mouseleave)="this.closeMenu()"
     [ngClass]="this.menuIsOpen ? '' : 'leave'">
-    <div class="d-flex align-items-center" routerLink="/sistema/filme">
-        <img src="../../../assets/img/claquete.png" alt="">
+    <div class="d-flex align-items-center col-sm-12 px-2" routerLink="/sistema/filme">
+        <img class="py-3" src="../../../assets/img/claquete.png" alt="">
         <p class="fs-4 ps-3 fw-bold">Filmes</p>
     </div>
-    <div class="d-flex align-items-center">
-        <img src="../../../assets/img/mascara-de-teatro (1).png" alt="">
+    <div class="d-flex align-items-center col-sm-12 ps-2 pe-4" >
+        <img class="py-3" src="../../../assets/img/mascara-de-teatro (1).png" alt="">
         <p class="fs-4 ps-3 fw-bold">Teatro</p>
     </div>
-    <div class="d-flex align-items-center">
-        <img src="../../../assets/img/calendario.png" alt="">
+    <div class="d-flex align-items-center col-sm-12 ps-2 pe-4">
+        <img class="py-3" src="../../../assets/img/calendario.png" alt="">
         <p class="fs-4 ps-3 fw-bold">Evento</p>
     </div>
-    <div class="d-flex align-items-center" routerLink="/sistema/funcionario">
-        <img src="../../../assets/img/funcionarios.png" alt="">
+    <div class="d-flex align-items-center col-sm-12 ps-2 pe-4" routerLink="/sistema/funcionario" >
+        <img class="py-3" src="../../../assets/img/funcionarios.png" alt="">
         <p class="fs-4 ps-3 fw-bold">Funcionários</p>
     </div>
-    <div class="d-flex align-items-center">
-        <img src="../../../assets/img/teatro.png" alt="">
+    <div class="d-flex align-items-center col-sm-12 ps-2 pe-4" routerLink="/sistema/sala">
+        <img class="py-3" src="../../../assets/img/teatro.png" alt="">
         <p class="fs-4 ps-3 fw-bold">Salas</p>
     </div>
-    <div class="d-flex align-items-center">
-        <img src="../../../assets/img/relogio.png" alt="">
+    <div class="d-flex align-items-center col-sm-12 ps-2 pe-4">
+        <img class="py-3" src="../../../assets/img/relogio.png" alt="">
         <p class="fs-4 ps-3 fw-bold">Horários</p>
     </div>
-    <div class="d-flex align-items-center">
-        <img src="../../../assets/img/projetor-de-cinema.png" alt="">
+    <div class="d-flex align-items-center col-sm-12 ps-2 pe-4" routerLink="/sistema/sessao">
+        <img class="py-3" src="../../../assets/img/projetor-de-cinema.png" alt="" >
         <p class="fs-4 ps-3 fw-bold">Sessões</p>
     </div>
 </nav>

@@ -1,9 +1,9 @@
+import { IUsuarioFilterParams } from './../../model/IUsuarioFilterParams';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IUsuario } from '../../model/IUsuario';
 import { Environment } from '../../environment';
-import { IUsuarioFilterParams } from '../../model/IUsuarioFilterParams';
 
 @Injectable({
   providedIn: 'root'
@@ -34,9 +34,24 @@ export class UsuarioService {
   findByNome(nome: string): Observable<IUsuario[]>{
     return this.http.get<IUsuario[]>(`${Environment.urlApi}/usuario/nome/${nome}`);
   }
-
-  filter(filter: IUsuarioFilterParams): Observable<IUsuario[]>{
-    return this.http.patch<IUsuario[]>(`${Environment.urlApi}/usuario/filtros`,filter);
+  
+  filter(filter:{ [key:  string]: string[] }): Observable<IUsuario[]>{
+    let tipo: string[] = [];
+    if(filter['cargo']){
+      tipo = filter['cargo'].map(cargo => cargo.toUpperCase());
+    }
+    let status: string[] | undefined | boolean = filter['status'];
+    if (status==undefined || status.length>=2 || status.length==0) {
+      status = undefined;
+    }else{
+      status.find(status => status == 'ativo')? status = true: status = false;
+    }
+    const filtro: IUsuarioFilterParams = {
+      tipo: tipo,
+      status: status
+    };
+    console.log(filter);
+    return this.http.patch<IUsuario[]>(`${Environment.urlApi}/usuario/filtros`,filtro);
   }
 
   inativarUsuario(id: string): Observable<IUsuario>{

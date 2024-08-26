@@ -1,0 +1,8 @@
+<div class="px-2 py-2 d-flex justify-content-between align-items-center">
+    <p class="text-light fs-3 mb-0">{{ this.numero }}</p>
+    <span class="text-light p-2 border border-black rounded-circle text-center" [ngClass]="this.disponibilidade ? 'ativo':'inativo'"></span>
+</div>
+<div class="px-2 py-2 d-flex justify-content-between align-items-center">
+    <p class="text-light fs-4 mb-0">{{ this.tipo }}</p>
+    <p class="text-light fs-4 mb-0">{{ this.tamanho }}</p>
+</div>

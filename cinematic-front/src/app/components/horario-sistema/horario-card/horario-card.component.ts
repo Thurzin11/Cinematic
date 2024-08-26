@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { IHorario } from './../../../model/IHorario';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-horario-card',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './horario-card.component.scss'
 })
 export class HorarioCardComponent {
+
+  @Input() horario: IHorario = {
+    id: '',
+    horario: '',
+    status: false
+  };
 
 }

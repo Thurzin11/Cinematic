@@ -11,7 +11,8 @@ import { IUsuarioFilterParams } from '../../../model/IUsuarioFilterParams';
 export class FuncionarioListComponent  {
   filterIsOpen: boolean = false;
   detalheIsOpen: boolean = false;
-  usuarios: IUsuario[]=[]
+  usuarios: IUsuario[]=[];
+  email: string = '';
   funcionarioDetails: IUsuario = {
     id: '',
     nome: '',
@@ -25,11 +26,13 @@ export class FuncionarioListComponent  {
     estado: ''
   };
 
-  constructor(private usuarioService: UsuarioService){}
+  constructor(private usuarioService: UsuarioService){
+    this.findAll();
+  }
 
 
   ngOnInit(): void {
-    this.usuarioService.findAll().subscribe(usuarios => this.usuarios = usuarios)
+    this.findAll();
   }
 
   toggleFiltro(): void{
@@ -53,9 +56,7 @@ export class FuncionarioListComponent  {
       this.usuarioService.findAll().subscribe(usuarios => this.usuarios = usuarios);
     }
   }
-
-  filtrar(event: IUsuarioFilterParams): void{
-    console.log(event);
-    this.usuarioService.filter(event).subscribe(usuarios => this.usuarios = usuarios);
+  findAll(): void{
+    this.usuarioService.findAll().subscribe(usuarios => this.usuarios = usuarios)
   }
 }

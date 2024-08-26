@@ -4,7 +4,7 @@ app-menu-sistema {
     z-index: 1;
 }
 
-input, select {
+input, select, textarea {
     background-color: transparent;
 }
 
@@ -12,13 +12,13 @@ input::placeholder {
     color: $PRETO;
 }
 
-input:focus, select:focus {
+input:focus, select:focus, textarea {
     scale: 105%;
     outline: 0;
     background-color: $BRANCO;
 }
 
-input:hover, select:hover {
+input:hover, select:hover, textarea {
     transition: .2s;
     scale: 105%;
     background-color: $BRANCO;

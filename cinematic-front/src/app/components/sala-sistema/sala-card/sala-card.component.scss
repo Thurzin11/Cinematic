@@ -1,0 +1,16 @@
+@import '../../../style/color';
+
+:host:hover {
+    cursor: pointer;
+    transition: .2s;
+    scale: 103%;
+    background-color: $ROXO-CLARO;
+}
+
+.ativo {
+    background-color: $VERDE-ATIVO;
+}
+
+.inativo {
+    background-color: $VERMELHO;
+}

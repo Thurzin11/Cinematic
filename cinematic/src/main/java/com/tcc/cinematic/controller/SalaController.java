@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -34,6 +35,29 @@ public class SalaController {
     @PostMapping
     public ResponseEntity<Sala> create(@RequestBody SalaRecordDTO salaRecordDTO) {
         return new ResponseEntity<Sala>(this.service.create(salaRecordDTO), HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/filtro")
+    public ResponseEntity<List<Sala>> filter(@RequestBody Map<String, List<String>> filter) {
+        return ResponseEntity.ok(this.service.filter(filter));
+    }
+
+    @PatchMapping("/inativar/{id}")
+    public ResponseEntity<Boolean> inativarSala(@PathVariable UUID id) {
+        var inativarReturn = this.service.inativarSala(id);
+        if(!inativarReturn)
+            return ResponseEntity.badRequest().build();
+
+        return ResponseEntity.ok(true);
+    }
+
+    @PatchMapping("/ativar/{id}")
+    public ResponseEntity<Boolean> ativarSala(@PathVariable UUID id) {
+        var inativarReturn = this.service.ativarSala(id);
+        if(!inativarReturn)
+            return ResponseEntity.badRequest().build();
+
+        return ResponseEntity.ok(true);
     }
 
     @PatchMapping

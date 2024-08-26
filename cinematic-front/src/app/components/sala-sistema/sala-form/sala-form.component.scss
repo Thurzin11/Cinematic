@@ -1,0 +1,31 @@
+@import "../../../style/color";
+
+app-menu-sistema {
+    z-index: 1;
+}
+
+select {
+    background-color: transparent;
+}
+
+select:focus {
+    scale: 105%;
+    outline: 0;
+    background-color: $BRANCO;
+}
+
+select:hover {
+    transition: .2s;
+    scale: 105%;
+    background-color: $BRANCO;
+}
+
+button {
+    background-color: $AMARELO;
+    opacity: .7;
+}
+
+button:hover {
+    transition: .2s;
+    opacity: 1;
+}
