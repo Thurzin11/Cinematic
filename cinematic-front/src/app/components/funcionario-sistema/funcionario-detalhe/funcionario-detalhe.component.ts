@@ -10,6 +10,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class FuncionarioDetalheComponent {
   @Output() onClose = new EventEmitter();
   @Output() onEditar = new EventEmitter();
+  @Output() onInativarUsuario = new EventEmitter();
+  @Output() onAtivarUsuario = new EventEmitter();
   @Input() funcionario: IUsuario = {
     id: '',
     nome: '',
@@ -22,17 +24,24 @@ export class FuncionarioDetalheComponent {
     cidade: '',
     estado: ''
   };
+  confirmacao: boolean = false;
   constructor(private usuarioService: UsuarioService){}
 
   close():void{
     this.onClose.emit();
   }
   editar(usuario: IUsuario):void{
-    // console.log(usuario);
+    console.log(usuario);
     this.onEditar.emit(usuario);
   }
   inativarUsuario(id:string):void{
-    this.usuarioService.inativarUsuario(id).subscribe();
+    this.onInativarUsuario.emit(id);
+  }
+  ativarUsuario(id: string): void{
+    this.onAtivarUsuario.emit(id);
+  }
+  confirmar():void{
+    this.confirmacao = !this.confirmacao;
   }
 
 }

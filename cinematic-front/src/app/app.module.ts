@@ -63,7 +63,7 @@ import { SessaoDetalheComponent } from './components/sessao-sistema/sessao-detal
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

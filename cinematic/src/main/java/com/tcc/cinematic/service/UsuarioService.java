@@ -38,7 +38,8 @@ public class UsuarioService {
         BeanUtils.copyProperties(funcionarioRegisterDTO,user);
         user.setLogin(funcionarioRegisterDTO.email());
         user.setSenha(funcionarioRegisterDTO.email());
-        return this.repository.save(user);
+        this.repository.save(user);
+        return user;
     }
 
     public Usuario update(FuncionarioRegisterDTO funcionarioRegisterDTO){
@@ -53,26 +54,24 @@ public class UsuarioService {
         var userFound = this.findById(id);
         if (userFound ==  null)
             return false;
-
         this.repository.delete(userFound);
         return true;
     }
 
-     public Stream<FuncionarioRegisterDTO> findByGerenteAndFuncionario(){
-        return this.repository.findByGerenteAndFuncionario()
-                .stream()
-                .map(usuario -> new FuncionarioRegisterDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
+     public Stream<Usuario> findByGerenteAndFuncionario(){
+        return this.repository.findByGerenteAndFuncionario().stream();
      }
 
      public Usuario inativarUsuario(UUID id){
-        var usuario = this.findById(id);
-        usuario.setStatus(false);
-        return this.repository.save(usuario);
+        var usuarioFound = this.findById(id);
+         System.out.println(usuarioFound.toString());
+        usuarioFound.setStatus(false);
+        return this.repository.save(usuarioFound);
      }
     public Usuario ativarUsuario(UUID id){
-        var usuario = this.findById(id);
-        usuario.setStatus(true);
-        return this.repository.save(usuario);
+        var usuarioFind = this.findById(id);
+        usuarioFind.setStatus(true);
+        return this.repository.save(usuarioFind);
     }
 
     public Stream<FuncionarioRegisterDTO> findByName(String nome){
@@ -99,8 +98,9 @@ public class UsuarioService {
          }
          if (filtro.get("email")!=null && !filtro.get("email").isEmpty()){
              sql.append("AND email LIKE :EMAIL");
-             map.put("EMAIL","%"+filtro.get("email")+"%");
+             map.put("EMAIL","%"+filtro.get("email").getFirst()+"%");
          }
+         System.out.println(map.get("EMAIL"));
          Query query = entityManager.createNativeQuery(sql.toString(), Usuario.class);
          map.forEach(query::setParameter);
 
@@ -127,6 +127,15 @@ public class UsuarioService {
             return false;
         }
         return null;
+    }
+
+    public FuncionarioRegisterDTO convertToDTO(Usuario usuario){
+        return new FuncionarioRegisterDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getStatus(),usuario.getTipoUsuario());
+    }
+
+    public Stream<FuncionarioRegisterDTO> convertToDTOStream(Stream<Usuario> usuarios){
+        return usuarios
+                .map(usuario -> new FuncionarioRegisterDTO(usuario.getId(),usuario.getNome(),usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
     }
 
 }
