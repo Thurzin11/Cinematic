@@ -16,7 +16,6 @@ export class FiltroSistemaComponent implements OnInit {
   @Input() tipo: string = '';
   @Output() onCloseFilter = new EventEmitter();
   @Output() onFilter = new EventEmitter();
-  email: string = '';
   estabelecimento: string = '';
 
   botoes: IBotao[] = [];
@@ -32,10 +31,18 @@ export class FiltroSistemaComponent implements OnInit {
     this.initLists();
   }
 
-  verificarEmail(): void {
-    if(!this.filterMap.has("Email")) {
-      this.toggleButton({ nome: this.email, isSelected: false }, 'Email');
-      return;
+  verificarEmail(email: string): void {
+    this.toggleButton({ nome: email, isSelected: false }, 'Email');
+  }
+
+  private atualizaEmail(): void {
+    const list: string[] | undefined = this.filterMap.get('Email');
+    if(list) {
+      console.log(list);
+
+      if(list.length > 1) {
+
+      }
     }
   }
 
@@ -82,18 +89,14 @@ export class FiltroSistemaComponent implements OnInit {
           if (!str)
             list.push(filter.value.nome.toLowerCase());
 
-          if(filter.label.toLocaleLowerCase() === 'email') {
-            list.splice(0, 1);
-          }
+          if(filter.label.toLowerCase() === 'email')
+            list.splice(0, list.length-1);
         }
       }
 
       if (!this.filterMap.has(filter.label.toLowerCase()))
         this.filterMap.set(filter.label.toLowerCase(), [filter.value.nome.toLowerCase()]);
     })
-
-    console.log(this.filterMap)
-
     this.routes();
   }
 
@@ -147,10 +150,9 @@ export class FiltroSistemaComponent implements OnInit {
 
     botaoValue.isSelected = true;
     this.filterList.push({
-      label,
+      label: label,
       value: botaoValue
     });
-    console.log(botaoValue)
     this.filter();
   }
 
