@@ -26,7 +26,6 @@ export class FiltroSistemaComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private categoriaService: CategoriaService,
-    private estabelecimentoService: EstabelecimentoService,
     private filmeService: FilmeService,
     private salaService: SalaService) { }
 
@@ -35,12 +34,19 @@ export class FiltroSistemaComponent implements OnInit {
   }
 
   verificarEmail(): void {
-    if(this.email === '') {
-      this.removeFilter({ nome: this.email, isSelected: true }, 'Email');
+    if(!this.filterMap.has("Email")) {
+      this.toggleButton({ nome: this.email, isSelected: false }, 'Email');
+      return;
+    }
+  }
+
+  verificarEstabelecimento(): void {
+    if(this.estabelecimento === '') {
+      this.removeFilter({nome: this.estabelecimento, isSelected: true}, 'Estabelecimento');
       return;
     }
 
-    this.toggleButton({ nome: this.email, isSelected: false }, 'Email');
+    this.toggleButton({nome: this.estabelecimento, isSelected: false}, 'Estabelecimento');
   }
 
   closeFilter(): void {
@@ -76,6 +82,10 @@ export class FiltroSistemaComponent implements OnInit {
           let str = list.find(value => filter.value.nome.toLowerCase() === value.toLowerCase())
           if (!str)
             list.push(filter.value.nome.toLowerCase());
+
+          if(filter.label.toLocaleLowerCase() === 'email') {
+            list.splice(0, 1);
+          }
         }
       }
 
@@ -83,6 +93,8 @@ export class FiltroSistemaComponent implements OnInit {
         this.filterMap.set(filter.label.toLowerCase(), [filter.value.nome.toLowerCase()]);
     })
     console.log(this.filterMap);
+
+    console.log(this.filterMap)
 
     this.routes();
   }
@@ -92,8 +104,6 @@ export class FiltroSistemaComponent implements OnInit {
       case "FUNCIONARIO": {
         this.usuarioService.filter(this.mapToObject(this.filterMap)).subscribe(usuarios => {
           this.onFilter.emit(usuarios);
-          console.log(usuarios);
-
         })
         break;
       }
@@ -142,6 +152,7 @@ export class FiltroSistemaComponent implements OnInit {
       label,
       value: botaoValue
     });
+    console.log(botaoValue)
     this.filter();
   }
 
@@ -240,18 +251,12 @@ export class FiltroSistemaComponent implements OnInit {
   private caseSessao(): void {
     let listPeriodo: string[] = ['Manha', 'Tarde', 'Noite'];
     let listStatus: string[] = ['Ativo', 'Inativo'];
-    let listTipoSessao: string[] = ['Legendado', 'Dublado', 'Normal'];
+    let listTipoSessao: string[] = ['2D', '3D', '4D', 'D-BOX'];
     let listIdioma: string[] = ['Legendado', 'Dublado', 'Normal'];
 
     this.setBotao('Periodo', this.setBotaoValue(listPeriodo));
     this.setBotao('Status', this.setBotaoValue(listStatus));
     this.setBotao('Tipo', this.setBotaoValue(listTipoSessao));
     this.setBotao('Idioma', this.setBotaoValue(listIdioma));
-
-    this.estabelecimentoService.findAll().subscribe(estabelecimentoList => {
-      let estabelecimentos: string[] = [];
-      estabelecimentoList.forEach(estabelecimento => estabelecimentos.push(estabelecimento.nome));
-      this.setBotao('Estabelecimento', this.setBotaoValue(estabelecimentos));
-    });
   }
 }

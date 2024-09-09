@@ -1,0 +1,57 @@
+@import '../../../style/color';
+
+.body {
+    background-color: $ROXO-ESCURO;
+    box-shadow: 0 .4rem .4rem $PRETO;
+}
+
+.ativo {
+    background-color: $VERDE-ATIVO;
+}
+
+.inativo {
+    background-color: $VERMELHO;
+}
+
+.close-details {
+    color: $BRANCO;
+    top: .5rem;
+    left: .5rem;
+}
+
+.close-details:hover {
+    cursor: pointer;
+    transition: .2s;
+    color: $VERMELHO;
+}
+
+.disponibilidade {
+    width: 2rem;
+    height: 2rem;
+}
+
+.idioma, .tipo {
+    box-shadow: 0 .2rem .2rem $PRETO;
+}
+
+.idioma {
+    background-color: $VERDE-IDIOMA;
+}
+
+.tipo {
+    background-color: $AMARELO;
+}
+
+button {
+    opacity: .7;
+}
+
+button:hover {
+    transition: .2s;
+    scale: 103%;
+    opacity: 1;
+}
+
+button:first-child {
+    background-color: $AMARELO;
+}

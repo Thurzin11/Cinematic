@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 @Service
 public class AssentoService {
@@ -50,6 +51,4 @@ public class AssentoService {
         this.repository.reservarAssento(assento.getId());
         return assento;
     }
-
-
 }

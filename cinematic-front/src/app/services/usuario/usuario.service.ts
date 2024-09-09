@@ -36,7 +36,6 @@ export class UsuarioService {
   }
 
   filter(filter:{ [key:  string]: string[] }): Observable<IUsuario[]>{
-    console.log(filter);
     return this.http.patch<IUsuario[]>(`${Environment.urlApi}/usuario/filtros`,filter);
   }
 

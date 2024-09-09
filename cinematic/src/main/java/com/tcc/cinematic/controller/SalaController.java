@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -43,6 +44,11 @@ public class SalaController {
             return ResponseEntity.badRequest().build();
 
         return ResponseEntity.ok(salaReturn);
+    }
+
+    @PatchMapping("/filtro")
+    public ResponseEntity<List<Sala>> filter(@RequestBody Map<String, List<String>> filter) {
+        return ResponseEntity.ok(this.service.filter(filter));
     }
 
     @DeleteMapping("/{id}")

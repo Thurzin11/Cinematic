@@ -29,6 +29,7 @@ const routes: Routes = [
   {path: "sistema/sala/editar/:id", component: SalaFormComponent},
   {path: "sistema/sessao", component: SessaoListComponent},
   {path: "sistema/sessao/cadastro", component: SessaoFormComponent},
+  {path: "sistema/sessao/editar/:id", component: SessaoFormComponent},
   {path: "", redirectTo: "sistema/login", pathMatch: 'full'}
 ];
 
