@@ -1,5 +1,6 @@
 package com.tcc.cinematic.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tcc.cinematic.enums.TipoUsuario;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

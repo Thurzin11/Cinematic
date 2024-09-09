@@ -98,6 +98,8 @@ export class FiltroSistemaComponent implements OnInit {
       case "FUNCIONARIO": {
         this.usuarioService.filter(this.mapToObject(this.filterMap)).subscribe(usuarios => {
           this.onFilter.emit(usuarios);
+          console.log(usuarios);
+
         })
         break;
       }

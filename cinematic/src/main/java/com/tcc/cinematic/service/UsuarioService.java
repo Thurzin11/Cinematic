@@ -1,5 +1,6 @@
 package com.tcc.cinematic.service;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tcc.cinematic.DTO.FuncionarioRegisterDTO;
 import com.tcc.cinematic.DTO.UsuarioFilterParams;
 import com.tcc.cinematic.entity.Categoria;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 public class UsuarioService {
@@ -31,7 +33,7 @@ public class UsuarioService {
         return this.repository.findById(id).orElse(null);
     }
 
-    public Usuario create(FuncionarioRegisterDTO funcionarioRegisterDTO){
+    public Usuario createFuncionario(FuncionarioRegisterDTO funcionarioRegisterDTO){
         var user  = new Usuario();
         BeanUtils.copyProperties(funcionarioRegisterDTO,user);
         user.setLogin(funcionarioRegisterDTO.email());
@@ -55,29 +57,11 @@ public class UsuarioService {
         this.repository.delete(userFound);
         return true;
     }
-     public List<Usuario> findByTipoUsuario(TipoUsuario tipoUsuario){
-        if (tipoUsuario.equals(TipoUsuario.FUNCIONARIO))
-            return this.repository.findByTipoUsuario(TipoUsuario.FUNCIONARIO);
-        else {
-            return this.repository.findByTipoUsuario(TipoUsuario.GERENTE);
-        }
-     }
-     public List<Usuario> findByStatus(Boolean status){
-        return this.repository.findByStatus(status);
-     }
-     public List<Usuario> findByEmail(String email){
-        return this.repository.findByEmail(email);
-     }
 
-
-     public List<Usuario> findByGerenteAndFuncionario(){
-        var funcionariosList = this.repository.findByTipoUsuario(TipoUsuario.GERENTE);
-        funcionariosList.addAll(this.repository.findByTipoUsuario(TipoUsuario.FUNCIONARIO));
-        return funcionariosList;
-     }
-
-     public List<Usuario> findByName(String nome){
-        return this.repository.findByName("%"+nome+"%");
+     public Stream<FuncionarioRegisterDTO> findByGerenteAndFuncionario(){
+        return this.repository.findByGerenteAndFuncionario()
+                .stream()
+                .map(usuario -> new FuncionarioRegisterDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
      }
 
      public Usuario inativarUsuario(UUID id){
@@ -91,9 +75,13 @@ public class UsuarioService {
         return this.repository.save(usuario);
     }
 
+    public Stream<FuncionarioRegisterDTO> findByName(String nome){
+        return this.repository.findByName("%"+nome+"%")
+                .stream().map(usuario -> new FuncionarioRegisterDTO(usuario.getId(), usuario.getNome(),usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
+    }
 
-     public List<Usuario> findByFilters(UsuarioFilterParams filtro){
-//        return this.repository.findByFilter(params.tipo(),params.status(), params.email());
+
+     public Stream<FuncionarioRegisterDTO> findByFilters(Map<String,List<String>> filtro){
          StringBuilder sql = new StringBuilder();
          sql.append(" " +
                  "SELECT * FROM usuario " +
@@ -101,22 +89,44 @@ public class UsuarioService {
 
          Map<String, Object> map = new HashMap<>();
 
-         if (filtro.tipo()!=null && !filtro.tipo().isEmpty()){
+         if (filtro.get("cargo")!=null && !filtro.get("cargo").isEmpty()){
              sql.append("AND tipo_usuario IN (:TIPO_USUARIO) ");
-             map.put("TIPO_USUARIO",filtro.tipo());
+             map.put("TIPO_USUARIO",this.setCargo(filtro.get("cargo")));
          }
-         if(filtro.status()!=null){
+         if(filtro.get("status")!=null && !filtro.get("status").isEmpty() && this.setStatus(filtro.get("status"))!=null){
              sql.append("AND status = :STATUS ");
-             map.put("STATUS",filtro.status());
+             map.put("STATUS",this.setStatus(filtro.get("status")));
          }
-         if (filtro.email()!=null && !filtro.email().isEmpty()){
+         if (filtro.get("email")!=null && !filtro.get("email").isEmpty()){
              sql.append("AND email LIKE :EMAIL");
-             map.put("EMAIL","%"+filtro.email()+"%");
+             map.put("EMAIL","%"+filtro.get("email")+"%");
          }
          Query query = entityManager.createNativeQuery(sql.toString(), Usuario.class);
          map.forEach(query::setParameter);
-         return query.getResultList();
+
+         List<Usuario> listFiltro = query.getResultList();
+         return listFiltro.stream().map(usuario -> new FuncionarioRegisterDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
      }
 
+     private List<String> setCargo(List<String> cargos){
+        List<String> cargosUpperCase = new ArrayList<>();
+        for (String cargo: cargos){
+            cargosUpperCase.add(cargo.toUpperCase());
+        }
+        return cargosUpperCase;
+    }
+
+    private Boolean setStatus(List<String> status){
+        if (status.size()>=2){
+            return null;
+        }
+        if (status.getFirst().equals("ativo")){
+            return true;
+        }
+        if (status.getFirst().equals("false")){
+            return false;
+        }
+        return null;
+    }
 
 }

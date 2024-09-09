@@ -1,5 +1,6 @@
 package com.tcc.cinematic.repository;
 
+import com.tcc.cinematic.DTO.FuncionarioRegisterDTO;
 import com.tcc.cinematic.entity.Usuario;
 import com.tcc.cinematic.enums.TipoUsuario;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,9 +15,9 @@ import java.util.UUID;
 public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
 //    @Query("SELECT * FROM USUARIO u WHERE u.tipou")
 //    List<Usuario> findByTipoUsuarioFuncionarioGerente();
-    List<Usuario> findByTipoUsuario(TipoUsuario tipoUsuario);
-    List<Usuario> findByStatus(Boolean status);
-    List<Usuario> findByEmail(String email);
+    @Query(value = "FROM Usuario u " +
+            "WHERE (tipoUsuario LIKE 'GERENTE' OR tipoUsuario LIKE 'FUNCIONARIO')")
+    List<Usuario> findByGerenteAndFuncionario();
 
     @Query(value = "SELECT * FROM usuario "+
             "WHERE nome LIKE :NOME "+

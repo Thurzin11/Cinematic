@@ -28,12 +28,13 @@ export class FuncionarioListComponent  {
 
   constructor(private usuarioService: UsuarioService){
     this.findAll();
+
   }
 
 
-  ngOnInit(): void {
-    this.findAll();
-  }
+  // ngOnInit(): void {
+  //   this.findAll();
+  // }
 
   toggleFiltro(): void{
     this.filterIsOpen = !this.filterIsOpen;
@@ -53,10 +54,10 @@ export class FuncionarioListComponent  {
     if (nome) {
       this.usuarioService.findByNome(nome).subscribe(usuarios => this.usuarios = usuarios);
     }else{
-      this.usuarioService.findAll().subscribe(usuarios => this.usuarios = usuarios);
+      this.findAll();
     }
   }
   findAll(): void{
-    this.usuarioService.findAll().subscribe(usuarios => this.usuarios = usuarios)
+    this.usuarioService.findAll().subscribe(usuarios => this.usuarios = usuarios);
   }
 }
