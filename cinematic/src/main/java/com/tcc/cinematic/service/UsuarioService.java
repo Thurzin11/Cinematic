@@ -58,10 +58,8 @@ public class UsuarioService {
         return true;
     }
 
-     public Stream<FuncionarioRegisterDTO> findByGerenteAndFuncionario(){
-        return this.repository.findByGerenteAndFuncionario()
-                .stream()
-                .map(usuario -> new FuncionarioRegisterDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
+     public Stream<Usuario> findByGerenteAndFuncionario(){
+        return this.repository.findByGerenteAndFuncionario().stream();
      }
 
      public Usuario inativarUsuario(UUID id){
@@ -100,8 +98,9 @@ public class UsuarioService {
          }
          if (filtro.get("email")!=null && !filtro.get("email").isEmpty()){
              sql.append("AND email LIKE :EMAIL");
-             map.put("EMAIL","%"+filtro.get("email")+"%");
+             map.put("EMAIL","%"+filtro.get("email").getFirst()+"%");
          }
+         System.out.println(map.get("EMAIL"));
          Query query = entityManager.createNativeQuery(sql.toString(), Usuario.class);
          map.forEach(query::setParameter);
 
@@ -132,6 +131,11 @@ public class UsuarioService {
 
     public FuncionarioRegisterDTO convertToDTO(Usuario usuario){
         return new FuncionarioRegisterDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getStatus(),usuario.getTipoUsuario());
+    }
+
+    public Stream<FuncionarioRegisterDTO> convertToDTOStream(Stream<Usuario> usuarios){
+        return usuarios
+                .map(usuario -> new FuncionarioRegisterDTO(usuario.getId(),usuario.getNome(),usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
     }
 
 }

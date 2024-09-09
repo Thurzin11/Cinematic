@@ -35,14 +35,14 @@ public class UsuarioController {
 
     @GetMapping("/funcionarios")
     public ResponseEntity<Stream<FuncionarioRegisterDTO>> findByGerenteAndFuncionario(){
-       return ResponseEntity.ok(this.service.findByGerenteAndFuncionario());
+        Stream<Usuario> usuarios = this.service.findByGerenteAndFuncionario();
+        return ResponseEntity.ok(this.service.convertToDTOStream(usuarios));
     }
 
     @GetMapping("/nome/{nome}")
     public ResponseEntity<Stream<FuncionarioRegisterDTO>> findByName(@PathVariable String nome){
         return ResponseEntity.ok(this.service.findByName(nome));
     }
-
     @PatchMapping("/funcionarios/inativar/{id}")
     public ResponseEntity<Usuario> inativarUsuario(@PathVariable UUID id){
         return ResponseEntity.ok(this.service.inativarUsuario(id));
