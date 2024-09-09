@@ -93,9 +93,6 @@ export class FiltroSistemaComponent implements OnInit {
         this.filterMap.set(filter.label.toLowerCase(), [filter.value.nome.toLowerCase()]);
     })
     console.log(this.filterMap);
-
-    console.log(this.filterMap)
-
     this.routes();
   }
 
@@ -152,7 +149,6 @@ export class FiltroSistemaComponent implements OnInit {
       label,
       value: botaoValue
     });
-    console.log(botaoValue)
     this.filter();
   }
 
