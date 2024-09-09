@@ -33,12 +33,10 @@ export class FiltroSistemaComponent implements OnInit {
   }
 
   verificarEmail(): void {
-    if(this.email === '') {
-      this.removeFilter({ nome: this.email, isSelected: true }, 'Email');
+    if(!this.filterMap.has("Email")) {
+      this.toggleButton({ nome: this.email, isSelected: false }, 'Email');
       return;
     }
-
-    this.toggleButton({ nome: this.email, isSelected: false }, 'Email');
   }
 
   verificarEstabelecimento(): void {
@@ -83,12 +81,18 @@ export class FiltroSistemaComponent implements OnInit {
           let str = list.find(value => filter.value.nome.toLowerCase() === value.toLowerCase())
           if (!str)
             list.push(filter.value.nome.toLowerCase());
+
+          if(filter.label.toLocaleLowerCase() === 'email') {
+            list.splice(0, 1);
+          }
         }
       }
 
       if (!this.filterMap.has(filter.label.toLowerCase()))
         this.filterMap.set(filter.label.toLowerCase(), [filter.value.nome.toLowerCase()]);
     })
+
+    console.log(this.filterMap)
 
     this.routes();
   }
@@ -98,8 +102,6 @@ export class FiltroSistemaComponent implements OnInit {
       case "FUNCIONARIO": {
         this.usuarioService.filter(this.mapToObject(this.filterMap)).subscribe(usuarios => {
           this.onFilter.emit(usuarios);
-          console.log(usuarios);
-
         })
         break;
       }
@@ -148,6 +150,7 @@ export class FiltroSistemaComponent implements OnInit {
       label,
       value: botaoValue
     });
+    console.log(botaoValue)
     this.filter();
   }
 
