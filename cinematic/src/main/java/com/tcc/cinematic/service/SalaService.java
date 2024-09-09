@@ -26,10 +26,6 @@ public class SalaService {
         return this.repository.findById(id).orElse(null);
     }
 
-    public void chupaCu() {
-        System.out.println("chupo");
-    }
-
     public Sala create(SalaRecordDTO salaRecordDTO) {
         var sala = Sala.builder()
                 .numero(this.findAll().size()+1)
