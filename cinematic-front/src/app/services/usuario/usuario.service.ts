@@ -43,4 +43,7 @@ export class UsuarioService {
   inativarUsuario(id: string): Observable<IUsuario>{
     return this.http.patch<IUsuario>(`${Environment.urlApi}/usuario/funcionarios/inativar/${id}`,null);
   }
+  ativarUsuario(id: string): Observable<IUsuario>{
+    return this.http.patch<IUsuario>(`${Environment.urlApi}/usuario/funcionarios/ativar/${id}`,null);
+  }
 }

@@ -38,7 +38,8 @@ public class UsuarioService {
         BeanUtils.copyProperties(funcionarioRegisterDTO,user);
         user.setLogin(funcionarioRegisterDTO.email());
         user.setSenha(funcionarioRegisterDTO.email());
-        return this.repository.save(user);
+        this.repository.save(user);
+        return user;
     }
 
     public Usuario update(FuncionarioRegisterDTO funcionarioRegisterDTO){
@@ -53,7 +54,6 @@ public class UsuarioService {
         var userFound = this.findById(id);
         if (userFound ==  null)
             return false;
-
         this.repository.delete(userFound);
         return true;
     }
@@ -65,14 +65,15 @@ public class UsuarioService {
      }
 
      public Usuario inativarUsuario(UUID id){
-        var usuario = this.findById(id);
-        usuario.setStatus(false);
-        return this.repository.save(usuario);
+        var usuarioFound = this.findById(id);
+         System.out.println(usuarioFound.toString());
+        usuarioFound.setStatus(false);
+        return this.repository.save(usuarioFound);
      }
     public Usuario ativarUsuario(UUID id){
-        var usuario = this.findById(id);
-        usuario.setStatus(true);
-        return this.repository.save(usuario);
+        var usuarioFind = this.findById(id);
+        usuarioFind.setStatus(true);
+        return this.repository.save(usuarioFind);
     }
 
     public Stream<FuncionarioRegisterDTO> findByName(String nome){
@@ -127,6 +128,10 @@ public class UsuarioService {
             return false;
         }
         return null;
+    }
+
+    public FuncionarioRegisterDTO convertToDTO(Usuario usuario){
+        return new FuncionarioRegisterDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getStatus(),usuario.getTipoUsuario());
     }
 
 }

@@ -1,14 +1,14 @@
-import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, OnChanges, SimpleChanges, ViewChild, ɵɵqueryRefresh } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { IUsuario } from '../../../model/IUsuario';
-import { IUsuarioFilterParams } from '../../../model/IUsuarioFilterParams';
 
 @Component({
   selector: 'app-funcionario-list',
   templateUrl: './funcionario-list.component.html',
   styleUrl: './funcionario-list.component.scss'
 })
-export class FuncionarioListComponent  {
+export class FuncionarioListComponent{
   filterIsOpen: boolean = false;
   detalheIsOpen: boolean = false;
   usuarios: IUsuario[]=[];
@@ -26,15 +26,9 @@ export class FuncionarioListComponent  {
     estado: ''
   };
 
-  constructor(private usuarioService: UsuarioService){
+  constructor(private usuarioService: UsuarioService,private router: Router){
     this.findAll();
-
   }
-
-
-  // ngOnInit(): void {
-  //   this.findAll();
-  // }
 
   toggleFiltro(): void{
     this.filterIsOpen = !this.filterIsOpen;
@@ -42,13 +36,16 @@ export class FuncionarioListComponent  {
 
   openDetalhe(id: string): void{
     let funcionario = this.usuarios.find(usuario => usuario.id == id)
+    console.log(funcionario);
     if(funcionario){
       this.funcionarioDetails = funcionario;
       this.detalheIsOpen = true;
     }
   }
+
   closeDetalhe(): void{
     this.detalheIsOpen = false;
+    this.findAll();
   }
   filtroNome(nome: string):void{
     if (nome) {
@@ -59,5 +56,13 @@ export class FuncionarioListComponent  {
   }
   findAll(): void{
     this.usuarioService.findAll().subscribe(usuarios => this.usuarios = usuarios);
+  }
+  inativarUsuario(id:string):void{
+    this.usuarioService.inativarUsuario(id).subscribe(()=> this.findAll());
+    this.closeDetalhe();
+  }
+  ativarUsuario(id: string): void{
+    this.usuarioService.ativarUsuario(id).subscribe(() => this.findAll());
+    this.closeDetalhe();
   }
 }

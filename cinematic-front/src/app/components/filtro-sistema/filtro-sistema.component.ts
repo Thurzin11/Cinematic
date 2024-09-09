@@ -7,6 +7,7 @@ import { IFilter } from '../../model/IFilter';
 import { FilmeService } from '../../services/filme/filme.service';
 import { IBotaoValue } from '../../model/IBotaoValue';
 import { SalaService } from '../../services/sala/sala.service';
+import { filter, map } from 'rxjs';
 @Component({
   selector: 'app-filtro-sistema',
   templateUrl: './filtro-sistema.component.html',
@@ -81,6 +82,7 @@ export class FiltroSistemaComponent implements OnInit {
       if (!this.filterMap.has(filter.label.toLowerCase()))
         this.filterMap.set(filter.label.toLowerCase(), [filter.value.nome.toLowerCase()]);
     })
+    console.log(this.filterMap);
 
     this.routes();
   }

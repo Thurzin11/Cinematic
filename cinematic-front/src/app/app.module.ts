@@ -59,7 +59,7 @@ import { SessaoFormComponent } from './components/sessao-sistema/sessao-form/ses
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

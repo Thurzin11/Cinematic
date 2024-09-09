@@ -1,28 +1,21 @@
 package com.tcc.cinematic.controller;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tcc.cinematic.DTO.FuncionarioRegisterDTO;
 import com.tcc.cinematic.entity.Usuario;
 import com.tcc.cinematic.service.UsuarioService;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-    private static final Logger log = LoggerFactory.getLogger(UsuarioController.class);
     @Autowired
     private UsuarioService service;
 
@@ -32,11 +25,12 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> findById(@PathVariable UUID id){
+    public ResponseEntity<FuncionarioRegisterDTO> findById(@PathVariable UUID id){
         var userReturn = this.service.findById(id);
         if (userReturn == null)
             return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(userReturn);
+        var userReturnDTO = this.service.convertToDTO(userReturn);
+        return ResponseEntity.ok(userReturnDTO);
     }
 
     @GetMapping("/funcionarios")
@@ -64,19 +58,22 @@ public class UsuarioController {
     }
 
     @PostMapping("/funcionario")
-    public ResponseEntity<Usuario> create(@RequestBody @Valid FuncionarioRegisterDTO funcionarioRegisterDTO){
+    public ResponseEntity<FuncionarioRegisterDTO> create(@RequestBody @Valid FuncionarioRegisterDTO funcionarioRegisterDTO){
         var user = this.service.createFuncionario(funcionarioRegisterDTO);
-        return new ResponseEntity<Usuario>(user, HttpStatus.CREATED);
+        var userDTO = this.service.convertToDTO(user);
+        return new ResponseEntity<FuncionarioRegisterDTO>(userDTO, HttpStatus.CREATED);
     }
 
 
     @PatchMapping
-    public ResponseEntity<Usuario> update(@RequestBody @Valid FuncionarioRegisterDTO funcionarioRegisterDTO){
+    public ResponseEntity<FuncionarioRegisterDTO> update(@RequestBody @Valid FuncionarioRegisterDTO funcionarioRegisterDTO){
         var user = this.service.update(funcionarioRegisterDTO);
         if (user == null)
             return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(user);
+        var userDTO = this.service.convertToDTO(user);
+        return ResponseEntity.ok(userDTO);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable UUID id){
         var isDelete = this.service.delete(id);
