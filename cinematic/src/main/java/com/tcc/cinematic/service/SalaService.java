@@ -30,10 +30,6 @@ public class SalaService {
         return this.repository.findById(id).orElse(null);
     }
 
-    public void chupaPinto() {
-        System.out.println("Cu");
-    }
-
     public Sala create(SalaRecordDTO salaRecordDTO) {
         var sala = Sala.builder()
                 .numero(this.findAll().size()+1)
