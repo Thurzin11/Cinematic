@@ -6,9 +6,5 @@ export interface IUsuario{
   email: string,
   senha: string,
   status: boolean,
-  tipoUsuario: ITipoUsuario | string,
-  login: string,
-  isGerente: boolean,
-  cidade: string,
-  estado: string
+  tipoUsuario: ITipoUsuario | string
 }

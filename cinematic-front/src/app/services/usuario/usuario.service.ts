@@ -1,3 +1,4 @@
+import { ILoginFuncionario } from './../../model/ILoginFuncionario';
 import { IUsuarioFilterParams } from './../../model/IUsuarioFilterParams';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -44,5 +45,9 @@ export class UsuarioService {
   }
   ativarUsuario(id: string): Observable<IUsuario>{
     return this.http.patch<IUsuario>(`${Environment.urlApi}/usuario/funcionarios/ativar/${id}`,null);
+  }
+
+  loginFuncionario(login: ILoginFuncionario){
+    return this.http.patch<IUsuario>(`${Environment.urlApi}/usuario/login/funcionario`,login);
   }
 }

@@ -15,11 +15,7 @@ export class FuncionarioCadastroComponent implements OnInit {
     email: '',
     senha: '',
     status: false,
-    login: '',
     tipoUsuario: '',
-    isGerente: false,
-    cidade: '',
-    estado: ''
   };
   editar: boolean = false;
 

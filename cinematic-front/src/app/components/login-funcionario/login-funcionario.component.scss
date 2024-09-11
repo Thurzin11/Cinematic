@@ -29,3 +29,9 @@
     }
 
 }
+p{
+  text-shadow: 0 .2rem .2rem $PRETO;
+  svg{
+    box-shadow: 0 .2rem .2rem $PRETO;
+  }
+}

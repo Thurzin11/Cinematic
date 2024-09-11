@@ -20,10 +20,6 @@ export class FuncionarioListComponent{
     senha: '',
     status: false,
     tipoUsuario: '',
-    login: '',
-    isGerente: false,
-    cidade: '',
-    estado: ''
   };
 
   constructor(private usuarioService: UsuarioService,private router: Router){

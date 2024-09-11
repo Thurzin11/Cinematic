@@ -18,11 +18,7 @@ export class FuncionarioDetalheComponent {
     email: '',
     senha: '',
     status: false,
-    tipoUsuario: '',
-    login: '',
-    isGerente: false,
-    cidade: '',
-    estado: ''
+    tipoUsuario: ''
   };
   confirmacao: boolean = false;
   constructor(private usuarioService: UsuarioService){}
