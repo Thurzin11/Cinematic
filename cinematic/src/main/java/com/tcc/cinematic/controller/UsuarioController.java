@@ -1,8 +1,10 @@
 package com.tcc.cinematic.controller;
 import com.tcc.cinematic.DTO.FuncionarioRegisterDTO;
+import com.tcc.cinematic.DTO.LoginFuncionarioDTO;
 import com.tcc.cinematic.entity.Usuario;
 import com.tcc.cinematic.service.UsuarioService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,8 +62,7 @@ public class UsuarioController {
     @PostMapping("/funcionario")
     public ResponseEntity<FuncionarioRegisterDTO> create(@RequestBody @Valid FuncionarioRegisterDTO funcionarioRegisterDTO){
         var user = this.service.createFuncionario(funcionarioRegisterDTO);
-        var userDTO = this.service.convertToDTO(user);
-        return new ResponseEntity<FuncionarioRegisterDTO>(userDTO, HttpStatus.CREATED);
+        return new ResponseEntity<FuncionarioRegisterDTO>(this.service.convertToDTO(user), HttpStatus.CREATED);
     }
 
 
@@ -70,8 +71,16 @@ public class UsuarioController {
         var user = this.service.update(funcionarioRegisterDTO);
         if (user == null)
             return ResponseEntity.notFound().build();
-        var userDTO = this.service.convertToDTO(user);
-        return ResponseEntity.ok(userDTO);
+        return ResponseEntity.ok(this.service.convertToDTO(user));
+    }
+
+    @PatchMapping("/login/funcionario")
+    public ResponseEntity<FuncionarioRegisterDTO> login(@RequestBody @Valid LoginFuncionarioDTO dto){
+        var userLogin = this.service.loginFuncionario(dto);
+        if (userLogin == null){
+            return ResponseEntity.badRequest().body(null);
+        }
+        return ResponseEntity.ok(this.service.convertToDTO(userLogin));
     }
 
     @DeleteMapping("/{id}")

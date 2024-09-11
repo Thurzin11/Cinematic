@@ -2,6 +2,7 @@ package com.tcc.cinematic.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tcc.cinematic.DTO.FuncionarioRegisterDTO;
+import com.tcc.cinematic.DTO.LoginFuncionarioDTO;
 import com.tcc.cinematic.DTO.UsuarioFilterParams;
 import com.tcc.cinematic.entity.Categoria;
 import com.tcc.cinematic.entity.Usuario;
@@ -100,7 +101,6 @@ public class UsuarioService {
              sql.append("AND email LIKE :EMAIL");
              map.put("EMAIL","%"+filtro.get("email").getFirst()+"%");
          }
-         System.out.println(map.get("EMAIL"));
          Query query = entityManager.createNativeQuery(sql.toString(), Usuario.class);
          map.forEach(query::setParameter);
 
@@ -136,6 +136,10 @@ public class UsuarioService {
     public Stream<FuncionarioRegisterDTO> convertToDTOStream(Stream<Usuario> usuarios){
         return usuarios
                 .map(usuario -> new FuncionarioRegisterDTO(usuario.getId(),usuario.getNome(),usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
+    }
+
+    public Usuario loginFuncionario(LoginFuncionarioDTO dto){
+        return this.repository.findByLoginAndSenha(dto.login(), dto.password()).orElse(null);
     }
 
 }
