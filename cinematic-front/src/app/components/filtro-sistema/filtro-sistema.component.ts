@@ -1,13 +1,11 @@
 import { UsuarioService } from './../../services/usuario/usuario.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CategoriaService } from '../../services/categoria/categoria.service';
-import { EstabelecimentoService } from '../../services/estabelecimento/estabelecimento.service';
 import { IBotao } from '../../model/IBotao';
 import { IFilter } from '../../model/IFilter';
 import { FilmeService } from '../../services/filme/filme.service';
 import { IBotaoValue } from '../../model/IBotaoValue';
 import { SalaService } from '../../services/sala/sala.service';
-import { filter, map } from 'rxjs';
 @Component({
   selector: 'app-filtro-sistema',
   templateUrl: './filtro-sistema.component.html',
