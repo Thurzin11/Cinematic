@@ -76,7 +76,6 @@ public class FilmeService {
         var filme = Filme.builder()
                 .classificacao(this.setClassificacao(filmeRegisterDTO.classificacao()))
                 .dataEstreia(filmeRegisterDTO.dataEstreia())
-                .status(this.setStatus(filmeRegisterDTO.status()))
                 .build();
 
         BeanUtils.copyProperties(filmeRegisterDTO, filme);
