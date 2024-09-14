@@ -3,6 +3,7 @@ package com.tcc.cinematic.controller;
 import com.tcc.cinematic.DTO.SalaRecordDTO;
 import com.tcc.cinematic.entity.Sala;
 import com.tcc.cinematic.service.SalaService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +50,24 @@ public class SalaController {
     @PatchMapping("/filtro")
     public ResponseEntity<List<Sala>> filter(@RequestBody Map<String, List<String>> filter) {
         return ResponseEntity.ok(this.service.filter(filter));
+    }
+
+    @PatchMapping("/{id}/ativar")
+    public ResponseEntity<Boolean> ativar(@PathVariable UUID id) {
+        var returnAtivar = this.service.ativarSala(id);
+        if(!returnAtivar)
+            return ResponseEntity.badRequest().build();
+
+        return ResponseEntity.ok(true);
+    }
+
+    @PatchMapping("/{id}/inativar")
+    public ResponseEntity<Boolean> inativar(@PathVariable UUID id) {
+        var returnAtivar = this.service.inativarSala(id);
+        if(!returnAtivar)
+            return ResponseEntity.badRequest().build();
+
+        return ResponseEntity.ok(true);
     }
 
     @DeleteMapping("/{id}")

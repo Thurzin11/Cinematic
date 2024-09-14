@@ -85,7 +85,7 @@ public class SalaService {
         if(sala == null)
             return false;
 
-        this.repository.inativarSala(id);
+        this.repository.inativarSala(sala.getId());
         return true;
     }
 
@@ -94,7 +94,7 @@ public class SalaService {
         if(sala == null)
             return false;
 
-        this.repository.ativarSala(id);
+        this.repository.ativarSala(sala.getId());
         return true;
     }
 
