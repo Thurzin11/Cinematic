@@ -1,6 +1,7 @@
 
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { register } from 'swiper/element/bundle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +32,7 @@ import { SessaoFormComponent } from './components/sistema/sessao-sistema/sessao-
 import { SessaoCardComponent } from './components/sistema/sessao-sistema/sessao-card/sessao-card.component';
 import { SessaoDetalheComponent } from './components/sistema/sessao-sistema/sessao-detalhe/sessao-detalhe.component';
 
+register();
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +68,9 @@ import { SessaoDetalheComponent } from './components/sistema/sessao-sistema/sess
     HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
+  ]
 })
 export class AppModule { }
