@@ -1,21 +1,21 @@
 @import '../../../../style/color';
 
-:host:hover {
-    cursor: pointer;
-    transition: .2s;
-    scale: 103%;
-}
-
 img {
     width: 100%;
-    box-shadow: 0 .2rem .2rem $PRETO;
+    box-shadow: 0 .4rem .4rem $PRETO;
 }
 
-span {
-    bottom: .5rem;
-    left: .5rem;
+h2 {
+    text-shadow: 0 .2rem .2rem $PRETO;
+}
+
+.classificacao {
     box-shadow: 0 .2rem .2rem $PRETO;
     min-width: 2rem;
+}
+
+.descricao {
+    max-height: 6rem;
 }
 
 .livre {

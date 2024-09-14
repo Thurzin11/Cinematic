@@ -12,7 +12,7 @@
         <div class="col-9 d-flex flex-column">
             <div class="d-flex align-items-center justify-content-between">
                 <h2 class="text-light fw-bold">{{ this.filme.nome }}</h2>
-                <p class="text-light fst-italic fs-5">{{ this.filme.duracao }} min</p>
+                <p class="text-light fst-italic fs-5">{{ this.filme.duracao }}min</p>
             </div>
             <span class="classificacao text-light col-1 my-3 p-1 fs-5 border border-black rounded text-center"
                 [ngClass]="this.classificacaoClass">{{ this.classificacao }}</span>
@@ -33,7 +33,7 @@
                 <p class="text-light fs-3 fw-semibold m-0">Categoria</p>
                 <p class="text-light fs-4 ps-2">{{ this.filme.categoria.nome }}</p>
             </div>
-            <div class="col-5">
+            <div class="col-6">
                 <p class="text-light fs-3 fw-semibold m-0">Distribuidor</p>
                 <p class="text-light fs-4 ps-2">{{ this.filme.distribuidora }}</p>
             </div>
@@ -41,7 +41,7 @@
                 <p class="text-light fs-3 fw-semibold m-0">Direção</p>
                 <p class="text-light fs-4 ps-2">{{ this.filme.direcao }}</p>
             </div>
-            <div class="col-5">
+            <div class="col-6">
                 <p class="text-light fs-3 fw-semibold m-0">Data de Estreia</p>
                 <p class="text-light fs-4 ps-2">{{ this.filme.dataEstreia }}</p>
             </div>

@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Chart, Colors } from 'chart.js/auto';
-import { color, EChartsOption } from 'echarts';
+import { Chart } from 'chart.js/auto';
 @Component({
   selector: 'app-home-sistema',
   templateUrl: './home-sistema.component.html',

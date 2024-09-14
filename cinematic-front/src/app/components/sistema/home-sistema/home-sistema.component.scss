@@ -1,4 +1,4 @@
-@import "../../style/color";
+@import "../../../style/color";
 
 .body{
   .graficos{
@@ -6,16 +6,16 @@
     border: 3px black solid;
     border-radius: 20px;
     background-color: $ROXO-CLARO;
-    // padding-left: 50px;
   }
 }
+
 select{
   background-color: $AMARELO;
   option{
     background-color: $BRANCO;
   }
 }
-// width="1350" height="160"
+
 .pizza{
   max-width: 300px;
   max-height: 300px;

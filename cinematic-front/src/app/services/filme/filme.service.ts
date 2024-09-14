@@ -28,16 +28,6 @@ export class FilmeService {
   }
 
   create(filme: IFilme): Observable<IFilme> {
-    return this.http.post<IFilme>(`${Environment.urlApi}/filme`, {
-      nome: filme.nome,
-      categoria: filme.categoria,
-      classificacao: filme.classificacao,
-      descricao: filme.descricao,
-      duracao: filme.duracao,
-      dataEstreia: filme.dataEstreia,
-      banner: filme.banner,
-      status: filme.statusFilme,
-      trailers: filme.trailers
-    })
+    return this.http.post<IFilme>(`${Environment.urlApi}/filme`, filme)
   }
 }

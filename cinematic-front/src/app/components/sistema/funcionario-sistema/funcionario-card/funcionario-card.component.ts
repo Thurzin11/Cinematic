@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IUsuario } from '../../../model/IUsuario';
-import { ITipoUsuario } from '../../../model/ITipoUsuario';
+import { Component, Input } from '@angular/core';
+import { IUsuario } from '../../../../model/IUsuario';
+import { ITipoUsuario } from '../../../../model/ITipoUsuario';
 
 @Component({
   selector: 'app-funcionario-card',

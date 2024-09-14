@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IFilme } from '../../../model/IFilme';
-import { ISessao } from '../../../model/ISessao';
+import { ISessao } from '../../../../model/ISessao';
 
 @Component({
   selector: 'app-sessao-card',

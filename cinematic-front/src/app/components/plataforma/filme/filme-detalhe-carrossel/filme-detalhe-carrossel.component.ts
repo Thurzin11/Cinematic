@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IFilme } from '../../../../model/IFilme';
 
 @Component({
-  selector: 'app-filme-detalhe',
-  templateUrl: './filme-detalhe.component.html',
-  styleUrl: './filme-detalhe.component.scss'
+  selector: 'app-filme-detalhe-carrossel',
+  templateUrl: './filme-detalhe-carrossel.component.html',
+  styleUrl: './filme-detalhe-carrossel.component.scss'
 })
-export class FilmeDetalheComponent implements OnInit, OnChanges{
-  @Input() filme: IFilme = {
+export class FilmeDetalheCarrosselComponent implements OnInit {
+  @Input()filme: IFilme = {
     id: '',
     nome: '',
     categoria: {
@@ -26,17 +26,10 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
     capas: [],
     trailers: []
   };
-  @Output() onCloseDetails = new EventEmitter();
-
-  classificacaoClass: string = '';
   classificacao: string = '';
+  classificacaoClass: string = '';
 
   ngOnInit(): void {
-    this.setClassificacao()
-    console.log(this.filme);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
     this.setClassificacao();
   }
 
@@ -74,9 +67,5 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
       };
       default: break;;
     }
-  }
-
-  closeDetails(): void {
-    this.onCloseDetails.emit();
   }
 }

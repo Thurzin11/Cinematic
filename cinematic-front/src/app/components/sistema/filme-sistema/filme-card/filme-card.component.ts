@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IClassificacao } from '../../../model/IClassificacao';
+import { Component, Input, OnInit,  } from '@angular/core';
 
 @Component({
   selector: 'app-filme-card',

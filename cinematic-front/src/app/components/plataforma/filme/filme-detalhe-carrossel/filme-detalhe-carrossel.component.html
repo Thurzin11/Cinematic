@@ -1,0 +1,15 @@
+<div class="d-flex col-4 justify-content-center">
+    <img 
+    [src]="this.filme.capas[0]"
+    alt="banner do {{this.filme.nome}}"
+    class="rounded-3 border border-black">
+</div>
+<div class="col-6">
+    <h2 class="text-light text-start pb-3 fw-bold fs-1">{{ this.filme.nome }}</h2>
+    <p class="text-wrap text-light fst-italic text-start lh-base descricao overflow-y">{{ this.filme.descricao }}</p>
+</div>
+<div class="col-1 d-flex flex-column justify-content-around align-self-start">
+    <p class="text-light fs-3 pb-3">{{ this.filme.duracao }} min</p>
+    <span class="classificacao text-light col-4 m-auto fs-1 border border-black rounded text-center"
+        [ngClass]="this.classificacaoClass">{{ this.classificacao }}</span>
+</div>

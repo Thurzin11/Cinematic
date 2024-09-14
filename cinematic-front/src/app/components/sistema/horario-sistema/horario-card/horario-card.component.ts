@@ -1,4 +1,4 @@
-import { IHorario } from './../../../model/IHorario';
+import { IHorario } from '.././../../../model/IHorario';
 import { Component, Input } from '@angular/core';
 
 @Component({

@@ -33,6 +33,7 @@ export class FilmeCadastroComponent implements OnInit {
   categoriaList: ICategoria[] = [];
   classificacaoList: string[] = ['Livre', 'Dez', 'Doze', 'Quatorze', 'Dezesseis', 'Dezoito'];
   trailer: string = '';
+  capa: string = '';
 
   constructor(
     private categoriaService: CategoriaService,
@@ -51,6 +52,7 @@ export class FilmeCadastroComponent implements OnInit {
 
   register(): void {
     this.filme.trailers.push(this.trailer);
+    this.filme.capas.push(this.capa);
     this.filmeService.create(this.filme).subscribe();
     this.router.navigate(['/sistema/filme']);
   }
