@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { IFilme } from '../../../../model/IFilme';
+import { IStatusFilme } from '../../../../model/IStatusFilme';
 
 @Component({
   selector: 'app-filme-detalhe',
@@ -14,7 +15,7 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
       id: '',
       nome: ''
     },
-    duracao: 0,
+    duracao: '',
     classificacao: '',
     descricao: '',
     dataEstreia: '',
@@ -22,7 +23,7 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
     banner: '',
     direcao: '',
     distribuidora: '',
-    statusFilme: '',
+    status: '',
     capas: [],
     trailers: []
   };
@@ -30,10 +31,11 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
 
   classificacaoClass: string = '';
   classificacao: string = '';
+  status: string = '';
 
   ngOnInit(): void {
     this.setClassificacao()
-    console.log(this.filme);
+    this.setStatus();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -73,6 +75,31 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
         break;
       };
       default: break;;
+    }
+  }
+
+  setStatus(): void {
+    switch(this.filme.status.toString().toLowerCase()) {
+      case 'destaque': {
+        this.status = 'Destaque';
+        break;
+      }
+      case 'estreia': {
+        this.status = 'Estreia';
+        break;
+      }
+      case 'lancamento': {
+        this.status = 'Lancamento';
+        break;
+      }
+      case 'pre_estreia': {
+        this.status = 'Pre-Estreia';
+        break;
+      }
+      case 'cartaz': {
+        this.status = 'cartaz';
+        break;
+      }
     }
   }
 

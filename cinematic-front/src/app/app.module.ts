@@ -31,8 +31,10 @@ import { SessaoListComponent } from './components/sistema/sessao-sistema/sessao-
 import { SessaoFormComponent } from './components/sistema/sessao-sistema/sessao-form/sessao-form.component';
 import { SessaoCardComponent } from './components/sistema/sessao-sistema/sessao-card/sessao-card.component';
 import { SessaoDetalheComponent } from './components/sistema/sessao-sistema/sessao-detalhe/sessao-detalhe.component';
-import { FilmeCarroselComponent } from './components/plataforma/filme/filme-carrosel/filme-carrosel.component';
-import { FilmeDetalheCarrosselComponent } from './components/plataforma/filme/filme-detalhe-carrossel/filme-detalhe-carrossel.component';
+import { DestaqueCarroselComponent } from './components/plataforma/filme/destaque-carrosel/destaque-carrosel.component';
+import { DestaqueDetalheCarrosselComponent } from './components/plataforma/filme/destaque-detalhe-carrossel/destaque-detalhe-carrossel.component';
+import { HomeCarrosselComponent } from './components/plataforma/home/home-carrossel/home-carrossel.component';
+import { HomeComponent } from './components/plataforma/home/home/home.component';
 
 register();
 @NgModule({
@@ -62,8 +64,10 @@ register();
     SessaoFormComponent,
     SessaoCardComponent,
     SessaoDetalheComponent,
-    FilmeCarroselComponent,
-    FilmeDetalheCarrosselComponent,
+    DestaqueCarroselComponent,
+    DestaqueDetalheCarrosselComponent,
+    HomeCarrosselComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

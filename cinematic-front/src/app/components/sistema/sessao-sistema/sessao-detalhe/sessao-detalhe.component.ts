@@ -32,7 +32,7 @@ export class SessaoDetalheComponent implements OnInit, OnChanges{
         id: '',
         nome: ''
       },
-      duracao: 0,
+      duracao: '',
       classificacao: '',
       descricao: '',
       dataEstreia: '',
@@ -40,7 +40,7 @@ export class SessaoDetalheComponent implements OnInit, OnChanges{
       banner: '',
       direcao: '',
       distribuidora: '',
-      statusFilme: '',
+      status: '',
       capas: [],
       trailers: []
     },

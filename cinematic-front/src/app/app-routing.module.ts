@@ -12,7 +12,8 @@ import { SalaListComponent } from './components/sistema/sala-sistema/sala-list/s
 import { SalaFormComponent } from './components/sistema/sala-sistema/sala-form/sala-form.component';
 import { SessaoListComponent } from './components/sistema/sessao-sistema/sessao-list/sessao-list.component';
 import { SessaoFormComponent } from './components/sistema/sessao-sistema/sessao-form/sessao-form.component';
-import { FilmeCarroselComponent } from './components/plataforma/filme/filme-carrosel/filme-carrosel.component';
+import { DestaqueCarroselComponent } from './components/plataforma/filme/destaque-carrosel/destaque-carrosel.component';
+import { HomeComponent } from './components/plataforma/home/home/home.component';
 
 const routes: Routes = [
   {path: "sistema/home", component: HomeSistemaComponent},
@@ -31,7 +32,8 @@ const routes: Routes = [
   {path: "sistema/sessao", component: SessaoListComponent},
   {path: "sistema/sessao/cadastro", component: SessaoFormComponent},
   {path: "sistema/sessao/editar/:id", component: SessaoFormComponent},
-  {path: "filme/carrossel", component: FilmeCarroselComponent},
+  {path: "home", component: HomeComponent},
+  {path: "filme/carrossel", component: DestaqueCarroselComponent},
   {path: "", redirectTo: "sistema/login", pathMatch: 'full'}
 ];
 

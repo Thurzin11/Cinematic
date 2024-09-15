@@ -2,10 +2,6 @@
 
 section{
   background: linear-gradient($ROXO-ESCURO,$ROXO-CLARO);
-  position: relative;
-  
-  app-menu-sistema{
-    position: absolute;
-    top: 7rem;
-  }
+  height: 100vh;
+  max-height: 100vh;
 }

@@ -3,10 +3,10 @@ import { IFilme } from '../../../../model/IFilme';
 
 @Component({
   selector: 'app-filme-detalhe-carrossel',
-  templateUrl: './filme-detalhe-carrossel.component.html',
-  styleUrl: './filme-detalhe-carrossel.component.scss'
+  templateUrl: './destaque-detalhe-carrossel.component.html',
+  styleUrl: './destaque-detalhe-carrossel.component.scss'
 })
-export class FilmeDetalheCarrosselComponent implements OnInit {
+export class DestaqueDetalheCarrosselComponent implements OnInit {
   @Input()filme: IFilme = {
     id: '',
     nome: '',
@@ -14,7 +14,7 @@ export class FilmeDetalheCarrosselComponent implements OnInit {
       id: '',
       nome: ''
     },
-    duracao: 0,
+    duracao: '',
     classificacao: '',
     descricao: '',
     dataEstreia: '',
@@ -22,7 +22,7 @@ export class FilmeDetalheCarrosselComponent implements OnInit {
     banner: '',
     direcao: '',
     distribuidora: '',
-    statusFilme: '',
+    status: '',
     capas: [],
     trailers: []
   };
