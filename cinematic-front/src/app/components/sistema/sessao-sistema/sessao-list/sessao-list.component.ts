@@ -34,7 +34,7 @@ export class SessaoListComponent implements OnInit{
         id: '',
         nome: ''
       },
-      duracao: 0,
+      duracao: '',
       classificacao: '',
       descricao: '',
       dataEstreia: '',
@@ -42,7 +42,7 @@ export class SessaoListComponent implements OnInit{
       banner: '',
       direcao: '',
       distribuidora: '',
-      statusFilme: '',
+      status: '',
       capas: [],
       trailers: []
     },
@@ -82,7 +82,6 @@ export class SessaoListComponent implements OnInit{
   }
 
   seeSessaoDetails(id: string): void {
-    // this.sessaoService.findById(id).subscribe(sessao => this.sessaoDetails = sessao);
     this.idSessaoDetails = id;
     this.openSessaoDetails = true;
   }

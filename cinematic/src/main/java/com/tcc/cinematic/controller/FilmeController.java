@@ -35,7 +35,7 @@ public class FilmeController {
     }
 
     @PostMapping
-    public ResponseEntity<Filme> create(@RequestBody @Valid FilmeRegisterDTO filmeRegisterDTO) {
+    public ResponseEntity<Filme> create(@RequestBody FilmeRegisterDTO filmeRegisterDTO) {
         return ResponseEntity.ok(this.service.create(filmeRegisterDTO));
     }
 

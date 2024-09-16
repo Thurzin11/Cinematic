@@ -30,7 +30,7 @@ export class SessaoCardComponent implements OnInit{
         id: '',
         nome: ''
       },
-      duracao: 0,
+      duracao: '',
       classificacao: '',
       descricao: '',
       dataEstreia: '',
@@ -38,7 +38,7 @@ export class SessaoCardComponent implements OnInit{
       banner: '',
       direcao: '',
       distribuidora: '',
-      statusFilme: '',
+      status: '',
       capas: [],
       trailers: []
     },

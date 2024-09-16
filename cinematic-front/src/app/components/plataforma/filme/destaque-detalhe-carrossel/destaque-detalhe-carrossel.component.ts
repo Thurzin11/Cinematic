@@ -1,14 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IFilme } from '../../../../model/IFilme';
-import { IStatusFilme } from '../../../../model/IStatusFilme';
 
 @Component({
-  selector: 'app-filme-detalhe',
-  templateUrl: './filme-detalhe.component.html',
-  styleUrl: './filme-detalhe.component.scss'
+  selector: 'app-filme-detalhe-carrossel',
+  templateUrl: './destaque-detalhe-carrossel.component.html',
+  styleUrl: './destaque-detalhe-carrossel.component.scss'
 })
-export class FilmeDetalheComponent implements OnInit, OnChanges{
-  @Input() filme: IFilme = {
+export class DestaqueDetalheCarrosselComponent implements OnInit {
+  @Input()filme: IFilme = {
     id: '',
     nome: '',
     categoria: {
@@ -27,18 +26,10 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
     capas: [],
     trailers: []
   };
-  @Output() onCloseDetails = new EventEmitter();
-
-  classificacaoClass: string = '';
   classificacao: string = '';
-  status: string = '';
+  classificacaoClass: string = '';
 
   ngOnInit(): void {
-    this.setClassificacao()
-    this.setStatus();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
     this.setClassificacao();
   }
 
@@ -76,34 +67,5 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
       };
       default: break;;
     }
-  }
-
-  setStatus(): void {
-    switch(this.filme.status.toString().toLowerCase()) {
-      case 'destaque': {
-        this.status = 'Destaque';
-        break;
-      }
-      case 'estreia': {
-        this.status = 'Estreia';
-        break;
-      }
-      case 'lancamento': {
-        this.status = 'Lancamento';
-        break;
-      }
-      case 'pre_estreia': {
-        this.status = 'Pre-Estreia';
-        break;
-      }
-      case 'cartaz': {
-        this.status = 'cartaz';
-        break;
-      }
-    }
-  }
-
-  closeDetails(): void {
-    this.onCloseDetails.emit();
   }
 }

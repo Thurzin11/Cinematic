@@ -1,10 +1,9 @@
 @import '../../../../style/color';
 
-img {
-    width: 100%;
-    box-shadow: 0 .4rem .4rem $PRETO;
-}
-
 h2 {
     text-shadow: 0 .2rem .2rem $PRETO;
+}
+
+swiper-slide {
+    cursor: pointer;
 }

@@ -10,6 +10,11 @@ app-sala-detalhe {
     width: 50%;
 }
 
+.body {
+    box-shadow: 0 .4rem .4rem $PRETO;
+    max-height: 650px;
+}
+
 .list {
     span {
         cursor: pointer;

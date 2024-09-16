@@ -1,20 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { IFilme } from '../../../../model/IFilme';
 
 @Component({
-  selector: 'app-filme-detalhe-carrossel',
-  templateUrl: './filme-detalhe-carrossel.component.html',
-  styleUrl: './filme-detalhe-carrossel.component.scss'
+  selector: 'app-plataforma-filme-detalhe',
+  templateUrl: './plataforma-filme-detalhe.component.html',
+  styleUrl: './plataforma-filme-detalhe.component.scss'
 })
-export class FilmeDetalheCarrosselComponent implements OnInit {
-  @Input()filme: IFilme = {
+export class PlataformaFilmeDetalheComponent implements OnInit, OnChanges {
+  @Input() filme: IFilme = {
     id: '',
     nome: '',
     categoria: {
       id: '',
       nome: ''
     },
-    duracao: 0,
+    duracao: '',
     classificacao: '',
     descricao: '',
     dataEstreia: '',
@@ -22,18 +22,27 @@ export class FilmeDetalheCarrosselComponent implements OnInit {
     banner: '',
     direcao: '',
     distribuidora: '',
-    statusFilme: '',
+    status: '',
     capas: [],
     trailers: []
-  };
+  }
+  @Output() onCloseDetails = new EventEmitter();
+
   classificacao: string = '';
   classificacaoClass: string = '';
+  status: string = '';
 
   ngOnInit(): void {
     this.setClassificacao();
+    this.setStatus();
   }
 
-  setClassificacao(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.setClassificacao();
+    this.setStatus();
+  }
+
+  private setClassificacao(): void {
     switch(this.filme.classificacao.toString().toLowerCase()) {
       case 'livre': {
         this.classificacao = 'L';
@@ -67,5 +76,34 @@ export class FilmeDetalheCarrosselComponent implements OnInit {
       };
       default: break;;
     }
+  }
+
+  setStatus(): void {
+    switch(this.filme.status.toString().toLowerCase()) {
+      case 'destaque': {
+        this.status = 'Destaque';
+        break;
+      }
+      case 'estreia': {
+        this.status = 'Estreia';
+        break;
+      }
+      case 'lancamento': {
+        this.status = 'Lancamento';
+        break;
+      }
+      case 'pre_estreia': {
+        this.status = 'Pre-Estreia';
+        break;
+      }
+      case 'cartaz': {
+        this.status = 'Cartaz';
+        break;
+      }
+    }
+  }
+
+  closeDetails(): void {
+    this.onCloseDetails.emit();
   }
 }

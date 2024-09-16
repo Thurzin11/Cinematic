@@ -4,6 +4,7 @@ import { CategoriaService } from '../../../../services/categoria/categoria.servi
 import { ActivatedRoute, Router } from '@angular/router';
 import { IFilme } from '../../../../model/IFilme';
 import { FilmeService } from '../../../../services/filme/filme.service';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-filme-cadastro',
@@ -18,7 +19,7 @@ export class FilmeCadastroComponent implements OnInit {
       id: '',
       nome: ''
     },
-    duracao: 0,
+    duracao: '',
     classificacao: '',
     descricao: '',
     dataEstreia: '',
@@ -26,14 +27,20 @@ export class FilmeCadastroComponent implements OnInit {
     banner: '',
     direcao: '',
     distribuidora: '',
-    statusFilme: '',
+    status: '',
     capas: [],
     trailers: []
   };
   categoriaList: ICategoria[] = [];
   classificacaoList: string[] = ['Livre', 'Dez', 'Doze', 'Quatorze', 'Dezesseis', 'Dezoito'];
+  statusList: string[] = ['Cartaz', 'Estreia', 'Destaque', 'Pre_Estreia', 'lancamento'];
+  trailers: string[] = [];
+  capas: string[] = [];
   trailer: string = '';
   capa: string = '';
+  status: string = '';
+  canSubmit: boolean = false;
+  canSubmitCapas: boolean = false;
 
   constructor(
     private categoriaService: CategoriaService,
@@ -50,10 +57,39 @@ export class FilmeCadastroComponent implements OnInit {
     this.categoriaService.findAll().subscribe(categoriaList => {this.categoriaList = categoriaList; console.log(this.categoriaList)});
   }
 
+  adicionarTrailer(string: string, list: string): void {
+    if(string === '')
+      return;
+    
+    if(list.toLowerCase() === 'trailer') {
+      this.trailers.push(string);
+      this.trailer = '';
+      return;
+    }
+  
+    this.capas.push(string);
+    this.capa = '';
+  }
+
+  enableSubmit(): void {
+    this.canSubmit = true;
+  }
+
+  disableSubmit(): void {
+    this.canSubmit = false;
+  }
+
+  enableSubmitCapas(): void {
+    this.canSubmitCapas = true;
+  }
+
+  disableSubmitCapas(): void {
+    this.canSubmitCapas = false;
+  }
+
   register(): void {
-    this.filme.trailers.push(this.trailer);
-    this.filme.capas.push(this.capa);
-    this.filmeService.create(this.filme).subscribe();
-    this.router.navigate(['/sistema/filme']);
+    this.filme.trailers = this.trailers;
+    this.filme.capas = this.capas;
+    this.filmeService.create(this.filme).subscribe(() => this.router.navigate(['/sistema/filme']));
   }
 }

@@ -3,76 +3,131 @@
     <app-menu-sistema class="position-absolute"></app-menu-sistema>
     <div class="col-10 m-auto">
         <h2 class="text-light fs-1 fw-bold">Filmes</h2>
-        <div class="border border-black rounded col-12 d-flex flex-column align-items-center flex-wrap px-2 rounded-bottom-0 border-bottom-0">
-            <div class="col-12 d-flex justify-content-around pt-4">
+        <div class="body border border-black rounded col-12 d-flex flex-column align-items-center flex-wrap rounded-bottom-1 border-bottom-0">
+            <div class="col-12 d-flex justify-content-around pt-2">
                 <div class="d-flex flex-column col-3">
-                    <label for="nome" class="text-light fs-3">Nome</label>
+                    <label  class="text-light fs-3">Nome</label>
                     <input id="nome" type="text" placeholder="Digite o nome do filme"
                         class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.nome" name="nome">
                 </div>
                 <div class="d-flex flex-column col-3">
-                    <label for="categoria" class="text-light fs-3">Categoria</label>
+                    <label class="text-light fs-3">Categoria</label>
                     <select name="categoria" id="categoria" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.categoria" name="categoria">
                         <option *ngFor="let categoria of this.categoriaList" [ngValue]="categoria">{{ categoria.nome }}</option>
                     </select>
                 </div>
                 <div class="d-flex flex-column col-3">
-                    <label for="duracao" class="text-light fs-3">Duração</label>
+                    <label class="text-light fs-3">Duração</label>
                     <input id="duracao" type="text" placeholder="Digite o duração do filme"
                         class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.duracao" name="duracao">
                 </div>
             </div>
             <div class="col-12 d-flex justify-content-around py-2">
                 <div class="d-flex flex-column col-3">
-                    <label for="dataEstreia" class="text-light fs-3">Data de Estreia</label>
+                    <label class="text-light fs-3">Data de Estreia</label>
                     <input id="dataEstreia" type="date"
                         class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.dataEstreia" name="dataEstreia">
                 </div>
                 <div class="d-flex flex-column col-3">
-                    <label for="classificacao" class="text-light fs-3">Classificação</label>
-                    <select name="classificacao" id="classificacao" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.classificacao" name="classificacao">
+                    <label class="text-light fs-3">Classificação</label>
+                    <select name="classificacao" id="classificacao" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.classificacao">
                         <option *ngFor="let classificacao of this.classificacaoList" [value]="classificacao">{{ classificacao }}</option>
                     </select>
                 </div>
                 <div class="d-flex flex-column col-3">
-                    <label for="distribuidora" class="text-light fs-3">Distribuidora</label>
-                    <input id="distribuidora" type="text" placeholder="Digite o nome da distribuidora"
-                        class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.distribuidora" name="distribuidora">
+                    <label class="text-light fs-3">Status</label>
+                    <select name="status" id="status" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.status">
+                        <option *ngFor="let status of this.statusList" [value]="status">{{ status }}</option>
+                    </select>
                 </div>
             </div>
-            <div class="col-12 d-flex justify-content-around pb-4">
-                <div class="col-4 d-flex flex-column justify-content-center">
-                    <div class="d-flex flex-column m-auto col-9 pt-2">
-                        <label for="direcao" class="text-light fs-3">Direção</label>
+            <div class="col-12 d-flex justify-content-around pb-2">
+                <div class="col-3 d-flex flex-column">
+                    <div class="d-flex flex-column m-auto col-12 pt-2">
+                        <label class="text-light fs-3">Direção</label>
                         <input id="direcao" type="text" placeholder="Digite quem faz parte da direção"
                             class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.direcao" name="direcao">
                     </div>
-                    <div class="d-flex flex-column m-auto col-9 pt-2">
-                        <label for="poster" class="text-light fs-3">Banner</label>
+                    <div class="d-flex flex-column m-auto col-12 pt-2">
+                        <label class="text-light fs-3">Banner</label>
                         <input id="poster" type="text" placeholder="Digite a url do banner"
                             class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.filme.banner">
                     </div>
                 </div>
-                <div class="col-8 d-flex justify-content-between">
-                    <div class="d-flex flex-column col-6 mx-auto pt-2">
-                        <label for="descricao" class="text-light fs-3 col-9 mx-auto text-wrap">Descrição</label>
-                        <textarea name="descricao" id="descricao" class="p-2 h-75 rounded fs-5 mt-2 mx-auto col-9 border border" [(ngModel)]="this.filme.descricao"></textarea>
-                    </div>
-                    <div class="col-6">
-                        <div class="d-flex flex-column col-9 mx-auto pt-2">
-                            <label for="trailers" class="text-light fs-3">Trailers</label>
-                            <input id="trailers" type="text" placeholder="Digite a url do trailer"
-                                class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.trailer" name="trailers">
+                <div class="d-flex flex-column col-7 pt-2">
+                    <label class="text-light fs-3 col-12 text-wrap">Descrição</label>
+                    <textarea name="descricao" placeholder="Digite a descrição do filme" id="descricao" class="p-2 h-75 rounded fs-5 mt-2 col-12 border border" [(ngModel)]="this.filme.descricao"></textarea>
+                </div>
+            </div>
+            <div class="col-11 d-flex justify-content-between pb-4">
+                <div class="col-5">
+                    <label class="text-light fs-3 col-12 text-wrap">Trailers</label>
+                    <div class="border col-12 rounded-3 p-3 links-div">
+                        <div class="d-flex">
+                            <input 
+                                type="text" 
+                                placeholder="Digite o link do trailer" 
+                                class="col-7 p-1 border text-light rounded border-black me-3" 
+                                [(ngModel)]="this.trailer">
+                            <button 
+                                class="col-3 border border-black rounded"
+                                [ngClass]="this.canSubmit ? 'enable':'disabled'"
+                                (mouseenter)="this.enableSubmit()"
+                                (mouseleave)="this.disableSubmit()"
+                                (click)="this.adicionarTrailer(this.trailer, 'trailer')">
+                                <svg 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    width="20" height="20" 
+                                    fill="currentColor" 
+                                    class="bi bi-check-circle"
+                                    viewBox="0 0 16 16"
+                                    [ngClass]="this.canSubmit ? 'submit': ''">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                    <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
+                                  </svg>
+                            </button>
                         </div>
-                        <div class="d-flex flex-column col-9 mx-auto">
-                            <label for="capas" class="text-light fs-3 col-9">Capas</label>
-                            <input id="capas" type="text" placeholder="Digite a url da capa"
-                                class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.capa" name="capas">
+                        <div class="links p-2 overflow-y-auto mt-2 d-flex flex-column align-items-start justify-content-center">
+                            <p *ngFor="let trailer of this.trailers"
+                                class="border border-black col-12 rounded-3 text-light mb-1 p-2"><span class="text-black fw-semibold">Link:</span> {{ trailer }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <label class="text-light fs-3 col-12 text-wrap">Capas</label>
+                    <div class="border col-12 rounded-3 p-3 links-div">
+                        <div class="d-flex mb-2">
+                            <input 
+                                type="text" 
+                                placeholder="Digite o link do trailer" 
+                                class="col-7 p-1 rounded border border-black me-3" 
+                                [(ngModel)]="this.capa">
+                            <button 
+                                class="col-3 border border-black rounded"
+                                [ngClass]="this.canSubmitCapas ? 'enable' : 'disabled'"
+                                (mouseenter)="this.enableSubmitCapas()"
+                                (mouseleave)="this.disableSubmitCapas()"
+                                (click)="this.adicionarTrailer(this.capa, 'capa')">
+                                <svg 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    width="20" height="20" 
+                                    fill="currentColor" 
+                                    class="bi bi-check-circle"
+                                    viewBox="0 0 16 16"
+                                    [ngClass]="this.canSubmitCapas ? 'submit': ''">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                    <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
+                                  </svg>
+                            </button>
+                        </div>
+                        <div class="links overflow-y-auto d-flex flex-column align-items-start justify-content-center">
+                            <p *ngFor="let capa of this.capas"
+                                class="col-12 border border-black rounded-3 text-light mb-0 mt-2 p-2"><span class="text-black fw-semibold">Link:</span> {{ capa }}</p>
                         </div>
                     </div>
                 </div>
             </div>
+            <button class="btn-salvar col-12 p-2 fs-3 fw-bold rounded-bottom-1 border border-black border-top-0" (click)="this.register()">Salvar</button>
         </div>
-        <button class="col-12 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" (click)="this.register()">Salvar</button>
     </div>
 </div>
