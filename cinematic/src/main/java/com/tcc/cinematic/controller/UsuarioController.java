@@ -1,5 +1,5 @@
 package com.tcc.cinematic.controller;
-import com.tcc.cinematic.DTO.ClientRegisterDTO;
+import com.tcc.cinematic.DTO.ClienteRegisterDTO;
 import com.tcc.cinematic.DTO.LoginClientDTO;
 import com.tcc.cinematic.DTO.UsuarioResponseDTO;
 import com.tcc.cinematic.DTO.LoginFuncionarioDTO;
@@ -67,7 +67,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/cliente")
-    public ResponseEntity<UsuarioResponseDTO> createClient(@RequestBody @Valid ClientRegisterDTO dto){
+    public ResponseEntity<UsuarioResponseDTO> createClient(@RequestBody @Valid ClienteRegisterDTO dto){
         var user = this.service.createClient(dto);
         return new ResponseEntity<UsuarioResponseDTO>(this.service.convertToDTO(user), HttpStatus.CREATED);
     }
