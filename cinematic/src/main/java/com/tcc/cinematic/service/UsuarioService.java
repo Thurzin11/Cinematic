@@ -1,12 +1,9 @@
 package com.tcc.cinematic.service;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.tcc.cinematic.DTO.FuncionarioRegisterDTO;
+import com.tcc.cinematic.DTO.ClientRegisterDTO;
+import com.tcc.cinematic.DTO.UsuarioResponseDTO;
 import com.tcc.cinematic.DTO.LoginFuncionarioDTO;
-import com.tcc.cinematic.DTO.UsuarioFilterParams;
-import com.tcc.cinematic.entity.Categoria;
 import com.tcc.cinematic.entity.Usuario;
-import com.tcc.cinematic.enums.TipoUsuario;
 import com.tcc.cinematic.repository.UsuarioRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -34,20 +31,27 @@ public class UsuarioService {
         return this.repository.findById(id).orElse(null);
     }
 
-    public Usuario createFuncionario(FuncionarioRegisterDTO funcionarioRegisterDTO){
-        var user  = new Usuario();
-        BeanUtils.copyProperties(funcionarioRegisterDTO,user);
-        user.setLogin(funcionarioRegisterDTO.email());
-        user.setSenha(funcionarioRegisterDTO.email());
+    public Usuario createClient(ClientRegisterDTO dto){
+        var user = new Usuario();
+        BeanUtils.copyProperties(dto,user);
         this.repository.save(user);
         return user;
     }
 
-    public Usuario update(FuncionarioRegisterDTO funcionarioRegisterDTO){
-        var userFound = this.findById(funcionarioRegisterDTO.id());
+    public Usuario createFuncionario(UsuarioResponseDTO usuarioResponseDTO){
+        var user  = new Usuario();
+        BeanUtils.copyProperties(usuarioResponseDTO,user);
+        user.setLogin(usuarioResponseDTO.email());
+        user.setSenha(usuarioResponseDTO.email());
+        this.repository.save(user);
+        return user;
+    }
+
+    public Usuario update(UsuarioResponseDTO usuarioResponseDTO){
+        var userFound = this.findById(usuarioResponseDTO.id());
         if (userFound == null)
             return null;
-        BeanUtils.copyProperties(funcionarioRegisterDTO,userFound);
+        BeanUtils.copyProperties(usuarioResponseDTO,userFound);
         return this.repository.save(userFound);
     }
 
@@ -75,13 +79,13 @@ public class UsuarioService {
         return this.repository.save(usuarioFind);
     }
 
-    public Stream<FuncionarioRegisterDTO> findByName(String nome){
+    public Stream<UsuarioResponseDTO> findByName(String nome){
         return this.repository.findByName("%"+nome+"%")
-                .stream().map(usuario -> new FuncionarioRegisterDTO(usuario.getId(), usuario.getNome(),usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
+                .stream().map(usuario -> new UsuarioResponseDTO(usuario.getId(), usuario.getNome(),usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
     }
 
 
-     public Stream<FuncionarioRegisterDTO> findByFilters(Map<String,List<String>> filtro){
+     public Stream<UsuarioResponseDTO> findByFilters(Map<String,List<String>> filtro){
          StringBuilder sql = new StringBuilder();
          sql.append(" " +
                  "SELECT * FROM usuario " +
@@ -105,7 +109,7 @@ public class UsuarioService {
          map.forEach(query::setParameter);
 
          List<Usuario> listFiltro = query.getResultList();
-         return listFiltro.stream().map(usuario -> new FuncionarioRegisterDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
+         return listFiltro.stream().map(usuario -> new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
      }
 
      private List<String> setCargo(List<String> cargos){
@@ -129,13 +133,13 @@ public class UsuarioService {
         return null;
     }
 
-    public FuncionarioRegisterDTO convertToDTO(Usuario usuario){
-        return new FuncionarioRegisterDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getStatus(),usuario.getTipoUsuario());
+    public UsuarioResponseDTO convertToDTO(Usuario usuario){
+        return new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getStatus(),usuario.getTipoUsuario());
     }
 
-    public Stream<FuncionarioRegisterDTO> convertToDTOStream(Stream<Usuario> usuarios){
+    public Stream<UsuarioResponseDTO> convertToDTOStream(Stream<Usuario> usuarios){
         return usuarios
-                .map(usuario -> new FuncionarioRegisterDTO(usuario.getId(),usuario.getNome(),usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
+                .map(usuario -> new UsuarioResponseDTO(usuario.getId(),usuario.getNome(),usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
     }
 
     public Usuario loginFuncionario(LoginFuncionarioDTO dto){

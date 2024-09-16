@@ -1,10 +1,10 @@
 package com.tcc.cinematic.controller;
-import com.tcc.cinematic.DTO.FuncionarioRegisterDTO;
+import com.tcc.cinematic.DTO.ClientRegisterDTO;
+import com.tcc.cinematic.DTO.UsuarioResponseDTO;
 import com.tcc.cinematic.DTO.LoginFuncionarioDTO;
 import com.tcc.cinematic.entity.Usuario;
 import com.tcc.cinematic.service.UsuarioService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FuncionarioRegisterDTO> findById(@PathVariable UUID id){
+    public ResponseEntity<UsuarioResponseDTO> findById(@PathVariable UUID id){
         var userReturn = this.service.findById(id);
         if (userReturn == null)
             return ResponseEntity.notFound().build();
@@ -36,13 +36,13 @@ public class UsuarioController {
     }
 
     @GetMapping("/funcionarios")
-    public ResponseEntity<Stream<FuncionarioRegisterDTO>> findByGerenteAndFuncionario(){
+    public ResponseEntity<Stream<UsuarioResponseDTO>> findByGerenteAndFuncionario(){
         Stream<Usuario> usuarios = this.service.findByGerenteAndFuncionario();
         return ResponseEntity.ok(this.service.convertToDTOStream(usuarios));
     }
 
     @GetMapping("/nome/{nome}")
-    public ResponseEntity<Stream<FuncionarioRegisterDTO>> findByName(@PathVariable String nome){
+    public ResponseEntity<Stream<UsuarioResponseDTO>> findByName(@PathVariable String nome){
         return ResponseEntity.ok(this.service.findByName(nome));
     }
     @PatchMapping("/funcionarios/inativar/{id}")
@@ -55,27 +55,32 @@ public class UsuarioController {
     }
 
     @PatchMapping("/filtros")
-    public ResponseEntity<Stream<FuncionarioRegisterDTO>> filtros(@RequestBody Map<String,List<String>> map){
+    public ResponseEntity<Stream<UsuarioResponseDTO>> filtros(@RequestBody Map<String,List<String>> map){
         return ResponseEntity.ok(this.service.findByFilters(map));
     }
 
     @PostMapping("/funcionario")
-    public ResponseEntity<FuncionarioRegisterDTO> create(@RequestBody @Valid FuncionarioRegisterDTO funcionarioRegisterDTO){
-        var user = this.service.createFuncionario(funcionarioRegisterDTO);
-        return new ResponseEntity<FuncionarioRegisterDTO>(this.service.convertToDTO(user), HttpStatus.CREATED);
+    public ResponseEntity<UsuarioResponseDTO> create(@RequestBody @Valid UsuarioResponseDTO usuarioResponseDTO){
+        var user = this.service.createFuncionario(usuarioResponseDTO);
+        return new ResponseEntity<UsuarioResponseDTO>(this.service.convertToDTO(user), HttpStatus.CREATED);
     }
 
+    @PostMapping("/cliente")
+    public ResponseEntity<UsuarioResponseDTO> createClient(@RequestBody @Valid ClientRegisterDTO dto){
+        var user = this.service.createClient(dto);
+        return new ResponseEntity<UsuarioResponseDTO>(this.service.convertToDTO(user), HttpStatus.CREATED);
+    }
 
     @PatchMapping
-    public ResponseEntity<FuncionarioRegisterDTO> update(@RequestBody @Valid FuncionarioRegisterDTO funcionarioRegisterDTO){
-        var user = this.service.update(funcionarioRegisterDTO);
+    public ResponseEntity<UsuarioResponseDTO> update(@RequestBody @Valid UsuarioResponseDTO usuarioResponseDTO){
+        var user = this.service.update(usuarioResponseDTO);
         if (user == null)
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(this.service.convertToDTO(user));
     }
 
     @PatchMapping("/login/funcionario")
-    public ResponseEntity<FuncionarioRegisterDTO> login(@RequestBody @Valid LoginFuncionarioDTO dto){
+    public ResponseEntity<UsuarioResponseDTO> login(@RequestBody @Valid LoginFuncionarioDTO dto){
         var userLogin = this.service.loginFuncionario(dto);
         if (userLogin == null){
             return ResponseEntity.badRequest().body(null);

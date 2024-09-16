@@ -1,8 +1,6 @@
 package com.tcc.cinematic.repository;
 
-import com.tcc.cinematic.DTO.FuncionarioRegisterDTO;
 import com.tcc.cinematic.entity.Usuario;
-import com.tcc.cinematic.enums.TipoUsuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
