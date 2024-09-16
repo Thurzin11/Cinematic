@@ -10,13 +10,23 @@ button{
   background-color: $AMARELO;
   box-shadow: 0 .4rem .4rem $PRETO;
 }
-input, select{
-  box-shadow: 0 .4rem .4rem $PRETO;
+input{
+  box-shadow: .4rem .4rem .4rem $PRETO;
 }
-.cadastro{
+.login{
   background-color: $ROXO-CLARO;
 }
-.changeLogin{
-  color: $BRANCO;
+.changeCadastro:hover{
   cursor: pointer;
 }
+.changeCadastro{
+  color: $BRANCO;
+}
+.eye{
+  box-shadow: .5rem .4rem .4rem $PRETO;
+  margin-left: -.5rem;
+}
+input:focus{
+  outline: none;
+}
+

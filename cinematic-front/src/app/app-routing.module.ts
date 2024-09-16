@@ -15,6 +15,7 @@ import { SessaoFormComponent } from './components/sistema/sessao-sistema/sessao-
 import { CadastroClienteComponent } from './components/plataforma/cadastro-cliente/cadastro-cliente.component';
 import { HomeComponent } from './components/plataforma/home/home/home.component';
 import { DestaqueCarroselComponent } from './components/plataforma/filme/destaque-carrosel/destaque-carrosel.component';
+import { LoginClienteComponent } from './components/plataforma/login-cliente/login-cliente.component';
 
 const routes: Routes = [
   {path: "sistema/home/:id", component: HomeSistemaComponent},
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: "cadastro", component: CadastroClienteComponent},
   {path: "home", component: HomeComponent},
   {path: "filme/carrossel", component: DestaqueCarroselComponent},
+  {path: "login", component: LoginClienteComponent},
   {path: "", redirectTo: "sistema/login", pathMatch: 'full'}
 ];
 

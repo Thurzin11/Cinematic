@@ -4,6 +4,7 @@ import { IUsuarioClient } from '../../../model/IUsuarioClient';
 import { IEstados } from '../../../model/IEstados';
 import { IBGEService } from '../../../services/IBGE/ibge.service';
 import { ICidades } from '../../../model/ICidades';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro-cliente',
@@ -26,7 +27,7 @@ export class CadastroClienteComponent {
   estados: IEstados[] = [];
   cidades: ICidades[] = [];
 
-  constructor(private service: UsuarioService, private ibgeService: IBGEService){
+  constructor(private service: UsuarioService, private ibgeService: IBGEService,private router: Router){
     this.ibgeService.findEstados().subscribe(estados => this.estados = estados);
   }
 
@@ -42,7 +43,7 @@ export class CadastroClienteComponent {
   findCidades(): void{
     this.ibgeService.findCidadesPorEstado(this.usuario.estado).subscribe(cidades => this.cidades = cidades);
   }
-
-
-
+  changeLogin(): void{
+    this.router.navigate([`login`])
+  }
 }

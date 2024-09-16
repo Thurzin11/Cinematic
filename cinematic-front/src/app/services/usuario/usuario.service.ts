@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { IUsuario } from '../../model/IUsuario';
 import { Environment } from '../../environment';
 import { IUsuarioClient } from '../../model/IUsuarioClient';
+import { ILoginClient } from '../../model/ILoginClient';
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +54,10 @@ export class UsuarioService {
     return this.http.patch<IUsuario>(`${Environment.urlApi}/usuario/funcionarios/ativar/${id}`,null);
   }
 
-  loginFuncionario(login: ILoginFuncionario){
+  loginFuncionario(login: ILoginFuncionario): Observable<IUsuario>{
     return this.http.patch<IUsuario>(`${Environment.urlApi}/usuario/login/funcionario`,login);
+  }
+  loginClient(login: ILoginClient): Observable<IUsuario>{
+    return this.http.patch<IUsuario>(`${Environment.urlApi}/usuario/login/client`,login);
   }
 }
