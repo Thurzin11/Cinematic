@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { IFilme } from '../../../../model/IFilme';
 import { FilmeService } from '../../../../services/filme/filme.service';
+import { IUsuario } from '../../../../model/IUsuario';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -33,10 +35,22 @@ export class HomeComponent implements OnInit {
     capas: [],
     trailers: []
   }
+  usuario: IUsuario = {
+    id: '',
+    nome: '',
+    email: '',
+    senha: '',
+    status: false,
+    tipoUsuario: ''
+    }
 
-  constructor(private filmeService: FilmeService) {}
+  private filmeService: FilmeService = inject(FilmeService);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
+    const usuario: IUsuario = this.route.snapshot.queryParams['usuario'];
+    console.log(usuario);
+
     this.filmeService.findAll().subscribe(filmes => {
       console.log(filmes);
       this.filmesDestaque = filmes.filter(filme => filme.status.toString().toLowerCase() === 'destaque');
