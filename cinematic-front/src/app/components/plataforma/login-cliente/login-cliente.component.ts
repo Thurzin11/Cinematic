@@ -10,7 +10,7 @@ import { ElementOptionsByType } from 'chart.js';
   styleUrl: './login-cliente.component.scss'
 })
 export class LoginClienteComponent {
-  eyePassword: boolean = false;
+  eyePassword: boolean = true;
   userIsValid: boolean = true;
 
   login: ILoginClient = {

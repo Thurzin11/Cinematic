@@ -11,7 +11,7 @@ button{
   box-shadow: 0 .4rem .4rem $PRETO;
 }
 input, select{
-  box-shadow: 0 .4rem .4rem $PRETO;
+  box-shadow: .5rem .4rem .4rem $PRETO;
 }
 .cadastro{
   background-color: $ROXO-CLARO;
@@ -19,4 +19,11 @@ input, select{
 .changeLogin{
   color: $BRANCO;
   cursor: pointer;
+}
+.eye{
+  box-shadow: .5rem .4rem .4rem $PRETO;
+  margin-left: -.5rem;
+}
+input:focus{
+  outline: none;
 }

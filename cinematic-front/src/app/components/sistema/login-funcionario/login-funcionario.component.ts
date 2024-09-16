@@ -14,6 +14,7 @@ export class LoginFuncionarioComponent {
     password: ''
   }
   userIsValid: boolean = true;
+  eyePassword: boolean = false;
 
   constructor(private service: UsuarioService, private router: Router){}
 
@@ -28,5 +29,14 @@ export class LoginFuncionarioComponent {
       }
     }
   )
+  }
+
+  seePassword(password: any): void{
+    if (password.type.value == 'text') {
+      password.type.value = 'password'
+    }else{
+      password.type.value = 'text'
+    }
+    this.eyePassword = !this.eyePassword;
   }
 }
