@@ -20,7 +20,7 @@ export class LoginFuncionarioComponent {
   logar(login: ILoginFuncionario): void{
     this.service.loginFuncionario(login).subscribe((usuario)=>{
       console.log(usuario);
-      this.router.navigate(['/sistema/home']);
+      this.router.navigate([`/sistema/home/${usuario.id}`]);
     },
     erro=>{
       if(erro.status==400){

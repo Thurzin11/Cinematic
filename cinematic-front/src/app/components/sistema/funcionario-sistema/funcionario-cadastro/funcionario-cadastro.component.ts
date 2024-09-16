@@ -33,7 +33,7 @@ export class FuncionarioCadastroComponent implements OnInit {
       this.usuarioService.update(usuario).subscribe(usuario => console.log(usuario));
       this.router.navigate(["/sistema/funcionario"]);
     }else{
-      this.usuarioService.create(usuario).subscribe();
+      this.usuarioService.createFuncionario(usuario).subscribe();
       this.router.navigate(["/sistema/funcionario"]);
       console.log(usuario);
     }

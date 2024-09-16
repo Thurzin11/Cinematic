@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IUsuario } from '../../model/IUsuario';
 import { Environment } from '../../environment';
+import { IUsuarioClient } from '../../model/IUsuarioClient';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class UsuarioService {
     return this.http.get<IUsuario[]>(`${Environment.urlApi}/usuario/funcionarios`);
   }
 
-  create(usuario:IUsuario): Observable<IUsuario>{
+  createFuncionario(usuario:IUsuario): Observable<IUsuario>{
     return this.http.post<IUsuario>(`${Environment.urlApi}/usuario/funcionario`,{
       nome: usuario.nome,
       email: usuario.email,
@@ -25,6 +26,11 @@ export class UsuarioService {
       tipoUsuario: usuario.tipoUsuario
     });
   }
+
+  createClient(usuario: IUsuarioClient): Observable<IUsuario>{
+    return this.http.post<IUsuario>(`${Environment.urlApi}/usuario/cliente`,usuario);
+  }
+
   findById(id: string): Observable<IUsuario>{
     return this.http.get<IUsuario>(`${Environment.urlApi}/usuario/${id}`)
   }

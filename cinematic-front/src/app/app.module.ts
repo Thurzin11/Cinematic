@@ -33,6 +33,7 @@ import { SessaoCardComponent } from './components/sistema/sessao-sistema/sessao-
 import { SessaoDetalheComponent } from './components/sistema/sessao-sistema/sessao-detalhe/sessao-detalhe.component';
 import { FilmeCarroselComponent } from './components/plataforma/filme/filme-carrosel/filme-carrosel.component';
 import { FilmeDetalheCarrosselComponent } from './components/plataforma/filme/filme-detalhe-carrossel/filme-detalhe-carrossel.component';
+import { CadastroClienteComponent } from './components/plataforma/cadastro-cliente/cadastro-cliente.component';
 
 register();
 @NgModule({
@@ -64,6 +65,7 @@ register();
     SessaoDetalheComponent,
     FilmeCarroselComponent,
     FilmeDetalheCarrosselComponent,
+    CadastroClienteComponent,
   ],
   imports: [
     BrowserModule,

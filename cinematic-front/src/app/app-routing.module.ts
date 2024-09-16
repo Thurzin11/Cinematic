@@ -13,9 +13,10 @@ import { SalaFormComponent } from './components/sistema/sala-sistema/sala-form/s
 import { SessaoListComponent } from './components/sistema/sessao-sistema/sessao-list/sessao-list.component';
 import { SessaoFormComponent } from './components/sistema/sessao-sistema/sessao-form/sessao-form.component';
 import { FilmeCarroselComponent } from './components/plataforma/filme/filme-carrosel/filme-carrosel.component';
+import { CadastroClienteComponent } from './components/plataforma/cadastro-cliente/cadastro-cliente.component';
 
 const routes: Routes = [
-  {path: "sistema/home", component: HomeSistemaComponent},
+  {path: "sistema/home/:id", component: HomeSistemaComponent},
   {path: "sistema/login", component: LoginFuncionarioComponent},
   {path: "sistema/funcionario/cadastro",component: FuncionarioCadastroComponent},
   {path: "sistema/filme", component: FilmeListComponent},
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: "sistema/sessao/cadastro", component: SessaoFormComponent},
   {path: "sistema/sessao/editar/:id", component: SessaoFormComponent},
   {path: "filme/carrossel", component: FilmeCarroselComponent},
+  {path: "cadastro", component: CadastroClienteComponent},
   {path: "", redirectTo: "sistema/login", pathMatch: 'full'}
 ];
 

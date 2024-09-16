@@ -1,5 +1,8 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js/auto';
+import { UsuarioService } from '../../../services/usuario/usuario.service';
+import { IUsuario } from '../../../model/IUsuario';
 @Component({
   selector: 'app-home-sistema',
   templateUrl: './home-sistema.component.html',
@@ -12,9 +15,24 @@ export class HomeSistemaComponent implements OnInit {
   @ViewChild("genero", { static: true }) genero!: ElementRef;
 
   filtro: boolean = false;
+  userLogged: IUsuario = {
+    id: '',
+    nome: '',
+    email: '',
+    senha: '',
+    status: false,
+    tipoUsuario: ''
+  }
+
+  constructor(private route:ActivatedRoute, private service: UsuarioService){}
 
 
   ngOnInit(){
+    const idUser: string | null = this.route.snapshot.paramMap.get('id');
+    if (idUser!=null) {
+      this.service.findById(idUser).subscribe((usuario)=>{this.userLogged = usuario; console.log(this.userLogged);
+      });
+    }
     this.generateChartRendimento();
     this.generateChartIngresso();
     this.generateChartGeneros();
