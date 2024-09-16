@@ -94,6 +94,24 @@ public class FilmeService {
         return this.repository.save(filmeFound);
     }
 
+    public Boolean inativar(UUID id) {
+        var filme = this.findById(id);
+        if(filme == null)
+            return false;
+
+        this.repository.inativar(id);
+        return true;
+    }
+
+    public Boolean ativar(UUID id) {
+        var filme = this.findById(id);
+        if(filme == null)
+            return false;
+
+        this.repository.ativar(id);
+        return true;
+    }
+
     public boolean delete(UUID id) {
         var filmeFound = this.findById(id);
         if(filmeFound == null)
@@ -226,16 +244,6 @@ public class FilmeService {
         }
 
         return duracoes;
-    }
-
-    private int setDuracao(String duracao) {
-        return switch (duracao.toUpperCase()) {
-            case "1HR" -> 60;
-            case "1HR30" -> 90;
-            case "2HR" -> 120;
-            case "2HR30" -> 150;
-            default -> 0;
-        };
     }
 
     private StatusFilme setStatus(String status) {
