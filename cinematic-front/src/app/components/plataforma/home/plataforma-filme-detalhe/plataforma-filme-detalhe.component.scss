@@ -2,11 +2,16 @@
 
 .body {
     background-color: $ROXO-CLARO;
+    box-shadow: 0 .4rem .4rem $PRETO;
 }
 
 button {
     background-color: transparent;
     box-shadow: 0 .2rem .2rem $PRETO;
+}
+
+.text-shadow {
+    text-shadow: 0 .2rem .2rem $PRETO;
 }
 
 button:hover {
