@@ -1,6 +1,7 @@
 package com.tcc.cinematic.service;
 
 import com.tcc.cinematic.DTO.ClientRegisterDTO;
+import com.tcc.cinematic.DTO.LoginClientDTO;
 import com.tcc.cinematic.DTO.UsuarioResponseDTO;
 import com.tcc.cinematic.DTO.LoginFuncionarioDTO;
 import com.tcc.cinematic.entity.Usuario;
@@ -144,6 +145,10 @@ public class UsuarioService {
 
     public Usuario loginFuncionario(LoginFuncionarioDTO dto){
         return this.repository.findByLoginAndSenha(dto.login(), dto.password()).orElse(null);
+    }
+
+    public Usuario loginClient(LoginClientDTO dto){
+        return this.repository.findByEmailAndSenha(dto.email(), dto.password()).orElse(null);
     }
 
 }

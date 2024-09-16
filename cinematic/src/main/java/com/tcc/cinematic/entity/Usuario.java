@@ -20,6 +20,7 @@ public class Usuario {
     @Setter(AccessLevel.NONE)
     private UUID id;
     private String nome;
+    @Column(unique = true)
     private String email;
     private String senha;
     private Boolean status;

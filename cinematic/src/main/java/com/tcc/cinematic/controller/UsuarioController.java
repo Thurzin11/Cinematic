@@ -1,5 +1,6 @@
 package com.tcc.cinematic.controller;
 import com.tcc.cinematic.DTO.ClientRegisterDTO;
+import com.tcc.cinematic.DTO.LoginClientDTO;
 import com.tcc.cinematic.DTO.UsuarioResponseDTO;
 import com.tcc.cinematic.DTO.LoginFuncionarioDTO;
 import com.tcc.cinematic.entity.Usuario;
@@ -80,11 +81,17 @@ public class UsuarioController {
     }
 
     @PatchMapping("/login/funcionario")
-    public ResponseEntity<UsuarioResponseDTO> login(@RequestBody @Valid LoginFuncionarioDTO dto){
+    public ResponseEntity<UsuarioResponseDTO> loginFuncionario(@RequestBody @Valid LoginFuncionarioDTO dto){
         var userLogin = this.service.loginFuncionario(dto);
-        if (userLogin == null){
+        if (userLogin == null)
             return ResponseEntity.badRequest().body(null);
-        }
+        return ResponseEntity.ok(this.service.convertToDTO(userLogin));
+    }
+    @PatchMapping("/login/client")
+    public ResponseEntity<UsuarioResponseDTO> loginClient(@RequestBody @Valid LoginClientDTO dto){
+        var userLogin = this.service.loginClient(dto);
+        if (userLogin == null)
+            return ResponseEntity.badRequest().body(null);
         return ResponseEntity.ok(this.service.convertToDTO(userLogin));
     }
 

@@ -22,4 +22,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
     List<Usuario> findByName(@Param("NOME") String nome);
 
     Optional<Usuario> findByLoginAndSenha(String login, String senha);
+    Optional<Usuario> findByEmailAndSenha(String email, String senha);
 }
