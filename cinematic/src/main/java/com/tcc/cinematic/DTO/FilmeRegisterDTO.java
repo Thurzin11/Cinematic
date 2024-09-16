@@ -12,10 +12,10 @@ public record FilmeRegisterDTO(
         @NotNull String classificacao,
         @NotNull String descricao,
         @NotNull String direcao,
-        @NotNull String distribuidor,
-        @NotNull int duracao,
+        @NotNull String duracao,
         @NotNull LocalDate dataEstreia,
         @NotNull String banner,
         @NotNull String status,
-        @NotNull List<String> trailers){
+        List<String> trailers,
+        @NotNull List<String> capas){
 }
