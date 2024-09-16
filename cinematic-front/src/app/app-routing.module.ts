@@ -37,7 +37,7 @@ const routes: Routes = [
   {path: "cadastro", component: CadastroClienteComponent},
   {path: "home", component: HomeComponent},
   {path: "filme/carrossel", component: DestaqueCarroselComponent},
-  {path: "login", component: LoginClienteComponent}
+  {path: "login", component: LoginClienteComponent},
   {path: "", redirectTo: "home", pathMatch: 'full'}
 ];
 
