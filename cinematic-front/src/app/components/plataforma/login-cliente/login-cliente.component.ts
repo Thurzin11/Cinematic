@@ -27,7 +27,7 @@ export class LoginClienteComponent {
     this.service.loginClient(this.login).subscribe((usuario)=>{
       console.log(usuario);
       if (usuario!=null) {
-        this.router.navigate([`home`],{queryParams:usuario});
+        this.router.navigate([`home`],{queryParams: {id: usuario.id}});
       }
     },
     erro=>{
