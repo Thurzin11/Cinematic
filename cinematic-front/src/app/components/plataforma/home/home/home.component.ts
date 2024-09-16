@@ -13,6 +13,26 @@ export class HomeComponent implements OnInit {
   filmesLancamento: IFilme[] = [];
   filmesEstreia: IFilme[] = [];
   filmesPreEstreia: IFilme[] = [];
+  seeDetalhes: boolean = false;
+  filmeDetalhe: IFilme = {
+    id: '',
+    nome: '',
+    categoria: {
+      id: '',
+      nome: ''
+    },
+    duracao: '',
+    classificacao: '',
+    descricao: '',
+    dataEstreia: '',
+    disponibilidade: false,
+    banner: '',
+    direcao: '',
+    distribuidora: '',
+    status: '',
+    capas: [],
+    trailers: []
+  }
 
   constructor(private filmeService: FilmeService) {}
 
@@ -25,5 +45,16 @@ export class HomeComponent implements OnInit {
       this.filmesEstreia = filmes.filter(filme => filme.status.toString().toLowerCase() === 'estreia');
       this.filmesPreEstreia = filmes.filter(filme => filme.status.toString().toLowerCase() === 'pre_estreia');
     });
+  }
+
+  showDetalhes(id: string): void {
+    this.filmeService.findById(id).subscribe(filme => {
+      this.filmeDetalhe = filme;
+      this.seeDetalhes = true;
+    })
+  }
+
+  closeDetalhes(): void {
+    this.seeDetalhes = false;
   }
 }

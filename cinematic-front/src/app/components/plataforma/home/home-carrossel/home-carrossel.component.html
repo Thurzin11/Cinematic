@@ -6,12 +6,14 @@
         pagination="true"
         navigation="true"
         speed="500">
-        <swiper-slide class="d-flex py-3" *ngFor="let filme of this.filmes">
+        <swiper-slide class="d-flex py-3 position-relative" *ngFor="let filme of this.filmes">
             <app-filme-card 
+                (click)="this.showDetalhes(filme.id)"
                 class="mx-5"
                 [classificacao]="filme.classificacao.toString()"
                 [banner]="filme.banner"
-                [nome]="filme.nome"></app-filme-card>
+                [nome]="filme.nome">
+            </app-filme-card>
         </swiper-slide>
     </swiper-container>
 </div>

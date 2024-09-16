@@ -6,7 +6,7 @@
     speed="500"
     navigation="true" 
     pagination="true">
-    <swiper-slide *ngFor="let filme of this.filmes">
+    <swiper-slide *ngFor="let filme of this.filmes" (click)="this.showDetalhes(filme.id)">
         <app-filme-detalhe-carrossel [filme]="filme" class="d-flex justify-content-around align-items-start py-3 px-5"></app-filme-detalhe-carrossel>
     </swiper-slide>
 </swiper-container>

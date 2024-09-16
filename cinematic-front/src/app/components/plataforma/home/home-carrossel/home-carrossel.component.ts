@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IFilme } from '../../../../model/IFilme';
 
 @Component({
@@ -9,4 +9,9 @@ import { IFilme } from '../../../../model/IFilme';
 export class HomeCarrosselComponent {
   @Input() filmes: IFilme[] = [];
   @Input() nomeCarrossel: string = '';
+  @Output() onShowDetalhes = new EventEmitter();
+
+  showDetalhes(id: string): void {
+    this.onShowDetalhes.emit(id);
+  }
 }

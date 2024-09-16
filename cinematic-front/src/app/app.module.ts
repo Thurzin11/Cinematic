@@ -35,6 +35,7 @@ import { DestaqueCarroselComponent } from './components/plataforma/filme/destaqu
 import { DestaqueDetalheCarrosselComponent } from './components/plataforma/filme/destaque-detalhe-carrossel/destaque-detalhe-carrossel.component';
 import { HomeCarrosselComponent } from './components/plataforma/home/home-carrossel/home-carrossel.component';
 import { HomeComponent } from './components/plataforma/home/home/home.component';
+import { PlataformaFilmeDetalheComponent } from './components/plataforma/home/plataforma-filme-detalhe/plataforma-filme-detalhe.component';
 
 register();
 @NgModule({
@@ -68,6 +69,7 @@ register();
     DestaqueDetalheCarrosselComponent,
     HomeCarrosselComponent,
     HomeComponent,
+    PlataformaFilmeDetalheComponent
   ],
   imports: [
     BrowserModule,
