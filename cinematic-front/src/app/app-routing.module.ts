@@ -37,8 +37,8 @@ const routes: Routes = [
   {path: "cadastro", component: CadastroClienteComponent},
   {path: "home", component: HomeComponent},
   {path: "filme/carrossel", component: DestaqueCarroselComponent},
-  {path: "login", component: LoginClienteComponent},
-  {path: "", redirectTo: "sistema/login", pathMatch: 'full'}
+  {path: "login", component: LoginClienteComponent}
+  {path: "", redirectTo: "home", pathMatch: 'full'}
 ];
 
 @NgModule({

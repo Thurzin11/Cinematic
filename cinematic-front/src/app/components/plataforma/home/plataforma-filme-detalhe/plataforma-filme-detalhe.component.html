@@ -12,7 +12,7 @@
         class="border-bottom border-black">
         <swiper-slide *ngFor="let capa of this.filme.capas" class="position-relative">
             <img [src]="capa" class="rounded-3" alt="">
-            <h2 class="text-light position-absolute">{{this.filme.nome}}</h2>
+            <h2 class="text-light position-absolute fw-bold text-shadow">{{this.filme.nome}}</h2>
         </swiper-slide>
     </swiper-container>
     <div class="p-3">
@@ -25,10 +25,10 @@
                     <div class="d-flex align-items-center justify-content-start col-8">
                         <span class="classificacao text-light col-1 fs-1 border border-black rounded text-center"
                             [ngClass]="this.classificacaoClass">{{ this.classificacao }}</span>
-                        <p class="text-light fs-3 classborder px-4">{{filme.duracao}}</p>
-                        <p class="text-light fs-3">{{filme.categoria.nome}}</p>
+                        <p class="text-light fs-3 classborder px-4 text-shadow fw-semibold">{{filme.duracao}}</p>
+                        <p class="text-light fs-3 text-shadow fw-semibold">{{filme.categoria.nome}}</p>
                     </div>
-                    <button class="border col-3 py-2 rounded border border-black">Ver Sessões</button>
+                    <button class="border col-3 py-2 rounded border border-black fw-semibold">Ver Sessões</button>
                 </div>
                 <div class="pt-3 col-11 mx-auto">
                     <p class="text-light fs-4">{{filme.descricao}}</p>
