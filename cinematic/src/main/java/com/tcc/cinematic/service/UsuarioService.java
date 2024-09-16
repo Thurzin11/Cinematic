@@ -34,24 +34,15 @@ public class UsuarioService {
     }
 
     public Usuario createClient(ClienteRegisterDTO dto){
-        var user = new Usuario();
+        var user = Usuario.builder().tipoUsuario(TipoUsuario.CLIENTE).status(true).build();
         BeanUtils.copyProperties(dto,user);
-        user.setTipoUsuario(TipoUsuario.CLIENTE);
-        user.setStatus(true);
         this.repository.save(user);
         return user;
     }
 
     public Usuario createFuncionario(UsuarioResponseDTO usuarioResponseDTO){
-        var user  = new Usuario();
+        var user  = Usuario.builder().login(usuarioResponseDTO.email()).senha(usuarioResponseDTO.email()).build();
         BeanUtils.copyProperties(usuarioResponseDTO,user);
-        user.setLogin(usuarioResponseDTO.email());
-        user.setSenha(usuarioResponseDTO.email());
-        if (usuarioResponseDTO.tipoUsuario() == TipoUsuario.GERENTE){
-            user.setIsGerente(true);
-        }else {
-            user.setIsGerente(false);
-        }
         this.repository.save(user);
         return user;
     }
