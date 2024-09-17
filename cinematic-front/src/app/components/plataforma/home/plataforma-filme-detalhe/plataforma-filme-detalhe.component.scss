@@ -1,0 +1,85 @@
+@import '../../../../style/color';
+
+.body {
+    background-color: $ROXO-CLARO;
+    box-shadow: 0 .4rem .4rem $PRETO;
+}
+
+button {
+    background-color: transparent;
+    box-shadow: 0 .2rem .2rem $PRETO;
+}
+
+.text-shadow {
+    text-shadow: 0 .2rem .2rem $PRETO;
+}
+
+button:hover {
+    transition: .2s;
+    scale: 105%;
+    background-color: $AMARELO;
+}
+
+.close-details {
+    color: $BRANCO;
+    top: .5rem;
+    left: .5rem;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.close-details:hover {
+    transition: .2s;
+    color: $VERMELHO;
+}
+
+swiper-container {
+    box-shadow: 0 .2rem .2rem $PRETO;
+
+    swiper-slide {
+        max-height: 15rem;
+    
+        img {
+            width: 100%;
+        }
+    
+        h2 {
+            bottom: .5rem;
+            left: .5rem;
+        }
+    }
+}
+
+.classificacao {
+    box-shadow: 0 .2rem .2rem $PRETO;
+    min-width: 2rem;
+}
+
+.livre {
+    background-color: $VERDE-CLASSIFICACAO-L;
+}
+
+.dez {
+    background-color: $AZUL-CLASSIFICACAO-10;
+}
+
+.doze {
+    background-color: $AMARELO-CLASSIFICACAO-12;
+}
+
+.quatorze {
+    background-color: $LARANJA-CLASSIFICACAO-14;
+}
+
+.dezesseis {
+    background-color: $VERMELHO;
+}
+
+.dezoito {
+    background-color: $PRETO;
+}
+
+.banner {
+    width: 100%;
+    box-shadow: 0 .2rem .2rem $PRETO;
+}

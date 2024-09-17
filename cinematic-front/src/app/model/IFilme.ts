@@ -6,7 +6,7 @@ export interface IFilme {
     id: string,
     nome: string,
     categoria: ICategoria,
-    duracao: number,
+    duracao: string,
     classificacao: IClassificacao | string,
     descricao: string,
     dataEstreia: Date | string,
@@ -14,7 +14,7 @@ export interface IFilme {
     banner: string,
     direcao: string,
     distribuidora: string,
-    statusFilme: IStatusFilme | string,
+    status: IStatusFilme | string,
     capas: string[],
     trailers: string[],
 }

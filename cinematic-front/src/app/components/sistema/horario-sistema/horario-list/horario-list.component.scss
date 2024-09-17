@@ -1,0 +1,40 @@
+@import "../../../../style/color";
+
+h2{
+  color: $AMARELO;
+}
+
+app-menu-sistema{
+  z-index: 1;
+}
+
+button, select{
+  background-color: transparent;
+  box-shadow: 0 .2rem .2rem $PRETO;
+}
+
+button:focus,select:focus{
+  outline: 0;
+  background-color: $BRANCO;
+  scale: 103%;
+}
+
+button:hover, select:hover{
+  transition: .2s;
+  scale: 103%;
+  background-color: $BRANCO;
+}
+
+.list-cards{
+  max-height: 25.3rem;
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+app-horario-detalhe{
+    right: 25%;
+    top: 10%;
+    width: 50%;
+}

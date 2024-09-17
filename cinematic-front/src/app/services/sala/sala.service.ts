@@ -28,10 +28,10 @@ export class SalaService {
   }
 
   inativarSala(id: string): Observable<Boolean> {
-    return this.http.patch<Boolean>(`${Environment.urlApi}/sala/inativar/${id}`, {});
+    return this.http.patch<Boolean>(`${Environment.urlApi}/sala/${id}/inativar`, {});
   }
 
   ativarSala(id: string): Observable<Boolean> {
-    return this.http.patch<Boolean>(`${Environment.urlApi}/sala/ativar/${id}`, {});
+    return this.http.patch<Boolean>(`${Environment.urlApi}/sala/${id}/ativar`, {});
   }
 }

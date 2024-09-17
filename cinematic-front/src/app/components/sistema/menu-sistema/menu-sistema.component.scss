@@ -1,0 +1,51 @@
+@import '../../../style/color';
+
+nav {
+    background-color: $ROXO-CLARO;
+    width: 3.5rem;
+    cursor: pointer;
+
+    div {
+        width: 100%;
+
+        p {
+            display: none;
+            color: $BRANCO;
+            padding-top: 1rem;
+        }
+    }
+
+    div:first-child {
+        border-radius: 0 1rem 0 0;
+    }
+
+    div:last-child {
+        border-radius: 0 0 1rem 0;
+    }
+}
+
+.leave {
+    transition: .4s;
+}
+
+nav:hover {
+    transition: .4s;
+    width: 14rem;
+     
+    div {
+        max-height: 4rem;
+
+        p {
+            display: block;
+        }
+    }
+
+    div:hover {
+        transition: .2s;
+        background-color: $AMARELO;
+
+        p {
+            color: $PRETO;
+        }
+    }
+}

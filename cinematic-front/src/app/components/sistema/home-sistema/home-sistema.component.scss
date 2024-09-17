@@ -1,0 +1,26 @@
+@import "../../../style/color";
+
+.body{
+  .graficos{
+    box-shadow: 0 1rem 1rem black;
+    border: 3px black solid;
+    border-radius: 20px;
+    background-color: $ROXO-CLARO;
+  }
+}
+
+select{
+  background-color: $AMARELO;
+  option{
+    background-color: $BRANCO;
+  }
+}
+
+.pizza{
+  max-width: 300px;
+  max-height: 300px;
+}
+.predio{
+  max-width: 1200px;
+  max-height: 160px;
+}

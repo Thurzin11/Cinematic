@@ -1,0 +1,11 @@
+<app-header-sistema></app-header-sistema>
+<app-destaque-carrosel [filmes]="this.filmesDestaque" (onShowDetalhes)="this.showDetalhes($event)"></app-destaque-carrosel>
+<div class="col-12 overflow-y-auto">
+    <app-home-carrossel [nomeCarrossel]="'Estreia'" [filmes]="this.filmesEstreia" (onShowDetalhes)="this.showDetalhes($event)"></app-home-carrossel>
+    <app-home-carrossel [nomeCarrossel]="'Cartaz'" [filmes]="this.filmesCartaz" (onShowDetalhes)="this.showDetalhes($event)"></app-home-carrossel>
+</div>
+<app-plataforma-filme-detalhe 
+    class="position-absolute" 
+    [filme]="this.filmeDetalhe" 
+    *ngIf="this.seeDetalhes"
+    (onCloseDetails)="this.closeDetalhes()"></app-plataforma-filme-detalhe>

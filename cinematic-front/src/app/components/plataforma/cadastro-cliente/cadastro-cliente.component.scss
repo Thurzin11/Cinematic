@@ -1,0 +1,22 @@
+@import '../../../style/color';
+label,p{
+  color: $BRANCO;
+}
+h2{
+  color: $BRANCO;
+  text-shadow: 0 .2rem .2rem $PRETO;
+}
+button{
+  background-color: $AMARELO;
+  box-shadow: 0 .4rem .4rem $PRETO;
+}
+input, select{
+  box-shadow: 0 .4rem .4rem $PRETO;
+}
+.cadastro{
+  background-color: $ROXO-CLARO;
+}
+.changeLogin{
+  color: $BRANCO;
+  cursor: pointer;
+}

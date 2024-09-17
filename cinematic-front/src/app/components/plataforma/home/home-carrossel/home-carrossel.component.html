@@ -1,0 +1,20 @@
+<div class="px-5 py-2">
+    <p class="text-light fs-3 fw-semibold">{{ nomeCarrossel }}</p>
+    <swiper-container
+        class="d-flex justify-content-center"
+        slides-per-view="8"
+        pagination="true"
+        navigation="true"
+        speed="500">
+        <swiper-slide class="d-flex py-3 position-relative" *ngFor="let filme of this.filmes">
+            <app-filme-card 
+                (click)="this.showDetalhes(filme.id)"
+                class="mx-5"
+                [classificacao]="filme.classificacao.toString()"
+                [banner]="filme.banner"
+                [nome]="filme.nome">
+            </app-filme-card>
+        </swiper-slide>
+    </swiper-container>
+</div>
+<hr class="col-10 mx-auto">

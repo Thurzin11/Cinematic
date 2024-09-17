@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center flex-column align-items-center pt-5">
+  <img src="../../../../assets/img/Cinematic-removebg-preview 1.png" class="col-2" alt="img-Logo">
+  <div class="border border-1 border-black rounded-4 d-flex flex-column align-items-center col-3 cadastro p-2">
+    <h2 class="fw-semibold fs-1 m-0">Cadastrar</h2>
+    <div class="d-flex flex-column col-11 pb-3">
+      <label for="name" class="fs-4">Nome</label>
+      <input type="text" class="rounded-3 p-1 fs-5 border-0" placeholder="Digite seu nome" id="name" [(ngModel)]="this.usuario.nome">
+    </div>
+    <div class="d-flex flex-column col-11 pb-3">
+      <label for="email" class="fs-4">Email</label>
+      <input type="text" class="rounded-3 p-1 fs-5 border-0" placeholder="exemplo@email.com" id="email" [(ngModel)]="this.usuario.email">
+    </div>
+    <div class="d-flex flex-column col-11 pb-3">
+      <label for="password" class="fs-4">Senha</label>
+      <input type="text" class="rounded-3 p-1 fs-5 border-0" placeholder="******" id="password" [(ngModel)]="this.usuario.senha">
+    </div>
+    <div class="d-flex flex-column col-11 pb-3">
+      <label for="passwordConfirm" class="fs-4">Confirme sua senha</label>
+      <input type="text" class="rounded-3 p-1 fs-5 border-0" placeholder="******" id="passwordConfirm" [(ngModel)]="this.usuario.confirmPassword">
+    </div>
+    <div class="d-flex justify-content-between col-11 pb-3">
+      <div class="d-flex flex-column col-4">
+        <label for="estado" class="fs-4">Estado</label>
+        <select name="estado" id="estado" class="rounded-3 p-1 fs-5" [(ngModel)]="this.usuario.estado" (ngModelChange)="this.findCidades()">
+          <option *ngFor="let estado of this.estados" [value]="estado.sigla" >{{estado.sigla}}</option>
+        </select>
+      </div>
+      <div class="d-flex flex-column col-7">
+        <label for="cidade" class="fs-4">Cidade</label>
+        <select name="cidade" id="cidade" class="rounded-3 p-1 fs-5" [(ngModel)]="this.usuario.cidade">
+          <option *ngFor="let cidade of cidades" [value]="">{{cidade.nome}}</option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <p *ngIf="!this.passwordsEquals" class="fw-bold text-danger p-0 mb-0 d-flex align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-circle me-2 rounded-circle'" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+          <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+        </svg>
+        Senhas não coincidem
+      </p>
+    </div>
+    <div class="col-11 pb-3 d-flex justify-content-center py-3">
+      <button class="rounded-3 col-6 p-2 fw-semibold border-0" (click)="this.createUser(this.usuario)">Cadastrar</button>
+    </div>
+    <div class="d-flex flex-column align-items-center">
+      <p class="m-0">Já tem uma conta?</p>
+      <a (click)="this.changeLogin()" class="changeLogin">Entre agora!</a>
+    </div>
+  </div>
+</div>

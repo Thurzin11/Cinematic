@@ -1,0 +1,24 @@
+<div class="d-flex flex-column align-items-center justify-content-around">
+  <img src="../../../assets/img/Cinematic-removebg-preview 1.png" class="logo mt-5 mb-3" alt="logo">
+  <div class="login d-flex flex-column justify-content-center col-4 p-5">
+    <h2 class="fs-1 text-center text-white">Entrar</h2>
+    <div class="d-flex flex-column align-items-center col-12">
+      <div class="input-login col-11 d-flex flex-column">
+        <label for="login" class="text-start fs-3 mt-4 text-white">Login</label>
+        <input type="text" id="login" class="p-3 mt-2 border-0" [(ngModel)]="this.login.login" placeholder="Digite seu login">
+      </div>
+      <div class="input-senha col-11 d-flex flex-column">
+        <label for="senha" class="text-start fs-3 mt-4 text-white">Senha</label>
+        <input type="text" id="senha" class="border-0 p-3 mt-2" [(ngModel)]="this.login.password" placeholder="*******">
+      </div>
+
+      <p *ngIf="!this.userIsValid" class="fw-bold text-danger p-0 mb-0 d-flex align-items-center" [ngClass]="this.userIsValid? '':'py-3'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-circle me-2 rounded-circle" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+          <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+        </svg>
+        Senha e/ou Login Incorretos</p>
+      <button class="fs-4 fw-bold col-8 btn-logar " [ngClass]="!this.userIsValid? '':'mt-3'" (click)="this.logar(this.login)">Entrar</button>
+    </div>
+  </div>
+</div>

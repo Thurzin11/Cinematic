@@ -1,0 +1,58 @@
+<app-header-sistema></app-header-sistema>
+<div class="position-relative">
+    <app-menu-sistema class="position-absolute"></app-menu-sistema>
+    <div class="col-10 m-auto">
+        <h2 class="text-light fs-1 fw-bold">Sessões</h2>
+        <div class="border border-black rounded col-12 d-flex flex-column align-items-center flex-wrap px-2 pb-4 rounded-bottom-0 border-bottom-0">
+            <div class="col-12 d-flex flex-column justify-content-around pt-4">
+                <div class="d-flex justify-content-around col-12 py-2">
+                    <div class="d-flex flex-column col-3">
+                        <label for="sala" class="text-light fs-3">Sala</label>
+                        <select name="sala" id="sala" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.sessao.sala">
+                            <option *ngFor="let sala of this.salas" [ngValue]="sala">{{ sala.numero }}</option>
+                        </select>
+                    </div>
+                    <div class="d-flex flex-column col-3">
+                        <label for="filme" class="text-light fs-3">Filme</label>
+                        <select name="filme" id="filme" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.sessao.filme">
+                            <option *ngFor="let filme of this.filmes" [ngValue]="filme">{{ filme.nome }}</option>
+                        </select>
+                    </div>
+                    <div class="d-flex flex-column col-3">
+                        <label for="idioma" class="text-light fs-3">Idioma</label>
+                        <select name="idioma" id="idioma" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.sessao.idioma">
+                            <option *ngFor="let idioma of this.idiomas" [ngValue]="idioma">{{ idioma }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-around col-12 py-2">
+                    <div class="d-flex flex-column col-3">
+                        <label for="tipo" class="text-light fs-3">Tipo</label>
+                        <select name="tipo" id="tipo" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.sessao.tipo">
+                            <option *ngFor="let tipo of this.tipos" [ngValue]="tipo">{{ tipo }}</option>
+                        </select>
+                    </div>
+                    <div class="d-flex flex-column col-3">
+                        <label for="data" class="text-light fs-3">Data</label>
+                        <input type="date" id="data" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.sessao.data">
+                    </div>
+                    <div class="d-flex flex-column col-3">
+                        <label for="horario" class="text-light fs-3">Horário</label>
+                        <select name="horario" id="horario" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.sessao.horario">
+                            <option *ngFor="let horario of this.horarios" [ngValue]="horario">{{ horario.horario }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center col-12 py-2">
+                    <div class="d-flex flex-column col-3">
+                        <label for="estabelecimento" class="text-light fs-3">Estabelecimento</label>
+                        <select name="estabelecimento" id="estabelecimento" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.sessao.estabelecimento">
+                            <option *ngFor="let estabelecimento of this.estabelecimentos" [ngValue]="estabelecimento">{{ estabelecimento.nome }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="col-12 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" (click)="this.register()">Salvar</button>
+    </div>
+</div>

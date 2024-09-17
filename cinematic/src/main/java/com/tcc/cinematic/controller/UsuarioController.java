@@ -1,19 +1,19 @@
 package com.tcc.cinematic.controller;
-
-import com.tcc.cinematic.DTO.FuncionarioRegisterDTO;
-import com.tcc.cinematic.DTO.UsuarioFilterParams;
+import com.tcc.cinematic.DTO.ClientRegisterDTO;
+import com.tcc.cinematic.DTO.LoginClientDTO;
+import com.tcc.cinematic.DTO.UsuarioResponseDTO;
+import com.tcc.cinematic.DTO.LoginFuncionarioDTO;
 import com.tcc.cinematic.entity.Usuario;
-import com.tcc.cinematic.enums.TipoUsuario;
 import com.tcc.cinematic.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/usuario")
@@ -28,19 +28,22 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> findById(@PathVariable UUID id){
+    public ResponseEntity<UsuarioResponseDTO> findById(@PathVariable UUID id){
         var userReturn = this.service.findById(id);
         if (userReturn == null)
             return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(userReturn);
+        var userReturnDTO = this.service.convertToDTO(userReturn);
+        return ResponseEntity.ok(userReturnDTO);
     }
+
     @GetMapping("/funcionarios")
-    public ResponseEntity<List<Usuario>> findByGerenteAndFuncionario(){
-       return ResponseEntity.ok(this.service.findByGerenteAndFuncionario());
+    public ResponseEntity<Stream<UsuarioResponseDTO>> findByGerenteAndFuncionario(){
+        Stream<Usuario> usuarios = this.service.findByGerenteAndFuncionario();
+        return ResponseEntity.ok(this.service.convertToDTOStream(usuarios));
     }
 
     @GetMapping("/nome/{nome}")
-    public ResponseEntity<List<Usuario>> findByName(@PathVariable String nome){
+    public ResponseEntity<Stream<UsuarioResponseDTO>> findByName(@PathVariable String nome){
         return ResponseEntity.ok(this.service.findByName(nome));
     }
     @PatchMapping("/funcionarios/inativar/{id}")
@@ -53,41 +56,45 @@ public class UsuarioController {
     }
 
     @PatchMapping("/filtros")
-    public ResponseEntity<List<Usuario>> filtros(@RequestBody UsuarioFilterParams params){
-        return ResponseEntity.ok(this.service.findByFilters(params));
+    public ResponseEntity<Stream<UsuarioResponseDTO>> filtros(@RequestBody Map<String,List<String>> map){
+        return ResponseEntity.ok(this.service.findByFilters(map));
     }
 
-    @GetMapping("/email")
-    public ResponseEntity<List<Usuario>> findByEmail(@RequestBody Map<String,String> map){
-        var email = map.get("email");
-        return ResponseEntity.ok(this.service.findByEmail(email));
+    @PostMapping("/funcionario")
+    public ResponseEntity<UsuarioResponseDTO> create(@RequestBody @Valid UsuarioResponseDTO usuarioResponseDTO){
+        var user = this.service.createFuncionario(usuarioResponseDTO);
+        return new ResponseEntity<UsuarioResponseDTO>(this.service.convertToDTO(user), HttpStatus.CREATED);
     }
 
-    @GetMapping("/status")
-    public ResponseEntity<List<Usuario>> findByStatus(@RequestBody Map<String,Boolean> map){
-        return ResponseEntity.ok(this.service.findByStatus(map.get("status")));
+    @PostMapping("/cliente")
+    public ResponseEntity<UsuarioResponseDTO> createClient(@RequestBody @Valid ClientRegisterDTO dto){
+        var user = this.service.createClient(dto);
+        return new ResponseEntity<UsuarioResponseDTO>(this.service.convertToDTO(user), HttpStatus.CREATED);
     }
-
-    @GetMapping("/tipoUser")
-    public ResponseEntity<List<Usuario>> findByTipoUsuario(@RequestBody Map<String,TipoUsuario> map){
-        return ResponseEntity.ok(this.service.findByTipoUsuario(map.get("tipoUsuario")));
-    }
-
-
-    @PostMapping
-    public ResponseEntity<Usuario> create(@RequestBody @Valid FuncionarioRegisterDTO funcionarioRegisterDTO){
-        var user = this.service.create(funcionarioRegisterDTO);
-        return new ResponseEntity<Usuario>(user, HttpStatus.CREATED);
-    }
-
 
     @PatchMapping
-    public ResponseEntity<Usuario> update(@RequestBody @Valid FuncionarioRegisterDTO funcionarioRegisterDTO){
-        var user = this.service.update(funcionarioRegisterDTO);
+    public ResponseEntity<UsuarioResponseDTO> update(@RequestBody @Valid UsuarioResponseDTO usuarioResponseDTO){
+        var user = this.service.update(usuarioResponseDTO);
         if (user == null)
             return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(this.service.convertToDTO(user));
     }
+
+    @PatchMapping("/login/funcionario")
+    public ResponseEntity<UsuarioResponseDTO> loginFuncionario(@RequestBody @Valid LoginFuncionarioDTO dto){
+        var userLogin = this.service.loginFuncionario(dto);
+        if (userLogin == null)
+            return ResponseEntity.badRequest().body(null);
+        return ResponseEntity.ok(this.service.convertToDTO(userLogin));
+    }
+    @PatchMapping("/login/client")
+    public ResponseEntity<UsuarioResponseDTO> loginClient(@RequestBody @Valid LoginClientDTO dto){
+        var userLogin = this.service.loginClient(dto);
+        if (userLogin == null)
+            return ResponseEntity.badRequest().body(null);
+        return ResponseEntity.ok(this.service.convertToDTO(userLogin));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable UUID id){
         var isDelete = this.service.delete(id);

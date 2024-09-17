@@ -45,6 +45,24 @@ public class  HorarioController {
         return ResponseEntity.ok(horarioReturn);
     }
 
+    @PatchMapping("{id}/inativar")
+    public ResponseEntity<Boolean> inativar(@PathVariable UUID id){
+        var returnInativar = this.service.inativar(id);
+        if (!returnInativar){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(true);
+    }
+
+    @PatchMapping("{id}/ativar")
+    public ResponseEntity<Boolean> ativar(@PathVariable UUID id){
+        var returnAtivar = this.service.ativar(id);
+        if (!returnAtivar){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(true);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable UUID id){
         var isDelete = this.service.delete(id);

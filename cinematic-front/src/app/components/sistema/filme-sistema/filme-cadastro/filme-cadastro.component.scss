@@ -1,0 +1,104 @@
+@import '../../../../style/color';
+
+app-menu-sistema {
+    z-index: 1;
+}
+
+button {
+    cursor: pointer;
+}
+
+.body {
+    box-shadow: 0 .4rem .4rem $PRETO;
+}
+
+.submit {
+    cursor: pointer;
+    opacity: 1;
+    color: $BRANCO;
+}
+
+.enable {
+    transition: .2s;
+    background-color: $VERDE-IDIOMA;
+    opacity: 1;
+}
+
+.disabled {
+    background-color: $ROXO-CLARO;
+    opacity: .5;
+}
+
+.links-div {
+    max-height: 10rem;
+
+    .links {
+        max-height: 6.4rem;
+    }
+}
+
+select {
+    cursor: pointer;
+}
+
+label {
+    text-shadow: 0 .2rem .2rem $PRETO;
+}
+
+h2 {
+    text-shadow: 0 .4rem .4rem $PRETO;
+}
+
+input, select, textarea {
+    background-color: transparent;
+}
+
+input::placeholder, textarea::placeholder {
+    color: $PRETO;
+}
+
+input:focus, select:focus, textarea:focus{
+    scale: 105%;
+    outline: 0;
+    background-color: $BRANCO;
+    box-shadow: 0 .2rem .2rem $PRETO;
+}
+
+input:hover, select:hover, textarea:hover {
+    transition: .2s;
+    scale: 105%;
+    background-color: $BRANCO;
+    box-shadow: 0 .2rem .2rem $PRETO;
+}
+
+textarea:hover {
+    box-shadow: 0 .4rem .4rem $PRETO;
+}
+
+.links-div:hover {
+    transition: .2s;
+    scale: 105%;
+    box-shadow: 0 .3rem .3rem $PRETO;
+    background-color: $BRANCO;
+
+    input {
+        background-color: $ROXO-CLARO;
+    }
+
+    .links {
+        p {
+            background-color: $ROXO-CLARO;
+            cursor: pointer;
+        }
+    }
+}
+
+.btn-salvar {
+    background-color: $AMARELO;
+    opacity: .7;
+}
+
+.btn-salvar:hover {
+    transition: .2s;
+    opacity: 1;
+}

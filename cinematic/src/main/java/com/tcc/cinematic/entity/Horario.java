@@ -1,8 +1,7 @@
 package com.tcc.cinematic.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.tcc.cinematic.enums.Periodo;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.UUID;
@@ -23,5 +22,7 @@ public class Horario {
 
     private boolean status = true;
 
+    @Enumerated(EnumType.STRING)
+    private Periodo periodo;
 
 }

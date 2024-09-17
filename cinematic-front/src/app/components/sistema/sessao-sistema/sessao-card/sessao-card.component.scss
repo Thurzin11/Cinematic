@@ -1,0 +1,33 @@
+@import '../../../../style/color';
+
+:host:hover {
+    cursor: pointer;
+    transition: .2s;
+    scale: 103%;
+    background-color: $ROXO-CLARO;
+    box-shadow: 0 .4rem .4rem $PRETO;
+}
+
+.ativo {
+    background-color: $VERDE-ATIVO;
+}
+
+.inativo {
+    background-color: $VERMELHO;
+}
+
+.idioma, .tipo {
+    box-shadow: 0 .2rem .2rem $PRETO;
+}
+
+.idioma {
+    background-color: $VERDE-IDIOMA;
+}
+
+.tipo {
+    background-color: $AMARELO;
+}
+
+span {
+    box-shadow: 0 .2rem .2rem $PRETO;
+}

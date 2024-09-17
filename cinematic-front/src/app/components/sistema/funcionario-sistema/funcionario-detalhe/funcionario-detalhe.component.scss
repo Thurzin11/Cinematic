@@ -1,0 +1,43 @@
+@import "../../../../style/color";
+
+.detalhe{
+  background-color: $ROXO-ESCURO;
+}
+span{
+  width: 1.6rem;
+  height: 1.6rem;
+}
+.ativo{
+  background-color: $VERDE-ATIVO;
+}
+.inativo{
+  background-color: $VERMELHO;
+}
+
+.editar{
+  background-color: $AMARELO;
+}
+.inativar{
+  background-color: $VERMELHO;
+}
+.ativar{
+  background-color: $VERDE-ATIVO;
+}
+.close{
+  top: .5rem;
+  left: .5rem;
+  color: $BRANCO;
+}
+.close:hover{
+  color: $VERMELHO;
+  cursor: pointer;
+}
+.confirmacao{
+  background-color: $ROXO-ESCURO;
+}
+.desautorizado{
+  background-color: $VERMELHO;
+}
+.autorizado{
+  background-color: $VERDE-ATIVO;
+}

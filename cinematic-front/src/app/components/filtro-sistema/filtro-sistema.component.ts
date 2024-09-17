@@ -1,7 +1,6 @@
 import { UsuarioService } from './../../services/usuario/usuario.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CategoriaService } from '../../services/categoria/categoria.service';
-import { EstabelecimentoService } from '../../services/estabelecimento/estabelecimento.service';
 import { IBotao } from '../../model/IBotao';
 import { IFilter } from '../../model/IFilter';
 import { FilmeService } from '../../services/filme/filme.service';
@@ -16,7 +15,6 @@ export class FiltroSistemaComponent implements OnInit {
   @Input() tipo: string = '';
   @Output() onCloseFilter = new EventEmitter();
   @Output() onFilter = new EventEmitter();
-  email: string = '';
   estabelecimento: string = '';
 
   botoes: IBotao[] = [];
@@ -25,7 +23,6 @@ export class FiltroSistemaComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private categoriaService: CategoriaService,
-    private estabelecimentoService: EstabelecimentoService,
     private filmeService: FilmeService,
     private salaService: SalaService) { }
 
@@ -33,13 +30,28 @@ export class FiltroSistemaComponent implements OnInit {
     this.initLists();
   }
 
-  verificarEmail(): void {
-    if(this.email === '') {
-      this.removeFilter({ nome: this.email, isSelected: true }, 'Email');
+  verificarEmail(email: string): void {
+    this.toggleButton({ nome: email, isSelected: false }, 'Email');
+  }
+
+  private atualizaEmail(): void {
+    const list: string[] | undefined = this.filterMap.get('Email');
+    if(list) {
+      console.log(list);
+
+      if(list.length > 1) {
+
+      }
+    }
+  }
+
+  verificarEstabelecimento(): void {
+    if(this.estabelecimento === '') {
+      this.removeFilter({nome: this.estabelecimento, isSelected: true}, 'Estabelecimento');
       return;
     }
 
-    this.toggleButton({ nome: this.email, isSelected: false }, 'Email');
+    this.toggleButton({nome: this.estabelecimento, isSelected: false}, 'Estabelecimento');
   }
 
   closeFilter(): void {
@@ -75,13 +87,16 @@ export class FiltroSistemaComponent implements OnInit {
           let str = list.find(value => filter.value.nome.toLowerCase() === value.toLowerCase())
           if (!str)
             list.push(filter.value.nome.toLowerCase());
+
+          if(filter.label.toLowerCase() === 'email')
+            list.splice(0, list.length-1);
         }
       }
 
       if (!this.filterMap.has(filter.label.toLowerCase()))
         this.filterMap.set(filter.label.toLowerCase(), [filter.value.nome.toLowerCase()]);
     })
-
+    
     this.routes();
   }
 
@@ -135,7 +150,7 @@ export class FiltroSistemaComponent implements OnInit {
 
     botaoValue.isSelected = true;
     this.filterList.push({
-      label,
+      label: label,
       value: botaoValue
     });
     this.filter();
@@ -236,18 +251,12 @@ export class FiltroSistemaComponent implements OnInit {
   private caseSessao(): void {
     let listPeriodo: string[] = ['Manha', 'Tarde', 'Noite'];
     let listStatus: string[] = ['Ativo', 'Inativo'];
-    let listTipoSessao: string[] = ['Legendado', 'Dublado', 'Normal'];
+    let listTipoSessao: string[] = ['2D', '3D', '4D', 'D-BOX'];
     let listIdioma: string[] = ['Legendado', 'Dublado', 'Normal'];
 
     this.setBotao('Periodo', this.setBotaoValue(listPeriodo));
     this.setBotao('Status', this.setBotaoValue(listStatus));
     this.setBotao('Tipo', this.setBotaoValue(listTipoSessao));
     this.setBotao('Idioma', this.setBotaoValue(listIdioma));
-
-    this.estabelecimentoService.findAll().subscribe(estabelecimentoList => {
-      let estabelecimentos: string[] = [];
-      estabelecimentoList.forEach(estabelecimento => estabelecimentos.push(estabelecimento.nome));
-      this.setBotao('Estabelecimento', this.setBotaoValue(estabelecimentos));
-    });
   }
 }

@@ -41,4 +41,22 @@ public class HorarioService {
         this.repository.delete(horarioFound);
         return true;
     }
+
+    public boolean inativar(UUID id){
+        var horarioFound = this.findById(id);
+        if (horarioFound == null){
+            return false;
+        }
+        this.repository.inativar(id);
+        return true;
+    }
+
+    public boolean ativar(UUID id){
+        var horarioFound = this.findById(id);
+        if (horarioFound == null){
+            return false;
+        }
+        this.repository.ativar(id);
+        return true;
+    }
 }

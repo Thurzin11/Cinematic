@@ -1,5 +1,6 @@
 package com.tcc.cinematic.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tcc.cinematic.enums.TipoUsuario;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -19,6 +20,7 @@ public class Usuario {
     @Setter(AccessLevel.NONE)
     private UUID id;
     private String nome;
+    @Column(unique = true)
     private String email;
     private String senha;
     private Boolean status;

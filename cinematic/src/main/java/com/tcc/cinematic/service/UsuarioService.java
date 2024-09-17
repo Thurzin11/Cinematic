@@ -1,10 +1,10 @@
 package com.tcc.cinematic.service;
 
-import com.tcc.cinematic.DTO.FuncionarioRegisterDTO;
-import com.tcc.cinematic.DTO.UsuarioFilterParams;
-import com.tcc.cinematic.entity.Categoria;
+import com.tcc.cinematic.DTO.ClientRegisterDTO;
+import com.tcc.cinematic.DTO.LoginClientDTO;
+import com.tcc.cinematic.DTO.UsuarioResponseDTO;
+import com.tcc.cinematic.DTO.LoginFuncionarioDTO;
 import com.tcc.cinematic.entity.Usuario;
-import com.tcc.cinematic.enums.TipoUsuario;
 import com.tcc.cinematic.repository.UsuarioRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 public class UsuarioService {
@@ -31,19 +32,27 @@ public class UsuarioService {
         return this.repository.findById(id).orElse(null);
     }
 
-    public Usuario create(FuncionarioRegisterDTO funcionarioRegisterDTO){
-        var user  = new Usuario();
-        BeanUtils.copyProperties(funcionarioRegisterDTO,user);
-        user.setLogin(funcionarioRegisterDTO.email());
-        user.setSenha(funcionarioRegisterDTO.email());
-        return this.repository.save(user);
+    public Usuario createClient(ClientRegisterDTO dto){
+        var user = new Usuario();
+        BeanUtils.copyProperties(dto,user);
+        this.repository.save(user);
+        return user;
     }
 
-    public Usuario update(FuncionarioRegisterDTO funcionarioRegisterDTO){
-        var userFound = this.findById(funcionarioRegisterDTO.id());
+    public Usuario createFuncionario(UsuarioResponseDTO usuarioResponseDTO){
+        var user  = new Usuario();
+        BeanUtils.copyProperties(usuarioResponseDTO,user);
+        user.setLogin(usuarioResponseDTO.email());
+        user.setSenha(usuarioResponseDTO.email());
+        this.repository.save(user);
+        return user;
+    }
+
+    public Usuario update(UsuarioResponseDTO usuarioResponseDTO){
+        var userFound = this.findById(usuarioResponseDTO.id());
         if (userFound == null)
             return null;
-        BeanUtils.copyProperties(funcionarioRegisterDTO,userFound);
+        BeanUtils.copyProperties(usuarioResponseDTO,userFound);
         return this.repository.save(userFound);
     }
 
@@ -51,49 +60,33 @@ public class UsuarioService {
         var userFound = this.findById(id);
         if (userFound ==  null)
             return false;
-
         this.repository.delete(userFound);
         return true;
     }
-     public List<Usuario> findByTipoUsuario(TipoUsuario tipoUsuario){
-        if (tipoUsuario.equals(TipoUsuario.FUNCIONARIO))
-            return this.repository.findByTipoUsuario(TipoUsuario.FUNCIONARIO);
-        else {
-            return this.repository.findByTipoUsuario(TipoUsuario.GERENTE);
-        }
-     }
-     public List<Usuario> findByStatus(Boolean status){
-        return this.repository.findByStatus(status);
-     }
-     public List<Usuario> findByEmail(String email){
-        return this.repository.findByEmail(email);
-     }
 
-
-     public List<Usuario> findByGerenteAndFuncionario(){
-        var funcionariosList = this.repository.findByTipoUsuario(TipoUsuario.GERENTE);
-        funcionariosList.addAll(this.repository.findByTipoUsuario(TipoUsuario.FUNCIONARIO));
-        return funcionariosList;
-     }
-
-     public List<Usuario> findByName(String nome){
-        return this.repository.findByName("%"+nome+"%");
+     public Stream<Usuario> findByGerenteAndFuncionario(){
+        return this.repository.findByGerenteAndFuncionario().stream();
      }
 
      public Usuario inativarUsuario(UUID id){
-        var usuario = this.findById(id);
-        usuario.setStatus(false);
-        return this.repository.save(usuario);
+        var usuarioFound = this.findById(id);
+         System.out.println(usuarioFound.toString());
+        usuarioFound.setStatus(false);
+        return this.repository.save(usuarioFound);
      }
     public Usuario ativarUsuario(UUID id){
-        var usuario = this.findById(id);
-        usuario.setStatus(true);
-        return this.repository.save(usuario);
+        var usuarioFind = this.findById(id);
+        usuarioFind.setStatus(true);
+        return this.repository.save(usuarioFind);
+    }
+
+    public Stream<UsuarioResponseDTO> findByName(String nome){
+        return this.repository.findByName("%"+nome+"%")
+                .stream().map(usuario -> new UsuarioResponseDTO(usuario.getId(), usuario.getNome(),usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
     }
 
 
-     public List<Usuario> findByFilters(UsuarioFilterParams filtro){
-//        return this.repository.findByFilter(params.tipo(),params.status(), params.email());
+     public Stream<UsuarioResponseDTO> findByFilters(Map<String,List<String>> filtro){
          StringBuilder sql = new StringBuilder();
          sql.append(" " +
                  "SELECT * FROM usuario " +
@@ -101,22 +94,61 @@ public class UsuarioService {
 
          Map<String, Object> map = new HashMap<>();
 
-         if (filtro.tipo()!=null && !filtro.tipo().isEmpty()){
+         if (filtro.get("cargo")!=null && !filtro.get("cargo").isEmpty()){
              sql.append("AND tipo_usuario IN (:TIPO_USUARIO) ");
-             map.put("TIPO_USUARIO",filtro.tipo());
+             map.put("TIPO_USUARIO",this.setCargo(filtro.get("cargo")));
          }
-         if(filtro.status()!=null){
+         if(filtro.get("status")!=null && !filtro.get("status").isEmpty() && this.setStatus(filtro.get("status"))!=null){
              sql.append("AND status = :STATUS ");
-             map.put("STATUS",filtro.status());
+             map.put("STATUS",this.setStatus(filtro.get("status")));
          }
-         if (filtro.email()!=null && !filtro.email().isEmpty()){
+         if (filtro.get("email")!=null && !filtro.get("email").isEmpty()){
              sql.append("AND email LIKE :EMAIL");
-             map.put("EMAIL","%"+filtro.email()+"%");
+             map.put("EMAIL","%"+filtro.get("email").getFirst()+"%");
          }
          Query query = entityManager.createNativeQuery(sql.toString(), Usuario.class);
          map.forEach(query::setParameter);
-         return query.getResultList();
+
+         List<Usuario> listFiltro = query.getResultList();
+         return listFiltro.stream().map(usuario -> new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
      }
 
+     private List<String> setCargo(List<String> cargos){
+        List<String> cargosUpperCase = new ArrayList<>();
+        for (String cargo: cargos){
+            cargosUpperCase.add(cargo.toUpperCase());
+        }
+        return cargosUpperCase;
+    }
+
+    private Boolean setStatus(List<String> status){
+        if (status.size()>=2){
+            return null;
+        }
+        if (status.getFirst().equals("ativo")){
+            return true;
+        }
+        if (status.getFirst().equals("false")){
+            return false;
+        }
+        return null;
+    }
+
+    public UsuarioResponseDTO convertToDTO(Usuario usuario){
+        return new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getStatus(),usuario.getTipoUsuario());
+    }
+
+    public Stream<UsuarioResponseDTO> convertToDTOStream(Stream<Usuario> usuarios){
+        return usuarios
+                .map(usuario -> new UsuarioResponseDTO(usuario.getId(),usuario.getNome(),usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
+    }
+
+    public Usuario loginFuncionario(LoginFuncionarioDTO dto){
+        return this.repository.findByLoginAndSenha(dto.login(), dto.password()).orElse(null);
+    }
+
+    public Usuario loginClient(LoginClientDTO dto){
+        return this.repository.findByEmailAndSenha(dto.email(), dto.password()).orElse(null);
+    }
 
 }
