@@ -53,12 +53,11 @@
             </button>
           </div>
 
-          <div
-            class="d-flex justify-content-between flex-wrap overflow-y-auto mx-auto list-cards"
-          >
-            <app-horario-card  *ngFor="let horario of this.listaHorarios" [horario]="horario"
-              class="border border-black rounded-2 d-flex col-3 mx-3 p-2 my-3 flex-wrap overflow-auto justify-content-between"
-            ></app-horario-card>
+          <div class="d-flex justify-content-between flex-wrap overflow-y-auto mx-auto list-cards position-relative">
+            <app-horario-card  *ngFor="let horario of this.listaHorarios" [horario]="horario" class="border border-black rounded-2 d-flex col-3 mx-3 p-2 my-3 flex-wrap overflow-auto justify-content-between" (click)="this.abrirDetalhe(horario.id)">
+
+            </app-horario-card>
+            <app-horario-detalhe class="position-absolute"[horarioDetalhe]="this.horarioDetalhe" *ngIf="this.detalheIsOpen" (onClose)="this.fecharDetalhe()" (onInativar)="this.inativar($event)" (onAtivar)="this.ativar($event)"></app-horario-detalhe>
           </div>
         </div>
       </div>

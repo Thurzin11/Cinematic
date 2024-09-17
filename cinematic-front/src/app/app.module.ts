@@ -28,6 +28,7 @@ import { SalaCardComponent } from './components/sala-sistema/sala-card/sala-card
 import { SalaDetalheComponent } from './components/sala-sistema/sala-detalhe/sala-detalhe.component';
 import { SessaoListComponent } from './components/sessao-sistema/sessao-list/sessao-list.component';
 import { SessaoFormComponent } from './components/sessao-sistema/sessao-form/sessao-form.component';
+import { HorarioDetalheComponent } from './components/horario-sistema/horario-detalhe/horario-detalhe.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { SessaoFormComponent } from './components/sessao-sistema/sessao-form/ses
     SalaDetalheComponent,
     SessaoListComponent,
     SessaoFormComponent,
+    HorarioDetalheComponent,
   ],
   imports: [
     BrowserModule,

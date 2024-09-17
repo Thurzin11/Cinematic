@@ -9,9 +9,18 @@ import { IHorario } from '../../../model/IHorario';
 })
 export class HorarioListComponent implements OnInit{
 
+  detalheIsOpen: boolean= false;
   filtroIsOpen: boolean= false;
+  horarioDetalhe: IHorario= {
+    id: '',
+    horario: '',
+    status: false
+  }
+
   listaHorarios: IHorario[] = [];
-  constructor(private horarioService: HorarioService){}
+  constructor(private horarioService: HorarioService){
+      this.findAllHorario();
+  }
 
   ngOnInit(): void {
     this.findAllHorario()
@@ -23,5 +32,32 @@ export class HorarioListComponent implements OnInit{
 
   fecharFiltro(): void{
     this.filtroIsOpen=!this.filtroIsOpen;
+  }
+
+  abrirDetalhe(id: string): void{
+    let horario=this.listaHorarios.find(horario=> horario.id==id)
+
+    if (horario) {
+      this.horarioDetalhe = horario;
+      this.detalheIsOpen = true;
+    }
+  }
+
+  fecharDetalhe(): void {
+    this.detalheIsOpen = false;
+  }
+
+  inativar(id:string):void {
+    this.horarioService.inativar(id).subscribe(()=>{
+      this.findAllHorario();
+      this.fecharDetalhe();
+    });
+  }
+
+  ativar(id:string):void {
+    this.horarioService.ativar(id).subscribe(()=>{
+      this.findAllHorario();
+      this.fecharDetalhe();
+    });
   }
 }

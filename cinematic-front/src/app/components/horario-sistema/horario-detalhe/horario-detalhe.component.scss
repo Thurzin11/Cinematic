@@ -1,0 +1,35 @@
+@import '../../../style/color';
+
+.body {
+    background-color: $ROXO-ESCURO;
+    box-shadow: 0 .4rem .4rem $PRETO;
+}
+
+.fechar{
+  top: .5rem;
+  left: .5rem;
+  color: $BRANCO;
+  cursor: pointer;
+}
+
+.fechar:hover{
+  color: $VERMELHO;
+  transition: .2s;
+}
+
+.ativo{
+  background-color: $VERDE-ATIVO;
+}
+
+.inativo{
+  background-color: $VERMELHO;
+}
+
+.disponibilidade {
+  width: 2rem;
+  height: 2rem;
+}
+
+button:first-child{
+  background-color: $AMARELO;
+}
