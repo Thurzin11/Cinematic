@@ -79,7 +79,6 @@ public class SessaoController {
 
     @PatchMapping("/filtro")
     public ResponseEntity<List<Sessao>> filter(@RequestBody Map<String, List<String>> filterMap) {
-        System.out.println(filterMap);
         return ResponseEntity.ok(this.service.filters(filterMap));
     }
 
