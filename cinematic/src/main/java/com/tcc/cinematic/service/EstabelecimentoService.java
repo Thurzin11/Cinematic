@@ -45,4 +45,9 @@ public class EstabelecimentoService {
         this.repository.delete(estabelecimentoFound);
         return true;
     }
+
+    public List<Estabelecimento> findByNome(String nome){
+        nome = "%"+nome+"%";
+        return this.repository.findByNomeLike(nome);
+    }
 }

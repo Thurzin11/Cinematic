@@ -34,6 +34,12 @@ public class EstabelecimentoController {
         return ResponseEntity.ok(this.service.create(estabelecimento));
     }
 
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<List<Estabelecimento>> findByNome(@PathVariable String nome){
+        return ResponseEntity.ok(this.service.findByNome(nome));
+    }
+
+
     @PatchMapping
     public ResponseEntity<Estabelecimento> update(@RequestBody Estabelecimento estabelecimento) {
         var estabelecimentoReturn = this.service.update(estabelecimento);
