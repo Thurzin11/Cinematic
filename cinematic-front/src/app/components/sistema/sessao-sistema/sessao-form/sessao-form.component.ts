@@ -30,8 +30,9 @@ export class SessaoFormComponent implements OnInit{
     },
     horario: {
       id: '',
-      horario: '',
-      status: false
+      hora: '',
+      status: false,
+      periodo: ''
     },
     filme: {
       id: '',
@@ -71,7 +72,7 @@ export class SessaoFormComponent implements OnInit{
   idiomas: string[] = ['Legendado', 'Dublado', 'Original'];
   tipos: string[] = ['2D', '3D', '4D', 'D-BOX'];
   estabelecimentos: IEstabelecimento[] = [];
-  
+
   constructor(
     private salaService: SalaService,
     private filmeService: FilmeService,
@@ -89,7 +90,7 @@ export class SessaoFormComponent implements OnInit{
     }
 
      this.salaService.findAll().subscribe(salas => this.salas = salas);
-     this.filmeService.findAll().subscribe(filmes => this.filmes = filmes); 
+     this.filmeService.findAll().subscribe(filmes => this.filmes = filmes);
      this.horarioService.findAll().subscribe(horarios => this.horarios = horarios);
      this.estabelecimentoService.findAll().subscribe(estabelecimentos => this.estabelecimentos = estabelecimentos);
   }

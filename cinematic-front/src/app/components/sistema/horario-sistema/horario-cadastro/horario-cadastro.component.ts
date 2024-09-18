@@ -11,9 +11,12 @@ import { IHorario } from '../../../../model/IHorario';
 export class HorarioCadastroComponent {
   horario: IHorario= {
     id: '',
-    horario: '',
-    status: false
+    hora: '',
+    status: false,
+    periodo: ''
   }
+
+  periodoList: string[] = ["Manha", "Tarde", "Noite"];
 
   constructor(private horarioService: HorarioService, private router: Router){}
 

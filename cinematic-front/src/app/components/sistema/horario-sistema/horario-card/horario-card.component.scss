@@ -13,3 +13,10 @@ span{
 .inativo{
   background-color: $VERMELHO;
 }
+
+:host:hover{
+  transition: .2s;
+  scale: 105%;
+  box-shadow: 0 .2rem .2rem $PRETO;
+  cursor: pointer;
+}
