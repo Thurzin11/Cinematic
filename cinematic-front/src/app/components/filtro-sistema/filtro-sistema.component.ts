@@ -7,6 +7,7 @@ import { FilmeService } from '../../services/filme/filme.service';
 import { IBotaoValue } from '../../model/IBotaoValue';
 import { SalaService } from '../../services/sala/sala.service';
 import { SessaoService } from '../../services/sessao/sessao.service';
+import { HorarioService } from '../../services/horario/horario.service';
 @Component({
   selector: 'app-filtro-sistema',
   templateUrl: './filtro-sistema.component.html',
@@ -26,6 +27,7 @@ export class FiltroSistemaComponent implements OnInit {
   private filmeService: FilmeService = inject(FilmeService);
   private salaService: SalaService = inject(SalaService);
   private sessaoService: SessaoService = inject(SessaoService);
+  private horarioService: HorarioService = inject(HorarioService);
 
   ngOnInit(): void {
     this.initLists();
@@ -123,14 +125,15 @@ export class FiltroSistemaComponent implements OnInit {
         break;
       }
       case "SESSAO": {
-        console.log()
         this.sessaoService.filter(this.mapToObject(this.filterMap)).subscribe(sessoes => {
           this.onFilter.emit(sessoes);
         })
         break;
       }
       case "HORARIO": {
-        console.log('working...');
+        this.horarioService.filter(this.mapToObject(this.filterMap)).subscribe(horarios => {
+          this.onFilter.emit(horarios);
+        })
         break;
       }
       default: {

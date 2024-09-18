@@ -41,7 +41,7 @@ public class HorarioService {
 
         if (filtro.get("periodo") != null && !filtro.get("periodo").isEmpty()) {
             sql.append("AND h.periodo IN (:PERIODOS) ");
-            parans.put("PERIODOS",this.setPeriodo(filtro.get("periodo")));
+            parans.put("PERIODOS",this.setPeriodoFilter(filtro.get("periodo")));
         }
 
         if (filtro.get("status") != null && !filtro.get("status").isEmpty()) {
@@ -91,7 +91,16 @@ public class HorarioService {
         return true;
     }
 
-    private List<Periodo> setPeriodo(List<String> periodosParams){
+    private Periodo setPeriodo(String periodo) {
+        return switch (periodo.toUpperCase()) {
+            case "MANHA" -> Periodo.MANHA;
+            case "TARDE" -> Periodo.TARDE;
+            case "NOITE" -> Periodo.NOITE;
+            default -> null;
+        };
+    }
+
+    private List<Periodo> setPeriodoFilter(List<String> periodosParams){
         List<Periodo> periodos = new ArrayList<>();
         for (String str: periodosParams){
             switch (str.toUpperCase()){
