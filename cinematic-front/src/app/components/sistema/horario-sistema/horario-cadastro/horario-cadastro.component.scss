@@ -1,9 +1,10 @@
 @import "../../../../style/color";
 
 h2{
-  color: $AMARELO;
+  text-shadow: 0 .2rem .2rem $PRETO;
 
 }
+
 input, select{
   background-color: transparent;
   box-shadow: 0 .2rem .2rem $PRETO;

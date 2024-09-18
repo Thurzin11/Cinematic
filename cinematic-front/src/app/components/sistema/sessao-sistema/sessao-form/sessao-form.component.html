@@ -39,7 +39,7 @@
                     <div class="d-flex flex-column col-3">
                         <label for="horario" class="text-light fs-3">Horário</label>
                         <select name="horario" id="horario" class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.sessao.horario">
-                            <option *ngFor="let horario of this.horarios" [ngValue]="horario">{{ horario.horario }}</option>
+                            <option *ngFor="let horario of this.horarios" [ngValue]="horario">{{ horario.hora }}</option>
                         </select>
                     </div>
                 </div>

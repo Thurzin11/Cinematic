@@ -1,10 +1,13 @@
+@import '../../../../style/color';
+
 :host {
     position: relative;
-
+    
     app-plataforma-filme-detalhe {
         top: 5%;
         z-index: 2;
         left: 18.5%;
         width: 65%;
     }
+
 }
