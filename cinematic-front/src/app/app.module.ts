@@ -43,7 +43,10 @@ import { EstabelecimentoListComponent } from './components/sistema/estabelecimen
 import { EstabelecimentoCadastroComponent } from './components/sistema/estabelecimento-sistema/estabelecimento-cadastro/estabelecimento-cadastro.component';
 import { EstabelecimentoCardComponent } from './components/sistema/estabelecimento-sistema/estabelecimento-card/estabelecimento-card.component';
 import { EstabelecimentoDetalheComponent } from './components/sistema/estabelecimento-sistema/estabelecimento-detalhe/estabelecimento-detalhe.component';
-
+import { CategoriaListComponent } from './components/sistema/categoria-sistema/categoria-list/categoria-list.component';
+import { CategoriaFormComponent } from './components/sistema/categoria-sistema/categoria-form/categoria-form.component';
+import { CategoriaCardComponent } from './components/sistema/categoria-sistema/categoria-card/categoria-card.component';
+import { CategoriaDetalheComponent } from './components/sistema/categoria-sistema/categoria-detalhe/categoria-detalhe.component';
 
 register();
 @NgModule({
@@ -84,7 +87,11 @@ register();
     EstabelecimentoListComponent,
     EstabelecimentoCadastroComponent,
     EstabelecimentoCardComponent,
-    EstabelecimentoDetalheComponent
+    EstabelecimentoDetalheComponent,
+    CategoriaListComponent,
+    CategoriaFormComponent,
+    CategoriaCardComponent,
+    CategoriaDetalheComponent
   ],
   imports: [
     BrowserModule,

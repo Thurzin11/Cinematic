@@ -1,0 +1,9 @@
+@import '../../../../style/color';
+
+:host:hover {
+    cursor: pointer;
+    transition: .2s;
+    scale: 103%;
+    background-color: $ROXO-CLARO;
+    box-shadow: 0 .4rem .4rem $PRETO;
+}

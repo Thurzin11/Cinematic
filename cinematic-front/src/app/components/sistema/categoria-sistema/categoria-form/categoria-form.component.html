@@ -1,0 +1,15 @@
+<app-header-sistema></app-header-sistema>
+<div class="position-relative">
+    <app-menu-sistema class="position-absolute"></app-menu-sistema>
+    <div class="col-10 m-auto">
+        <h2 class="text-light fs-1 fw-bold">Salas</h2>
+        <div class="body border border-black rounded col-12 d-flex flex-column align-items-center flex-wrap border-bottom-0">
+            <div class="d-flex flex-column col-5 py-4">
+                <label class="text-light fs-3">Nome</label>
+                <input id="nome" type="text" placeholder="Digite o nome da categoria"
+                        class="p-2 rounded fs-5 mt-2 border border" [(ngModel)]="this.categoria.nome">
+            </div>
+            <button class="btn-salvar col-12 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" (click)="this.register()">Salvar</button>
+        </div>
+    </div>
+</div>

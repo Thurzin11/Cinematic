@@ -18,6 +18,8 @@ import { DestaqueCarroselComponent } from './components/plataforma/filme/destaqu
 import { LoginClienteComponent } from './components/plataforma/login-cliente/login-cliente.component';
 import { EstabelecimentoListComponent } from './components/sistema/estabelecimento-sistema/estabelecimento-list/estabelecimento-list.component';
 import { EstabelecimentoCadastroComponent } from './components/sistema/estabelecimento-sistema/estabelecimento-cadastro/estabelecimento-cadastro.component';
+import { CategoriaListComponent } from './components/sistema/categoria-sistema/categoria-list/categoria-list.component';
+import { CategoriaFormComponent } from './components/sistema/categoria-sistema/categoria-form/categoria-form.component';
 
 const routes: Routes = [
   {path: "sistema/home/:id", component: HomeSistemaComponent},
@@ -38,6 +40,9 @@ const routes: Routes = [
   {path: "sistema/sessao/editar/:id", component: SessaoFormComponent},
   {path: "sistema/estabelecimento",component:EstabelecimentoListComponent},
   {path: "sistema/estabelecimento/cadastro",component:EstabelecimentoCadastroComponent},
+  {path: "sistema/categoria", component: CategoriaListComponent},
+  {path: "sistema/categoria/cadastro", component: CategoriaFormComponent},
+  {path: "sistema/categoria/editar/:id", component: CategoriaFormComponent},
   {path: "cadastro", component: CadastroClienteComponent},
   {path: "home", component: HomeComponent},
   {path: "filme/carrossel", component: DestaqueCarroselComponent},
