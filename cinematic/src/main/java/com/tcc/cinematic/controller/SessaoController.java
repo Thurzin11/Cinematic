@@ -77,6 +77,12 @@ public class SessaoController {
         return new ResponseEntity<Sessao>(this.service.create(sessao), HttpStatus.CREATED);
     }
 
+    @PatchMapping("/filtro")
+    public ResponseEntity<List<Sessao>> filter(@RequestBody Map<String, List<String>> filterMap) {
+        System.out.println(filterMap);
+        return ResponseEntity.ok(this.service.filters(filterMap));
+    }
+
     @PatchMapping("/{id}")
     public ResponseEntity<Sessao> update(@RequestBody SessaoUpdateDTO sessaoUpdateDTO, @PathVariable UUID id) {
         var sessaoReturn = this.service.update(sessaoUpdateDTO, id);

@@ -5,7 +5,6 @@ import com.tcc.cinematic.DTO.FilmeUpdateDTO;
 import com.tcc.cinematic.entity.Filme;
 import com.tcc.cinematic.service.FilmeService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +49,6 @@ public class FilmeController {
 
     @PatchMapping("/filtro")
     public ResponseEntity<List<Filme>> filter(@RequestBody Map<String, List<String>> filter) {
-        System.out.println(filter);
         return ResponseEntity.ok(this.service.filters(filter));
     }
 
