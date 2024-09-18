@@ -18,7 +18,7 @@ public class Horario {
     @Setter(AccessLevel.NONE)
     private UUID id;
 
-    private String horario;
+    private String hora;
 
     private boolean status = true;
 

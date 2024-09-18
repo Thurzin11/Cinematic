@@ -1,5 +1,6 @@
 package com.tcc.cinematic.controller;
 
+import com.tcc.cinematic.DTO.HorarioRegisterDTO;
 import com.tcc.cinematic.entity.Horario;
 import com.tcc.cinematic.service.HorarioService;
 import jakarta.validation.Valid;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -31,9 +33,14 @@ public class  HorarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Horario> create(@RequestBody @Valid Horario horario){
-        var horarioReturn = this.service.create(horario);
+    public ResponseEntity<Horario> create(@RequestBody @Valid HorarioRegisterDTO horarioDTO){
+        var horarioReturn = this.service.create(horarioDTO);
         return new ResponseEntity(horarioReturn, HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/filtro")
+    public ResponseEntity<List<Horario>> filtro(@RequestBody Map<String,List<String>> filtro){
+        return ResponseEntity.ok(this.service.filtro(filtro));
     }
 
     @PatchMapping
