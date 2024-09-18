@@ -14,7 +14,7 @@ public record FilmeRegisterDTO(
         @NotNull @NotBlank String descricao,
         @NotNull @NotBlank String direcao,
         @NotNull @NotBlank String duracao,
-        @NotNull @NotBlank LocalDate dataEstreia,
+        @NotNull LocalDate dataEstreia,
         @NotNull @NotBlank String banner,
         @NotNull @NotBlank String status,
         List<String> trailers,

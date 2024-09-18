@@ -24,6 +24,11 @@ public class FilmeController {
         return ResponseEntity.ok(this.service.findAll());
     }
 
+    @GetMapping("/disponivel")
+    public ResponseEntity<List<Filme>> findAllByDisponibilidade() {
+        return ResponseEntity.ok(this.service.findAllByDisponibilidade());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Filme> findById(@PathVariable UUID id) {
         var filmeFound = this.service.findById(id);
@@ -35,6 +40,7 @@ public class FilmeController {
 
     @PostMapping
     public ResponseEntity<Filme> create(@RequestBody @Valid FilmeRegisterDTO filmeRegisterDTO) {
+        System.out.println(filmeRegisterDTO);
         return ResponseEntity.ok(this.service.create(filmeRegisterDTO));
     }
 
@@ -55,6 +61,24 @@ public class FilmeController {
     @PatchMapping("/nome")
     public ResponseEntity<List<Filme>> findByNomeIlike(@RequestBody String nome) {
         return ResponseEntity.ok(this.service.findByNomeIlike(nome));
+    }
+
+    @PatchMapping("/{id}/inativar")
+    public ResponseEntity<Boolean> inativar(@PathVariable UUID id) {
+        var returnInativar = this.service.inativar(id);
+        if(!returnInativar)
+            return ResponseEntity.badRequest().body(false);
+
+        return ResponseEntity.ok(true);
+    }
+
+    @PatchMapping("{id}/ativar")
+    public ResponseEntity<Boolean> ativar(@PathVariable UUID id) {
+        var returnAtivar = this.service.ativar(id);
+        if(!returnAtivar)
+            return ResponseEntity.badRequest().body(false);
+
+        return ResponseEntity.ok(true);
     }
 
     @DeleteMapping("/{id}")

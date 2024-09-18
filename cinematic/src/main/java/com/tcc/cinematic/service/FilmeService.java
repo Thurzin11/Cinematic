@@ -30,6 +30,10 @@ public class FilmeService {
         return this.repository.findAll();
     }
 
+    public List<Filme> findAllByDisponibilidade() {
+        return this.repository.findByDisponibilidadeTrue();
+    }
+
     public List<Filme> findByNomeIlike(String nome) {
         return this.repository.findByNomeIlike(nome);
     }
@@ -39,7 +43,7 @@ public class FilmeService {
             return null;
 
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT f FROM Filme f WHERE 1=1 ");
+        sql.append("SELECT f FROM Filme f WHERE 1=1 AND f.disponibilidade = true ");
         Map<String, Object> params = new HashMap<>();
 
         if(filter.get("categoria") != null && !filter.get("categoria").isEmpty()) {
@@ -76,6 +80,8 @@ public class FilmeService {
         var filme = Filme.builder()
                 .classificacao(this.setClassificacao(filmeRegisterDTO.classificacao()))
                 .dataEstreia(filmeRegisterDTO.dataEstreia())
+                .status(setStatus(filmeRegisterDTO.status()))
+                .disponibilidade(true)
                 .build();
 
         BeanUtils.copyProperties(filmeRegisterDTO, filme);

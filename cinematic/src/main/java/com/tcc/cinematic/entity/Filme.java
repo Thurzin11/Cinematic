@@ -31,7 +31,7 @@ public class Filme {
     @Column(length = 1000)
     private String descricao;
     private LocalDate dataEstreia;
-    private boolean disponibilidade = true;
+    private boolean disponibilidade;
     private String banner;
     private String direcao;
     private String distribuidora;

@@ -1,9 +1,6 @@
 package com.tcc.cinematic.controller;
 
-import com.tcc.cinematic.DTO.SessaoUpdateDTO;
-import com.tcc.cinematic.entity.Estabelecimento;
-import com.tcc.cinematic.entity.Filme;
-import com.tcc.cinematic.entity.Horario;
+import com.tcc.cinematic.DTO.SessaoRecordDTO;
 import com.tcc.cinematic.entity.Sessao;
 import com.tcc.cinematic.service.SessaoService;
 import jakarta.validation.Valid;
@@ -28,41 +25,6 @@ public class SessaoController {
         return ResponseEntity.ok(this.service.findAll());
     }
 
-    @GetMapping("/horario")
-    public ResponseEntity<List<Sessao>> findByHorarioBetween(@RequestBody Map<String, Horario> params) {
-        return ResponseEntity.ok(this.service.findByHorarioBetween(params.get("horarioInicial"), params.get("horarioFinal")));
-    }
-
-    @GetMapping("/filme")
-    public ResponseEntity<List<Sessao>> findByFilme(@RequestBody Filme filme) {
-        return ResponseEntity.ok(this.service.findByFilme(filme));
-    }
-
-    @GetMapping("/disponibilidade")
-    public ResponseEntity<List<Sessao>> findByDisponibilidade() {
-        return ResponseEntity.ok(this.service.findByDisponibilidade());
-    }
-
-    @GetMapping("/idioma")
-    public ResponseEntity<List<Sessao>> findByIdioma(@RequestBody Map<String, String> params) {
-        return ResponseEntity.ok(this.service.findByIdioma(params.get("idioma")));
-    }
-
-    @GetMapping("/tipo")
-    public ResponseEntity<List<Sessao>> findByTipo(@RequestBody Map<String, String> params) {
-        return ResponseEntity.ok(this.service.findByTipo(params.get("tipo")));
-    }
-
-    @GetMapping("/estabelecimento")
-    public ResponseEntity<List<Sessao>> findByEstabelecimento(@RequestBody Estabelecimento estabelecimento) {
-        return ResponseEntity.ok(this.service.findByEstabelecimento(estabelecimento));
-    }
-
-    @GetMapping("/data")
-    public ResponseEntity<List<Sessao>> findByData(@RequestBody Map<String, LocalDate> params) {
-        return ResponseEntity.ok(this.service.findByData(params.get("data")));
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Sessao> findById(@PathVariable UUID id) {
         var sessaoFound = this.service.findById(id);
@@ -73,7 +35,7 @@ public class SessaoController {
     }
 
     @PostMapping
-    public ResponseEntity<Sessao> create(@RequestBody @Valid SessaoUpdateDTO sessao) {
+    public ResponseEntity<Sessao> create(@RequestBody @Valid SessaoRecordDTO sessao) {
         return new ResponseEntity<Sessao>(this.service.create(sessao), HttpStatus.CREATED);
     }
 
@@ -82,9 +44,27 @@ public class SessaoController {
         return ResponseEntity.ok(this.service.filters(filterMap));
     }
 
+    @PatchMapping("/{id}/inativar")
+    public ResponseEntity<Boolean> inativar(@PathVariable UUID id) {
+        var returnInativar = this.service.inativar(id);
+        if(!returnInativar)
+            return ResponseEntity.badRequest().body(false);
+
+        return ResponseEntity.ok(true);
+    }
+
+    @PatchMapping("/{id}/ativar")
+    public ResponseEntity<Boolean> ativar(@PathVariable UUID id) {
+        var returnAtivar = this.service.ativar(id);
+        if(!returnAtivar)
+            return ResponseEntity.badRequest().body(false);
+
+        return ResponseEntity.ok(true);
+    }
+
     @PatchMapping("/{id}")
-    public ResponseEntity<Sessao> update(@RequestBody SessaoUpdateDTO sessaoUpdateDTO, @PathVariable UUID id) {
-        var sessaoReturn = this.service.update(sessaoUpdateDTO, id);
+    public ResponseEntity<Sessao> update(@RequestBody SessaoRecordDTO sessaoRecordDTO, @PathVariable UUID id) {
+        var sessaoReturn = this.service.update(sessaoRecordDTO, id);
         if(sessaoReturn == null)
             return ResponseEntity.badRequest().build();
 

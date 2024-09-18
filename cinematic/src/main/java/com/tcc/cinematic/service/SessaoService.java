@@ -1,6 +1,6 @@
 package com.tcc.cinematic.service;
 
-import com.tcc.cinematic.DTO.SessaoUpdateDTO;
+import com.tcc.cinematic.DTO.SessaoRecordDTO;
 import com.tcc.cinematic.entity.*;
 import com.tcc.cinematic.enums.*;
 import com.tcc.cinematic.repository.SessaoRepository;
@@ -27,34 +27,6 @@ public class SessaoService {
 
     public List<Sessao> findAll() {
         return this.repository.findAll();
-    }
-
-    public List<Sessao> findByHorarioBetween(Horario horarioInicial, Horario horarioFinal) {
-        return this.repository.findByHorarioBetween(horarioInicial, horarioFinal);
-    }
-
-    public List<Sessao> findByFilme(Filme filme) {
-        return this.repository.findByFilme(filme);
-    }
-
-    public List<Sessao> findByDisponibilidade() {
-        return this.repository.findByDisponibilidadeTrue();
-    }
-
-    public List<Sessao> findByEstabelecimento(Estabelecimento estabelecimento) {
-        return this.repository.findByEstabelecimento(estabelecimento);
-    }
-
-    public List<Sessao> findByIdioma(String idioma) {
-        return this.repository.findByIdioma(this.setIdioma(idioma));
-    }
-
-    public List<Sessao> findByTipo(String tipo) {
-        return this.repository.findByTipo(this.setTipo(tipo));
-    }
-
-    public List<Sessao> findByData(LocalDate data) {
-        return this.repository.findByData(data);
     }
 
     public Sessao findById(UUID id) {
@@ -100,7 +72,7 @@ public class SessaoService {
         return query.getResultList();
     }
 
-    public Sessao create(SessaoUpdateDTO sessaoParams) {
+    public Sessao create(SessaoRecordDTO sessaoParams) {
         var sessao = Sessao.builder()
                 .tipo(this.setTipo(sessaoParams.tipo()))
                 .idioma(this.setIdioma(sessaoParams.idioma()))
@@ -112,19 +84,37 @@ public class SessaoService {
         return this.repository.save(sessao);
     }
 
-    public Sessao update(SessaoUpdateDTO sessaoUpdateDTO, UUID id) {
+    public Sessao update(SessaoRecordDTO sessaoRecordDTO, UUID id) {
         var sessaoFound = this.findById(id);
         if(sessaoFound == null)
             return null;
 
-        if(!sessaoUpdateDTO.tipo().isEmpty())
-            sessaoFound.setTipo(this.setTipo(sessaoUpdateDTO.tipo()));
+        if(!sessaoRecordDTO.tipo().isEmpty())
+            sessaoFound.setTipo(this.setTipo(sessaoRecordDTO.tipo()));
 
-        if(!sessaoUpdateDTO.idioma().isEmpty())
-            sessaoFound.setIdioma(this.setIdioma(sessaoUpdateDTO.idioma()));
+        if(!sessaoRecordDTO.idioma().isEmpty())
+            sessaoFound.setIdioma(this.setIdioma(sessaoRecordDTO.idioma()));
 
-        BeanUtils.copyProperties(sessaoUpdateDTO, sessaoFound);
+        BeanUtils.copyProperties(sessaoRecordDTO, sessaoFound);
         return this.repository.save(sessaoFound);
+    }
+
+    public boolean inativar(UUID id) {
+        var sessao = this.findById(id);
+        if(sessao == null)
+            return false;
+
+        this.repository.inativar(id);
+        return true;
+    }
+
+    public boolean ativar(UUID id) {
+        var sessao = this.findById(id);
+        if(sessao == null)
+            return false;
+
+        this.repository.ativar(id);
+        return true;
     }
 
     public boolean delete(UUID id) {
@@ -211,21 +201,21 @@ public class SessaoService {
         };
     }
 
-    private List<String> setPeriodos(List<String> horario) {
-        List<String> horarios = new ArrayList<>();
+    private List<Periodo> setPeriodos(List<String> periodosParams) {
+        List<Periodo> periodos = new ArrayList<>();
 
-        for(String hora:horario) {
+        for(String hora:periodosParams) {
             switch (hora.toUpperCase()) {
                 case "MANHA": {
-                    horarios.add("7:30");
+                    periodos.add(Periodo.MANHA);
                     break;
                 }
                 case "TARDE": {
-                    horarios.add("12:00");
+                    periodos.add(Periodo.TARDE);
                     break;
                 }
                 case "NOITE": {
-                    horarios.add("18:00");
+                    periodos.add(Periodo.NOITE);
                     break;
                 }
                 default: {
@@ -234,7 +224,7 @@ public class SessaoService {
             };
         }
 
-        return horarios;
+        return periodos;
     }
 
     private List<Boolean> setDisponibilidade(List<String> status) {

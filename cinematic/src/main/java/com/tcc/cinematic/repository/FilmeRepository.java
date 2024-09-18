@@ -26,4 +26,5 @@ public interface FilmeRepository extends JpaRepository<Filme, UUID> {
     @Transactional
     @Query("UPDATE Filme f SET f.disponibilidade = true WHERE f.id = :ID")
     void ativar(@Param("ID") UUID id);
+    List<Filme> findByDisponibilidadeTrue();
 }

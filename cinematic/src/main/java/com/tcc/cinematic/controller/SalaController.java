@@ -3,6 +3,7 @@ package com.tcc.cinematic.controller;
 import com.tcc.cinematic.DTO.SalaRecordDTO;
 import com.tcc.cinematic.entity.Sala;
 import com.tcc.cinematic.service.SalaService;
+import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,12 +35,12 @@ public class SalaController {
     }
 
     @PostMapping
-    public ResponseEntity<Sala> create(@RequestBody SalaRecordDTO salaRecordDTO) {
+    public ResponseEntity<Sala> create(@RequestBody @Valid SalaRecordDTO salaRecordDTO) {
         return new ResponseEntity<Sala>(this.service.create(salaRecordDTO), HttpStatus.CREATED);
     }
 
     @PatchMapping
-    public ResponseEntity<Sala> update(@RequestBody SalaRecordDTO salaRecordDTO) {
+    public ResponseEntity<Sala> update(@RequestBody @Valid SalaRecordDTO salaRecordDTO) {
         var salaReturn = this.service.update(salaRecordDTO);
         if(salaReturn == null)
             return ResponseEntity.badRequest().build();
