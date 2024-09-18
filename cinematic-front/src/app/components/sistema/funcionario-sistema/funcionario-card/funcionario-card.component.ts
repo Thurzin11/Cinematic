@@ -13,14 +13,10 @@ export class FuncionarioCardComponent {
   @Input() status: boolean = false;
   @Input() tipoUsuario: ITipoUsuario | string = '';
 
-  usuarios: IUsuario[] = [];
-
   usuarioIsAtivo(status: boolean): boolean{
     if(status)
       return true;
     return false;
   }
-
-
 
 }

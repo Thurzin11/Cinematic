@@ -1,0 +1,39 @@
+@import "../../../../style/color";
+
+h2{
+  color: $BRANCO;
+
+}
+.cadastra-funcionario{
+  border: solid 2 px $PRETO;
+}
+.inpt{
+  margin: 0 auto;
+}
+button{
+  background-color: $AMARELO;
+}
+input{
+  padding: 10px 10px;
+  background-color: transparent;
+}
+input:hover,select:hover{
+  scale: 102%;
+  transition: .2s;
+}
+
+input:focus,select:focus{
+  background-color: $BRANCO;
+  scale: 102%;
+  transition: .2s;
+  outline: 0;
+}
+input::placeholder{
+  color: $PRETO;
+}
+input::placeholder:focus{
+  color: $BRANCO;
+}
+select{
+  background-color: transparent;
+}

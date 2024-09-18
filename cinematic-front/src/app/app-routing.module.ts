@@ -16,6 +16,8 @@ import { CadastroClienteComponent } from './components/plataforma/cadastro-clien
 import { HomeComponent } from './components/plataforma/home/home/home.component';
 import { DestaqueCarroselComponent } from './components/plataforma/filme/destaque-carrosel/destaque-carrosel.component';
 import { LoginClienteComponent } from './components/plataforma/login-cliente/login-cliente.component';
+import { EstabelecimentoListComponent } from './components/sistema/estabelecimento-sistema/estabelecimento-list/estabelecimento-list.component';
+import { EstabelecimentoCadastroComponent } from './components/sistema/estabelecimento-sistema/estabelecimento-cadastro/estabelecimento-cadastro.component';
 
 const routes: Routes = [
   {path: "sistema/home/:id", component: HomeSistemaComponent},
@@ -34,6 +36,8 @@ const routes: Routes = [
   {path: "sistema/sessao", component: SessaoListComponent},
   {path: "sistema/sessao/cadastro", component: SessaoFormComponent},
   {path: "sistema/sessao/editar/:id", component: SessaoFormComponent},
+  {path: "sistema/estabelecimento",component:EstabelecimentoListComponent},
+  {path: "sistema/estabelecimento/cadastro",component:EstabelecimentoCadastroComponent},
   {path: "cadastro", component: CadastroClienteComponent},
   {path: "home", component: HomeComponent},
   {path: "filme/carrossel", component: DestaqueCarroselComponent},

@@ -50,7 +50,7 @@
       <div class="d-flex flex-column col-7 me-2">
         <label for="cidade" class="fs-4">Cidade</label>
         <select name="cidade" id="cidade" class="rounded-3 p-1 fs-5" [(ngModel)]="this.usuario.cidade">
-          <option *ngFor="let cidade of cidades" [value]="">{{cidade.nome}}</option>
+          <option *ngFor="let cidade of cidades" [value]="cidade.nome">{{cidade.nome}}</option>
         </select>
       </div>
     </div>
