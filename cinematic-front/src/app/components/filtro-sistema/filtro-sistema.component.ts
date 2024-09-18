@@ -1,11 +1,12 @@
 import { UsuarioService } from './../../services/usuario/usuario.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { CategoriaService } from '../../services/categoria/categoria.service';
 import { IBotao } from '../../model/IBotao';
 import { IFilter } from '../../model/IFilter';
 import { FilmeService } from '../../services/filme/filme.service';
 import { IBotaoValue } from '../../model/IBotaoValue';
 import { SalaService } from '../../services/sala/sala.service';
+import { SessaoService } from '../../services/sessao/sessao.service';
 @Component({
   selector: 'app-filtro-sistema',
   templateUrl: './filtro-sistema.component.html',
@@ -20,11 +21,11 @@ export class FiltroSistemaComponent implements OnInit {
   botoes: IBotao[] = [];
   filterList: IFilter[] = [];
   filterMap: Map<string, string[]> = new Map();
-  constructor(
-    private usuarioService: UsuarioService,
-    private categoriaService: CategoriaService,
-    private filmeService: FilmeService,
-    private salaService: SalaService) { }
+  private usuarioService: UsuarioService = inject(UsuarioService);
+  private categoriaService: CategoriaService = inject(CategoriaService);
+  private filmeService: FilmeService = inject(FilmeService);
+  private salaService: SalaService = inject(SalaService);
+  private sessaoService: SessaoService = inject(SessaoService);
 
   ngOnInit(): void {
     this.initLists();
@@ -121,7 +122,10 @@ export class FiltroSistemaComponent implements OnInit {
         break;
       }
       case "SESSAO": {
-        console.log('working...');
+        console.log()
+        this.sessaoService.filter(this.mapToObject(this.filterMap)).subscribe(sessoes => {
+          this.onFilter.emit(sessoes);
+        })
         break;
       }
       case "HORARIO": {
@@ -129,7 +133,6 @@ export class FiltroSistemaComponent implements OnInit {
         break;
       }
       default: {
-        console.log('working...');
         break;
       }
     }
