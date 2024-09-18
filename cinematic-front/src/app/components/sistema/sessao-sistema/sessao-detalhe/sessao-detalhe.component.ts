@@ -22,8 +22,9 @@ export class SessaoDetalheComponent implements OnInit, OnChanges{
     },
     horario: {
       id: '',
-      horario: '',
-      status: false
+      hora: '',
+      status: false,
+      periodo: ''
     },
     filme: {
       id: '',

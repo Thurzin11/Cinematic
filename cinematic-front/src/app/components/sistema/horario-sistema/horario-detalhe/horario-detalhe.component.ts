@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IHorario } from '../../../model/IHorario';
+import { IHorario } from '../../../../model/IHorario';
 
 @Component({
   selector: 'app-horario-detalhe',
@@ -14,8 +14,9 @@ export class HorarioDetalheComponent {
 
   @Input() horarioDetalhe: IHorario= {
       id: '',
-      horario: '',
-      status: false
+      hora: '',
+      status: false,
+      periodo: ''
     }
 
 

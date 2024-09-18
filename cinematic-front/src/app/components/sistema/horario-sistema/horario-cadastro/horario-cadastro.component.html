@@ -2,21 +2,22 @@
 <div class="position-relative">
   <app-menu-sistema class="position-absolute"></app-menu-sistema>
   <div class="col-10 mx-auto">
-    <h2 class="mb-5 fs-1">Horários</h2>
-    <div class="border border-black rounded-bottom-0 p-3 d-flex rounded-3 body pb-4">
-      <div class="col-6">
-        <label class="text-light fs-3 d-flex fw-bold pb-2" for="hora">Hora</label>
-        <input class="rounded-3 border border-black py-2 ps-2 col-8" id="hora" type="text" placeholder="Digite o horário" [(ngModel)]="this.horario.horario">
+    <h2 class="text-light fw-bold fs-1">Horários</h2>
+    <div class="border border-black d-flex rounded-3 body flex-column pt-4">
+      <div class="d-flex">
+        <div class="col-6 align-items-center d-flex flex-column">
+          <label class="text-light fs-3 d-flex fw-bold pb-2 text-start col-8">Hora</label>
+          <input class="rounded-3 border border-black py-2 ps-2 col-8" id="hora" type="text" placeholder="Digite o horário" [(ngModel)]="this.horario.hora">
+        </div>
+        <div class="col-6 align-items-center d-flex flex-column">
+          <label class="text-light fs-3 d-flex fw-bold pb-2 text-start col-8">Periodo</label>
+          <select class="rounded-3 border border-black py-2 ps-2 col-8" name="periodo" id="periodo" [(ngModel)]="this.horario.periodo">
+            <option value="true" *ngFor="let periodo of this.periodoList" [value]="periodo">{{periodo}}</option>
+          </select>
+        </div>
       </div>
-      <div class="col-6">
-        <label class="text-light fs-3 d-flex fw-bold pb-2" for="status">Status</label>
-        <select class="rounded-3 border border-black py-2 ps-2 col-4" name="status" id="status" [(ngModel)]="this.horario.status">
-          <option value="true">Ativo</option>
-          <option value="false">Inativo</option>
-        </select>
-      </div>
+      <button class="fw-bold fs-3 col-12 rounded-bottom-3 border border-black border-top-0 py-2 mt-5" (click)="cadastrar(this.horario)">Salvar</button>
     </div>
-    <button class="fw-bold fs-3 col-12 rounded-bottom-3 border border-black border-top-0 py-2" (click)="cadastrar(this.horario)">Salvar</button>
   </div>
 </div>
 

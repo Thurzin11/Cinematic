@@ -1,25 +1,25 @@
 @import "../../../../style/color";
 
 h2{
-  color: $AMARELO;
+  text-shadow: 0 .2rem .2rem $PRETO;
 }
 
 app-menu-sistema{
   z-index: 1;
 }
 
-button, select{
+ select{
   background-color: transparent;
   box-shadow: 0 .2rem .2rem $PRETO;
 }
 
-button:focus,select:focus{
+ select:focus{
   outline: 0;
   background-color: $BRANCO;
   scale: 103%;
 }
 
-button:hover, select:hover{
+ select:hover{
   transition: .2s;
   scale: 103%;
   background-color: $BRANCO;
@@ -38,3 +38,25 @@ app-horario-detalhe{
     top: 10%;
     width: 50%;
 }
+
+.body{
+  box-shadow: 0 .4rem .4rem $PRETO;
+}
+
+button{
+  opacity: .7;
+  box-shadow: 0 .2rem .2rem $PRETO;
+}
+
+button:hover{
+  transition: .2s;
+  scale: 105%;
+  background-color: $AMARELO;
+  opacity: 1;
+}
+
+span{
+  cursor: pointer;
+
+}
+

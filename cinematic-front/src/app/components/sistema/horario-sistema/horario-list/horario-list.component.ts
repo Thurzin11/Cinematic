@@ -13,8 +13,9 @@ export class HorarioListComponent implements OnInit{
   filtroIsOpen: boolean= false;
   horarioDetalhe: IHorario= {
     id: '',
-    horario: '',
-    status: false
+    hora: '',
+    status: false,
+    periodo: ''
   }
 
   listaHorarios: IHorario[] = [];
