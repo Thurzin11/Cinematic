@@ -31,6 +31,7 @@ export class FiltroSistemaComponent implements OnInit {
 
   ngOnInit(): void {
     this.initLists();
+    console.log()
   }
 
   verificarEmail(email: string): void {
