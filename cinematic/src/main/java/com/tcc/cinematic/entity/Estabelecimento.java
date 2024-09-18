@@ -20,6 +20,6 @@ public class Estabelecimento {
     private UUID id;
     private String nome;
     private String endereco;
-    private String cida .de;
+    private String cidade;
     private String estado;
 }
