@@ -31,6 +31,11 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaFound);
     }
 
+    @PatchMapping("/nome")
+    public ResponseEntity<List<Categoria>> findByNomeLike(@RequestBody String nome) {
+        return ResponseEntity.ok(this.service.findByNome(nome));
+    }
+
     @PostMapping
     public ResponseEntity<Categoria> create(@RequestBody @Valid Categoria categoria) {
         var categoriaFound = this.service.create(categoria);

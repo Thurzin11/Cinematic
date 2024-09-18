@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 @Service
 public class CategoriaService {
@@ -23,8 +22,8 @@ public class CategoriaService {
         return this.repository.findById(id).orElse(null);
     }
 
-    public Categoria findByNome(String nome) {
-        return this.repository.findByNome(nome).orElse(null);
+    public List<Categoria> findByNome(String nome) {
+        return this.repository.findByNomeLike(nome);
     }
 
     public Categoria create(Categoria categoria) {
