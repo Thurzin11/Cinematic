@@ -39,6 +39,10 @@ import { HomeCarrosselComponent } from './components/plataforma/home/home-carros
 import { DestaqueDetalheCarrosselComponent } from './components/plataforma/filme/destaque-detalhe-carrossel/destaque-detalhe-carrossel.component';
 import { DestaqueCarroselComponent } from './components/plataforma/filme/destaque-carrosel/destaque-carrosel.component';
 import { LoginClienteComponent } from './components/plataforma/login-cliente/login-cliente.component';
+import { CategoriaListComponent } from './components/sistema/categoria-sistema/categoria-list/categoria-list.component';
+import { CategoriaFormComponent } from './components/sistema/categoria-sistema/categoria-form/categoria-form.component';
+import { CategoriaCardComponent } from './components/sistema/categoria-sistema/categoria-card/categoria-card.component';
+import { CategoriaDetalheComponent } from './components/sistema/categoria-sistema/categoria-detalhe/categoria-detalhe.component';
 
 
 register();
@@ -76,7 +80,11 @@ register();
     HomeCarrosselComponent,
     HomeComponent,
     PlataformaFilmeDetalheComponent,
-    LoginClienteComponent
+    LoginClienteComponent,
+    CategoriaListComponent,
+    CategoriaFormComponent,
+    CategoriaCardComponent,
+    CategoriaDetalheComponent
   ],
   imports: [
     BrowserModule,
