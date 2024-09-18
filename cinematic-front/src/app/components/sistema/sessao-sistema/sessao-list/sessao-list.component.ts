@@ -24,8 +24,9 @@ export class SessaoListComponent implements OnInit{
     },
     horario: {
       id: '',
-      horario: '',
-      status: false
+      hora: '',
+      status: false,
+      periodo: ''
     },
     filme: {
       id: '',
@@ -91,7 +92,7 @@ export class SessaoListComponent implements OnInit{
   }
 
   ativarSessao(id: string): void {
-    
+
   }
 
   inativarSessao(id: string): void {

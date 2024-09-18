@@ -16,6 +16,14 @@ export class HorarioService {
   }
 
   create(horario: IHorario): Observable<IHorario> {
-    return this.http.post<IHorario>(`${Environment.urlApi}/horario`, horario)
+    return this.http.post<IHorario>(`${Environment.urlApi}/horario`, horario);
+  }
+
+  inativar(id:string): Observable<boolean> {
+    return this.http.patch<boolean>(`${Environment.urlApi}/horario/${id}/inativar` , {});
+  }
+
+  ativar(id:string): Observable<boolean> {
+    return this.http.patch<boolean>(`${Environment.urlApi}/horario/${id}/ativar` , {});
   }
 }

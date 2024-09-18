@@ -20,8 +20,9 @@ export class SessaoCardComponent implements OnInit{
     },
     horario: {
       id: '',
-      horario: '',
-      status: false
+      hora: '',
+      status: false,
+      periodo: ''
     },
     filme: {
       id: '',

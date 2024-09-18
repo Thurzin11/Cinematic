@@ -10,8 +10,9 @@ export class HorarioCardComponent {
 
   @Input() horario: IHorario = {
     id: '',
-    horario: '',
-    status: false
+    hora: '',
+    status: false,
+    periodo: ''
   };
 
 }

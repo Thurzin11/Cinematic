@@ -3,6 +3,7 @@ import { IFilme } from '../../../../model/IFilme';
 import { FilmeService } from '../../../../services/filme/filme.service';
 import { IUsuario } from '../../../../model/IUsuario';
 import { ActivatedRoute } from '@angular/router';
+import { UsuarioService } from '../../../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-home',
@@ -45,14 +46,16 @@ export class HomeComponent implements OnInit {
     }
 
   private filmeService: FilmeService = inject(FilmeService);
+  private usuarioService: UsuarioService = inject(UsuarioService);
   private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
-    const usuario: IUsuario = this.route.snapshot.queryParams['usuario'];
-    console.log(usuario);
+    const id: string | undefined = this.route.snapshot.queryParams['id'];
+    if(id) {
+      this.usuarioService.findById(id).subscribe(usuario => {this.usuario = usuario; console.log(this.usuario)});
+    }
 
     this.filmeService.findAll().subscribe(filmes => {
-      console.log(filmes);
       this.filmesDestaque = filmes.filter(filme => filme.status.toString().toLowerCase() === 'destaque');
       this.filmesCartaz = filmes.filter(filme => filme.status.toString().toLowerCase() === 'cartaz');
       this.filmesLancamento = filmes.filter(filme => filme.status.toString().toLowerCase() === 'lancamento');

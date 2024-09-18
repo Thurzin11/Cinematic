@@ -18,6 +18,10 @@ export class SessaoService {
   findById(id: string): Observable<ISessao> {
     return this.http.get<ISessao>(`${Environment.urlApi}/sessao/${id}`);
   }
+  
+  filter(filter:{ [key:  string]: string[] }): Observable<ISessao[]> {
+    return this.http.patch<ISessao[]>(`${Environment.urlApi}/sessao/filtro`, filter);
+  }
 
   create(sessao: ISessao): Observable<ISessao> {
     return this.http.post<ISessao>(`${Environment.urlApi}/sessao`, sessao);
