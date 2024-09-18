@@ -15,6 +15,10 @@ export class FilmeService {
     return this.http.get<IFilme[]>(`${Environment.urlApi}/filme`);
   }
 
+  findAllByDisponibilidade(): Observable<IFilme[]> {
+    return this.http.get<IFilme[]>(`${Environment.urlApi}/filme/disponivel`);
+  }
+
   findByNomeIlike(nome: string): Observable<IFilme[]> {
     return this.http.patch<IFilme[]>(`${Environment.urlApi}/filme/nome`, nome);
   }
@@ -29,5 +33,13 @@ export class FilmeService {
 
   create(filme: IFilme): Observable<IFilme> {
     return this.http.post<IFilme>(`${Environment.urlApi}/filme`, filme)
+  }
+
+  inativar(id: string): Observable<boolean> {
+    return this.http.patch<boolean>(`${Environment.urlApi}/filme/${id}/inativar`, {});
+  }
+
+  ativar(id: string): Observable<boolean> {
+    return this.http.patch<boolean>(`${Environment.urlApi}/filme/${id}/ativar`, {});
   }
 }

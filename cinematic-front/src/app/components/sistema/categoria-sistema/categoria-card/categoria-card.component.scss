@@ -7,3 +7,7 @@
     background-color: $ROXO-CLARO;
     box-shadow: 0 .4rem .4rem $PRETO;
 }
+
+:host {
+    box-shadow: 0 .2rem .2rem $PRETO;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SalaService } from '../../../../services/sala/sala.service';
 import { ISala } from '../../../../model/ISala';
 import { FilmeService } from '../../../../services/filme/filme.service';
@@ -73,15 +73,13 @@ export class SessaoFormComponent implements OnInit{
   tipos: string[] = ['2D', '3D', '4D', 'D-BOX'];
   estabelecimentos: IEstabelecimento[] = [];
 
-  constructor(
-    private salaService: SalaService,
-    private filmeService: FilmeService,
-    private horarioService: HorarioService,
-    private sessaoService: SessaoService,
-    private estabelecimentoService: EstabelecimentoService,
-    private router: Router,
-    private route: ActivatedRoute
-    ) {}
+  private salaService: SalaService = inject(SalaService);
+  private filmeService: FilmeService = inject(FilmeService);
+  private horarioService: HorarioService = inject(HorarioService);
+  private sessaoService: SessaoService = inject(SessaoService);
+  private estabelecimentoService: EstabelecimentoService = inject(EstabelecimentoService);
+  private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get("id");
@@ -90,7 +88,7 @@ export class SessaoFormComponent implements OnInit{
     }
 
      this.salaService.findAll().subscribe(salas => this.salas = salas);
-     this.filmeService.findAll().subscribe(filmes => this.filmes = filmes);
+     this.filmeService.findAllByDisponibilidade().subscribe(filmes => this.filmes = filmes);
      this.horarioService.findAll().subscribe(horarios => this.horarios = horarios);
      this.estabelecimentoService.findAll().subscribe(estabelecimentos => this.estabelecimentos = estabelecimentos);
   }

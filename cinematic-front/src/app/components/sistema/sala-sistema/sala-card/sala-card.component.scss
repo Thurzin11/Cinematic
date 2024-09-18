@@ -7,6 +7,10 @@
     background-color: $ROXO-CLARO;
 }
 
+:host {
+    box-shadow: 0 .2rem .2rem $PRETO;
+}
+
 .ativo {
     background-color: $VERDE-ATIVO;
 }

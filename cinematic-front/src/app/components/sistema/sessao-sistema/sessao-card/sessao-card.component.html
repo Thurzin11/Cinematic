@@ -1,18 +1,18 @@
 <div class="px-2 py-2 d-flex justify-content-between align-items-center">
     <div class="d-flex flex-column">
-        <p class="text-light fs-3 mb-0">{{ this.sessao.estabelecimento.nome }}</p>
-        <p class="text-light fs-5 fst-italic mb-0">{{ this.sessao.filme.nome }}</p>
+        <p class="text-light fs-4 mb-0">{{ this.sessao.estabelecimento.nome }}</p>
+        <p class="text-light fst-italic mb-0">{{ this.sessao.filme.nome }}</p>
     </div>
     <div class="d-flex flex-column align-items-end">
-        <p class="text-light fs-3 mb-0">{{ this.sessao.horario.hora }}</p>
-        <p class="text-light fs-5 fst-italic mb-0">{{ this.sessao.data.toString() }}</p>
+        <p class="text-light fs-4 mb-0">{{ this.sessao.horario.hora }}</p>
+        <p class="text-light fst-italic mb-0">{{ this.sessao.data.toString() }}</p>
     </div>
 </div>
 <div class="px-2 py-2 d-flex justify-content-between align-items-center pt-3">
-    <div class="col-8 d-flex align-items-center justify-content-between">
-        <p class="text-light fs-4 mb-0">Sala {{ this.sessao.sala.numero }}</p>
-        <p class="idioma text-black fw-semibold fs-5 mb-0 border border-black rounded-4 p-1 px-4">{{ this.sessao.idioma.toString().toLowerCase() }}</p>
-        <p class="tipo text-black fw-semibold fs-5 mb-0 border border-black rounded-4 p-1 px-4">{{ this.tipo }}</p>
+    <div class="col-10 d-flex align-items-center justify-content-between">
+        <p class="text-light mb-0">Sala {{ this.sessao.sala.numero }}</p>
+        <p class="idioma text-black fw-semibold mb-0 border border-black rounded-4 p-1 px-4">{{ this.sessao.idioma.toString().toLowerCase() }}</p>
+        <p class="tipo text-black fw-semibold mb-0 border border-black rounded-4 p-1 px-4">{{ this.tipo }}</p>
     </div>
     <span class="text-light p-2 border border-black rounded-circle text-center" [ngClass]="this.sessao.disponibilidade ? 'ativo':'inativo'"></span>
 </div>

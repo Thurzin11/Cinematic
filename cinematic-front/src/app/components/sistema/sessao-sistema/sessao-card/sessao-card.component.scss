@@ -5,6 +5,9 @@
     transition: .2s;
     scale: 103%;
     background-color: $ROXO-CLARO;
+}
+
+:host {
     box-shadow: 0 .4rem .4rem $PRETO;
 }
 

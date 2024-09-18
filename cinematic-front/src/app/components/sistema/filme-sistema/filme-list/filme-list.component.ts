@@ -49,7 +49,7 @@ export class FilmeListComponent implements OnInit{
   }
 
   private findAllFilmes(): void {
-    this.filmeService.findAll().subscribe(filmes => this.filmes = filmes);
+    this.filmeService.findAllByDisponibilidade().subscribe(filmes => this.filmes = filmes);
   }
 
   toggleFiltro(): void {

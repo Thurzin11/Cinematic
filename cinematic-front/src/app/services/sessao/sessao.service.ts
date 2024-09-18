@@ -26,4 +26,12 @@ export class SessaoService {
   create(sessao: ISessao): Observable<ISessao> {
     return this.http.post<ISessao>(`${Environment.urlApi}/sessao`, sessao);
   }
+
+  inativar(id: string): Observable<boolean> {
+    return this.http.patch<boolean>(`${Environment.urlApi}/sessao/${id}/inativar`, {});
+  }
+
+  ativar(id: string): Observable<boolean> {
+    return this.http.patch<boolean>(`${Environment.urlApi}/sessao/${id}/ativar`, {});
+  }
 }

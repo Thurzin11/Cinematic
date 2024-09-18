@@ -9,12 +9,10 @@
         [tipo]="'HORARIO'"
         (onCloseFilter)="fecharFiltro()"
         *ngIf="this.filtroIsOpen"
-        (onFilter)="this.listaHorarios = $event"
       ></app-filtro-sistema>
       <div
         class="d-flex justify-content-between flex-column"
-        [ngClass]="this.filtroIsOpen ? 'col-10' : 'col-12'"
-      >
+        [ngClass]="this.filtroIsOpen ? 'col-10' : 'col-12'">
         <div class="p-3">
           <div
             class="d-flex"

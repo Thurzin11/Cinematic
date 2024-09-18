@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { IFilme } from '../../../../model/IFilme';
 import { IStatusFilme } from '../../../../model/IStatusFilme';
+import { FilmeService } from '../../../../services/filme/filme.service';
 
 @Component({
   selector: 'app-filme-detalhe',
@@ -32,6 +33,8 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
   classificacaoClass: string = '';
   classificacao: string = '';
   status: string = '';
+  
+  private filmeService: FilmeService = inject(FilmeService);
 
   ngOnInit(): void {
     this.setClassificacao()
@@ -105,5 +108,9 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
 
   closeDetails(): void {
     this.onCloseDetails.emit();
+  }
+
+  inativar(id: string): void {
+    this.filmeService.inativar(id).subscribe(() => this.onCloseDetails.emit());
   }
 }

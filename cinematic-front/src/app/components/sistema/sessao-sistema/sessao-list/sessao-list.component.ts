@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ISessao } from '../../../../model/ISessao';
 import { SessaoService } from '../../../../services/sessao/sessao.service';
 
@@ -62,9 +62,7 @@ export class SessaoListComponent implements OnInit{
   };
   idSessaoDetails: string = '';
 
-  constructor(private sessaoService: SessaoService) {
-    this.findAllSessoes();
-  }
+  private sessaoService: SessaoService = inject(SessaoService);
 
   ngOnInit(): void {
     this.findAllSessoes();
@@ -92,10 +90,16 @@ export class SessaoListComponent implements OnInit{
   }
 
   ativarSessao(id: string): void {
-
+    this.sessaoService.ativar(id).subscribe(() => {
+      this.closeDetails();
+      this.findAllSessoes();
+    })
   }
 
   inativarSessao(id: string): void {
-
+    this.sessaoService.inativar(id).subscribe(() => {
+      this.closeDetails();
+      this.findAllSessoes();
+    })
   }
 }

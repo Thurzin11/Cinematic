@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ISala } from '../../../../model/ISala';
 import { SalaService } from '../../../../services/sala/sala.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,19 +21,17 @@ export class SalaFormComponent implements OnInit{
   tipos: string[] = ['Cinema', 'Evento', 'Teatro'];
   tamanhos: string[] = ['Grande', 'Media', 'Pequena'];
 
-  constructor(
-    private salaService: SalaService, 
-    private router: Router,
-    private route: ActivatedRoute) {}
+  private salaService: SalaService = inject(SalaService);
+  private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get("id");
     if(id)
-      this.salaService.findById(id).subscribe(sala => this.sala = sala);
+      this.salaService.findById(id).subscribe(sala => {this.sala = sala; console.log(this.sala)});
   }
 
   register(): void {
-    this.salaService.create(this.sala).subscribe();
-    this.router.navigate(['/sistema/sala']);
+    this.salaService.create(this.sala).subscribe(() => this.router.navigate(['/sistema/sala']));
   }
 }
