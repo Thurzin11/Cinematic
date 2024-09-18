@@ -100,8 +100,9 @@ export class FiltroSistemaComponent implements OnInit {
       if (!this.filterMap.has(filter.label.toLowerCase()))
         this.filterMap.set(filter.label.toLowerCase(), [filter.value.nome.toLowerCase()]);
     })
-    
+
     this.routes();
+
   }
 
   private routes(): void {

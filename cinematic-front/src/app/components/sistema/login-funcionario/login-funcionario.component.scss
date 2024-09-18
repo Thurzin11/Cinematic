@@ -5,19 +5,8 @@
   border-radius: 20px;
   border: $PRETO solid .2rem;
   box-shadow: 0 .4rem .4rem $PRETO;
-  input{
-    border-radius: 5px;
-
-  }
   input:focus{
-    outline: 0;
-    box-shadow: 0 .4rem .4rem $PRETO;
-    scale: 105%;
-  }
-  input:hover, .btn-logar:hover{
-    transition: .2s;
-    box-shadow: 0 .4rem .4rem $PRETO;
-    scale: 105%;
+    outline: none;
   }
   // label{
     //   font-size: 2.2rem;

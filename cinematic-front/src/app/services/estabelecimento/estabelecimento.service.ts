@@ -14,4 +14,12 @@ export class EstabelecimentoService {
   findAll(): Observable<IEstabelecimento[]> {
     return this.http.get<IEstabelecimento[]>(`${Environment.urlApi}/estabelecimento`);
   }
+
+  create(estabelecimento: IEstabelecimento): Observable<IEstabelecimento>{
+    return this.http.post<IEstabelecimento>(`${Environment.urlApi}/estabelecimento`,estabelecimento);
+  }
+
+  findByNome(nome: string): Observable<IEstabelecimento[]>{
+    return this.http.get<IEstabelecimento[]>(`${Environment.urlApi}/estabelecimento/nome/${nome}`);
+  }
 }

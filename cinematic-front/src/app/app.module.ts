@@ -39,11 +39,14 @@ import { HomeCarrosselComponent } from './components/plataforma/home/home-carros
 import { DestaqueDetalheCarrosselComponent } from './components/plataforma/filme/destaque-detalhe-carrossel/destaque-detalhe-carrossel.component';
 import { DestaqueCarroselComponent } from './components/plataforma/filme/destaque-carrosel/destaque-carrosel.component';
 import { LoginClienteComponent } from './components/plataforma/login-cliente/login-cliente.component';
+import { EstabelecimentoListComponent } from './components/sistema/estabelecimento-sistema/estabelecimento-list/estabelecimento-list.component';
+import { EstabelecimentoCadastroComponent } from './components/sistema/estabelecimento-sistema/estabelecimento-cadastro/estabelecimento-cadastro.component';
+import { EstabelecimentoCardComponent } from './components/sistema/estabelecimento-sistema/estabelecimento-card/estabelecimento-card.component';
+import { EstabelecimentoDetalheComponent } from './components/sistema/estabelecimento-sistema/estabelecimento-detalhe/estabelecimento-detalhe.component';
 import { CategoriaListComponent } from './components/sistema/categoria-sistema/categoria-list/categoria-list.component';
 import { CategoriaFormComponent } from './components/sistema/categoria-sistema/categoria-form/categoria-form.component';
 import { CategoriaCardComponent } from './components/sistema/categoria-sistema/categoria-card/categoria-card.component';
 import { CategoriaDetalheComponent } from './components/sistema/categoria-sistema/categoria-detalhe/categoria-detalhe.component';
-
 
 register();
 @NgModule({
@@ -81,6 +84,10 @@ register();
     HomeComponent,
     PlataformaFilmeDetalheComponent,
     LoginClienteComponent,
+    EstabelecimentoListComponent,
+    EstabelecimentoCadastroComponent,
+    EstabelecimentoCardComponent,
+    EstabelecimentoDetalheComponent,
     CategoriaListComponent,
     CategoriaFormComponent,
     CategoriaCardComponent,

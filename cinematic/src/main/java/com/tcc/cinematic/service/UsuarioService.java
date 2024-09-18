@@ -1,10 +1,11 @@
 package com.tcc.cinematic.service;
 
-import com.tcc.cinematic.DTO.ClientRegisterDTO;
+import com.tcc.cinematic.DTO.ClienteRegisterDTO;
 import com.tcc.cinematic.DTO.LoginClientDTO;
 import com.tcc.cinematic.DTO.UsuarioResponseDTO;
 import com.tcc.cinematic.DTO.LoginFuncionarioDTO;
 import com.tcc.cinematic.entity.Usuario;
+import com.tcc.cinematic.enums.TipoUsuario;
 import com.tcc.cinematic.repository.UsuarioRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -32,18 +33,16 @@ public class UsuarioService {
         return this.repository.findById(id).orElse(null);
     }
 
-    public Usuario createClient(ClientRegisterDTO dto){
-        var user = new Usuario();
+    public Usuario createClient(ClienteRegisterDTO dto){
+        var user = Usuario.builder().tipoUsuario(TipoUsuario.CLIENTE).status(true).build();
         BeanUtils.copyProperties(dto,user);
         this.repository.save(user);
         return user;
     }
 
     public Usuario createFuncionario(UsuarioResponseDTO usuarioResponseDTO){
-        var user  = new Usuario();
+        var user  = Usuario.builder().login(usuarioResponseDTO.email()).senha(usuarioResponseDTO.email()).build();
         BeanUtils.copyProperties(usuarioResponseDTO,user);
-        user.setLogin(usuarioResponseDTO.email());
-        user.setSenha(usuarioResponseDTO.email());
         this.repository.save(user);
         return user;
     }
@@ -86,32 +85,37 @@ public class UsuarioService {
     }
 
 
-     public Stream<UsuarioResponseDTO> findByFilters(Map<String,List<String>> filtro){
-         StringBuilder sql = new StringBuilder();
-         sql.append(" " +
-                 "SELECT * FROM usuario " +
-                 "WHERE 1=1 ");
+    public Stream<UsuarioResponseDTO> findByFilters(Map<String,List<String>> filtro){
+        StringBuilder sql = new StringBuilder();
+        sql.append(" " +
+                "SELECT * FROM usuario " +
+                "WHERE 1=1 ");
 
-         Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
 
-         if (filtro.get("cargo")!=null && !filtro.get("cargo").isEmpty()){
-             sql.append("AND tipo_usuario IN (:TIPO_USUARIO) ");
-             map.put("TIPO_USUARIO",this.setCargo(filtro.get("cargo")));
-         }
-         if(filtro.get("status")!=null && !filtro.get("status").isEmpty() && this.setStatus(filtro.get("status"))!=null){
-             sql.append("AND status = :STATUS ");
-             map.put("STATUS",this.setStatus(filtro.get("status")));
-         }
-         if (filtro.get("email")!=null && !filtro.get("email").isEmpty()){
-             sql.append("AND email LIKE :EMAIL");
-             map.put("EMAIL","%"+filtro.get("email").getFirst()+"%");
-         }
-         Query query = entityManager.createNativeQuery(sql.toString(), Usuario.class);
-         map.forEach(query::setParameter);
+        if (filtro.get("cargo")!=null && !filtro.get("cargo").isEmpty()){
+            sql.append("AND tipo_usuario IN (:TIPO_USUARIO) ");
+            map.put("TIPO_USUARIO",this.setCargo(filtro.get("cargo")));
+        }else{
+            sql.append("AND (tipo_usuario = 'FUNCIONARIO' OR tipo_usuario = 'GERENTE') ");
+        }
 
-         List<Usuario> listFiltro = query.getResultList();
-         return listFiltro.stream().map(usuario -> new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
-     }
+        if(filtro.get("status")!=null && !filtro.get("status").isEmpty() && this.setStatus(filtro.get("status"))!=null){
+            sql.append(" AND status = :STATUS ");
+            map.put("STATUS",this.setStatus(filtro.get("status")));
+        }
+
+        if (filtro.get("email")!=null && !filtro.get("email").isEmpty()){
+            sql.append(" AND email LIKE :EMAIL ");
+            map.put("EMAIL","%"+filtro.get("email").getFirst()+"%");
+        }
+
+        Query query = entityManager.createNativeQuery(sql.toString(), Usuario.class);
+        map.forEach(query::setParameter);
+
+        List<Usuario> listFiltro = query.getResultList();
+        return listFiltro.stream().map(usuario -> new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
+    }
 
      private List<String> setCargo(List<String> cargos){
         List<String> cargosUpperCase = new ArrayList<>();

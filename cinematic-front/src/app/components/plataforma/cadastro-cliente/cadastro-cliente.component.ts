@@ -23,7 +23,10 @@ export class CadastroClienteComponent {
     estado: '',
     confirmPassword: ''
   }
+  eyePassword: boolean = true;
+  eyePasswordConfirm: boolean = true;
   passwordsEquals: boolean = true;
+  validDados: boolean = true;
   estados: IEstados[] = [];
   cidades: ICidades[] = [];
 
@@ -32,10 +35,15 @@ export class CadastroClienteComponent {
   }
 
   createUser(usuario: IUsuarioClient): void{
+    console.log(usuario);
     if (usuario.senha == usuario.confirmPassword) {
       this.passwordsEquals = true;
-      this.service.createClient(usuario).subscribe((usuario =>{console.log(usuario);
-      }));
+      this.service.createClient(usuario).subscribe(()=> {this.router.navigate([`login`])},
+      erro=>{
+        if (erro.status == 400) {
+          this.validDados = false;
+        }
+      })
     }else{
       this.passwordsEquals = false;
     }
@@ -46,4 +54,36 @@ export class CadastroClienteComponent {
   changeLogin(): void{
     this.router.navigate([`login`])
   }
+  seePassword(password: any): void{
+    if (password.type.value == 'text') {
+      password.type.value = 'password'
+    }else{
+      password.type.value = 'text'
+    }
+    this.eyePassword = !this.eyePassword;
+  }
+  seePasswordConfirm(password: any): void{
+    if (password.type.value == 'text') {
+      password.type.value = 'password'
+    }else{
+      password.type.value = 'text'
+    }
+    this.eyePasswordConfirm = !this.eyePasswordConfirm;
+  }
+
+  limparCampos(): void{
+    this.usuario = {
+      id: '',
+      nome: '',
+      email: '',
+      senha: '',
+      status: false,
+      tipoUsuario: 'CLIENTE',
+      cidade: '',
+      estado: '',
+      confirmPassword: ''
+    }
+  }
+
+
 }

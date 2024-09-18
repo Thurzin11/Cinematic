@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { UsuarioService } from './../../../services/usuario/usuario.service';
+import { Component, inject, Inject } from '@angular/core';
 import { ILoginFuncionario } from '../../../model/ILoginFuncionario';
-import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,8 +14,11 @@ export class LoginFuncionarioComponent {
     password: ''
   }
   userIsValid: boolean = true;
+  eyePassword: boolean = false;
 
-  constructor(private service: UsuarioService, private router: Router){}
+  // constructor(private service:UsuarioService,private router: Router){}
+  private service: UsuarioService = inject(UsuarioService);
+  private router: Router = inject(Router);
 
   logar(login: ILoginFuncionario): void{
     this.service.loginFuncionario(login).subscribe((usuario)=>{
@@ -28,5 +31,14 @@ export class LoginFuncionarioComponent {
       }
     }
   )
+  }
+
+  seePassword(password: any): void{
+    if (password.type.value == 'text') {
+      password.type.value = 'password'
+    }else{
+      password.type.value = 'text'
+    }
+    this.eyePassword = !this.eyePassword;
   }
 }

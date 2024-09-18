@@ -1,0 +1,19 @@
+@import "../../../../style/color";
+
+.detalhe{
+  background-color: $ROXO-ESCURO;
+}
+
+
+.editar{
+  background-color: $AMARELO;
+}
+.close{
+  top: .5rem;
+  left: .5rem;
+  color: $BRANCO;
+}
+.close:hover{
+  color: $VERMELHO;
+  cursor: pointer;
+}
