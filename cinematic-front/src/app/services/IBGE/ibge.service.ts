@@ -16,6 +16,10 @@ export class IBGEService {
     return this.http.get<IEstados[]>(`${Environment.urlIBGE}/estados`);
   }
 
+  findEstadoById(id: string): Observable<IEstados> {
+    return this.http.get<IEstados>(`${Environment.urlIBGE}/estados/${id}`);
+  }
+
   findCidadesPorEstado(uf: string): Observable<ICidades[]>{
     return this.http.get<ICidades[]>(`${Environment.urlIBGE}/estados/${uf}/municipios`);
   }

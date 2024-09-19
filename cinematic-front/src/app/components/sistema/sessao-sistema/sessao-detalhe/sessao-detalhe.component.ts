@@ -53,9 +53,12 @@ export class SessaoDetalheComponent implements OnInit, OnChanges{
     estabelecimento: {
       id: '',
       nome: '',
-      endereco: '',
+      rua: '',
+      bairro: '',
+      numero: 0,
       cidade: '',
-      estado: ''
+      estado: '',
+      cep: ''
     }
   };
   @Input() sessaoId: string = '';

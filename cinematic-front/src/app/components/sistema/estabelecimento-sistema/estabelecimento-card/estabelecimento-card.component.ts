@@ -7,7 +7,9 @@ import { Component, Input } from '@angular/core';
 })
 export class EstabelecimentoCardComponent {
   @Input() nome: string = '';
-  @Input() endereco:string = '';
+  @Input() rua:string = '';
+  @Input() bairro: string = '';
+  @Input() numero: number = 0;
   @Input() cidade: string = '';
   @Input() estado: string = '';
 

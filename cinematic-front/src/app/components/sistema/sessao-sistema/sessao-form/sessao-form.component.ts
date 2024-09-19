@@ -61,9 +61,12 @@ export class SessaoFormComponent implements OnInit{
     estabelecimento: {
       id: '',
       nome: '',
-      endereco: '',
+      rua: '',
+      bairro: '',
+      numero: 0,
       cidade: '',
-      estado: ''
+      estado: '',
+      cep: ''
     }
   };
   salas: ISala[] = [];

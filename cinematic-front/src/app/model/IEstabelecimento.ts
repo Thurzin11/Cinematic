@@ -1,7 +1,10 @@
 export interface IEstabelecimento {
     id: string,
     nome: string,
-    endereco: string,
+    rua: string,
+    bairro: string,
+    numero: number,
     cidade: string,
     estado: string,
+    cep: string
 }

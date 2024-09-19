@@ -15,6 +15,14 @@ export class EstabelecimentoService {
     return this.http.get<IEstabelecimento[]>(`${Environment.urlApi}/estabelecimento`);
   }
 
+  findById(id: string): Observable<IEstabelecimento> {
+    return this.http.get<IEstabelecimento>(`${Environment.urlApi}/estabelecimento/${id}`);
+  }
+
+  filter(filters: { [key: string]: string[] }): Observable<IEstabelecimento[]> {
+    return this.http.patch<IEstabelecimento[]>(`${Environment.urlApi}/estabelecimento/filtro`, filters);
+  }
+
   create(estabelecimento: IEstabelecimento): Observable<IEstabelecimento>{
     return this.http.post<IEstabelecimento>(`${Environment.urlApi}/estabelecimento`,estabelecimento);
   }

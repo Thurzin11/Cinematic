@@ -31,6 +31,7 @@ export class DestaqueDetalheCarrosselComponent implements OnInit {
 
   ngOnInit(): void {
     this.setClassificacao();
+    console.log(this.filme.capas)
   }
 
   setClassificacao(): void {

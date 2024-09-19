@@ -16,13 +16,11 @@ export class LoginFuncionarioComponent {
   userIsValid: boolean = true;
   eyePassword: boolean = false;
 
-  // constructor(private service:UsuarioService,private router: Router){}
   private service: UsuarioService = inject(UsuarioService);
   private router: Router = inject(Router);
 
   logar(login: ILoginFuncionario): void{
     this.service.loginFuncionario(login).subscribe((usuario)=>{
-      console.log(usuario);
       this.router.navigate([`/sistema/home/${usuario.id}`]);
     },
     erro=>{

@@ -1,5 +1,6 @@
+import { Router } from '@angular/router';
 import { IEstabelecimento } from './../../../../model/IEstabelecimento';
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input, inject } from '@angular/core';
 
 @Component({
   selector: 'app-estabelecimento-detalhe',
@@ -12,18 +13,15 @@ export class EstabelecimentoDetalheComponent {
   @Input() estabelecimentoDetails:IEstabelecimento ={
     id: '',
     nome: '',
-    endereco: '',
+    rua: '',
+    bairro: '',
+    numero: 0,
     cidade: '',
-    estado: ''
+    estado: '',
+    cep: ''
   }
-
+  
   close():void{
     this.onClose.emit();
   }
-
-  editar(estabelecimento: IEstabelecimento):void{
-    console.log(estabelecimento);
-    this.onEditar.emit(estabelecimento);
-  }
-
 }

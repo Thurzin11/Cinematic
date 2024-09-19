@@ -15,7 +15,7 @@
         box-shadow: 0 .2rem .4rem $PRETO;
     }
 
-    button, input, .btn-filter {
+    button, input, select, .btn-filter {
         font-size: 1rem;
         margin: 0 .5rem;
         background-color: transparent;
@@ -26,14 +26,32 @@
         color: $PRETO;
     }
 
-    input:focus {
+    input:focus, select:focus {
         outline: 0;
     }
 
-    button:hover, input:hover,.btn-filter:hover {
+    button:hover, select:hover, input:hover,.btn-filter:hover {
         transition: .2s;
         scale: 105%;
         background-color: $AMARELO;
+    }
+
+    select:hover {
+        cursor: pointer;
+
+        option {
+            background-color: $BRANCO;
+        }
+    }
+
+    .disabled {
+        transition: .2s;
+        opacity: .5;
+    }
+
+    .disabled:hover {
+        background-color: transparent;
+        scale: 100%;
     }
 }
 

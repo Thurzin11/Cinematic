@@ -14,9 +14,12 @@ export class EstabelecimentoListComponent {
   estabelecimentoDetails: IEstabelecimento = {
     id: '',
     nome: '',
-    endereco: '',
+    rua: '',
+    bairro: '',
+    numero: 0,
     cidade: '',
-    estado: ''
+    estado: '',
+    cep: ''
   };
   estabelecimentos: IEstabelecimento[]=[];
 

@@ -32,10 +32,33 @@
           <input type="text" id="estabelecimento" placeholder="Digite um estabelecimento" class="mx-auto rounded-4 border border-black text-start ps-2 mb-3 col-10 p-1" name="estabelecimento" (change)="this.verificarEstabelecimento()" [(ngModel)]="this.estabelecimento">
         </div>
         <div *ngIf="this.tipo.toUpperCase() === 'ESTABELECIMENTO'" class="d-flex flex-column p-2">
-          <label for="cidade">Cidade</label>
-          <select name="cidade" id="cidade" class="d-flex flex-columns p-2">
-            
+          <label for="estado" class="text-light fs-4 fw-semibold pb-2">Estado</label>
+          <select name="estado" id="estado" class="rounded-4 border border-black p-1 col-10 mx-auto" 
+            [(ngModel)]="this.estadoSelected" #estado 
+            (ngModelChange)="this.filterEstabelecimentoEstado(estado.value)" 
+            [attr.disabled]="true">
+            <option *ngFor="let estado of this.estados" [value]="estado.id">{{estado.sigla}}</option>
           </select>
+        </div>
+        <div *ngIf="this.tipo.toUpperCase() === 'ESTABELECIMENTO'" class="d-flex flex-column p-2">
+          <label for="cidade" class="text-light fs-4 fw-semibold pb-2">Cidade</label>
+          <select name="cidade" id="cidade" class="rounded-4 border border-black p-1 col-10 mx-auto" 
+            #cidade
+            [(ngModel)]="this.cidadeSelected"
+            (ngModelChange)="this.filterEstabelecimentoCidade(cidade.value)"
+            [disabled]="!this.estadoIsSelected"
+            [ngClass]="!this.estadoIsSelected ? 'disabled':''"
+            [attr.disabled]="true">
+            <option *ngFor="let cidade of this.cidades" [value]="cidade.nome">{{cidade.nome}}</option>
+          </select>
+        </div>
+        <div *ngIf="this.tipo.toUpperCase() === 'ESTABELECIMENTO'" class="d-flex flex-column p-2">
+          <label for="cep" class="text-light fs-4 fw-semibold pb-2">Cep</label>
+          <input type="text" id="cep" placeholder="Digite um cep" class="mx-auto rounded-4 border border-black text-start ps-2 mb-3 col-10 p-1" name="cep" #cep (input)="this.verificarCep(cep.value)">
+        </div>
+        <div class="col-10 border mx-auto" *ngIf="this.tipo.toUpperCase() === 'ESTABELECIMENTO'">
+          <button (click)="this.limparAtributos()"
+            class="col-12">peidei</button>
         </div>
     </div>
 </div>

@@ -1,5 +1,5 @@
 import { UsuarioService } from './../../services/usuario/usuario.service';
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CategoriaService } from '../../services/categoria/categoria.service';
 import { IBotao } from '../../model/IBotao';
 import { IFilter } from '../../model/IFilter';
@@ -8,16 +8,37 @@ import { IBotaoValue } from '../../model/IBotaoValue';
 import { SalaService } from '../../services/sala/sala.service';
 import { SessaoService } from '../../services/sessao/sessao.service';
 import { HorarioService } from '../../services/horario/horario.service';
+import { IBGEService } from '../../services/IBGE/ibge.service';
+import { IEstados } from '../../model/IEstados';
+import { ICidades } from '../../model/ICidades';
+import { EstabelecimentoService } from '../../services/estabelecimento/estabelecimento.service';
 @Component({
   selector: 'app-filtro-sistema',
   templateUrl: './filtro-sistema.component.html',
   styleUrl: './filtro-sistema.component.scss'
 })
-export class FiltroSistemaComponent implements OnInit {
+export class FiltroSistemaComponent implements OnInit{
   @Input() tipo: string = '';
   @Output() onCloseFilter = new EventEmitter();
   @Output() onFilter = new EventEmitter();
   estabelecimento: string = '';
+  cidades: ICidades[] = [];
+  cidadeSelected: ICidades = {
+    id: 0,
+    nome: ''
+  };
+  estados: IEstados[] = [];
+  estadoSelected: IEstados = {
+    id: 0,
+    nome: '',
+    sigla: '',
+    regiao: {
+      id: 0,
+      nome: '',
+      sigla: ''
+    }
+  };
+  estadoIsSelected: boolean = false;
 
   botoes: IBotao[] = [];
   filterList: IFilter[] = [];
@@ -28,14 +49,27 @@ export class FiltroSistemaComponent implements OnInit {
   private salaService: SalaService = inject(SalaService);
   private sessaoService: SessaoService = inject(SessaoService);
   private horarioService: HorarioService = inject(HorarioService);
+  private ibgeService: IBGEService = inject(IBGEService);
+  private estabelecimentoService: EstabelecimentoService = inject(EstabelecimentoService);
 
   ngOnInit(): void {
     this.initLists();
-    console.log()
   }
 
   verificarEmail(email: string): void {
     this.toggleButton({ nome: email, isSelected: false }, 'Email');
+  }
+
+  verificarCep(cep: string): void {
+    if(cep.length === 8) {
+      this.toggleButton({nome: cep, isSelected: false}, 'Cep');
+      return;
+    }
+
+    let index:number = this.filterList.findIndex(filter => filter.label.toLowerCase() === 'cep');
+    this.filterList.splice(index, 1);
+    this.filterMap.delete('cep');
+    this.filter();
   }
 
   private atualizaEmail(): void {
@@ -92,7 +126,7 @@ export class FiltroSistemaComponent implements OnInit {
           if (!str)
             list.push(filter.value.nome.toLowerCase());
 
-          if(filter.label.toLowerCase() === 'email')
+          if(filter.label.toLowerCase() === 'email' || filter.label.toLowerCase() === 'cep' || filter.label.toLowerCase() === 'estado' || filter.label.toLocaleLowerCase() === 'cidade')
             list.splice(0, list.length-1);
         }
       }
@@ -102,7 +136,53 @@ export class FiltroSistemaComponent implements OnInit {
     })
 
     this.routes();
+  }
 
+  filterEstabelecimentoEstado(estadoId: string): void {
+    if(this.cidadeSelected.nome === undefined) {
+      let index: number = this.filterList.findIndex(filter => filter.label.toLowerCase() === 'cidade');
+      this.filterList.splice(index, 1);
+      this.filterMap.delete('cidade');
+    }
+
+    this.ibgeService.findEstadoById(estadoId).subscribe(estado => {
+      this.toggleButton({nome: estado.sigla, isSelected: false}, 'estado');
+      this.findCidadesPorEstado(estado.id.toString());
+    });
+  }
+
+  filterEstabelecimentoCidade(nome: string): void {
+    this.toggleButton({nome, isSelected: false}, 'cidade')
+  }
+
+  limparAtributos(): void {
+    this.filterList = [];
+    this.filterMap.delete('cidade');
+    this.filterMap.delete('estado');
+    this.estadoSelected = {
+      id: 0,
+      nome: '',
+      sigla: '',
+      regiao: {
+        id: 0,
+        nome: '',
+        sigla: ''
+      }
+    };
+    this.cidadeSelected = {
+      id: 0,
+      nome: ''
+    }
+    this.estadoIsSelected = false; 
+    this.filter();
+  }  
+
+  private findCidadesPorEstado(estadoId: string): void {
+    this.ibgeService.findCidadesPorEstado(estadoId).subscribe(cidades => {
+      this.cidades = cidades;
+      if(!this.estadoIsSelected)
+        this.estadoIsSelected = true;
+    })
   }
 
   private routes(): void {
@@ -137,6 +217,12 @@ export class FiltroSistemaComponent implements OnInit {
         })
         break;
       }
+      case "ESTABELECIMENTO": {
+        this.estabelecimentoService.filter(this.mapToObject(this.filterMap)).subscribe(estabelecimentos => {
+          this.onFilter.emit(estabelecimentos);
+        })
+        break;
+      }
       default: {
         break;
       }
@@ -156,11 +242,18 @@ export class FiltroSistemaComponent implements OnInit {
       return;
     }
 
+    let filterExists:IFilter | undefined = this.filterList.find(filter => filter.label === label);
+    if(filterExists) {
+      let index: number = this.filterList.findIndex(filter => filter.label === label);
+      this.filterList.splice(index, 1);
+    }
+    
     botaoValue.isSelected = true;
     this.filterList.push({
       label: label,
       value: botaoValue
     });
+
     this.filter();
   }
 
@@ -211,7 +304,17 @@ export class FiltroSistemaComponent implements OnInit {
         this.caseSessao();
         break;
       }
+      case 'ESTABELECIMENTO': {
+        this.caseEstabelecimento();
+        break;
+      }
     }
+  }
+
+  private caseEstabelecimento(): void {
+    this.ibgeService.findEstados().subscribe(estados => {
+      estados.forEach(estado => this.estados.push(estado))
+    });
   }
 
   private caseFilme(): void {

@@ -40,6 +40,7 @@ const routes: Routes = [
   {path: "sistema/sessao/editar/:id", component: SessaoFormComponent},
   {path: "sistema/estabelecimento",component:EstabelecimentoListComponent},
   {path: "sistema/estabelecimento/cadastro",component:EstabelecimentoCadastroComponent},
+  {path: "sistema/estabelecimento/editar/:id", component:EstabelecimentoCadastroComponent},
   {path: "sistema/categoria", component: CategoriaListComponent},
   {path: "sistema/categoria/cadastro", component: CategoriaFormComponent},
   {path: "sistema/categoria/editar/:id", component: CategoriaFormComponent},

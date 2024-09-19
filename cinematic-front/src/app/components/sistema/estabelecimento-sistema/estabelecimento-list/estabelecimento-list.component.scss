@@ -3,17 +3,16 @@
 app-menu-sistema{
   z-index: 1;
 }
+
 .body-bottom{
-  // height: 33rem;
   max-height: 33rem;
   box-shadow: 0 .4rem .4rem $PRETO;
 }
 
-// .list{
-  // border: 3px solid black;
-  // height: 700px;
+span {
+  cursor: pointer;
+}
 
-// }
 input:hover{
   scale: 102%;
   transition: .2s;
@@ -38,10 +37,7 @@ input,button{
 .filter{
   background-color: $ROXO-CLARO;
 }
-.span-filtro{
-  background-color: $AMARELO;
-  box-shadow: 0 .4rem .4rem $PRETO;
-}
+
 app-estabelecimento-detalhe{
   right: 32.5%;
   top: 25%;

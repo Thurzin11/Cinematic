@@ -2,12 +2,20 @@
 
 .detalhe{
   background-color: $ROXO-ESCURO;
+  box-shadow: 0 .4rem .4rem $PRETO;
 }
-
 
 .editar{
   background-color: $AMARELO;
+  opacity: .7;
 }
+
+.editar:hover {
+  transition: .2s;
+  opacity: 1;
+  scale: 105%;
+}
+
 .close{
   top: .5rem;
   left: .5rem;

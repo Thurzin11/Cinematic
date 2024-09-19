@@ -9,8 +9,8 @@
   <div class="d-flex col-12 justify-content-around">
     <div class="d-flex justify-content-between col-11">
       <div>
-        <p class="mb-0 fs-3 text-light">{{this.estabelecimentoDetails.nome}}</p>
-        <p class="fs-5 text-light">{{this.estabelecimentoDetails.endereco}}</p>
+        <p class="mb-0 fs-3 fw-semibold text-light">{{this.estabelecimentoDetails.nome}}</p>
+        <p class="fs-5 fst-italic text-light">{{this.estabelecimentoDetails.rua}}, {{this.estabelecimentoDetails.numero}} - {{this.estabelecimentoDetails.bairro}}</p>
       </div>
     </div>
   </div>
@@ -20,7 +20,7 @@
   </div>
   <div class="d-flex justify-content-center col-12">
     <button class="editar col-5 p-2 fs-4 fw-semibold rounded-3 border border-black "
-      routerLink="editar/{{estabelecimentoDetails.id}}" (click)="this.editar(this.estabelecimentoDetails)">Editar <svg
+      routerLink="editar/{{estabelecimentoDetails.id}}">Editar <svg
         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="ms-2 bi bi-pencil"
         viewBox="0 0 16 16">
         <path

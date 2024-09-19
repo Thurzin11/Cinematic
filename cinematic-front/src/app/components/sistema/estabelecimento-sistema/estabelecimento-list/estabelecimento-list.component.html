@@ -24,7 +24,15 @@
           <button class="col-2 rounded-2 fst-italic p-1 m-2" routerLink="cadastro">Adicionar</button>
         </div>
         <div class="listBottom col-11 mx-auto p-3 d-flex flex-wrap justify-content-between overflow-y-auto">
-          <app-estabelecimento-card class="col-3 mx-3 p-2 border border-black my-3 overflow-auto d-flex flex-wrap justify-content-between flex-column rounded-2" *ngFor="let estabelecimento of this.estabelecimentos" [nome]="estabelecimento.nome" [endereco]="estabelecimento.endereco" [cidade]="estabelecimento.cidade" [estado]="estabelecimento.estado" (click)="this.openDetalhe(estabelecimento.id)"></app-estabelecimento-card>
+          <app-estabelecimento-card class="col-3 mx-3 p-2 border border-black my-3 overflow-auto d-flex flex-wrap justify-content-between flex-column rounded-2" 
+            *ngFor="let estabelecimento of this.estabelecimentos" 
+            [nome]="estabelecimento.nome" 
+            [rua]="estabelecimento.rua"
+            [bairro]="estabelecimento.bairro"
+            [numero]="estabelecimento.numero"
+            [cidade]="estabelecimento.cidade" 
+            [estado]="estabelecimento.estado" 
+            (click)="this.openDetalhe(estabelecimento.id)"></app-estabelecimento-card>
         </div>
       </div>
       <app-estabelecimento-detalhe class="position-absolute detalhe" [estabelecimentoDetails]="this.estabelecimentoDetails" *ngIf="this.detalheIsOpen" (onClose)="this.closeDetalhe()"></app-estabelecimento-detalhe>
