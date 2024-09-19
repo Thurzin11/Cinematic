@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -37,6 +38,12 @@ public class EstabelecimentoController {
     @GetMapping("/nome/{nome}")
     public ResponseEntity<List<Estabelecimento>> findByNome(@PathVariable String nome){
         return ResponseEntity.ok(this.service.findByNome(nome));
+    }
+
+    @PatchMapping("/filtro")
+    public ResponseEntity<List<Estabelecimento>> filtro(@RequestBody Map<String, List<String>> filtro) {
+        System.out.println(filtro);
+        return ResponseEntity.ok(this.service.filtro(filtro));
     }
 
 
