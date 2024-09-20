@@ -10,6 +10,10 @@ app-categoria-detalhe {
     width: 60%;
 }
 
+h2 {
+    text-shadow: $SHADOW-MD ;
+}
+
 .body {
     box-shadow: 0 .4rem .4rem $PRETO;
     max-height: 650px;
@@ -37,4 +41,19 @@ app-categoria-detalhe {
         background-color: $AMARELO;
         opacity: 1;
     }
+}
+
+.cards {
+    max-height: 94%;
+}
+
+::-webkit-scrollbar{
+    background-color: $PRETO;
+    border: .1rem solid $PRETO;
+}
+
+::-webkit-scrollbar-thumb{
+    width: 1rem;
+    background-color: $ROXO-CLARO;
+    border: .1rem solid $PRETO;
 }

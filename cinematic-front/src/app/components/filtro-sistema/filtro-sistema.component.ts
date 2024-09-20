@@ -72,17 +72,6 @@ export class FiltroSistemaComponent implements OnInit{
     this.filter();
   }
 
-  private atualizaEmail(): void {
-    const list: string[] | undefined = this.filterMap.get('Email');
-    if(list) {
-      console.log(list);
-
-      if(list.length > 1) {
-
-      }
-    }
-  }
-
   verificarEstabelecimento(): void {
     if(this.estabelecimento === '') {
       this.removeFilter({nome: this.estabelecimento, isSelected: true}, 'Estabelecimento');
@@ -242,10 +231,12 @@ export class FiltroSistemaComponent implements OnInit{
       return;
     }
 
-    let filterExists:IFilter | undefined = this.filterList.find(filter => filter.label === label);
-    if(filterExists) {
-      let index: number = this.filterList.findIndex(filter => filter.label === label);
-      this.filterList.splice(index, 1);
+    if(this.tipo.toLowerCase() === 'estabelecimento') {
+      let filterExists:IFilter | undefined = this.filterList.find(filter => filter.label === label);
+      if(filterExists) {
+        let index: number = this.filterList.findIndex(filter => filter.label === label);
+        this.filterList.splice(index, 1);
+      }
     }
     
     botaoValue.isSelected = true;

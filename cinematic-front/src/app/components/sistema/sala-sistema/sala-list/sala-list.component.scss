@@ -4,6 +4,10 @@ app-menu-sistema {
     z-index: 1;
 }
 
+h2 {
+    text-shadow: $SHADOW-MD;
+}
+
 app-sala-detalhe {
     right: 25%;
     top: 10%;
@@ -11,7 +15,7 @@ app-sala-detalhe {
 }
 
 .body {
-    box-shadow: 0 .4rem .4rem $PRETO;
+    box-shadow: $SHADOW-MD;
     max-height: 650px;
 }
 
@@ -22,7 +26,7 @@ app-sala-detalhe {
 
     button {
         opacity: .7;
-        box-shadow: 0 .2rem .2rem $PRETO;
+        box-shadow: $SHADOW-SM;
     }
 
     button:hover {
@@ -31,4 +35,19 @@ app-sala-detalhe {
         background-color: $AMARELO;
         opacity: 1;
     }
+}
+
+.cards {
+    max-height:94%;
+}
+
+::-webkit-scrollbar{
+    background-color: $PRETO;
+    border: .1rem solid $PRETO;
+}
+
+::-webkit-scrollbar-thumb{
+    width: 1rem;
+    background-color: $ROXO-CLARO;
+    border: .1rem solid $PRETO;
 }

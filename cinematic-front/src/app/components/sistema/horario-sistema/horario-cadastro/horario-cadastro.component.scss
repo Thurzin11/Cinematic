@@ -1,25 +1,33 @@
 @import "../../../../style/color";
 
 h2{
-  text-shadow: 0 .2rem .2rem $PRETO;
-
+  text-shadow: 0 .4rem .4rem $PRETO;
 }
 
 input, select{
   background-color: transparent;
+  color: $BRANCO;
   box-shadow: 0 .2rem .2rem $PRETO;
+}
+
+select {
+  cursor: pointer;
+}
+
+input::placeholder {
+  color: $BRANCO;
 }
 
 input:focus,select:focus{
   outline: 0;
-  background-color: $BRANCO;
+  background-color: $ROXO-CLARO;
   scale: 103%;
 }
 
 input:hover, select:hover{
   transition: .2s;
   scale: 103%;
-  background-color: $BRANCO;
+  background-color: $ROXO-CLARO;
 }
 
 .body{

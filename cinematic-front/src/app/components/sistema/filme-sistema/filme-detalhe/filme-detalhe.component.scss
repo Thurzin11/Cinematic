@@ -2,12 +2,20 @@
 
 .body {
     background-color: $ROXO-ESCURO;
-    box-shadow: 0 .4rem .4rem $PRETO;
+    box-shadow: $SHADOW-MD;
+}
+
+.shadow-text {
+    text-shadow: $SHADOW-SM;
+}
+
+h2 {
+    text-shadow: $SHADOW-MD;
 }
 
 img {
     width: 20%;
-    box-shadow: 0 .4rem .4rem $PRETO;
+    box-shadow: $SHADOW-MD;
 }
 
 .close-details {
@@ -23,7 +31,7 @@ img {
 }
 
 .descricao {
-    max-height: 5rem;
+    max-height: 6.5rem;
 }
 
 .div-trailers {
@@ -31,7 +39,7 @@ img {
 }
 
 .classificacao {
-    box-shadow: 0 .2rem .2rem $PRETO;
+    box-shadow: $SHADOW-SM;
     min-width: 2rem;
 }
 
@@ -51,6 +59,19 @@ button:first-child {
 
 button:last-child {
     background-color: $VERMELHO;
+}
+
+::-webkit-scrollbar{
+    background-color: $PRETO;
+    border: .1rem solid $PRETO;
+    border-radius: .5rem;
+}
+
+::-webkit-scrollbar-thumb{
+    width: 1rem;
+    background-color: $ROXO-CLARO;
+    border-radius: .5rem;
+    border: .1rem solid $PRETO;
 }
 
 .livre {

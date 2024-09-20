@@ -1,6 +1,6 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HorarioService } from './../../../../services/horario/horario.service';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { IHorario } from '../../../../model/IHorario';
 
 @Component({
@@ -8,7 +8,7 @@ import { IHorario } from '../../../../model/IHorario';
   templateUrl: './horario-cadastro.component.html',
   styleUrl: './horario-cadastro.component.scss'
 })
-export class HorarioCadastroComponent {
+export class HorarioCadastroComponent implements OnInit {
   horario: IHorario= {
     id: '',
     hora: '',
@@ -18,7 +18,26 @@ export class HorarioCadastroComponent {
 
   periodoList: string[] = ["Manha", "Tarde", "Noite"];
 
-  constructor(private horarioService: HorarioService, private router: Router){}
+  private horarioService: HorarioService = inject(HorarioService);
+  private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+
+  ngOnInit(): void {
+    const id: string | null = this.route.snapshot.paramMap.get('id');
+    if(id !== null) {
+      this.horarioService.findById(id).subscribe(horario => {
+        this.horario = horario;
+        this.periodoList.forEach(periodo => {
+          if(this.horario.periodo.toLowerCase() === periodo.toLowerCase())
+            this.horario.periodo = periodo;
+        })
+      })
+
+      return;
+    }
+
+    this.horario.periodo = this.periodoList[0];
+  }
 
   cadastrar(horario: IHorario){
     this.horarioService.create(horario).subscribe();

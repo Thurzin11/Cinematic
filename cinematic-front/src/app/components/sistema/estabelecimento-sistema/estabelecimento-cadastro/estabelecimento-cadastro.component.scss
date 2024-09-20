@@ -2,38 +2,39 @@
 
 h2{
   color: $BRANCO;
-
+  text-shadow: $SHADOW-MD;
 }
+
 .cadastra-funcionario{
   border: solid 2 px $PRETO;
+  box-shadow: $SHADOW-MD;  
 }
+
 .inpt{
   margin: 0 auto;
 }
 button{
   background-color: $AMARELO;
 }
-input{
-  padding: 10px 10px;
+input, select{
   background-color: transparent;
+  color: $BRANCO;
+  box-shadow: $SHADOW-SM;
 }
+
 input:hover,select:hover{
   scale: 102%;
   transition: .2s;
+  background-color: $ROXO-CLARO;
 }
 
 input:focus,select:focus{
-  background-color: $BRANCO;
+  background-color: $ROXO-CLARO;
   scale: 102%;
   transition: .2s;
   outline: 0;
 }
+
 input::placeholder{
-  color: $PRETO;
-}
-input::placeholder:focus{
   color: $BRANCO;
-}
-select{
-  background-color: transparent;
 }

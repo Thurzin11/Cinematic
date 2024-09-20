@@ -1,4 +1,3 @@
-import { EIdioma } from "./EIdioma";
 import { IAssento } from "./IAssento";
 import { IEstabelecimento } from "./IEstabelecimento";
 import { IFilme } from "./IFilme";
@@ -12,7 +11,7 @@ export interface ISessao {
     filme: IFilme,
     disponibilidade: boolean,
     assentos: IAssento[],
-    idioma: EIdioma | string,
+    idioma: string,
     tipo: string,
     data: Date | string,
     estabelecimento: IEstabelecimento

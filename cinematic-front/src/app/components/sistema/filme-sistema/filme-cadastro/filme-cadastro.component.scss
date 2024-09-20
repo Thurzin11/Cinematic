@@ -4,12 +4,25 @@ app-menu-sistema {
     z-index: 1;
 }
 
+::-webkit-scrollbar{
+    background-color: $PRETO;
+    border: .1rem solid $PRETO;
+    border-radius: .5rem;
+}
+
+::-webkit-scrollbar-thumb{
+    width: 1rem;
+    background-color: $ROXO-CLARO;
+    border-radius: .5rem;
+    border: .1rem solid $PRETO;
+}
+
 button {
     cursor: pointer;
 }
 
 .body {
-    box-shadow: 0 .4rem .4rem $PRETO;
+    box-shadow: $SHADOW-MD;
 }
 
 .submit {
@@ -30,10 +43,21 @@ button {
 }
 
 .links-div {
-    max-height: 10rem;
+    max-height: 12rem;
+    box-shadow: $SHADOW-SM;
+
+    button {
+        box-shadow: $SHADOW-SM;
+    }
 
     .links {
-        max-height: 6.4rem;
+        max-height: 7rem;
+
+        p {
+            font-size: .8rem;
+            background-color: transparent;
+            cursor: pointer;
+        }
     }
 }
 
@@ -42,54 +66,54 @@ select {
 }
 
 label {
-    text-shadow: 0 .2rem .2rem $PRETO;
+    text-shadow: $SHADOW-SM;
 }
 
 h2 {
-    text-shadow: 0 .4rem .4rem $PRETO;
+    text-shadow: $SHADOW-MD;
 }
 
 input, select, textarea {
     background-color: transparent;
+    box-shadow: $SHADOW-SM;
+    color: $BRANCO;
 }
 
 input::placeholder, textarea::placeholder {
-    color: $PRETO;
+    color: $BRANCO;
 }
 
 input:focus, select:focus, textarea:focus{
     scale: 105%;
     outline: 0;
-    background-color: $BRANCO;
-    box-shadow: 0 .2rem .2rem $PRETO;
+    background-color: $ROXO-CLARO;
+    box-shadow: $SHADOW-SM;
 }
 
 input:hover, select:hover, textarea:hover {
     transition: .2s;
     scale: 105%;
-    background-color: $BRANCO;
-    box-shadow: 0 .2rem .2rem $PRETO;
+    background-color: $ROXO-CLARO;
+    box-shadow: $SHADOW-SM;
 }
 
 textarea:hover {
-    box-shadow: 0 .4rem .4rem $PRETO;
+    box-shadow: $SHADOW-MD;
 }
 
 .links-div:hover {
     transition: .2s;
     scale: 105%;
-    box-shadow: 0 .3rem .3rem $PRETO;
-    background-color: $BRANCO;
+    box-shadow: $SHADOW-MD;
+    background-color: $ROXO-CLARO;
 
     input {
         background-color: $ROXO-CLARO;
     }
 
-    .links {
-        p {
-            background-color: $ROXO-CLARO;
-            cursor: pointer;
-        }
+    p:hover {
+        transition: .2s;
+        scale: 105%;
     }
 }
 

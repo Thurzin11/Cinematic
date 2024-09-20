@@ -15,6 +15,10 @@ export class HorarioService {
     return this.http.get<IHorario[]>(`${Environment.urlApi}/horario`);
   }
 
+  findById(id: string): Observable<IHorario> {
+    return this.http.get<IHorario>(`${Environment.urlApi}/horario/${id}`);
+  }
+
   create(horario: IHorario): Observable<IHorario> {
     return this.http.post<IHorario>(`${Environment.urlApi}/horario`, horario);
   }

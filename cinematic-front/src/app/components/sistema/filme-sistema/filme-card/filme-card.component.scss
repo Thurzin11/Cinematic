@@ -8,14 +8,18 @@
 
 img {
     width: 100%;
-    box-shadow: 0 .2rem .2rem $PRETO;
+    box-shadow: $SHADOW-SM;
 }
 
 span {
     bottom: .5rem;
     left: .5rem;
-    box-shadow: 0 .2rem .2rem $PRETO;
+    box-shadow: $SHADOW-SM;
     min-width: 2rem;
+}
+
+p {
+    text-shadow: $SHADOW-SM;
 }
 
 .livre {

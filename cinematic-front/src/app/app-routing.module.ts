@@ -29,6 +29,7 @@ const routes: Routes = [
   {path: "sistema/filme/cadastro", component: FilmeCadastroComponent},
   {path: "sistema/horario/cadastro", component: HorarioCadastroComponent},
   {path: "sistema/horario", component: HorarioListComponent},
+  {path: "sistema/horario/editar/:id", component: HorarioCadastroComponent},
   {path: "sistema/filme/editar/:id", component: FilmeCadastroComponent},
   {path: "sistema/funcionario",component: FuncionarioListComponent},
   {path: "sistema/funcionario/editar/:id",component: FuncionarioCadastroComponent},
@@ -48,7 +49,7 @@ const routes: Routes = [
   {path: "home", component: HomeComponent},
   {path: "filme/carrossel", component: DestaqueCarroselComponent},
   {path: "login", component: LoginClienteComponent},
-  {path: "", redirectTo: "home", pathMatch: 'full'}
+  {path: "", redirectTo: "sistema/login", pathMatch: 'full'}
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 @import "../../../../style/color";
 
 h2{
-  text-shadow: 0 .2rem .2rem $PRETO;
+  text-shadow: 0 .4rem .4rem $PRETO;
 }
 
 app-menu-sistema{
@@ -26,11 +26,18 @@ app-menu-sistema{
 }
 
 .list-cards{
-  max-height: 25.3rem;
+  max-height: 94%;
 }
 
 ::-webkit-scrollbar{
-  display: none;
+  background-color: $PRETO;
+  border: .1rem solid $PRETO;
+}
+
+::-webkit-scrollbar-thumb{
+  width: 1rem;
+  background-color: $ROXO-CLARO;
+  border: .1rem solid $PRETO;
 }
 
 app-horario-detalhe{

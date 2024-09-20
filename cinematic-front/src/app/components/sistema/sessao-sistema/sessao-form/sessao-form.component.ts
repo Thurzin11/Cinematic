@@ -75,6 +75,7 @@ export class SessaoFormComponent implements OnInit{
   idiomas: string[] = ['Legendado', 'Dublado', 'Original'];
   tipos: string[] = ['2D', '3D', '4D', 'D-BOX'];
   estabelecimentos: IEstabelecimento[] = [];
+  isEdit: boolean = false;
 
   private salaService: SalaService = inject(SalaService);
   private filmeService: FilmeService = inject(FilmeService);
@@ -87,16 +88,100 @@ export class SessaoFormComponent implements OnInit{
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get("id");
     if(id) {
-      this.sessaoService.findById(id).subscribe(sessao => this.sessao = sessao);
+      this.sessaoService.findById(id).subscribe(sessao => {
+        this.sessao = sessao;
+      
+        this.salaService.findAll().subscribe(salas => {
+          this.salas = salas;
+          this.salas.forEach(sala => {
+            if(this.sessao.sala.id === sala.id)
+              this.sessao.sala = sala;
+          })
+         })
+
+        this.tipos.forEach(tipo => {
+          switch(this.sessao.tipo.toLowerCase()) {
+            case 'a': {
+              this.sessao.tipo = '2D';
+              break;
+            }
+            case 'b': {
+              this.sessao.tipo = '3D';
+              break;
+            }
+            case 'c': {
+              this.sessao.tipo = '4D';
+              break;
+            }
+            case 'd': {
+              this.sessao.tipo = 'D-BOX';
+              break;
+            }
+          }
+        })
+
+        this.idiomas.forEach(idioma => {
+          if(this.sessao.idioma.toLowerCase() === idioma.toLowerCase())
+            this.sessao.idioma = idioma;
+        })
+
+        this.filmeService.findAllByDisponibilidade().subscribe(filmes => {
+          this.filmes = filmes;
+          
+          this.filmes.forEach(filme => {
+            if(this.sessao.filme.id === filme.id)
+              this.sessao.filme = filme;
+          })
+        });
+
+        this.horarioService.findAll().subscribe(horarios => {
+          this.horarios = horarios;
+          
+          this.horarios.forEach(horario => {
+            if(this.sessao.horario.id === horario.id)
+              this.sessao.horario = horario;
+          })
+        });
+
+        this.estabelecimentoService.findAll().subscribe(estabelecimentos => {
+          this.estabelecimentos = estabelecimentos;
+
+          this.estabelecimentos.forEach(estabelecimento => {
+            if(this.sessao.estabelecimento.id === estabelecimento.id)
+              this.sessao.estabelecimento = estabelecimento;
+          })
+        });
+      });
+
+      this.isEdit = true;
+      return;
     }
 
-     this.salaService.findAll().subscribe(salas => this.salas = salas);
-     this.filmeService.findAllByDisponibilidade().subscribe(filmes => this.filmes = filmes);
-     this.horarioService.findAll().subscribe(horarios => this.horarios = horarios);
-     this.estabelecimentoService.findAll().subscribe(estabelecimentos => this.estabelecimentos = estabelecimentos);
+    this.salaService.findAll().subscribe(salas => {
+      this.salas = salas;
+      this.sessao.sala = this.salas[0];
+    });
+    this.filmeService.findAllByDisponibilidade().subscribe(filmes => {
+      this.filmes = filmes;
+      this.sessao.filme = this.filmes[0];
+    });
+    this.horarioService.findAll().subscribe(horarios => {
+      this.horarios = horarios;
+      this.sessao.horario = this.horarios[0];
+    });
+    this.estabelecimentoService.findAll().subscribe(estabelecimentos => {
+      this.estabelecimentos = estabelecimentos;
+      this.sessao.estabelecimento = this.estabelecimentos[0];
+    });
+    this.sessao.tipo = this.tipos[0];
+    this.sessao.idioma = this.idiomas[0];
   }
 
   register(): void {
     this.sessaoService.create(this.sessao).subscribe(() => this.router.navigate(["/sistema/sessao"]));
+  }
+
+  update(): void {
+    this.sessaoService.update(this.sessao).subscribe(() => this.router.navigate(['/sistema/sessao']));
   }
 }

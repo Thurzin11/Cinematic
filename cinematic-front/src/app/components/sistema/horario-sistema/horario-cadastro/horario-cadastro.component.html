@@ -6,11 +6,11 @@
     <div class="border border-black d-flex rounded-3 body flex-column pt-4">
       <div class="d-flex">
         <div class="col-6 align-items-center d-flex flex-column">
-          <label class="text-light fs-3 d-flex fw-bold pb-2 text-start col-8">Hora</label>
+          <label class="text-light fs-3 d-flex fw-semibold pb-2 text-start col-8">Hora</label>
           <input class="rounded-3 border border-black py-2 ps-2 col-8" id="hora" type="text" placeholder="Digite o horário" [(ngModel)]="this.horario.hora">
         </div>
         <div class="col-6 align-items-center d-flex flex-column">
-          <label class="text-light fs-3 d-flex fw-bold pb-2 text-start col-8">Periodo</label>
+          <label class="text-light fs-3 d-flex fw-semibold pb-2 text-start col-8">Periodo</label>
           <select class="rounded-3 border border-black py-2 ps-2 col-8" name="periodo" id="periodo" [(ngModel)]="this.horario.periodo">
             <option value="true" *ngFor="let periodo of this.periodoList" [value]="periodo">{{periodo}}</option>
           </select>

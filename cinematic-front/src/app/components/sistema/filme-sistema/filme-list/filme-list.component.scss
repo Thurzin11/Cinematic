@@ -10,8 +10,12 @@ app-filme-detalhe {
     width: 60%;
 }
 
+h2 {
+    text-shadow: $SHADOW-MD;
+}
+
 .body {
-    box-shadow: 0 .4rem .4rem $PRETO;
+    box-shadow: $SHADOW-MD;
     max-height: 650px;
 }
 
@@ -22,7 +26,7 @@ app-filme-detalhe {
 
     input {
         opacity: .7;
-        box-shadow: 0 .2rem .2rem $PRETO;
+        box-shadow: $SHADOW-SM;
     }
 
     input:hover {
@@ -39,7 +43,7 @@ app-filme-detalhe {
 
     button {
         opacity: .7;
-        box-shadow: 0 .2rem .2rem $PRETO;
+        box-shadow: $SHADOW-SM;
     }
 
     button:hover {
@@ -48,4 +52,15 @@ app-filme-detalhe {
         background-color: $AMARELO;
         opacity: 1;
     }
+}
+
+::-webkit-scrollbar{
+    background-color: $PRETO;
+    border: .1rem solid $PRETO;
+}
+
+::-webkit-scrollbar-thumb{
+    width: 1rem;
+    background-color: $ROXO-CLARO;
+    border: .1rem solid $PRETO;
 }

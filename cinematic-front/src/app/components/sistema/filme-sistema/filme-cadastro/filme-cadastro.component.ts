@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ICategoria } from '../../../../model/ICategoria';
 import { CategoriaService } from '../../../../services/categoria/categoria.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IFilme } from '../../../../model/IFilme';
 import { FilmeService } from '../../../../services/filme/filme.service';
-import Swiper from 'swiper';
 
 @Component({
   selector: 'app-filme-cadastro',
@@ -33,7 +32,7 @@ export class FilmeCadastroComponent implements OnInit {
   };
   categoriaList: ICategoria[] = [];
   classificacaoList: string[] = ['Livre', 'Dez', 'Doze', 'Quatorze', 'Dezesseis', 'Dezoito'];
-  statusList: string[] = ['Cartaz', 'Estreia', 'Destaque', 'Pre_Estreia', 'lancamento'];
+  statusList: string[] = ['Cartaz', 'Estreia', 'Destaque', 'Pre_Estreia', 'Lancamento'];
   trailers: string[] = [];
   capas: string[] = [];
   trailer: string = '';
@@ -41,20 +40,59 @@ export class FilmeCadastroComponent implements OnInit {
   status: string = '';
   canSubmit: boolean = false;
   canSubmitCapas: boolean = false;
+  isEdit: boolean = false;
 
-  constructor(
-    private categoriaService: CategoriaService,
-    private filmeService: FilmeService,
-    private router: Router,
-    private route: ActivatedRoute) {}
+  private categoriaService: CategoriaService = inject(CategoriaService);
+  private filmeService: FilmeService = inject(FilmeService);
+  private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get("id");
-    if(id && id != null) {
-      this.filmeService.findById(id).subscribe(filme => this.filme = filme);
+    if(id != null) {
+      this.filmeService.findById(id).subscribe(filme => {
+        this.filme = filme
+
+        this.capas = this.filme.capas;
+        this.trailers = this.filme.trailers;
+
+        this.statusList.forEach(status => {
+          if(this.filme.status.toString().toLowerCase() === status.toLowerCase()) {
+            this.filme.status = status;
+          }
+        })
+
+        this.classificacaoList.forEach(classificacao => {
+          if(this.filme.classificacao.toString().toLowerCase() === classificacao.toLowerCase())
+            this.filme.classificacao = classificacao;
+        })
+
+        this.categoriaService.findAll().subscribe(categoriaList => {
+          this.categoriaList = categoriaList;
+          
+          this.categoriaList.forEach(categoria => {
+            if(this.filme.categoria.id === categoria.id)
+              this.filme.categoria = categoria;
+          })
+        });
+      });
+      this.isEdit = true;
+      return;
     }
 
-    this.categoriaService.findAll().subscribe(categoriaList => {this.categoriaList = categoriaList; console.log(this.categoriaList)});
+    this.categoriaService.findAll().subscribe(categoriaList => {
+      this.categoriaList = categoriaList;
+
+      if(this.filme.categoria.nome === '' && this.filme.categoria.id === '') {
+        this.filme.categoria = categoriaList[0];
+      }
+    });
+
+    if(this.filme.status === '')
+      this.filme.status = this.statusList[0];
+    
+    if(this.filme.classificacao === '')
+      this.filme.classificacao = this.classificacaoList[0];
   }
 
   adicionarTrailer(string: string, list: string): void {
@@ -91,5 +129,9 @@ export class FilmeCadastroComponent implements OnInit {
     this.filme.trailers = this.trailers;
     this.filme.capas = this.capas;
     this.filmeService.create(this.filme).subscribe(() => this.router.navigate(['/sistema/filme']));
+  }
+
+  update(): void {
+    this.filmeService.update(this.filme).subscribe(() => this.router.navigate(['/sistema/filme']))
   }
 }

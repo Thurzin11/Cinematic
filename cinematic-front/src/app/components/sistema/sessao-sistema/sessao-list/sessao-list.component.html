@@ -19,11 +19,11 @@
                     </div>
                     <button class="p-1 col-2 rounded-2 fst-italic" routerLink="cadastro">Adicionar</button>
                 </div>
-                <div class="p-3 d-flex justify-content-between flex-wrap py-3 col-12 overflow-y-auto">
+                <div class="cards p-3 d-flex justify-content-between flex-wrap py-3 col-12 overflow-y-auto">
                     <app-sessao-card 
                         *ngFor="let sessao of this.sessoes" 
                         [sessao]="sessao"
-                        class="col-3 p-2 rounded-3 border-black mx-3 mt-3 border"
+                        class="col-3 p-2 rounded-3 border-black mx-3 border"
                         (click)="this.seeSessaoDetails(sessao.id)"></app-sessao-card>
                 </div>
                 <app-sessao-detalhe 

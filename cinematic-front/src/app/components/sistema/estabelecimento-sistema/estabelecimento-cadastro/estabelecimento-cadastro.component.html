@@ -5,12 +5,12 @@
     <h2 class="col-12 fs-1">Estabelecimentos</h2>
     <div class="cadastra-funcionario col-12 rounded-3 border border-black">
       <div class="inpt col-11 d-flex flex-column mt-3">
-        <label for="name" class="fs-3 fw-semibold text-light">Nome</label>
-        <input type="text" class="rounded-3 fs-5 border border-white" id="name" name="name" [(ngModel)]="this.estabelecimento.nome" placeholder="Digite o nome do estabelecimento">
+        <label class="fs-3 fw-semibold text-light">Nome</label>
+        <input type="text" class="p-2 rounded-3 border border-black" id="name" name="name" [(ngModel)]="this.estabelecimento.nome" placeholder="Digite o nome do estabelecimento">
       </div>
       <div class="inpt col-11 d-flex flex-column mt-3">
-        <label for="cep" class="fs-3 fw-semibold text-light">CEP</label>
-        <input type="text" class="rounded-3 fs-5 border border-white" id="cep" name="cep" [(ngModel)]="this.estabelecimento.cep" (input)="this.verificaCep()" placeholder="Informe o CEP">
+        <label class="fs-3 fw-semibold text-light">CEP</label>
+        <input type="text" class="p-2 rounded-3 border border-black" id="cep" name="cep" [(ngModel)]="this.estabelecimento.cep" (input)="this.verificaCep()" placeholder="Informe o CEP">
         <p *ngIf="!this.cepIsValid" class="fw-bold text-danger p-0 mb-0 d-flex align-items-center" [ngClass]="this.cepIsValid? '':'py-3'">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-circle me-2 rounded-circle" viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
@@ -20,31 +20,31 @@
       </div>
       <div class="inpt col-11 d-flex justify-content-between" [ngClass]="!this.cepIsValid? 'mt-0':'mt-3'">
         <div class="d-flex flex-column col-12">
-          <label for="endereco" class="fs-3 fw-semibold text-light">Endereço</label>
-          <input type="text" id="endereco" class="rounded-3 fs-5 border border-white"  name="endereco" [(ngModel)]="this.estabelecimento.rua" placeholder="Digite o nome da rua do estabelecimento">
+          <label class="fs-3 fw-semibold text-light">Endereço</label>
+          <input type="text" id="endereco" class="p-2 rounded-3 border border-black"  name="endereco" [(ngModel)]="this.estabelecimento.rua" placeholder="Digite o nome da rua do estabelecimento">
         </div>
       </div>
       <div class="inpt col-11 mt-3 d-flex justify-content-between">
         <div class="d-flex flex-column col-3">
-          <label for="numero" class="fs-3 fw-semibold text-light">Número</label>
-          <input type="number" id="numero" class="col-12 rounded-3 fs-5 border border-white"  name="numero" [(ngModel)]="this.estabelecimento.numero" placeholder="Digite o numero">
+          <label class="fs-3 fw-semibold text-light">Número</label>
+          <input type="number" id="numero" class="p-2 col-12 rounded-3 border border-black"  name="numero" [(ngModel)]="this.estabelecimento.numero" placeholder="Digite o numero">
         </div>
         <div class="d-flex flex-column col-8">
-          <label for="numero" class="fs-3 fw-semibold text-light">Bairro</label>
-          <input type="text" id="numero" class="col-12 rounded-3 fs-5 border border-white"  name="numero" [(ngModel)]="this.estabelecimento.bairro" placeholder="Digite o nome do Bairro">
+          <label class="fs-3 fw-semibold text-light">Bairro</label>
+          <input type="text" id="numero" class="p-2 col-12 rounded-3 border border-black"  name="numero" [(ngModel)]="this.estabelecimento.bairro" placeholder="Digite o nome do Bairro">
         </div>
       </div>
       <div class="inpt col-11 d-flex mt-3 justify-content-between">
         <div class="d-flex flex-column col-3">
-          <label for="estado" class="col-8 text-light fs-3 fw-semibold">Estado</label>
-          <select name="estado" id="estado" class="rounded-3 col-12 p-2 fs-5 border border-white" [(ngModel)]="this.estabelecimento.estado" [disabled]="this.disableSelect">
+          <label class="col-8 text-light fs-3 fw-semibold">Estado</label>
+          <select name="estado" id="estado" class="rounded-3 col-12 p-2 border border-black" [(ngModel)]="this.estabelecimento.estado" [disabled]="this.disableSelect">
             <option *ngFor="let estado of estados" [value]="estado.sigla">{{estado.sigla}}</option>
           </select>
         </div>
         <div class="d-flex flex-column col-8">
-          <label for="cidade" class="col-8 text-light fs-3 fw-semibold">Cidade</label>
+          <label class="col-8 text-light fs-3 fw-semibold">Cidade</label>
           <select name="cidade" id="cidade"  
-            class="col-12 rounded-3 col-12 p-2 fs-5 border border-white" 
+            class="col-12 rounded-3 col-12 p-2 border border-black" 
             [(ngModel)]="this.estabelecimento.cidade" 
             [disabled]="this.disableSelect">
             <option *ngFor="let cidade of cidades"

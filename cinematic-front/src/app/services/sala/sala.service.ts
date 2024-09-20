@@ -27,6 +27,10 @@ export class SalaService {
     return this.http.patch<ISala[]>(`${Environment.urlApi}/sala/filtro`, filter);
   }
 
+  update(sala: ISala): Observable<ISala> {
+    return this.http.patch<ISala>(`${Environment.urlApi}/sala`, sala);
+  }
+
   inativarSala(id: string): Observable<Boolean> {
     return this.http.patch<Boolean>(`${Environment.urlApi}/sala/${id}/inativar`, {});
   }

@@ -4,20 +4,31 @@ app-menu-sistema {
     z-index: 1;
 }
 
+.body {
+    box-shadow: $SHADOW-MD;
+}
+
+h2 {
+    text-shadow: $SHADOW-MD;
+}
+
 select {
     background-color: transparent;
+    color: $BRANCO;
+    box-shadow: $SHADOW-SM;
+    cursor: pointer;
 }
 
 select:focus {
     scale: 105%;
     outline: 0;
-    background-color: $BRANCO;
+    background-color: $ROXO-CLARO;
 }
 
 select:hover {
     transition: .2s;
     scale: 105%;
-    background-color: $BRANCO;
+    background-color: $ROXO-CLARO;
 }
 
 button {

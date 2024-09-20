@@ -14,7 +14,7 @@ export interface IFilme {
     banner: string,
     direcao: string,
     distribuidora: string,
-    status: IStatusFilme | string,
+    status: string,
     capas: string[],
     trailers: string[],
 }

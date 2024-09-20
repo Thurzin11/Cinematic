@@ -35,6 +35,10 @@ export class FilmeService {
     return this.http.post<IFilme>(`${Environment.urlApi}/filme`, filme)
   }
 
+  update(filme: IFilme): Observable<IFilme> {
+    return this.http.patch<IFilme>(`${Environment.urlApi}/filme/${filme.id}`, filme);
+  }
+
   inativar(id: string): Observable<boolean> {
     return this.http.patch<boolean>(`${Environment.urlApi}/filme/${id}/inativar`, {});
   }

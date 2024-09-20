@@ -9,6 +9,10 @@ app-menu-sistema{
   box-shadow: 0 .4rem .4rem $PRETO;
 }
 
+h2 {
+  text-shadow: $SHADOW-MD;
+}
+
 span {
   cursor: pointer;
 }
@@ -51,18 +55,16 @@ app-estebelecimento-card:hover{
   cursor: pointer;
 }
 .listBottom{
-  max-height: 29.1rem;
+  max-height: 94%rem;
 }
 ::-webkit-scrollbar{
-  display: none;
-  width: 10px;
-  height: 5px;
-  background-color: $ROXO-CLARO;
-  border-radius: 10px;
+  background-color: $PRETO;
+  border: .1rem solid $PRETO;
 }
+
 ::-webkit-scrollbar-thumb{
-  width: 10px;
-  background-color: $ROXO-ESCURO;
-  border-radius: 10px;
+  width: 1rem;
+  background-color: $ROXO-CLARO;
+  border: .1rem solid $PRETO;
 }
 
