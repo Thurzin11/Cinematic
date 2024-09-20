@@ -84,8 +84,8 @@ public class SessaoService {
         return this.repository.save(sessao);
     }
 
-    public Sessao update(SessaoRecordDTO sessaoRecordDTO, UUID id) {
-        var sessaoFound = this.findById(id);
+    public Sessao update(SessaoRecordDTO sessaoRecordDTO) {
+        var sessaoFound = this.findById(sessaoRecordDTO.id());
         if(sessaoFound == null)
             return null;
 

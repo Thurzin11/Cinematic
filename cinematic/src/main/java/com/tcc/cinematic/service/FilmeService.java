@@ -88,14 +88,13 @@ public class FilmeService {
         return this.repository.save(filme);
     }
 
-    public Filme update(FilmeUpdateDTO filmeUpdateDTO, UUID id) {
+    public Filme update(FilmeRegisterDTO filmeUpdateDTO, UUID id) {
         var filmeFound = this.findById(id);
         if(filmeFound == null)
             return null;
 
         BeanUtils.copyProperties(filmeUpdateDTO, filmeFound);
-        filmeFound.setClassificacao(this.setClassificacao(filmeUpdateDTO.classificacao()));
-        filmeFound.setStatus(this.setStatus(filmeUpdateDTO.status()));
+        System.out.println(filmeFound);
         return this.repository.save(filmeFound);
     }
 

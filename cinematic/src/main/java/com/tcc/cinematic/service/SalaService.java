@@ -77,6 +77,8 @@ public class SalaService {
             return null;
 
         BeanUtils.copyProperties(salaRecordDTO, salaFound);
+        salaFound.setTipo(this.setTipo(salaRecordDTO.tipo()));
+        salaFound.setTamanho(this.setTamanho(salaRecordDTO.tamanho()));
         return this.repository.save(salaFound);
     }
 

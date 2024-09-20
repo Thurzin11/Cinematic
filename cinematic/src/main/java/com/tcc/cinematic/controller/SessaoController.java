@@ -62,9 +62,9 @@ public class SessaoController {
         return ResponseEntity.ok(true);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Sessao> update(@RequestBody SessaoRecordDTO sessaoRecordDTO, @PathVariable UUID id) {
-        var sessaoReturn = this.service.update(sessaoRecordDTO, id);
+    @PatchMapping
+    public ResponseEntity<Sessao> update(@RequestBody @Valid SessaoRecordDTO sessaoRecordDTO) {
+        var sessaoReturn = this.service.update(sessaoRecordDTO);
         if(sessaoReturn == null)
             return ResponseEntity.badRequest().build();
 

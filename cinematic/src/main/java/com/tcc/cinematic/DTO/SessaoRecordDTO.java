@@ -9,8 +9,10 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public record SessaoRecordDTO(
+        UUID id,
         @NotNull Sala sala,
         @NotNull Horario horario,
         @NotNull Filme filme,

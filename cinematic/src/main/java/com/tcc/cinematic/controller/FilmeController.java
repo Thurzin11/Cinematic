@@ -45,7 +45,7 @@ public class FilmeController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Filme> update(@RequestBody FilmeUpdateDTO filmeUpdateDTO, @PathVariable UUID id) {
+    public ResponseEntity<Filme> update(@RequestBody FilmeRegisterDTO filmeUpdateDTO, @PathVariable UUID id) {
         var filmeReturn = this.service.update(filmeUpdateDTO, id);
         if(filmeReturn == null)
             return ResponseEntity.badRequest().build();
