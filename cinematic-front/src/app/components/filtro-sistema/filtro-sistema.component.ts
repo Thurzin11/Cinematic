@@ -326,7 +326,7 @@ export class FiltroSistemaComponent implements OnInit{
 
   private caseFuncionario(): void {
     let cargoList: string[] = ['Funcionario', 'Gerente'];
-    let statusList: string[] = ['Ativo', 'False'];
+    let statusList: string[] = ['Ativo', 'Inativo'];
 
     this.setBotao('Cargo', this.setBotaoValue(cargoList));
     this.setBotao('Status', this.setBotaoValue(statusList));
