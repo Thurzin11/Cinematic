@@ -33,3 +33,12 @@
 button:first-child{
   background-color: $AMARELO;
 }
+
+button {
+  opacity: .7;
+}
+
+button:hover {
+  transition: .2s;
+  opacity: 1;
+}

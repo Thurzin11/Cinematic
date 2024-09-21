@@ -1,0 +1,26 @@
+@import '../../../style/color';
+
+:host {
+    width: 100%
+}
+
+button {
+    opacity: .7;
+}
+
+button:hover {
+    transition: .2s;
+    opacity: 1;
+}
+
+.confirmacao{
+    background-color: $ROXO-ESCURO;
+}
+
+.desautorizado{
+    background-color: $VERMELHO;
+}
+
+.autorizado{
+    background-color: $VERDE-ATIVO;
+}

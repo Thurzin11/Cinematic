@@ -13,6 +13,9 @@ export class CategoriaDetalheComponent {
     nome: ''
   }
   @Output() onCloseDetails = new EventEmitter();
+
+  showModal: boolean = false;
+
   private categoriaService: CategoriaService = inject(CategoriaService);
 
   fecharDetalhe(): void {

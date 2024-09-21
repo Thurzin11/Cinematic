@@ -8,6 +8,7 @@
         class="col-2"
         [tipo]="'HORARIO'"
         (onCloseFilter)="fecharFiltro()"
+        (onFilter)="listaHorarios = $event"
         *ngIf="this.filtroIsOpen"
       ></app-filtro-sistema>
       <div

@@ -19,7 +19,7 @@ export class HorarioDetalheComponent {
       periodo: ''
     }
 
-
+  showModal: boolean = false;
 
   fecharDetalhe(): void{
     this.onClose.emit();

@@ -134,4 +134,8 @@ export class FilmeCadastroComponent implements OnInit {
   update(): void {
     this.filmeService.update(this.filme).subscribe(() => this.router.navigate(['/sistema/filme']))
   }
+
+  // private validaCampos(): boolean {
+
+  // }
 }

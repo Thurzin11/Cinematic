@@ -33,6 +33,7 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
   classificacaoClass: string = '';
   classificacao: string = '';
   status: string = '';
+  showModal: boolean = false;
   
   private filmeService: FilmeService = inject(FilmeService);
 

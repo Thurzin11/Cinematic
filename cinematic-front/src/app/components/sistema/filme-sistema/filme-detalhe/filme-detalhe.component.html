@@ -1,5 +1,4 @@
-<div
-    class="body d-flex flex-column justify-content-between position-relative px-5 py-3 rounded border border-black col-12">
+<div class="body d-flex flex-column justify-content-between position-relative px-5 py-3 rounded border border-black col-12">
     <span class="close-details position-absolute" (click)="this.closeDetails()">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg"
             viewBox="0 0 16 16">
@@ -45,7 +44,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 d-flex justify-content-around">
+    <div class="col-12 d-flex justify-content-around" *ngIf="!showModal">
         <button
             class="col-5 p-2 fs-4 fw-semibold border border-black rounded-3 d-flex align-items-center justify-content-center"
             routerLink="editar/{{this.filme.id}}">
@@ -58,7 +57,7 @@
         </button>
         <button
             class="col-5 p-2 fs-4 fw-semibold border border-black rounded-3 d-flex align-items-center justify-content-center"
-            (click)="this.inativar(this.filme.id)">
+            (click)="showModal = true">
             Inativar
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                 class="bi bi-ban ms-2 mt-1" viewBox="0 0 16 16">
@@ -67,4 +66,5 @@
             </svg>
         </button>
     </div>
+    <app-modal-confirmacao *ngIf="showModal" (onInativar)="this.inativar(filme.id)" (onClose)="showModal = false"></app-modal-confirmacao>
 </div>

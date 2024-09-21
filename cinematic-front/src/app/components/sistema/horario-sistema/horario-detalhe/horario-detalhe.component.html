@@ -28,7 +28,7 @@
       </span>
     </div>
   </div>
-  <div class="d-flex justify-content-around col-12">
+  <div *ngIf="!showModal" class="d-flex justify-content-around col-12">
     <button class="col-5 p-2 fs-4 fw-semibold rounded-3 border border-black" routerLink="editar/{{horarioDetalhe.id}}">
       Editar
       <svg
@@ -44,7 +44,7 @@
         />
       </svg>
     </button>
-    <button class="col-5 p-2 fs-4 fw-semibold rounded-3 border border-black inativo" *ngIf="this.horarioDetalhe.status" (click)="this.inativar(this.horarioDetalhe.id)">
+    <button class="col-5 p-2 fs-4 fw-semibold rounded-3 border border-black inativo" *ngIf="this.horarioDetalhe.status" (click)="showModal = true">
       Inativar
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -75,4 +75,5 @@
       </svg>
     </button>
   </div>
+  <app-modal-confirmacao *ngIf="showModal" (onClose)="showModal = false" (onInativar)="inativar(horarioDetalhe.id)"></app-modal-confirmacao>
 </div>

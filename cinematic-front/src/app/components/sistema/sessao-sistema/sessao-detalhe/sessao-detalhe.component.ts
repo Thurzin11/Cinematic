@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ISessao } from '../../../../model/ISessao';
 import { Router } from '@angular/router';
 import { SessaoService } from '../../../../services/sessao/sessao.service';
@@ -66,8 +66,10 @@ export class SessaoDetalheComponent implements OnInit, OnChanges{
   @Output() onInativar = new EventEmitter();
   @Output() onCloseDetails = new EventEmitter();
   tipo: string = '';
+  showModal: boolean = false;
 
-  constructor(private router: Router, private sessaoService: SessaoService) {}
+  private router: Router = inject(Router);
+  private sessaoService: SessaoService = inject(SessaoService);
 
   ngOnInit(): void {
     if(this.sessaoId !== '') {
