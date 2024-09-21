@@ -8,19 +8,19 @@
                 <div class="d-flex justify-content-around col-12 py-2">
                     <div class="d-flex flex-column col-3">
                         <label class="text-light fw-semibold fs-3">Sala</label>
-                        <select name="sala" id="sala" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sessao.sala">
+                        <select name="sala" id="sala" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sessao.sala" (ngModelChange)="validaCampos()">
                             <option *ngFor="let sala of this.salas" [ngValue]="sala">{{ sala.numero }}</option>
                         </select>
                     </div>
                     <div class="d-flex flex-column col-3">
                         <label class="text-light fw-semibold fs-3">Filme</label>
-                        <select name="filme" id="filme" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sessao.filme">
+                        <select name="filme" id="filme" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sessao.filme" (ngModelChange)="validaCampos()">
                             <option *ngFor="let filme of this.filmes" [ngValue]="filme">{{ filme.nome }}</option>
                         </select>
                     </div>
                     <div class="d-flex flex-column col-3">
                         <label class="text-light fw-semibold fs-3">Idioma</label>
-                        <select name="idioma" id="idioma" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sessao.idioma">
+                        <select name="idioma" id="idioma" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sessao.idioma" (ngModelChange)="validaCampos()">
                             <option *ngFor="let idioma of this.idiomas" [ngValue]="idioma">{{ idioma }}</option>
                         </select>
                     </div>
@@ -28,17 +28,17 @@
                 <div class="d-flex justify-content-around col-12 py-2">
                     <div class="d-flex flex-column col-3">
                         <label class="text-light fw-semibold fs-3">Tipo</label>
-                        <select name="tipo" id="tipo" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sessao.tipo">
+                        <select name="tipo" id="tipo" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sessao.tipo" (ngModelChange)="validaCampos()">
                             <option *ngFor="let tipo of this.tipos" [ngValue]="tipo">{{ tipo }}</option>
                         </select>
                     </div>
                     <div class="d-flex flex-column col-3">
                         <label class="text-light fw-semibold fs-3">Data</label>
-                        <input type="date" id="data" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sessao.data">
+                        <input type="date" id="data" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sessao.data" (ngModelChange)="validaCampos()">
                     </div>
                     <div class="d-flex flex-column col-3">
                         <label class="text-light fw-semibold fs-3">Horário</label>
-                        <select name="horario" id="horario" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sessao.horario">
+                        <select name="horario" id="horario" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sessao.horario" (ngModelChange)="validaCampos()">
                             <option *ngFor="let horario of this.horarios" [ngValue]="horario">{{ horario.hora }}</option>
                         </select>
                     </div>
@@ -46,13 +46,13 @@
                 <div class="d-flex justify-content-center col-12 py-2">
                     <div class="d-flex flex-column col-3">
                         <label class="text-light fw-semibold fs-3">Estabelecimento</label>
-                        <select name="estabelecimento" id="estabelecimento" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sessao.estabelecimento">
+                        <select name="estabelecimento" id="estabelecimento" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sessao.estabelecimento" (ngModelChange)="validaCampos()">
                             <option *ngFor="let estabelecimento of this.estabelecimentos" [ngValue]="estabelecimento">{{ estabelecimento.nome }}</option>
                         </select>
                     </div>
                 </div>
             </div>
-            <button *ngIf="!this.isEdit" class="col-12 mt-3 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" (click)="this.register()">Salvar</button>
+            <button *ngIf="!this.isEdit" class="col-12 mt-3 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" [disabled]="!canRegister" [ngClass]="canRegister ? 'ativo':''" (click)="this.register()">Salvar</button>
             <button *ngIf="this.isEdit" class="col-12 mt-3 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" (click)="this.update()">Salvar</button>
         </div>
     </div>

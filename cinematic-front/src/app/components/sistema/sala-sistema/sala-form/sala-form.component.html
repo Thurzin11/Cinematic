@@ -7,18 +7,18 @@
             <div class="col-12 d-flex justify-content-around p-4">
                 <div class="d-flex flex-column col-5">
                     <label for="tipo" class="text-light fs-3 fw-semibold">Tipo</label>
-                    <select name="tipo" id="tipo" class="p-2 rounded mt-2 border border-black" [(ngModel)]="sala.tipo" required>
+                    <select name="tipo" id="tipo" class="p-2 rounded mt-2 border border-black" [(ngModel)]="sala.tipo" (ngModelChange)="validaCampos()" required>
                         <option *ngFor="let tipo of this.tipos" [ngValue]="tipo">{{ tipo }}</option>
                     </select>
                 </div>
                 <div class="d-flex flex-column col-5">
                     <label for="tamanho" class="text-light fs-3 fw-semibold">Tamanho</label>
-                    <select name="tamanho" id="tamanho" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sala.tamanho">
+                    <select name="tamanho" id="tamanho" class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.sala.tamanho" (ngModelChange)="validaCampos()">
                         <option *ngFor="let tamanho of this.tamanhos" [ngValue]="tamanho">{{ tamanho }}</option>
                     </select>
                 </div>
             </div>    
-            <button *ngIf="!this.isEdit" class="col-12 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" (click)="this.register()">Salvar</button>
+            <button *ngIf="!this.isEdit" class="col-12 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" [disabled]="!canRegister" [ngClass]="canRegister ? 'ativo' : ''" (click)="this.register()">Salvar</button>
             <button *ngIf="this.isEdit" class="col-12 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" (click)="this.update()">Salvar</button>
         </div>
     </div>

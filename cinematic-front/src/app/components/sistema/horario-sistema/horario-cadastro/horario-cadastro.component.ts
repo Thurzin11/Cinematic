@@ -17,6 +17,7 @@ export class HorarioCadastroComponent implements OnInit {
   }
 
   periodoList: string[] = ["Manha", "Tarde", "Noite"];
+  canRegister: boolean = false;
 
   private horarioService: HorarioService = inject(HorarioService);
   private router: Router = inject(Router);
@@ -40,7 +41,17 @@ export class HorarioCadastroComponent implements OnInit {
   }
 
   cadastrar(horario: IHorario){
-    this.horarioService.create(horario).subscribe();
-    this.router.navigate(["/sistema/horario"])
+    if(this.canRegister)
+      this.horarioService.create(horario).subscribe(() => this.router.navigate(["/sistema/horario"]));
+  }
+
+  validaCampos(): boolean {
+    if(this.horario.hora === '' || this.horario.periodo === '') {
+      this.canRegister = false;
+      return false;
+    }
+
+    this.canRegister = true;
+    return true;
   }
 }

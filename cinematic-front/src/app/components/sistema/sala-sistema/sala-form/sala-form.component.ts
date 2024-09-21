@@ -21,6 +21,7 @@ export class SalaFormComponent implements OnInit{
   tipos: string[] = ['Cinema', 'Evento', 'Teatro'];
   tamanhos: string[] = ['Grande', 'Media', 'Pequena'];
   isEdit: boolean = false;
+  canRegister: boolean = false;
 
   private salaService: SalaService = inject(SalaService);
   private router: Router = inject(Router);
@@ -52,10 +53,22 @@ export class SalaFormComponent implements OnInit{
   }
 
   register(): void {
-    this.salaService.create(this.sala).subscribe(() => this.router.navigate(['/sistema/sala']));
+    if(this.canRegister)
+      this.salaService.create(this.sala).subscribe(() => this.router.navigate(['/sistema/sala']));
   }
 
   update(): void {
     this.salaService.update(this.sala).subscribe(() => this.router.navigate(['/sistema/sala']));
+  }
+  
+  validaCampos(): boolean {
+    if(this.sala.tipo === '' || this.sala.tamanho === '') {
+      this.canRegister = false;
+      return false;
+    }
+    
+    console.log(this.sala)
+    this.canRegister = true;
+    return true;
   }
 }
