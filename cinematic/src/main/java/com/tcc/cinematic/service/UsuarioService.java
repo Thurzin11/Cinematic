@@ -133,7 +133,7 @@ public class UsuarioService {
         if (status.getFirst().equals("ativo")){
             return true;
         }
-        if (status.getFirst().equals("false")){
+        if (status.getFirst().equals("inativo")){
             return false;
         }
         return null;
