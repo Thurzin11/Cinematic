@@ -34,9 +34,11 @@ select:hover {
 button {
     background-color: $AMARELO;
     opacity: .7;
+    cursor: auto;
 }
 
-button:hover {
+.ativo:hover {
     transition: .2s;
     opacity: 1;
+    cursor: pointer;
 }

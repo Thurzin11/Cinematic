@@ -7,9 +7,9 @@
             <div class="d-flex flex-column col-5 py-4">
                 <label class="text-light fw-semibold fs-3">Nome</label>
                 <input id="nome" type="text" placeholder="Digite o nome da categoria"
-                        class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.categoria.nome">
+                        class="p-2 rounded mt-2 border border-black" [(ngModel)]="this.categoria.nome" (ngModelChange)="validaCampos()">
             </div>
-            <button class="btn-salvar col-12 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" (click)="this.register()">Salvar</button>
+            <button class="btn-salvar col-12 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" [disabled]="!canRegister" [ngClass]="canRegister ? 'ativo':''" (click)="this.register()">Salvar</button>
         </div>
     </div>
 </div>

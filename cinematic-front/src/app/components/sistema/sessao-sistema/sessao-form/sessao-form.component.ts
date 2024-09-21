@@ -76,6 +76,7 @@ export class SessaoFormComponent implements OnInit{
   tipos: string[] = ['2D', '3D', '4D', 'D-BOX'];
   estabelecimentos: IEstabelecimento[] = [];
   isEdit: boolean = false;
+  canRegister: boolean = false;
 
   private salaService: SalaService = inject(SalaService);
   private filmeService: FilmeService = inject(FilmeService);
@@ -178,10 +179,29 @@ export class SessaoFormComponent implements OnInit{
   }
 
   register(): void {
-    this.sessaoService.create(this.sessao).subscribe(() => this.router.navigate(["/sistema/sessao"]));
+    if(this.canRegister)
+      this.sessaoService.create(this.sessao).subscribe(() => this.router.navigate(["/sistema/sessao"]));
   }
 
   update(): void {
     this.sessaoService.update(this.sessao).subscribe(() => this.router.navigate(['/sistema/sessao']));
+  }
+  
+  validaCampos(): boolean {
+    if(
+      this.sessao.sala.numero === 0 ||
+      this.sessao.filme.nome === '' ||
+      this.sessao.idioma === '' ||
+      this.sessao.tipo === '' ||
+      this.sessao.data === '' ||
+      this.sessao.horario.hora === '' ||
+      this.sessao.estabelecimento.nome === ''
+    ) {
+      this.canRegister = false;
+      return false;
+    }
+
+    this.canRegister = true;
+    return true;
   }
 }

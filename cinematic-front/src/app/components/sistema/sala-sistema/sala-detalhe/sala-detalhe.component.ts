@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { ISala } from '../../../../model/ISala';
 import { SalaService } from '../../../../services/sala/sala.service';
 
@@ -21,8 +21,7 @@ export class SalaDetalheComponent {
   @Output() onEdit = new EventEmitter();
   @Output() onAtivar = new EventEmitter();
   @Output() onInativar = new EventEmitter();
-
-  constructor(private salaService: SalaService) {}
+  showModal: boolean = false;
   
   close(): void {
     this.onCloseDetails.emit();

@@ -47,6 +47,7 @@ import { CategoriaListComponent } from './components/sistema/categoria-sistema/c
 import { CategoriaFormComponent } from './components/sistema/categoria-sistema/categoria-form/categoria-form.component';
 import { CategoriaCardComponent } from './components/sistema/categoria-sistema/categoria-card/categoria-card.component';
 import { CategoriaDetalheComponent } from './components/sistema/categoria-sistema/categoria-detalhe/categoria-detalhe.component';
+import { ModalConfirmacaoComponent } from './components/sistema/modal-confirmacao/modal-confirmacao.component';
 
 register();
 @NgModule({
@@ -91,7 +92,8 @@ register();
     CategoriaListComponent,
     CategoriaFormComponent,
     CategoriaCardComponent,
-    CategoriaDetalheComponent
+    CategoriaDetalheComponent,
+    ModalConfirmacaoComponent
   ],
   imports: [
     BrowserModule,

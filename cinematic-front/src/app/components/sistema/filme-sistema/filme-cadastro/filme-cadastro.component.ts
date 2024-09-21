@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ICategoria } from '../../../../model/ICategoria';
 import { CategoriaService } from '../../../../services/categoria/categoria.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -38,7 +38,8 @@ export class FilmeCadastroComponent implements OnInit {
   trailer: string = '';
   capa: string = '';
   status: string = '';
-  canSubmit: boolean = false;
+  canRegister: boolean = false;
+  canSubmitTrailers: boolean = false;
   canSubmitCapas: boolean = false;
   isEdit: boolean = false;
 
@@ -100,21 +101,23 @@ export class FilmeCadastroComponent implements OnInit {
       return;
     
     if(list.toLowerCase() === 'trailer') {
-      this.trailers.push(string);
+      this.filme.trailers.push(string);
       this.trailer = '';
+      this.validaCampos();
       return;
     }
   
-    this.capas.push(string);
+    this.filme.capas.push(string);
     this.capa = '';
+    this.validaCampos();
   }
 
   enableSubmit(): void {
-    this.canSubmit = true;
+    this.canSubmitTrailers = true;
   }
 
   disableSubmit(): void {
-    this.canSubmit = false;
+    this.canSubmitTrailers = false;
   }
 
   enableSubmitCapas(): void {
@@ -128,10 +131,33 @@ export class FilmeCadastroComponent implements OnInit {
   register(): void {
     this.filme.trailers = this.trailers;
     this.filme.capas = this.capas;
-    this.filmeService.create(this.filme).subscribe(() => this.router.navigate(['/sistema/filme']));
+    if(this.canRegister)
+      this.filmeService.create(this.filme).subscribe(() => this.router.navigate(['/sistema/filme']));
   }
 
   update(): void {
     this.filmeService.update(this.filme).subscribe(() => this.router.navigate(['/sistema/filme']))
+  }
+
+  validaCampos(): boolean {
+      if(
+        this.filme.nome === '' || 
+        this.filme.dataEstreia === '' || 
+        this.filme.direcao === '' ||
+        this.filme.banner === '' ||
+        this.filme.trailers.length === 0 ||
+        this.filme.capas.length === 0 ||
+        this.filme.categoria.nome === '' ||
+        this.filme.classificacao === '' ||
+        this.filme.status === '' ||
+        this.filme.descricao === '' ||
+        this.filme.duracao === ''
+      ) {
+        this.canRegister = false;
+        return false;
+      }
+  
+      this.canRegister = true;
+      return true;
   }
 }

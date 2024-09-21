@@ -13,6 +13,9 @@ export class CategoriaFormComponent implements OnInit {
     id: '',
     nome: ''
   }
+
+  canRegister: boolean = false;
+
   private categoriaService: CategoriaService = inject(CategoriaService);
   private router: Router = inject(Router);
   private route: ActivatedRoute = inject(ActivatedRoute);
@@ -24,6 +27,17 @@ export class CategoriaFormComponent implements OnInit {
   }
 
   register(): void {
-    this.categoriaService.create(this.categoria).subscribe(() => this.router.navigate(["/sistema/categoria"]));
+    if(this.canRegister)
+      this.categoriaService.create(this.categoria).subscribe(() => this.router.navigate(["/sistema/categoria"]));
+  }
+
+  validaCampos(): boolean {
+    if(this.categoria.nome === '') {
+      this.canRegister = false;
+      return false;
+    }
+
+    this.canRegister = true;
+    return true;
   }
 }

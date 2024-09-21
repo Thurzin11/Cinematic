@@ -17,10 +17,6 @@ app-menu-sistema {
     border: .1rem solid $PRETO;
 }
 
-button {
-    cursor: pointer;
-}
-
 .body {
     box-shadow: $SHADOW-MD;
 }
@@ -63,6 +59,10 @@ button {
 
 select {
     cursor: pointer;
+
+    option::after {
+        border-radius: .5rem;
+    }
 }
 
 label {
@@ -122,7 +122,8 @@ textarea:hover {
     opacity: .7;
 }
 
-.btn-salvar:hover {
+.ativo:hover {
     transition: .2s;
     opacity: 1;
+    cursor: pointer;
 }

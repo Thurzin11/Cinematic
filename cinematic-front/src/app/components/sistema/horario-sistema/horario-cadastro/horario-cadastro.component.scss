@@ -1,5 +1,9 @@
 @import "../../../../style/color";
 
+app-menu-sistema {
+  z-index: 1;
+}
+
 h2{
   text-shadow: 0 .4rem .4rem $PRETO;
 }
@@ -35,5 +39,11 @@ input:hover, select:hover{
 }
 
 button{
+  opacity: .7;
   background-color: $AMARELO;
+}
+
+.ativo:hover {
+  transition: .2s;
+  opacity: 1;
 }

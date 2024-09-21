@@ -29,6 +29,7 @@ export class EstabelecimentoCadastroComponent implements OnInit {
   estados: IEstados[] = [];
   cidades: ICidades[] = [];
   disableSelect: boolean = true;
+  canRegister: boolean = false;
 
   private serviceCep: ViaCepService = inject(ViaCepService);
   private ibgeService: IBGEService = inject(IBGEService);
@@ -79,8 +80,26 @@ export class EstabelecimentoCadastroComponent implements OnInit {
   }
 
   create(): void{
-    if(this.estabelecimento.numero !== 0)
+    if(this.canRegister)
       this.estabelecimentoService.create(this.estabelecimento).subscribe(() => this.router.navigate([`/sistema/estabelecimento`]));
   }
 
+  validaCampos(): boolean {
+    if(
+      this.estabelecimento.nome === '' ||
+      this.estabelecimento.cep === '' ||
+      this.estabelecimento.rua === '' ||
+      this.estabelecimento.numero === 0 ||
+      this.estabelecimento.numero === null ||
+      this.estabelecimento.bairro === '' ||
+      this.estabelecimento.estado === '' ||
+      this.estabelecimento.cidade === ''
+    ) {
+      this.canRegister = false;
+      return false;
+    }
+
+    this.canRegister = true;
+    return true;
+  }
 }
