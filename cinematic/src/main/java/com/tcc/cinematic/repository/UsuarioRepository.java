@@ -17,7 +17,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
     List<Usuario> findByGerenteAndFuncionario();
 
     @Query(value = "SELECT * FROM usuario "+
-            "WHERE nome LIKE :NOME "+
+            "WHERE nome ILIKE :NOME "+
             "AND (tipo_usuario LIKE 'GERENTE' OR tipo_usuario LIKE 'FUNCIONARIO')",nativeQuery = true)
     List<Usuario> findByName(@Param("NOME") String nome);
 

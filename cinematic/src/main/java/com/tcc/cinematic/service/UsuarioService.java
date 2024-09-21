@@ -51,6 +51,7 @@ public class UsuarioService {
         var userFound = this.findById(usuarioResponseDTO.id());
         if (userFound == null)
             return null;
+        userFound.setTipoUsuario(this.setTipoUsuario(usuarioResponseDTO.tipoUsuario()));
         BeanUtils.copyProperties(usuarioResponseDTO,userFound);
         return this.repository.save(userFound);
     }
@@ -81,7 +82,7 @@ public class UsuarioService {
 
     public Stream<UsuarioResponseDTO> findByName(String nome){
         return this.repository.findByName("%"+nome+"%")
-                .stream().map(usuario -> new UsuarioResponseDTO(usuario.getId(), usuario.getNome(),usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
+                .stream().map(usuario -> new UsuarioResponseDTO(usuario.getId(), usuario.getNome(),usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario().toString()));
     }
 
 
@@ -106,7 +107,7 @@ public class UsuarioService {
         }
 
         if (filtro.get("email")!=null && !filtro.get("email").isEmpty()){
-            sql.append(" AND email LIKE :EMAIL ");
+            sql.append(" AND email ILIKE :EMAIL ");
             map.put("EMAIL","%"+filtro.get("email").getFirst()+"%");
         }
 
@@ -114,7 +115,7 @@ public class UsuarioService {
         map.forEach(query::setParameter);
 
         List<Usuario> listFiltro = query.getResultList();
-        return listFiltro.stream().map(usuario -> new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
+        return listFiltro.stream().map(usuario -> new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario().toString()));
     }
 
      private List<String> setCargo(List<String> cargos){
@@ -139,12 +140,12 @@ public class UsuarioService {
     }
 
     public UsuarioResponseDTO convertToDTO(Usuario usuario){
-        return new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getStatus(),usuario.getTipoUsuario());
+        return new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getStatus(),usuario.getTipoUsuario().toString());
     }
 
     public Stream<UsuarioResponseDTO> convertToDTOStream(Stream<Usuario> usuarios){
         return usuarios
-                .map(usuario -> new UsuarioResponseDTO(usuario.getId(),usuario.getNome(),usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario()));
+                .map(usuario -> new UsuarioResponseDTO(usuario.getId(),usuario.getNome(),usuario.getEmail(),usuario.getStatus(),usuario.getTipoUsuario().toString()));
     }
 
     public Usuario loginFuncionario(LoginFuncionarioDTO dto){
@@ -153,6 +154,14 @@ public class UsuarioService {
 
     public Usuario loginClient(LoginClientDTO dto){
         return this.repository.findByEmailAndSenha(dto.email(), dto.password()).orElse(null);
+    }
+
+    public TipoUsuario setTipoUsuario(String tipo){
+        return switch (tipo.toUpperCase()){
+            case "FUNCIONARIO"-> TipoUsuario.FUNCIONARIO;
+            case "GERENTE" -> TipoUsuario.GERENTE;
+            default -> null;
+        };
     }
 
 }

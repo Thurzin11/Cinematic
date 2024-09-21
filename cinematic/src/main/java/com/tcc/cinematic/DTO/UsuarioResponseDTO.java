@@ -7,6 +7,6 @@ import java.util.UUID;
 
 
 public record UsuarioResponseDTO(UUID id, @NotNull String nome, @NotNull String email, @NotNull Boolean status, @NotNull
-                                     TipoUsuario tipoUsuario) {
+                                     String tipoUsuario) {
 
 }
