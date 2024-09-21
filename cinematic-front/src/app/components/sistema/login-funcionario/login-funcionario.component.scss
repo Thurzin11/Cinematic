@@ -2,26 +2,27 @@
 
 .login{
   background-color: $ROXO-CLARO;
-  border-radius: 20px;
-  border: $PRETO solid .2rem;
-  box-shadow: 0 .4rem .4rem $PRETO;
+  box-shadow: $SHADOW-MD;
   input:focus{
     outline: none;
   }
-  // label{
-    //   font-size: 2.2rem;
-    // }
     .btn-logar{
       background-color: $AMARELO;
-      border-radius: 10px;
       color: $PRETO;
-      padding: 10px;
     }
 
 }
-p{
-  text-shadow: 0 .2rem .2rem $PRETO;
-  svg{
-    box-shadow: 0 .2rem .2rem $PRETO;
-  }
+svg{
+  cursor: pointer;
+}
+h2{
+  text-shadow: $SHADOW-MD;
+}
+button{
+  background-color: $AMARELO;
+  opacity: .7;
+}
+.salvar:hover{
+  transition: .2s;
+  opacity: 1;
 }

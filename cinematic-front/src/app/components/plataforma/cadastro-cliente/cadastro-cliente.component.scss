@@ -8,21 +8,23 @@ h2{
 }
 button{
   background-color: $AMARELO;
-  box-shadow: 0 .4rem .4rem $PRETO;
+  opacity: .7;
 }
-input, select{
-  box-shadow: .5rem .4rem .4rem $PRETO;
+.salvar:hover{
+  transition: .2s;
+  opacity: 1;
 }
 .cadastro{
   background-color: $ROXO-CLARO;
+  box-shadow: $SHADOW-MD;
 }
 .changeLogin{
   color: $BRANCO;
   cursor: pointer;
 }
 .eye{
-  box-shadow: .5rem .4rem .4rem $PRETO;
   margin-left: -.5rem;
+  cursor: pointer;
 }
 input:focus{
   outline: none;

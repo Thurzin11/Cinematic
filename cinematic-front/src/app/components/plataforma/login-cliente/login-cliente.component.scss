@@ -8,10 +8,11 @@ h2{
 }
 button{
   background-color: $AMARELO;
-  box-shadow: 0 .4rem .4rem $PRETO;
+  opacity: .7;
 }
-input{
-  box-shadow: .4rem .4rem .4rem $PRETO;
+.salvar:hover{
+  transition: .2s;
+  opacity: 1;
 }
 .login{
   background-color: $ROXO-CLARO;
@@ -23,10 +24,13 @@ input{
   color: $BRANCO;
 }
 .eye{
-  box-shadow: .5rem .4rem .4rem $PRETO;
   margin-left: -.5rem;
+  cursor: pointer;
 }
 input:focus{
   outline: none;
 }
 
+.login{
+  box-shadow: $SHADOW-MD;
+}

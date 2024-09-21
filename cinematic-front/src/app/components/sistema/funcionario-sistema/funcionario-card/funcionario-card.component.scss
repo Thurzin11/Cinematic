@@ -11,3 +11,14 @@ span{
   background-color: $VERMELHO;
 }
 
+:host:hover{
+  background-color: $ROXO-CLARO;
+  box-shadow: 0 .4rem .4rem $PRETO;
+  scale: 102%;
+  transition: .2s;
+  cursor: pointer;
+}
+:host{
+  box-shadow: 0 .2rem .2rem $PRETO;
+}
+

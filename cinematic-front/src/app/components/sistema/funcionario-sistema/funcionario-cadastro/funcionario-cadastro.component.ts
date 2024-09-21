@@ -18,6 +18,7 @@ export class FuncionarioCadastroComponent implements OnInit {
     tipoUsuario: '',
   };
   editar: boolean = false;
+  cargos: string[] = ['Funcionario','Gerente'];
 
   constructor(private usuarioService: UsuarioService,private router: Router,private route: ActivatedRoute){}
 
@@ -25,8 +26,16 @@ export class FuncionarioCadastroComponent implements OnInit {
     let id: string | null = this.route.snapshot.paramMap.get('id');
     if (id && id!=null) {
       this.editar = true;
-      this.usuarioService.findById(id).subscribe(usuario=> this.usuario = usuario);
+      this.usuarioService.findById(id).subscribe((usuario)=> {
+        this.usuario = usuario
+        this.cargos.forEach(cargo=>{
+          if (this.usuario.tipoUsuario.toLowerCase() === cargo.toLowerCase())
+            this.usuario.tipoUsuario = cargo;
+        })
+      });
+      return;
     }
+    this.usuario.tipoUsuario = this.cargos[0];
   }
   cadastraUsuario(usuario: IUsuario): void{
     if (this.editar) {
@@ -38,5 +47,4 @@ export class FuncionarioCadastroComponent implements OnInit {
       console.log(usuario);
     }
   }
-
 }

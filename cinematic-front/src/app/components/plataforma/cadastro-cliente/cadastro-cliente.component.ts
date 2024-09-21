@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { IUsuarioClient } from '../../../model/IUsuarioClient';
 import { IEstados } from '../../../model/IEstados';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './cadastro-cliente.component.html',
   styleUrl: './cadastro-cliente.component.scss'
 })
-export class CadastroClienteComponent {
+export class CadastroClienteComponent{
   usuario: IUsuarioClient = {
     id: '',
     nome: '',
@@ -26,27 +26,27 @@ export class CadastroClienteComponent {
   eyePassword: boolean = true;
   eyePasswordConfirm: boolean = true;
   passwordsEquals: boolean = true;
-  validDados: boolean = true;
+  validDados: boolean = false;
   estados: IEstados[] = [];
   cidades: ICidades[] = [];
 
   constructor(private service: UsuarioService, private ibgeService: IBGEService,private router: Router){
     this.ibgeService.findEstados().subscribe(estados => this.estados = estados);
   }
-
   createUser(usuario: IUsuarioClient): void{
-    console.log(usuario);
-    if (usuario.senha == usuario.confirmPassword) {
-      this.passwordsEquals = true;
-      this.service.createClient(usuario).subscribe(()=> {this.router.navigate([`login`])},
-      erro=>{
-        if (erro.status == 400) {
-          this.validDados = false;
-        }
-      })
-    }else{
-      this.passwordsEquals = false;
-    }
+      if (this.validDados && this.usuario.senha == this.usuario.confirmPassword) {
+        this.passwordsEquals = true;
+        this.service.createClient(usuario).subscribe(()=> {this.router.navigate([`login`])},
+        erro=>{
+          if (erro.status == 400) {
+            this.validDados = false;
+            this.passwordsEquals = false;
+          }
+        })
+      }else{
+        this.passwordsEquals = false;
+      }
+
   }
   findCidades(): void{
     this.ibgeService.findCidadesPorEstado(this.usuario.estado).subscribe(cidades => this.cidades = cidades);
@@ -83,6 +83,15 @@ export class CadastroClienteComponent {
       estado: '',
       confirmPassword: ''
     }
+  }
+
+  validarCampos(): void{
+    if (this.usuario.nome != '' && this.usuario.email != '' && this.usuario.senha != ''
+       && this.usuario.confirmPassword != '' && this.usuario.estado != '' && this.usuario.cidade != '') {
+      this.validDados = true;
+      return;
+    }
+    this.validDados = false;
   }
 
 

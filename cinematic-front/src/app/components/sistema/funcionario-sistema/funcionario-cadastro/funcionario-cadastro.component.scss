@@ -1,39 +1,42 @@
 @import "../../../../style/color";
-
 h2{
   color: $BRANCO;
-
+  text-shadow: $SHADOW-MD;
 }
 .cadastra-funcionario{
-  border: solid 2 px $PRETO;
+  box-shadow: $SHADOW-MD;
 }
 .inputName,.inputEmail,.last{
   margin: 0 auto;
 }
 button{
+  opacity: .7;
   background-color: $AMARELO;
-}
-input{
-  padding: 10px 10px;
-  background-color: transparent;
 }
 input:hover,select:hover{
   scale: 102%;
   transition: .2s;
+  background-color: $ROXO-CLARO;
 }
 
 input:focus,select:focus{
-  background-color: $BRANCO;
+  background-color: $ROXO-CLARO;
   scale: 102%;
   transition: .2s;
   outline: 0;
 }
 input::placeholder{
-  color: $PRETO;
-}
-input::placeholder:focus{
   color: $BRANCO;
 }
-select{
+select, input{
+  box-shadow: $SHADOW-SM;
   background-color: transparent;
+  color: $BRANCO;
+
 }
+button:hover {
+  transition: .2s;
+  opacity: 1;
+}
+
+

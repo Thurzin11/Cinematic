@@ -2,6 +2,7 @@
 
 .detalhe{
   background-color: $ROXO-ESCURO;
+  box-shadow: $SHADOW-MD;
 }
 span{
   width: 1.6rem;
@@ -40,4 +41,12 @@ span{
 }
 .autorizado{
   background-color: $VERDE-ATIVO;
+}
+button{
+  opacity: .7;
+}
+button:hover {
+  transition: .2s;
+  scale: 103%;
+  opacity: 1;
 }

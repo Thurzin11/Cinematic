@@ -6,5 +6,5 @@ export interface IUsuario{
   email: string,
   senha: string,
   status: boolean,
-  tipoUsuario: ITipoUsuario | string
+  tipoUsuario: string
 }

@@ -12,6 +12,7 @@ import { ElementOptionsByType } from 'chart.js';
 export class LoginClienteComponent {
   eyePassword: boolean = true;
   userIsValid: boolean = true;
+  camposIsValid: boolean = false;
 
   login: ILoginClient = {
     email: '',
@@ -44,6 +45,14 @@ export class LoginClienteComponent {
       password.type.value = 'text'
     }
     this.eyePassword = !this.eyePassword;
+  }
+
+  validaCampos(): void{
+    if (this.login.email == '' || this.login.password == '') {
+      this.camposIsValid = false;
+    }else{
+      this.camposIsValid = true;
+    }
   }
 
 }

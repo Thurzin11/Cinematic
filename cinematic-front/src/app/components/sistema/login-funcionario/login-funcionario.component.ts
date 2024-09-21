@@ -14,7 +14,8 @@ export class LoginFuncionarioComponent {
     password: ''
   }
   userIsValid: boolean = true;
-  eyePassword: boolean = false;
+  eyePassword: boolean = true;
+  camposIsValid: boolean = false;
 
   private service: UsuarioService = inject(UsuarioService);
   private router: Router = inject(Router);
@@ -38,5 +39,13 @@ export class LoginFuncionarioComponent {
       password.type.value = 'text'
     }
     this.eyePassword = !this.eyePassword;
+  }
+
+  validaCampos(): void{
+    if (this.login.login == '' || this.login.password == '') {
+      this.camposIsValid = false;
+    }else{
+      this.camposIsValid = true;
+    }
   }
 }

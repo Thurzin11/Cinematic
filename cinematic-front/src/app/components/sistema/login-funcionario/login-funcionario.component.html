@@ -1,16 +1,16 @@
 <div class="d-flex flex-column align-items-center justify-content-around">
   <img src="../../../assets/img/Cinematic-removebg-preview 1.png" class="logo mt-5 mb-3" alt="logo">
-  <div class="login d-flex flex-column justify-content-center col-4 p-5">
-    <h2 class="fs-1 text-center text-white">Entrar</h2>
+  <div class="login d-flex flex-column justify-content-center col-4 p-5 border border-black border-3 rounded-5">
+    <h2 class="fs-1 text-center text-white fw-bold">Entrar</h2>
     <div class="d-flex flex-column align-items-center col-12">
       <div class="input-login col-11 d-flex flex-column">
         <label for="login" class="text-start fs-3 mt-4 text-white">Login</label>
-        <input type="text" id="login" class="p-2 mt-2 border-0 rounded-3" [(ngModel)]="this.login.login" placeholder="Digite seu login">
+        <input type="text" id="login" class="p-2 mt-2 border-0 rounded-3" [(ngModel)]="this.login.login" placeholder="Digite seu login" (ngModelChange)="this.validaCampos()">
       </div>
-      <div class="input-senha col-11 d-flex flex-column">
+      <div class="input-senha col-11 d-flex flex-column mb-3">
         <label for="senha" class="text-start fs-3 mt-4 text-white">Senha</label>
         <div class="col-12 d-flex align-items-center">
-          <input type="text" id="senha" class="col-11 border-0 p-2 rounded-3 rounded-end-0" [(ngModel)]="this.login.password" #password placeholder="*******">
+          <input type="password" id="senha" class="col-11 border-0 p-2 rounded-3 rounded-end-0" [(ngModel)]="this.login.password" #password placeholder="*******" (ngModelChange)="this.validaCampos()">
           <svg *ngIf="this.eyePassword" (click)="this.seePassword(password.attributes)" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-eye col-1 bg-white p-1 rounded-end-3 eye " viewBox="0 0 16 16">
             <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
             <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
@@ -29,7 +29,7 @@
           <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
         </svg>
         Senha e/ou Login Incorretos</p>
-      <button class="fs-4 fw-bold col-8 btn-logar " [ngClass]="!this.userIsValid? '':'mt-3'" (click)="this.logar(this.login)">Entrar</button>
+      <button class="fs-4 fw-bold col-8 btn-logar rounded-3 p-2 border-0" [disabled]="!this.camposIsValid" [ngClass]="!this.camposIsValid ? '': 'salvar'"  [ngClass]="!this.userIsValid? '':''" (click)="this.logar(this.login)">Entrar</button>
     </div>
   </div>
 </div>

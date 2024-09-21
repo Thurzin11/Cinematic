@@ -4,16 +4,9 @@ app-menu-sistema{
   z-index: 1;
 }
 .body-bottom{
-  // height: 33rem;
   max-height: 33rem;
   box-shadow: 0 .4rem .4rem $PRETO;
 }
-
-// .list{
-  // border: 3px solid black;
-  // height: 700px;
-
-// }
 input:hover{
   scale: 102%;
   transition: .2s;
@@ -35,12 +28,8 @@ input,button{
   box-shadow: 0 .2rem .2rem $PRETO;
   opacity: .7;
 }
-.filter{
-  background-color: $ROXO-CLARO;
-}
-.span-filtro{
-  background-color: $AMARELO;
-  box-shadow: 0 .4rem .4rem $PRETO;
+span{
+  cursor: pointer;
 }
 app-funcionario-detalhe{
   right: 25%;
@@ -48,27 +37,22 @@ app-funcionario-detalhe{
   width: 50%;
   z-index: 2;
 }
-app-funcionario-card:hover{
-  box-shadow: 0 .4rem .4rem $PRETO;
-  scale: 102%;
-  transition: .2s;
-  cursor: pointer;
-}
 .listBottom{
-  max-height: 29.1rem;
+  max-height: 92.6%;
 }
 ::-webkit-scrollbar{
-  display: none;
-  width: 10px;
-  height: 5px;
-  background-color: $ROXO-CLARO;
-  border-radius: 10px;
+  background-color: $PRETO;
+  border: .1rem solid $PRETO;
 }
+
 ::-webkit-scrollbar-thumb{
-  width: 10px;
-  background-color: $ROXO-ESCURO;
-  border-radius: 10px;
+  width: 1rem;
+  background-color: $ROXO-CLARO;
+  border: .1rem solid $PRETO;
 }
 .detalhe{
   top: 25%;
+}
+h2{
+  text-shadow: $SHADOW-MD;
 }
