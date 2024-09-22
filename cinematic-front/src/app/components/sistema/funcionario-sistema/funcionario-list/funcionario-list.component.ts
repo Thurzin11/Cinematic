@@ -1,5 +1,5 @@
-import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
 import { UsuarioService } from '../../../../services/usuario/usuario.service';
 import { IUsuario } from '../../../../model/IUsuario';
 
@@ -8,7 +8,7 @@ import { IUsuario } from '../../../../model/IUsuario';
   templateUrl: './funcionario-list.component.html',
   styleUrl: './funcionario-list.component.scss'
 })
-export class FuncionarioListComponent{
+export class FuncionarioListComponent implements OnInit{
   filterIsOpen: boolean = false;
   detalheIsOpen: boolean = false;
   usuarios: IUsuario[]=[];
@@ -22,8 +22,13 @@ export class FuncionarioListComponent{
     tipoUsuario: '',
   };
 
-  constructor(private usuarioService: UsuarioService,private router: Router){
+  private usuarioService: UsuarioService = inject(UsuarioService);
+  private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+
+  ngOnInit(): void {
     this.findAll();
+    const idUser: string | null = this.route.snapshot.paramMap.get('id');
   }
 
   toggleFiltro(): void{

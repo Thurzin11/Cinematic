@@ -1,6 +1,14 @@
+@import "../../../style/color";
 h2{
     font-size: 1.6rem;
 }
 .logo{
     width: 15%;
+}
+.opcoes{
+  right: .1rem;
+  background-color: $ROXO-CLARO;
+}
+svg{
+  cursor: pointer;
 }

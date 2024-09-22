@@ -1,4 +1,4 @@
-<app-header-sistema></app-header-sistema>
+<app-header-sistema [userLogged]="this.usuario"></app-header-sistema>
 <hr class="col-10 mx-auto">
 <div class="body">
     <app-destaque-carrosel [filmes]="this.filmesDestaque" (onShowDetalhes)="this.showDetalhes($event)"></app-destaque-carrosel>
@@ -6,9 +6,9 @@
         <app-home-carrossel [nomeCarrossel]="'Estreia'" [filmes]="this.filmesEstreia" (onShowDetalhes)="this.showDetalhes($event)"></app-home-carrossel>
         <app-home-carrossel [nomeCarrossel]="'Cartaz'" [filmes]="this.filmesCartaz" (onShowDetalhes)="this.showDetalhes($event)"></app-home-carrossel>
     </div>
-    <app-plataforma-filme-detalhe 
-        class="position-absolute" 
-        [filme]="this.filmeDetalhe" 
+    <app-plataforma-filme-detalhe
+        class="position-absolute"
+        [filme]="this.filmeDetalhe"
         *ngIf="this.seeDetalhes"
         (onCloseDetails)="this.closeDetalhes()"></app-plataforma-filme-detalhe>
 </div>

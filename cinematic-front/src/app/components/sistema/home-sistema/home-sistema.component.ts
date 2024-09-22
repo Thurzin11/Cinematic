@@ -1,5 +1,5 @@
-import { ActivatedRoute } from '@angular/router';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { IUsuario } from '../../../model/IUsuario';
@@ -24,8 +24,9 @@ export class HomeSistemaComponent implements OnInit {
     tipoUsuario: ''
   }
 
-  constructor(private route:ActivatedRoute, private service: UsuarioService){}
-
+  private service: UsuarioService = inject(UsuarioService);
+  private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(){
     const idUser: string | null = this.route.snapshot.paramMap.get('id');
