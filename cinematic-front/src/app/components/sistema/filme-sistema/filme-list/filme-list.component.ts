@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ICategoria } from '../../../../model/ICategoria';
 import { CategoriaService } from '../../../../services/categoria/categoria.service';
 import { FilmeService } from '../../../../services/filme/filme.service';
 import { IFilme } from '../../../../model/IFilme';
+import { Router, UrlSegment, UrlSegmentGroup } from '@angular/router';
 
 @Component({
   selector: 'app-filme-list',
@@ -36,14 +37,18 @@ export class FilmeListComponent implements OnInit{
     trailers: []
   };
   openFilmeDetailes: boolean = false;
+  lastUrl: string = '';
+  userId: string = '';
   
-  constructor(
-    private categoriaService: CategoriaService,
-    private filmeService: FilmeService) {
-      this.findAllFilmes();
-    }
+  private categoriaService: CategoriaService = inject(CategoriaService);
+  private filmeService: FilmeService = inject(FilmeService);
+  private router: Router = inject(Router);
 
   ngOnInit(): void {
+    let urlSegment: UrlSegment[] | undefined = this.router.lastSuccessfulNavigation?.previousNavigation?.extractedUrl.root.children['primary'].segments;
+    if(urlSegment)
+      this.userId = urlSegment[urlSegment.length-1].path;
+    
     this.categoriaService.findAll().subscribe(categoriaList => this.categoriaList = categoriaList); 
     this.findAllFilmes();
   }
