@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-sistema',
@@ -8,11 +9,17 @@ import { Component } from '@angular/core';
 export class MenuSistemaComponent {
   menuIsOpen = false;
 
+  private router: Router = inject(Router);
+
   closeMenu(): void {
     this.menuIsOpen = false;
   }
 
   openMenu(): void {
     this.menuIsOpen = true;
+  }
+
+  redirect(path: string): void {
+    this.router.navigate([`/sistema/${path}`]);
   }
 }
