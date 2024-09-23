@@ -28,7 +28,7 @@
             <button
               class="rounded-2 p-1 col-2 fst-italic me-3"
               [ngClass]="this.filtroIsOpen ? 'p-2' : ''"
-              routerLink="cadastro">
+              (click)="this.redirect()">
               Adicionar
             </button>
           </div>

@@ -34,7 +34,7 @@
             [status]="usuario.status" [tipoUsuario]="usuario.tipoUsuario" (click)="this.openDetalhe(usuario.id)">
           </app-funcionario-card>
         </div>
-        <app-funcionario-detalhe [idUserLogged]="this.userLogged.id" [funcionario]="this.funcionarioDetails" *ngIf="this.detalheIsOpen"
+        <app-funcionario-detalhe [userLogged]="this.userLogged" [funcionario]="this.funcionarioDetails" *ngIf="this.detalheIsOpen"
           class="position-absolute detalhe" (onClose)="this.closeDetalhe()" (onInativarUsuario)="this.inativarUsuario($event)" (onAtivarUsuario)="this.ativarUsuario($event)"></app-funcionario-detalhe>
       </div>
     </div>

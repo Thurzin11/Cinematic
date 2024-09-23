@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { IUsuario } from './../../../../model/IUsuario';
+import { Component, inject, OnInit } from '@angular/core';
 import { HorarioService } from '../../../../services/horario/horario.service';
 import { IHorario } from '../../../../model/IHorario';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { UsuarioService } from '../../../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-horario-list',
@@ -17,14 +20,30 @@ export class HorarioListComponent implements OnInit{
     status: false,
     periodo: ''
   }
-
+  userLogged: IUsuario ={
+    id: '',
+    nome: '',
+    email: '',
+    senha: '',
+    status: false,
+    tipoUsuario: ''
+  }
   listaHorarios: IHorario[] = [];
+
+  private usuarioService: UsuarioService = inject(UsuarioService);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private router: Router = inject(Router);
   constructor(private horarioService: HorarioService){
       this.findAllHorario();
-  }
+    }
 
-  ngOnInit(): void {
-    this.findAllHorario()
+    ngOnInit(): void {
+      this.findAllHorario()
+      const idUser: string = this.route.snapshot.queryParams['userLogged'];
+    if (idUser) {
+      this.usuarioService.findById(idUser).subscribe(usuario => {this.userLogged = usuario; console.log(this.userLogged);
+      })
+    }
   }
 
   findAllHorario(): void{
@@ -60,5 +79,8 @@ export class HorarioListComponent implements OnInit{
       this.findAllHorario();
       this.fecharDetalhe();
     });
+  }
+  redirect(): void{
+    this.router.navigate(['sistema/horario/cadastro'],{queryParams: {userLogged: this.userLogged.id, userType: this.userLogged.tipoUsuario}})
   }
 }

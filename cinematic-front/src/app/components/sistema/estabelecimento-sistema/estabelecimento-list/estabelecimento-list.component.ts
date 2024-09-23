@@ -1,14 +1,17 @@
-import { Component, inject } from '@angular/core';
+import { UsuarioService } from './../../../../services/usuario/usuario.service';
+import { Component, inject, OnInit } from '@angular/core';
 import { IEstabelecimento } from '../../../../model/IEstabelecimento';
 import { EstabelecimentoService } from '../../../../services/estabelecimento/estabelecimento.service';
 import { find } from 'rxjs';
+import { IUsuario } from '../../../../model/IUsuario';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-estabelecimento-list',
   templateUrl: './estabelecimento-list.component.html',
   styleUrl: './estabelecimento-list.component.scss'
 })
-export class EstabelecimentoListComponent {
+export class EstabelecimentoListComponent implements OnInit {
   filterIsOpen: boolean = false;
   detalheIsOpen: boolean = false;
   estabelecimentoDetails: IEstabelecimento = {
@@ -21,12 +24,30 @@ export class EstabelecimentoListComponent {
     estado: '',
     cep: ''
   };
+  userLogged: IUsuario = {
+    id: '',
+    nome: '',
+    email: '',
+    senha: '',
+    status: false,
+    tipoUsuario: ''
+  }
   estabelecimentos: IEstabelecimento[]=[];
 
   private service: EstabelecimentoService = inject(EstabelecimentoService);
+  private usuarioService: UsuarioService = inject(UsuarioService);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private router: Router = inject(Router);
 
   constructor(){
     this.findAll();
+  }
+  ngOnInit(): void {
+    const idUser: string = this.route.snapshot.queryParams['userLogged'];
+    if (idUser) {
+      this.usuarioService.findById(idUser).subscribe(usuario => {this.userLogged = usuario; console.log(this.userLogged);
+      })
+    }
   }
 
   toggleFiltro(): void{
@@ -58,6 +79,10 @@ export class EstabelecimentoListComponent {
   closeDetalhe(): void{
     this.detalheIsOpen = false;
     this.findAll();
+  }
+
+  redirect(): void{
+    this.router.navigate(['sistema/estabelecimento/cadastro'],{queryParams: {userLogged: this.userLogged.id, userType: this.userLogged.tipoUsuario}})
   }
 
 

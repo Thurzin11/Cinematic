@@ -21,17 +21,17 @@
             <input type="text" placeholder="Procure pelo nome do Estabelecimento" list="list" #nome (input)="this.findByNome(nome.value)"
               class="col-6 py-1 ps-2 rounded-2 border border-black fst-italic text-start">
           </div>
-          <button class="col-2 rounded-2 fst-italic p-1 m-2" routerLink="cadastro">Adicionar</button>
+          <button class="col-2 rounded-2 fst-italic p-1 m-2" (click)="this.redirect()">Adicionar</button>
         </div>
         <div class="listBottom col-12 mx-auto d-flex flex-wrap justify-content-between overflow-y-auto pt-2">
-          <app-estabelecimento-card class="col-3 mx-3 p-2 border border-black mb-3 overflow-auto d-flex flex-wrap justify-content-between flex-column rounded-2" 
-            *ngFor="let estabelecimento of this.estabelecimentos" 
-            [nome]="estabelecimento.nome" 
+          <app-estabelecimento-card class="col-3 mx-3 p-2 border border-black mb-3 overflow-auto d-flex flex-wrap justify-content-between flex-column rounded-2"
+            *ngFor="let estabelecimento of this.estabelecimentos"
+            [nome]="estabelecimento.nome"
             [rua]="estabelecimento.rua"
             [bairro]="estabelecimento.bairro"
             [numero]="estabelecimento.numero"
-            [cidade]="estabelecimento.cidade" 
-            [estado]="estabelecimento.estado" 
+            [cidade]="estabelecimento.cidade"
+            [estado]="estabelecimento.estado"
             (click)="this.openDetalhe(estabelecimento.id)"></app-estabelecimento-card>
         </div>
       </div>
