@@ -1,7 +1,5 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
-import { UsuarioService } from '../../../services/usuario/usuario.service';
+import { Component, Input } from '@angular/core';
 import { IUsuario } from '../../../model/IUsuario';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-sistema',

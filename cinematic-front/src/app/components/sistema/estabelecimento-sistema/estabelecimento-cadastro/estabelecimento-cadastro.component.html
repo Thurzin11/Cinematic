@@ -37,17 +37,24 @@
       <div class="inpt col-11 d-flex mt-3 justify-content-between">
         <div class="d-flex flex-column col-3">
           <label class="col-8 text-light fs-3 fw-semibold">Estado</label>
-          <select name="estado" id="estado" class="rounded-3 col-12 p-2 border border-black" [(ngModel)]="this.estabelecimento.estado" (ngModelChange)="validaCampos()" [disabled]="this.disableSelect">
+          <select 
+            name="estado" id="estado" 
+            class="rounded-3 col-12 p-2 border border-black estado" 
+            [(ngModel)]="this.estabelecimento.estado" 
+            (ngModelChange)="validaCampos()" 
+            [disabled]="this.disableSelect"
+            [ngClass]="this.disableSelect ? '':'select-ativo'">
             <option *ngFor="let estado of estados" [value]="estado.sigla">{{estado.sigla}}</option>
           </select>
         </div>
         <div class="d-flex flex-column col-8">
           <label class="col-8 text-light fs-3 fw-semibold">Cidade</label>
           <select name="cidade" id="cidade"  
-            class="col-12 rounded-3 col-12 p-2 border border-black" 
+            class="col-12 rounded-3 col-12 p-2 border border-black cidade" 
             [(ngModel)]="this.estabelecimento.cidade" 
             (ngModelChange)="validaCampos()"
-            [disabled]="this.disableSelect">
+            [disabled]="this.disableSelect"
+            [ngClass]="this.disableSelect ? '':'select-ativo'">
             <option *ngFor="let cidade of cidades"
               [ngValue]="cidade.nome">{{cidade.nome}}</option>
           </select>

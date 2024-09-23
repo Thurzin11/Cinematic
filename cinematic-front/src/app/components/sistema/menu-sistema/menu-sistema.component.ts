@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 export class MenuSistemaComponent {
   menuIsOpen = false;
   @Input() userId: string = '';
-
+  @Input() userIsGerente: boolean = false; 
+  
   private router: Router = inject(Router);
 
   closeMenu(): void {

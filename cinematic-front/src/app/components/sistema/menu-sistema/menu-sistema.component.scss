@@ -1,5 +1,9 @@
 @import '../../../style/color';
 
+:host {
+    z-index: 1;
+}
+
 nav {
     background-color: $ROXO-CLARO;
     width: 3.5rem;
