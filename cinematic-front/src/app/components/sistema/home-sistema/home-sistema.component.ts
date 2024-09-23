@@ -15,24 +15,15 @@ export class HomeSistemaComponent implements OnInit {
   @ViewChild("genero", { static: true }) genero!: ElementRef;
 
   filtro: boolean = false;
-  userLogged: IUsuario = {
-    id: '',
-    nome: '',
-    email: '',
-    senha: '',
-    status: false,
-    tipoUsuario: ''
-  }
-
+  idUser: string  = '';
   private service: UsuarioService = inject(UsuarioService);
   private router: Router = inject(Router);
   private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(){
-    const idUser: string | null = this.route.snapshot.paramMap.get('id');
-    if (idUser!=null) {
-      this.service.findById(idUser).subscribe((usuario)=>{this.userLogged = usuario; console.log(this.userLogged);
-      });
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id!=null) {
+      this.idUser = id;
     }
     this.generateChartRendimento();
     this.generateChartIngresso();
