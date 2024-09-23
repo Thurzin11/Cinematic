@@ -1,5 +1,10 @@
 @import "../../../../style/color";
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+}
+
 h2{
   color: $BRANCO;
   text-shadow: $SHADOW-MD;
@@ -27,7 +32,15 @@ input, select{
   box-shadow: $SHADOW-SM;
 }
 
-input:hover,select:hover{
+.cidade, .estado {
+  opacity: .7;
+}
+
+.select-ativo {
+  opacity: 1;
+}
+
+input:hover, .select-ativo:hover{
   scale: 102%;
   transition: .2s;
   background-color: $ROXO-CLARO;

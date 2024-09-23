@@ -43,6 +43,7 @@ export class FilmeListComponent implements OnInit{
   private categoriaService: CategoriaService = inject(CategoriaService);
   private filmeService: FilmeService = inject(FilmeService);
   private route: ActivatedRoute = inject(ActivatedRoute);
+  private router: Router = inject(Router);
 
   ngOnInit(): void {
     const id: string | undefined = this.route.snapshot.queryParams['userLogged'];
@@ -82,5 +83,6 @@ export class FilmeListComponent implements OnInit{
 
   closeDetails(): void {
     this.openFilmeDetailes = false;
+    this.findAllFilmes();
   }
 }

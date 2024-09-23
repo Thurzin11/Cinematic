@@ -23,16 +23,17 @@ export class HomeSistemaComponent implements OnInit {
     status: false,
     tipoUsuario: ''
   }
+  userLoggedId: string = '';
 
   private service: UsuarioService = inject(UsuarioService);
-  private router: Router = inject(Router);
   private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(){
     const idUser: string = this.route.snapshot.queryParams['userLogged'];
     if (idUser) {
-      this.service.findById(idUser).subscribe((usuario)=>{this.userLogged = usuario; console.log(this.userLogged);
-      });
+      this.userLogged.id = idUser;
+      console.log(idUser);
+      this.service.findById(idUser).subscribe((usuario)=>{this.userLogged = usuario});
     }
     this.generateChartRendimento();
     this.generateChartIngresso();
