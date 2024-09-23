@@ -39,6 +39,7 @@ export class FilmeListComponent implements OnInit{
   };
   openFilmeDetailes: boolean = false;
   userId: string = '';
+  userType: string = '';
   
   private categoriaService: CategoriaService = inject(CategoriaService);
   private filmeService: FilmeService = inject(FilmeService);
@@ -47,8 +48,11 @@ export class FilmeListComponent implements OnInit{
 
   ngOnInit(): void {
     const id: string | undefined = this.route.snapshot.queryParams['userLogged'];
-    if(id)
+    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
+    if(id && userType) {
       this.userId = id;
+      this.userType = userType;
+    }
 
     this.categoriaService.findAll().subscribe(categoriaList => this.categoriaList = categoriaList); 
     this.findAllFilmes();
@@ -84,5 +88,9 @@ export class FilmeListComponent implements OnInit{
   closeDetails(): void {
     this.openFilmeDetailes = false;
     this.findAllFilmes();
+  }
+
+  redirect(): void {
+    this.router.navigate(['sistema/filme/cadastro'], {queryParams: {userLogged: this.userId, userType: this.userType}});
   }
 }

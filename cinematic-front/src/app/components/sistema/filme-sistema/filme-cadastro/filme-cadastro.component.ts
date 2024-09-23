@@ -42,6 +42,8 @@ export class FilmeCadastroComponent implements OnInit {
   canSubmitTrailers: boolean = false;
   canSubmitCapas: boolean = false;
   isEdit: boolean = false;
+  userLogged: string = '';
+  userType: string = '';
 
   private categoriaService: CategoriaService = inject(CategoriaService);
   private filmeService: FilmeService = inject(FilmeService);
@@ -50,6 +52,8 @@ export class FilmeCadastroComponent implements OnInit {
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get("id");
+    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
+    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
     if(id != null) {
       this.filmeService.findById(id).subscribe(filme => {
         this.filme = filme
@@ -79,6 +83,11 @@ export class FilmeCadastroComponent implements OnInit {
       });
       this.isEdit = true;
       return;
+    }
+
+    if(userLogged && userType) {
+      this.userLogged = userLogged;
+      this.userType = userType;
     }
 
     this.categoriaService.findAll().subscribe(categoriaList => {
@@ -132,11 +141,11 @@ export class FilmeCadastroComponent implements OnInit {
     this.filme.trailers = this.trailers;
     this.filme.capas = this.capas;
     if(this.canRegister)
-      this.filmeService.create(this.filme).subscribe(() => this.router.navigate(['/sistema/filme']));
+      this.filmeService.create(this.filme).subscribe(() => this.redirect());
   }
 
   update(): void {
-    this.filmeService.update(this.filme).subscribe(() => this.router.navigate(['/sistema/filme']))
+    this.filmeService.update(this.filme).subscribe(() => this.redirect())
   }
 
   validaCampos(): boolean {
@@ -159,5 +168,9 @@ export class FilmeCadastroComponent implements OnInit {
   
       this.canRegister = true;
       return true;
+  }
+
+  redirect(): void {
+    this.router.navigate(['sistema/filme'], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
   }
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { IFilme } from '../../../../model/IFilme';
 import { FilmeService } from '../../../../services/filme/filme.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-filme-detalhe',
@@ -33,10 +34,21 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
   classificacao: string = '';
   status: string = '';
   showModal: boolean = false;
+  userId: string = '';
+  userType: string = '';
   
   private filmeService: FilmeService = inject(FilmeService);
+  private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
+    const id: string | undefined = this.route.snapshot.queryParams['userLogged'];
+    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
+    if(id && userType) {
+      this.userId = id;
+      this.userType = userType;
+    }
+
     this.setClassificacao()
     this.setStatus();
   }
@@ -112,5 +124,9 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
 
   inativar(id: string): void {
     this.filmeService.inativar(id).subscribe(() => this.onCloseDetails.emit());
+  }
+
+  redirect(): void {
+    this.router.navigate([`sistema/filme/editar/${this.filme.id}`], {queryParams: {userLogged: this.userId, userType: this.userType}});
   }
 }
