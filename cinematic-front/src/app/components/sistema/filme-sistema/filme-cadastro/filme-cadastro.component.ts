@@ -18,7 +18,7 @@ export class FilmeCadastroComponent implements OnInit {
       id: '',
       nome: ''
     },
-    duracao: '',
+    duracao: 0,
     classificacao: '',
     descricao: '',
     dataEstreia: '',
@@ -151,7 +151,7 @@ export class FilmeCadastroComponent implements OnInit {
         this.filme.classificacao === '' ||
         this.filme.status === '' ||
         this.filme.descricao === '' ||
-        this.filme.duracao === ''
+        this.filme.duracao === 0
       ) {
         this.canRegister = false;
         return false;

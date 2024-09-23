@@ -310,7 +310,7 @@ export class FiltroSistemaComponent implements OnInit{
 
   private caseFilme(): void {
     let classificacaoList: string[] = ['Livre', 'Dez', 'Doze', 'Quatorze', 'Dezesseis', 'Dezoito'];
-    let duracaoList: string[] = ['1hr-', '1hr30-', '2h-', '2hr30-'];
+    let duracaoList: string[] = ['Curta', '1hr', '1hr30', '2h', '2hr30'];
     let statusList: string[] = ['Lancamento', 'Cartaz', 'Destaque', 'Pre-Estreia', 'Estreia'];
 
     this.categoriaService.findAll().subscribe(categoriaList => {

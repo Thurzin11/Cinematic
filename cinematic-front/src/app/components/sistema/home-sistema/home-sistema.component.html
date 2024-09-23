@@ -1,6 +1,6 @@
 <app-header-sistema [userLogged]="this.userLogged"></app-header-sistema>
 <div class="position-relative">
-  <app-menu-sistema class="position-absolute"></app-menu-sistema>
+  <app-menu-sistema [userId]="userLogged.id" class="position-absolute"></app-menu-sistema>
   <div class="body d-flex flex-column justify-content-center align-items-center">
     <h2 class="col-8 text-light">Estabelecimento 1</h2>
     <div class="graficos col-8 py-2 mt-3">

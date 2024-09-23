@@ -29,8 +29,8 @@ export class HomeSistemaComponent implements OnInit {
   private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(){
-    const idUser: string | null = this.route.snapshot.paramMap.get('id');
-    if (idUser!=null) {
+    const idUser: string = this.route.snapshot.queryParams['userLogged'];
+    if (idUser) {
       this.service.findById(idUser).subscribe((usuario)=>{this.userLogged = usuario; console.log(this.userLogged);
       });
     }
