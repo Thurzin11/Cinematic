@@ -17,8 +17,9 @@ export class MenuSistemaComponent implements OnInit{
   ngOnInit(): void {
     const id: string | undefined = this.route.snapshot.queryParams['userLogged'];
     const userType: string | undefined = this.route.snapshot.queryParams['userType'];
-    if(id)
+    if(id) {
       this.userId = id;
+    }
   
     if(userType) {
       if(userType.toLowerCase() === 'funcionario') {
@@ -39,6 +40,6 @@ export class MenuSistemaComponent implements OnInit{
   }
 
   redirect(path: string): void {
-    this.router.navigate([`/sistema/${path}`], {queryParams: {userLogged: this.userId}});
+    this.router.navigate([`/sistema/${path}`], {queryParams: {userLogged: this.userId, userType: this.userIsGerente ? 'GERENTE':'FUNCIONARIO'}});
   }
 }
