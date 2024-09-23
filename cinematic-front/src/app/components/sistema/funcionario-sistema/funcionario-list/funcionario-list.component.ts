@@ -79,6 +79,6 @@ export class FuncionarioListComponent implements OnInit{
   }
 
   redirect(): void{
-    this.router.navigate(['sistema/funcionario/cadastro'],{queryParams: {userLogged: this.userLogged.id}})
+    this.router.navigate(['sistema/funcionario/cadastro'],{queryParams: {userLogged: this.userLogged.id, userType: this.userLogged.tipoUsuario}})
   }
 }
