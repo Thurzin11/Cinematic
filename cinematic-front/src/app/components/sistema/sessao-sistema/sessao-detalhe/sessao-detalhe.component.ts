@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ISessao } from '../../../../model/ISessao';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SessaoService } from '../../../../services/sessao/sessao.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { SessaoService } from '../../../../services/sessao/sessao.service';
   templateUrl: './sessao-detalhe.component.html',
   styleUrl: './sessao-detalhe.component.scss'
 })
-export class SessaoDetalheComponent implements OnInit, OnChanges{
+export class SessaoDetalheComponent implements OnInit{
   @Input() sessao: ISessao = {
     id: '',
     sala: {
@@ -67,20 +67,22 @@ export class SessaoDetalheComponent implements OnInit, OnChanges{
   @Output() onCloseDetails = new EventEmitter();
   tipo: string = '';
   showModal: boolean = false;
+  userLogged: string = '';
+  userType: string = '';
 
   private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
   private sessaoService: SessaoService = inject(SessaoService);
 
   ngOnInit(): void {
-    if(this.sessaoId !== '') {
-      this.sessaoService.findById(this.sessaoId).subscribe(sessao => {
-        this.sessao = sessao;
-        this.setTipo();
-      });
-    }
-  }
+    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
+    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
 
-  ngOnChanges(changes: SimpleChanges): void {
+    if(userLogged && userType) {
+      this.userLogged = userLogged;
+      this.userType = userType;
+    }
+
     if(this.sessaoId !== '') {
       this.sessaoService.findById(this.sessaoId).subscribe(sessao => {
         this.sessao = sessao;
@@ -91,10 +93,6 @@ export class SessaoDetalheComponent implements OnInit, OnChanges{
 
   close(): void {
     this.onCloseDetails.emit();
-  }
-
-  edit(id: string): void {
-    this.router.navigate([`/sistema/sessao/editar/${id}`]);
   }
 
   ativar(id: string): void {
@@ -125,5 +123,9 @@ export class SessaoDetalheComponent implements OnInit, OnChanges{
       }
       default: break;
     }
+  }
+
+  redirect(): void {
+    this.router.navigate([`sistema/sessao/editar/${this.sessao.id}`], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
   }
 }

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ISala } from '../../../../model/ISala';
 import { SalaService } from '../../../../services/sala/sala.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sala-list',
@@ -20,12 +21,22 @@ export class SalaListComponent implements OnInit{
     tamanho: '',
     disponibilidade: false
   };
+  userLogged: string = '';
+  userType: string = '';
 
-  constructor(private salaService: SalaService) {
-    this.findAllSala();
-  }
+  private salaService: SalaService = inject(SalaService);
+  private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
+    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
+    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
+
+    if(userLogged && userType) {
+      this.userLogged = userLogged;
+      this.userType = userType;
+    }
+
     this.findAllSala();
   }
 
@@ -65,5 +76,9 @@ export class SalaListComponent implements OnInit{
       this.findAllSala();
       this.openSalaDetails = false;
     });
+  }
+
+  redirect(): void {
+    this.router.navigate(['sistema/sala/cadastro'], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
   }
 }

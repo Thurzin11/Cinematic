@@ -22,6 +22,8 @@ export class SalaFormComponent implements OnInit{
   tamanhos: string[] = ['Grande', 'Media', 'Pequena'];
   isEdit: boolean = false;
   canRegister: boolean = false;
+  userLogged: string = '';
+  userType: string = '';
 
   private salaService: SalaService = inject(SalaService);
   private router: Router = inject(Router);
@@ -29,6 +31,14 @@ export class SalaFormComponent implements OnInit{
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get("id");
+    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
+    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
+
+    if(userLogged && userType) {
+      this.userLogged = userLogged;
+      this.userType = userType;
+    }
+
     if(id) {
       this.salaService.findById(id).subscribe(sala => {
         this.sala = sala;
@@ -54,11 +64,11 @@ export class SalaFormComponent implements OnInit{
 
   register(): void {
     if(this.canRegister)
-      this.salaService.create(this.sala).subscribe(() => this.router.navigate(['/sistema/sala']));
+      this.salaService.create(this.sala).subscribe(() => this.redirect());
   }
 
   update(): void {
-    this.salaService.update(this.sala).subscribe(() => this.router.navigate(['/sistema/sala']));
+    this.salaService.update(this.sala).subscribe(() => this.redirect());
   }
   
   validaCampos(): boolean {
@@ -70,5 +80,9 @@ export class SalaFormComponent implements OnInit{
     console.log(this.sala)
     this.canRegister = true;
     return true;
+  }
+
+  redirect(): void {
+    this.router.navigate(['sistema/sala'], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
   }
 }
