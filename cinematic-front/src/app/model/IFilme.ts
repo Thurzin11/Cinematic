@@ -6,7 +6,7 @@ export interface IFilme {
     id: string,
     nome: string,
     categoria: ICategoria,
-    duracao: string,
+    duracao: number,
     classificacao: IClassificacao | string,
     descricao: string,
     dataEstreia: Date | string,

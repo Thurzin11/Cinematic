@@ -22,7 +22,7 @@ import { CategoriaListComponent } from './components/sistema/categoria-sistema/c
 import { CategoriaFormComponent } from './components/sistema/categoria-sistema/categoria-form/categoria-form.component';
 
 const routes: Routes = [
-  {path: "sistema/home/:id", component: HomeSistemaComponent},
+  {path: "sistema/home", component: HomeSistemaComponent},
   {path: "sistema/login", component: LoginFuncionarioComponent},
   {path: "sistema/funcionario/cadastro",component: FuncionarioCadastroComponent},
   {path: "sistema/filme", component: FilmeListComponent},

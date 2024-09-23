@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class MenuSistemaComponent {
   menuIsOpen = false;
+  @Input() userId: string = '';
 
   private router: Router = inject(Router);
 
@@ -20,6 +21,6 @@ export class MenuSistemaComponent {
   }
 
   redirect(path: string): void {
-    this.router.navigate([`/sistema/${path}`]);
+    this.router.navigate([`/sistema/${path}`], {queryParams: {userLogged: this.userId}});
   }
 }

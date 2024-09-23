@@ -22,7 +22,7 @@ export class LoginFuncionarioComponent {
 
   logar(login: ILoginFuncionario): void{
     this.service.loginFuncionario(login).subscribe((usuario)=>{
-      this.router.navigate([`/sistema/home/${usuario.id}`]);
+      this.router.navigate([`/sistema/home`], {queryParams: {userLogged: usuario.id}});
     },
     erro=>{
       if(erro.status==400){

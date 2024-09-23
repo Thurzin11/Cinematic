@@ -35,7 +35,7 @@ export class SessaoListComponent implements OnInit{
         id: '',
         nome: ''
       },
-      duracao: '',
+      duracao: 0,
       classificacao: '',
       descricao: '',
       dataEstreia: '',

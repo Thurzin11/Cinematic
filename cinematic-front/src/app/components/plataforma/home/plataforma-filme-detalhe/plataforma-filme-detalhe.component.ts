@@ -14,7 +14,7 @@ export class PlataformaFilmeDetalheComponent implements OnInit, OnChanges {
       id: '',
       nome: ''
     },
-    duracao: '',
+    duracao: 0,
     classificacao: '',
     descricao: '',
     dataEstreia: '',

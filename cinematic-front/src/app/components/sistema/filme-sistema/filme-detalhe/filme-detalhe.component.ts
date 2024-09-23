@@ -1,6 +1,5 @@
 import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { IFilme } from '../../../../model/IFilme';
-import { IStatusFilme } from '../../../../model/IStatusFilme';
 import { FilmeService } from '../../../../services/filme/filme.service';
 
 @Component({
@@ -16,7 +15,7 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
       id: '',
       nome: ''
     },
-    duracao: '',
+    duracao: 0,
     classificacao: '',
     descricao: '',
     dataEstreia: '',

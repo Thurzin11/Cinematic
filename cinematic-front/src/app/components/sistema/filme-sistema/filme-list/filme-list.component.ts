@@ -3,7 +3,7 @@ import { ICategoria } from '../../../../model/ICategoria';
 import { CategoriaService } from '../../../../services/categoria/categoria.service';
 import { FilmeService } from '../../../../services/filme/filme.service';
 import { IFilme } from '../../../../model/IFilme';
-import { Router, UrlSegment } from '@angular/router';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class FilmeListComponent implements OnInit{
       id: '',
       nome: ''
     },
-    duracao: '',
+    duracao: 0,
     classificacao: '',
     descricao: '',
     dataEstreia: '',
@@ -42,13 +42,13 @@ export class FilmeListComponent implements OnInit{
   
   private categoriaService: CategoriaService = inject(CategoriaService);
   private filmeService: FilmeService = inject(FilmeService);
-  private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
-    let urlSegment: UrlSegment[] | undefined = this.router.lastSuccessfulNavigation?.previousNavigation?.extractedUrl.root.children['primary'].segments;
-    if(urlSegment)
-      this.userId = urlSegment[urlSegment.length-1].path;
-    
+    const id: string | undefined = this.route.snapshot.queryParams['userLogged'];
+    if(id)
+      this.userId = id;
+
     this.categoriaService.findAll().subscribe(categoriaList => this.categoriaList = categoriaList); 
     this.findAllFilmes();
   }
