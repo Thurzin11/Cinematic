@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ISala } from '../../../../model/ISala';
 import { SalaService } from '../../../../services/sala/sala.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IUsuario } from '../../../../model/IUsuario';
-import { UsuarioService } from '../../../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-sala-list',
@@ -11,14 +9,6 @@ import { UsuarioService } from '../../../../services/usuario/usuario.service';
   styleUrl: './sala-list.component.scss'
 })
 export class SalaListComponent implements OnInit{
-  userLogged: IUsuario = {
-    id: '',
-    nome: '',
-    email: '',
-    senha: '',
-    status: false,
-    tipoUsuario: ''
-  };
   filterIsOpen: boolean = false;
   openSalaDetails: boolean = false;
   salas: ISala[] = [];
@@ -31,17 +21,23 @@ export class SalaListComponent implements OnInit{
     tamanho: '',
     disponibilidade: false
   };
+  userLogged: string = '';
+  userType: string = '';
 
-  constructor(private salaService: SalaService,private route: ActivatedRoute,private router:Router,private usuarioService: UsuarioService) {
-    this.findAllSala();
-  }
+  private salaService: SalaService = inject(SalaService);
+  private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
-    this.findAllSala();
-    const idUser: string = this.route.snapshot.queryParams['userLogged'];
-    if (idUser) {
-      this.usuarioService.findById(idUser).subscribe(usuario => this.userLogged = usuario);
+    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
+    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
+
+    if(userLogged && userType) {
+      this.userLogged = userLogged;
+      this.userType = userType;
     }
+
+    this.findAllSala();
   }
 
   findAllSala(): void {
@@ -81,7 +77,7 @@ export class SalaListComponent implements OnInit{
       this.openSalaDetails = false;
     });
   }
-  redirect(): void{
-    this.router.navigate(['sistema/sala/cadastro'],{queryParams: {userLogged: this.userLogged.id}})
+  redirect(): void {
+    this.router.navigate(['sistema/sala/cadastro'], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
   }
 }

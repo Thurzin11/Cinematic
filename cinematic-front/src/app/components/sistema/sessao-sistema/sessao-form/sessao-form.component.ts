@@ -77,6 +77,8 @@ export class SessaoFormComponent implements OnInit{
   estabelecimentos: IEstabelecimento[] = [];
   isEdit: boolean = false;
   canRegister: boolean = false;
+  userLogged: string = '';
+  userType: string = '';
 
   private salaService: SalaService = inject(SalaService);
   private filmeService: FilmeService = inject(FilmeService);
@@ -88,6 +90,14 @@ export class SessaoFormComponent implements OnInit{
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get("id");
+    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
+    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
+
+    if(userLogged && userType) {
+      this.userLogged = userLogged;
+      this.userType = userType;
+    }
+
     if(id) {
       this.sessaoService.findById(id).subscribe(sessao => {
         this.sessao = sessao;
@@ -180,14 +190,14 @@ export class SessaoFormComponent implements OnInit{
 
   register(): void {
     if(this.canRegister)
-      this.sessaoService.create(this.sessao).subscribe(() => this.router.navigate(["/sistema/sessao"]));
+      this.sessaoService.create(this.sessao).subscribe(() => this.redirect());
   }
 
   update(): void {
-    this.sessaoService.update(this.sessao).subscribe(() => this.router.navigate(['/sistema/sessao']));
+    this.sessaoService.update(this.sessao).subscribe(() => this.redirect());
   }
   
-  validaCampos(): boolean {
+  validaCampos(): void {
     if(
       this.sessao.sala.numero === 0 ||
       this.sessao.filme.nome === '' ||
@@ -198,10 +208,13 @@ export class SessaoFormComponent implements OnInit{
       this.sessao.estabelecimento.nome === ''
     ) {
       this.canRegister = false;
-      return false;
+      return;
     }
 
     this.canRegister = true;
-    return true;
+  }
+
+  redirect(): void {
+    this.router.navigate(['sistema/sessao'], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
   }
 }
