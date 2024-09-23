@@ -25,7 +25,7 @@ public class Filme {
     private String nome;
     @ManyToOne
     private Categoria categoria;
-    private String duracao;
+    private Integer duracao;
     @Enumerated(EnumType.STRING)
     private Classificacao classificacao;
     @Column(length = 1000)

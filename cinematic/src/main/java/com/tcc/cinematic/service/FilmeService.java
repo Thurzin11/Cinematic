@@ -42,6 +42,8 @@ public class FilmeService {
         if(filter == null || filter.isEmpty())
             return null;
 
+        System.out.println(filter);
+
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT f FROM Filme f WHERE 1=1 AND f.disponibilidade = true ");
         Map<String, Object> params = new HashMap<>();
@@ -225,23 +227,23 @@ public class FilmeService {
 
         for(String param:params) {
             switch (param.toUpperCase()) {
-                case "1HR" -> {
+                case "1HR": {
                     duracoes.add(60);
                     break;
                 }
-                case "1HR30" -> {
+                case "1HR30": {
                     duracoes.add(90);
                     break;
                 }
-                case "2HR" -> {
+                case "2HR": {
                     duracoes.add(120);
                     break;
                 }
-                case "2HR30" -> {
+                case "2HR30": {
                     duracoes.add(150);
                     break;
                 }
-                default -> {
+                default: {
                     break;
                 }
             };
