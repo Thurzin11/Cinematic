@@ -21,16 +21,24 @@ export class FuncionarioListComponent implements OnInit{
     status: false,
     tipoUsuario: '',
   };
-  userId: string = '';
+  userLogged: IUsuario = {
+    id: '',
+    nome: '',
+    email: '',
+    senha: '',
+    status: false,
+    tipoUsuario: ''
+  };
   private usuarioService: UsuarioService = inject(UsuarioService);
   private router: Router = inject(Router);
   private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.findAll();
-    let urlSegment: UrlSegment[] | undefined = this.router.lastSuccessfulNavigation?.previousNavigation?.extractedUrl.root.children['primary'].segments;
-    if(urlSegment){
-      this.userId = urlSegment[urlSegment.length-1].path;
+    const idUser: string = this.route.snapshot.queryParams['userLogged'];
+    if (idUser) {
+      this.usuarioService.findById(idUser).subscribe(usuario => {this.userLogged = usuario; console.log(this.userLogged);
+      })
     }
   }
 
@@ -68,5 +76,9 @@ export class FuncionarioListComponent implements OnInit{
   ativarUsuario(id: string): void{
     this.usuarioService.ativarUsuario(id).subscribe(() => this.findAll());
     this.closeDetalhe();
+  }
+
+  redirect(): void{
+    this.router.navigate(['sistema/funcionario/cadastro'],{queryParams: {userLogged: this.userLogged.id}})
   }
 }

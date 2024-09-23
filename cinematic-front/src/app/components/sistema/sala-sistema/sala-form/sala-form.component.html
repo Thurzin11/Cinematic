@@ -1,4 +1,4 @@
-<app-header-sistema></app-header-sistema>
+<app-header-sistema [userLogged]="this.userLogged"></app-header-sistema>
 <div class="position-relative">
     <app-menu-sistema class="position-absolute"></app-menu-sistema>
     <div class="col-10 m-auto">
@@ -17,7 +17,7 @@
                         <option *ngFor="let tamanho of this.tamanhos" [ngValue]="tamanho">{{ tamanho }}</option>
                     </select>
                 </div>
-            </div>    
+            </div>
             <button *ngIf="!this.isEdit" class="col-12 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" [disabled]="!canRegister" [ngClass]="canRegister ? 'ativo' : ''" (click)="this.register()">Salvar</button>
             <button *ngIf="this.isEdit" class="col-12 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" (click)="this.update()">Salvar</button>
         </div>

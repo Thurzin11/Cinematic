@@ -21,6 +21,8 @@ export class MenuSistemaComponent {
   }
 
   redirect(path: string): void {
+    console.log(this.userId);
     this.router.navigate([`/sistema/${path}`], {queryParams: {userLogged: this.userId}});
   }
+  
 }

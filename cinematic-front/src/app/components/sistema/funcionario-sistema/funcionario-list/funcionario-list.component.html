@@ -1,6 +1,6 @@
-<app-header-sistema [userId]="userId"></app-header-sistema>
+<app-header-sistema [userLogged]="userLogged"></app-header-sistema>
 <div class="position-relative">
-  <app-menu-sistema class="position-absolute"></app-menu-sistema>
+  <app-menu-sistema class="position-absolute" [userId]="this.userLogged.id"></app-menu-sistema>
   <div class="body d-flex flex-column justify-content-center align-items-center col-10 m-auto ">
     <h2 class="col-12 text-light fs-1 fw-bold">Funcionários</h2>
     <div class="body-bottom col-12 d-flex border border-black rounded-3">
@@ -25,7 +25,7 @@
                 <option *ngFor="let usuario of usuarios" [value]="usuario.nome">{{usuario.nome}}</option>
               </datalist>
           </div>
-          <button class="col-2 rounded-2 fst-italic p-1 m-2" routerLink="cadastro">Adicionar</button>
+          <button class="col-2 rounded-2 fst-italic p-1 m-2" (click)="this.redirect()">Adicionar</button>
         </div>
         <div class="listBottom col-12 p-3 d-flex flex-wrap justify-content-between overflow-y-auto">
           <app-funcionario-card
@@ -34,7 +34,7 @@
             [status]="usuario.status" [tipoUsuario]="usuario.tipoUsuario" (click)="this.openDetalhe(usuario.id)">
           </app-funcionario-card>
         </div>
-        <app-funcionario-detalhe [funcionario]="this.funcionarioDetails" *ngIf="this.detalheIsOpen"
+        <app-funcionario-detalhe [idUserLogged]="this.userLogged.id" [funcionario]="this.funcionarioDetails" *ngIf="this.detalheIsOpen"
           class="position-absolute detalhe" (onClose)="this.closeDetalhe()" (onInativarUsuario)="this.inativarUsuario($event)" (onAtivarUsuario)="this.ativarUsuario($event)"></app-funcionario-detalhe>
       </div>
     </div>

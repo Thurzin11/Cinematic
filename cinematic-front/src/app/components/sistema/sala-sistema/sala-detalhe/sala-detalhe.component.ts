@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { ISala } from '../../../../model/ISala';
-import { SalaService } from '../../../../services/sala/sala.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sala-detalhe',
@@ -17,18 +17,22 @@ export class SalaDetalheComponent {
     tamanho: '',
     disponibilidade: false
   };
+  @Input() idUserLogged: string = '';
   @Output() onCloseDetails = new EventEmitter();
   @Output() onEdit = new EventEmitter();
   @Output() onAtivar = new EventEmitter();
   @Output() onInativar = new EventEmitter();
   showModal: boolean = false;
-  
+
+  private router: Router = inject(Router);
+
   close(): void {
     this.onCloseDetails.emit();
   }
 
   edit(salaId: string): void {
     this.onEdit.emit(salaId);
+    this.redirect(salaId);
   }
 
   inativar(salaId: string): void {
@@ -37,5 +41,8 @@ export class SalaDetalheComponent {
 
   ativar(salaId: string): void {
     this.onAtivar.emit(salaId);
+  }
+  redirect(salaId: string): void{
+    this.router.navigate([`sistema/sala/editar/${salaId}`],{queryParams: {userLogged: this.idUserLogged}})
   }
 }

@@ -8,25 +8,18 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './header-sistema.component.html',
   styleUrl: './header-sistema.component.scss'
 })
-export class HeaderSistemaComponent implements OnInit{
-  @Input() userId: string = '';
-  userLogged: IUsuario = {
+export class HeaderSistemaComponent{
+  @Input() userLogged: IUsuario = {
     id: '',
     nome: '',
     email: '',
     senha: '',
     status: false,
     tipoUsuario: ''
-  }
+  };
   options: boolean = false;
   private usuarioService: UsuarioService = inject(UsuarioService);
 
-  ngOnInit(): void {
-    if (this.userId) {
-      console.log(this.userId);
-      this.usuarioService.findById(this.userId).subscribe(usuario => this.userLogged = usuario);
-    }
-  }
   activateOptions(){
     this.options =! this.options;
     console.log(this.options);

@@ -2,6 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ISala } from '../../../../model/ISala';
 import { SalaService } from '../../../../services/sala/sala.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IUsuario } from '../../../../model/IUsuario';
+import { UsuarioService } from '../../../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-sala-form',
@@ -22,13 +24,27 @@ export class SalaFormComponent implements OnInit{
   tamanhos: string[] = ['Grande', 'Media', 'Pequena'];
   isEdit: boolean = false;
   canRegister: boolean = false;
+  userLogged: IUsuario = {
+    id: '',
+    nome: '',
+    email: '',
+    senha: '',
+    status: false,
+    tipoUsuario: ''
+  };
 
   private salaService: SalaService = inject(SalaService);
+  private usuarioService: UsuarioService = inject(UsuarioService);
   private router: Router = inject(Router);
   private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get("id");
+    const idUser: string = this.route.snapshot.queryParams['userLogged'];
+    if (idUser) {
+      this.usuarioService.findById(idUser).subscribe(usuario => {this.userLogged = usuario;console.log(this.userLogged);
+      });
+    }
     if(id) {
       this.salaService.findById(id).subscribe(sala => {
         this.sala = sala;
@@ -60,13 +76,13 @@ export class SalaFormComponent implements OnInit{
   update(): void {
     this.salaService.update(this.sala).subscribe(() => this.router.navigate(['/sistema/sala']));
   }
-  
+
   validaCampos(): boolean {
     if(this.sala.tipo === '' || this.sala.tamanho === '') {
       this.canRegister = false;
       return false;
     }
-    
+
     console.log(this.sala)
     this.canRegister = true;
     return true;

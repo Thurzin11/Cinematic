@@ -1,6 +1,7 @@
 import { UsuarioService } from '../../../../services/usuario/usuario.service';
 import { IUsuario } from '../../../../model/IUsuario';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-funcionario-detalhe',
@@ -12,6 +13,7 @@ export class FuncionarioDetalheComponent {
   @Output() onEditar = new EventEmitter();
   @Output() onInativarUsuario = new EventEmitter();
   @Output() onAtivarUsuario = new EventEmitter();
+  @Input() idUserLogged: string = '';
   @Input() funcionario: IUsuario = {
     id: '',
     nome: '',
@@ -21,7 +23,7 @@ export class FuncionarioDetalheComponent {
     tipoUsuario: ''
   };
   confirmacao: boolean = false;
-  constructor(private usuarioService: UsuarioService){}
+  constructor(private usuarioService: UsuarioService,private router: Router){}
 
   close():void{
     this.onClose.emit();
@@ -29,6 +31,7 @@ export class FuncionarioDetalheComponent {
   editar(usuario: IUsuario):void{
     console.log(usuario);
     this.onEditar.emit(usuario);
+    this.redirect(usuario);
   }
   inativarUsuario(id:string):void{
     this.onInativarUsuario.emit(id);
@@ -38,6 +41,9 @@ export class FuncionarioDetalheComponent {
   }
   confirmar():void{
     this.confirmacao = !this.confirmacao;
+  }
+  redirect(usuario: IUsuario): void{
+    this.router.navigate([`sistema/funcionario/editar/${usuario.id}`],{queryParams: {userLogged: this.idUserLogged}})
   }
 
 }
