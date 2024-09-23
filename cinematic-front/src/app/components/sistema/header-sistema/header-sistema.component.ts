@@ -33,6 +33,5 @@ export class HeaderSistemaComponent implements OnInit{
   activateOptions(){
     this.options =! this.options;
     console.log(this.options);
-
   }
 }
