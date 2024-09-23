@@ -1,17 +1,34 @@
-import { Component, inject, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject , OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-sistema',
   templateUrl: './menu-sistema.component.html',
   styleUrl: './menu-sistema.component.scss'
 })
-export class MenuSistemaComponent {
+export class MenuSistemaComponent implements OnInit{
   menuIsOpen = false;
-  @Input() userId: string = '';
-  @Input() userIsGerente: boolean = false; 
+  userId: string = '';
+  userIsGerente: boolean = false; 
   
   private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+
+  ngOnInit(): void {
+    const id: string | undefined = this.route.snapshot.queryParams['userLogged'];
+    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
+    if(id)
+      this.userId = id;
+  
+    if(userType) {
+      if(userType.toLowerCase() === 'funcionario') {
+        this.userIsGerente = false;
+        return;
+      }
+
+      this.userIsGerente = true;
+    }
+  }
 
   closeMenu(): void {
     this.menuIsOpen = false;
