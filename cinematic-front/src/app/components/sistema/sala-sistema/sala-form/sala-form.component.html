@@ -25,7 +25,7 @@
                         </select>
                     </div>
                 </div>
-            </div>    
+            </div>
             <button *ngIf="!this.isEdit" class="col-12 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" [disabled]="!canRegister" [ngClass]="canRegister ? 'ativo' : ''" (click)="this.register()">Salvar</button>
             <button *ngIf="this.isEdit" class="col-12 p-2 fs-3 fw-bold rounded-bottom border border-black border-top-0" (click)="this.update()">Salvar</button>
         </div>

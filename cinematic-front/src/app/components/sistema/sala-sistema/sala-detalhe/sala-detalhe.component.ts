@@ -1,6 +1,5 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { ISala } from '../../../../model/ISala';
-import { SalaService } from '../../../../services/sala/sala.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -18,6 +17,7 @@ export class SalaDetalheComponent implements OnInit {
     tamanho: '',
     disponibilidade: false
   };
+  @Input() idUserLogged: string = '';
   @Output() onCloseDetails = new EventEmitter();
   @Output() onAtivar = new EventEmitter();
   @Output() onInativar = new EventEmitter();
@@ -37,7 +37,7 @@ export class SalaDetalheComponent implements OnInit {
       this.userType = userType;
     }
   }
-  
+
   close(): void {
     this.onCloseDetails.emit();
   }

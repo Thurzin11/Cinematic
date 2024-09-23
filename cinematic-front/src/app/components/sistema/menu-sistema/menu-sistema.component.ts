@@ -9,8 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MenuSistemaComponent implements OnInit{
   menuIsOpen = false;
   userId: string = '';
-  userIsGerente: boolean = false; 
-  
+  userIsGerente: boolean = false;
+
   private router: Router = inject(Router);
   private route: ActivatedRoute = inject(ActivatedRoute);
 
@@ -20,7 +20,7 @@ export class MenuSistemaComponent implements OnInit{
     if(id) {
       this.userId = id;
     }
-  
+
     if(userType) {
       if(userType.toLowerCase() === 'funcionario') {
         this.userIsGerente = false;
@@ -42,4 +42,5 @@ export class MenuSistemaComponent implements OnInit{
   redirect(path: string): void {
     this.router.navigate([`/sistema/${path}`], {queryParams: {userLogged: this.userId, userType: this.userIsGerente ? 'GERENTE':'FUNCIONARIO'}});
   }
+
 }

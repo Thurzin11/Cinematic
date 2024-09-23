@@ -2,6 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ISala } from '../../../../model/ISala';
 import { SalaService } from '../../../../services/sala/sala.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IUsuario } from '../../../../model/IUsuario';
+import { UsuarioService } from '../../../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-sala-form',
@@ -26,6 +28,7 @@ export class SalaFormComponent implements OnInit{
   userType: string = '';
 
   private salaService: SalaService = inject(SalaService);
+  private usuarioService: UsuarioService = inject(UsuarioService);
   private router: Router = inject(Router);
   private route: ActivatedRoute = inject(ActivatedRoute);
 
@@ -70,13 +73,13 @@ export class SalaFormComponent implements OnInit{
   update(): void {
     this.salaService.update(this.sala).subscribe(() => this.redirect());
   }
-  
+
   validaCampos(): boolean {
     if(this.sala.tipo === '' || this.sala.tamanho === '') {
       this.canRegister = false;
       return false;
     }
-    
+
     console.log(this.sala)
     this.canRegister = true;
     return true;

@@ -77,7 +77,6 @@ export class SalaListComponent implements OnInit{
       this.openSalaDetails = false;
     });
   }
-
   redirect(): void {
     this.router.navigate(['sistema/sala/cadastro'], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
   }

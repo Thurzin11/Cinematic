@@ -16,17 +16,15 @@ export class HeaderSistemaComponent implements OnInit{
     senha: '',
     status: false,
     tipoUsuario: ''
-  }
-  
+  };
   options: boolean = false;
-
   private route: ActivatedRoute = inject(ActivatedRoute);
   private usuarioService: UsuarioService = inject(UsuarioService);
 
   ngOnInit(): void {
     const id: string | undefined = this.route.snapshot.queryParams['userLogged'];
     if(id) {
-      this.usuarioService.findById(id).subscribe(usuario => this.userLogged = usuario); 
+      this.usuarioService.findById(id).subscribe(usuario => this.userLogged = usuario);
     }
   }
 

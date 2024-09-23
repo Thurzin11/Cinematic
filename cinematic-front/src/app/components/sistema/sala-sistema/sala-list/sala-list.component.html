@@ -17,26 +17,27 @@
                             </svg>
                           </span>
                     </div>
-                    <button class="p-1 col-2 rounded-2 fst-italic" (click)="redirect()">Adicionar</button>
+                    <button class="p-1 col-2 rounded-2 fst-italic" (click)="this.redirect()">Adicionar</button>
                 </div>
                 <div class="cards pt-2 d-flex justify-content-between flex-wrap col-12 overflow-y-auto">
-                    <app-sala-card 
-                        *ngFor="let sala of this.salas" 
-                        [numero]="sala.numero" 
+                    <app-sala-card
+                        *ngFor="let sala of this.salas"
+                        [numero]="sala.numero"
                         [disponibilidade]="sala.disponibilidade"
                         [tipo]="sala.tipo.toString()"
                         [tamanho]="sala.tamanho.toString()"
                         class="col-3 px-1 rounded-3 border-black mx-3 mb-4 border"
                         (click)="this.seeSalaDetails(sala.id)"></app-sala-card>
                 </div>
-                <app-sala-detalhe 
-                        [sala]="this.salaDetails" 
+                <app-sala-detalhe
+                        [idUserLogged]="this.userLogged"
+                        [sala]="this.salaDetails"
                         (onCloseDetails)="this.closeDetails()"
                         (onAtivar)="this.ativarSala($event)"
                         (onInativar)="this.inativarSala($event)"
                         *ngIf="this.openSalaDetails"
                         class="d-flex justify-content-center align-items-center position-absolute"></app-sala-detalhe>
-            </div>    
+            </div>
         </div>
     </div>
 </div>

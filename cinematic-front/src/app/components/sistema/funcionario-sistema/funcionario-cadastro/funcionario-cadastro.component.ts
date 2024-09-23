@@ -18,12 +18,24 @@ export class FuncionarioCadastroComponent implements OnInit {
     tipoUsuario: '',
   };
   editar: boolean = false;
+  userLogged: IUsuario = {
+    id: '',
+    nome: '',
+    email: '',
+    senha: '',
+    status: false,
+    tipoUsuario: ''
+  };
   cargos: string[] = ['Funcionario','Gerente'];
 
   constructor(private usuarioService: UsuarioService,private router: Router,private route: ActivatedRoute){}
 
   ngOnInit(): void{
     let id: string | null = this.route.snapshot.paramMap.get('id');
+    const idUser: string = this.route.snapshot.queryParams['userLogged'];
+    if (idUser) {
+      this.usuarioService.findById(idUser).subscribe(usuario => this.userLogged = usuario);
+    }
     if (id && id!=null) {
       this.editar = true;
       this.usuarioService.findById(id).subscribe((usuario)=> {
@@ -40,11 +52,10 @@ export class FuncionarioCadastroComponent implements OnInit {
   cadastraUsuario(usuario: IUsuario): void{
     if (this.editar) {
       this.usuarioService.update(usuario).subscribe(usuario => console.log(usuario));
-      this.router.navigate(["/sistema/funcionario"]);
+      this.router.navigate(["/sistema/funcionario"],{queryParams: {userLogged: this.userLogged.id, userType: this.userLogged.tipoUsuario ? 'GERENTE':'FUNCIONARIO'}});
     }else{
       this.usuarioService.createFuncionario(usuario).subscribe();
-      this.router.navigate(["/sistema/funcionario"]);
-      console.log(usuario);
+      this.router.navigate(["/sistema/funcionario"],{queryParams: {userLogged: this.userLogged.id, userType: this.userLogged.tipoUsuario ? 'GERENTE':'FUNCIONARIO'}});
     }
   }
 }

@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
 import { UsuarioService } from '../../../../services/usuario/usuario.service';
 import { IUsuario } from '../../../../model/IUsuario';
@@ -21,14 +21,25 @@ export class FuncionarioListComponent implements OnInit{
     status: false,
     tipoUsuario: '',
   };
-
+  userLogged: IUsuario = {
+    id: '',
+    nome: '',
+    email: '',
+    senha: '',
+    status: false,
+    tipoUsuario: ''
+  };
   private usuarioService: UsuarioService = inject(UsuarioService);
   private router: Router = inject(Router);
   private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.findAll();
-    const idUser: string | null = this.route.snapshot.paramMap.get('id');
+    const idUser: string = this.route.snapshot.queryParams['userLogged'];
+    if (idUser) {
+      this.usuarioService.findById(idUser).subscribe(usuario => {this.userLogged = usuario; console.log(this.userLogged);
+      })
+    }
   }
 
   toggleFiltro(): void{
@@ -65,5 +76,9 @@ export class FuncionarioListComponent implements OnInit{
   ativarUsuario(id: string): void{
     this.usuarioService.ativarUsuario(id).subscribe(() => this.findAll());
     this.closeDetalhe();
+  }
+
+  redirect(): void{
+    this.router.navigate(['sistema/funcionario/cadastro'],{queryParams: {userLogged: this.userLogged.id, userType: this.userLogged.tipoUsuario}})
   }
 }

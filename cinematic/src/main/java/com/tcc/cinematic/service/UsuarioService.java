@@ -41,7 +41,8 @@ public class UsuarioService {
     }
 
     public Usuario createFuncionario(UsuarioResponseDTO usuarioResponseDTO){
-        var user  = Usuario.builder().tipoUsuario(this.setTipoUsuario(usuarioResponseDTO.tipoUsuario())).login(usuarioResponseDTO.email()).senha(usuarioResponseDTO.email()).build();
+        System.out.println(usuarioResponseDTO.tipoUsuario());
+        var user  = Usuario.builder().tipoUsuario(setTipoUsuario(usuarioResponseDTO.tipoUsuario())).login(usuarioResponseDTO.email()).senha(usuarioResponseDTO.email()).build();
         BeanUtils.copyProperties(usuarioResponseDTO,user);
         this.repository.save(user);
         return user;
