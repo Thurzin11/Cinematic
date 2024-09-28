@@ -41,7 +41,6 @@ export class FuncionarioListComponent implements OnInit{
       })
     }
   }
-
   toggleFiltro(): void{
     this.filterIsOpen = !this.filterIsOpen;
   }

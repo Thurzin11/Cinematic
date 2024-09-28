@@ -22,6 +22,7 @@ import { CategoriaListComponent } from './components/sistema/categoria-sistema/c
 import { CategoriaFormComponent } from './components/sistema/categoria-sistema/categoria-form/categoria-form.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { SessaoIngressoComponent } from './components/sistema/ingresso-sistema/sessao-ingresso/sessao-ingresso.component';
+import { PagamentoIngressoComponent } from './components/sistema/ingresso-sistema/pagamento-ingresso/pagamento-ingresso.component';
 
 const routes: Routes = [
   {path: "sistema/home", component: HomeSistemaComponent},
@@ -48,6 +49,7 @@ const routes: Routes = [
   {path: "sistema/categoria/cadastro", component: CategoriaFormComponent},
   {path: "sistema/categoria/editar/:id", component: CategoriaFormComponent},
   {path: "sistema/ingresso", component: SessaoIngressoComponent},
+  {path: "sistema/ingresso/:idSessao",component: PagamentoIngressoComponent},
   {path: "cadastro", component: CadastroClienteComponent},
   {path: "home", component: HomeComponent},
   {path: "filme/carrossel", component: DestaqueCarroselComponent},

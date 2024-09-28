@@ -50,6 +50,7 @@ import { CategoriaDetalheComponent } from './components/sistema/categoria-sistem
 import { ModalConfirmacaoComponent } from './components/sistema/modal-confirmacao/modal-confirmacao.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { SessaoIngressoComponent } from './components/sistema/ingresso-sistema/sessao-ingresso/sessao-ingresso.component';
+import { PagamentoIngressoComponent } from './components/sistema/ingresso-sistema/pagamento-ingresso/pagamento-ingresso.component';
 
 register();
 @NgModule({
@@ -97,7 +98,8 @@ register();
     CategoriaDetalheComponent,
     ModalConfirmacaoComponent,
     LandingPageComponent,
-    SessaoIngressoComponent
+    SessaoIngressoComponent,
+    PagamentoIngressoComponent
   ],
   imports: [
     BrowserModule,

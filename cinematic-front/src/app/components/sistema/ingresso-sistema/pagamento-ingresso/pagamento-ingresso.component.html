@@ -1,0 +1,42 @@
+<app-header-sistema></app-header-sistema>
+<div class="d-flex flex-column align-items-center col-12" *ngIf="!this.isPagamento">
+  <h1 class="text-light col-8">Ingressos</h1>
+  <div class="col-8">
+    <div class="border border-black rounded-3 col-12 d-flex mb-3 tipo" *ngFor="let tipo of this.tipoIngresso">
+      <div class="col-1 d-flex align-items-center justify-content-center">
+        <img src="../../../../../assets/img/ingressos.png" alt="img-ingresso">
+      </div>
+      <div class="d-flex flex-column justify-content-center p-1 col-10">
+        <p class="text-light m-0">{{tipo.nome}}</p>
+        <p class="text-light m-0">R${{tipo.valor.toFixed(2)}}</p>
+      </div>
+      <div class="d-flex align-items-center justify-content-around col-1">
+        <button class="rounded-circle border border-black increment" (click)="this.decrement(tipo)">-</button>
+        <p class="text-light m-0 align-self-center">{{tipo.quantidade}}</p>
+        <button class="rounded-circle border border-black increment" (click)="this.increment(tipo)">+</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- Pagamento -->
+<div class="d-flex flex-column align-items-center col-12" *ngIf="this.isPagamento">
+  <h1 class="text-light col-8">Pagamento</h1>
+  <div class="col-8">
+    <div class="border border-black rounded-3 col-12 d-flex mb-3 tipo" *ngFor="let tipo of this.tipoIngresso">
+      <div class="col-1 d-flex align-items-center justify-content-center">
+        <img src="../../../../../assets/img/ingressos.png" alt="img-ingresso">
+      </div>
+      <div class="d-flex flex-column justify-content-center p-1 col-10">
+        <p class="text-light m-0">{{tipo.nome}}</p>
+        <p class="text-light m-0">R${{tipo.valor.toFixed(2)}}</p>
+      </div>
+      <div class="d-flex align-items-center justify-content-around col-1">
+        <button class="rounded-circle border border-black increment" (click)="this.decrement(tipo)">-</button>
+        <p class="text-light m-0 align-self-center">{{tipo.quantidade}}</p>
+        <button class="rounded-circle border border-black increment" (click)="this.increment(tipo)">+</button>
+      </div>
+    </div>
+
+  </div>
+</div>
