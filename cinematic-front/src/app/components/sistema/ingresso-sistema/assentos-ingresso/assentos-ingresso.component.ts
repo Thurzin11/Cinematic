@@ -69,7 +69,7 @@ export class AssentosIngressoComponent implements OnInit {
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get('sessaoId');
     if(id !== null) {
-      this.sessaoService.findById(id).subscribe(sessao => this.sessao = sessao);
+      this.sessaoService.findById(id).subscribe(sessao => {this.sessao = sessao; console.log(sessao)});
     }
 
   }
