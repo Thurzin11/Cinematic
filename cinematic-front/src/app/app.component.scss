@@ -5,3 +5,14 @@ section{
   height: 100vh;
   max-height: 100vh;
 }
+
+::-webkit-scrollbar{
+  background-color: $PRETO;
+  border: .1rem solid $PRETO;
+}
+
+::-webkit-scrollbar-thumb{
+  width: 1rem;
+  background-color: $ROXO-CLARO;
+  border: .1rem solid $PRETO;
+}

@@ -28,6 +28,10 @@ export class SalaListComponent implements OnInit{
   private router: Router = inject(Router);
   private route: ActivatedRoute = inject(ActivatedRoute);
 
+  constructor() {
+    this.findAllSala();
+  }
+
   ngOnInit(): void {
     const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
     const userType: string | undefined = this.route.snapshot.queryParams['userType'];

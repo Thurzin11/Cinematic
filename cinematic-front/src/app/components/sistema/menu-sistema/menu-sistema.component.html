@@ -1,6 +1,10 @@
 <nav class="d-flex flex-column align-items-start border border-black col-sm-10 rounded-end-4"
     (mouseleave)="this.closeMenu()"
     [ngClass]="this.menuIsOpen ? '' : 'leave'">
+    <div class="d-flex align-items-center col-sm-12 px-2" (click)="redirect('ingresso')">
+        <img class="py-3" src="../../../../assets/img/ingressos.png" alt="">
+        <p class="fs-4 ps-3 fw-bold">Ingresso</p>
+    </div>
     <div class="d-flex align-items-center col-sm-12 px-2" (click)="redirect('filme')">
         <img class="py-3" src="../../../../assets/img/claquete.png" alt="">
         <p class="fs-4 ps-3 fw-bold">Filmes</p>

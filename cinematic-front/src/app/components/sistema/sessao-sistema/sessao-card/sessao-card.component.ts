@@ -60,6 +60,7 @@ export class SessaoCardComponent implements OnInit{
     }
   };
   tipo: string = '';
+  @Input() isVenda: boolean = false;
 
   ngOnInit(): void {
     this.setTipo();

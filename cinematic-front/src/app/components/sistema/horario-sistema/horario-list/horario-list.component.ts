@@ -30,10 +30,12 @@ export class HorarioListComponent implements OnInit{
   }
   listaHorarios: IHorario[] = [];
 
+  private horarioService: HorarioService = inject(HorarioService);
   private usuarioService: UsuarioService = inject(UsuarioService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
-  constructor(private horarioService: HorarioService){
+
+  constructor() {
       this.findAllHorario();
     }
 

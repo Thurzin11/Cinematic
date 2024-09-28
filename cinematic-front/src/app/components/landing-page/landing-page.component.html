@@ -1,0 +1,135 @@
+<div class="h-100 position-relative">
+    <div class="d-flex justify-content-between col-10 mx-auto align-items-center text-light pt-4">
+        <h1 class="fw-bold">CINEMATIC</h1>
+        <div class="col-3 justify-content-around d-flex">
+            <a class="border fw-semibold fst-italic border-3 border-black fs-5 py-2 px-3 col-5 text-center rounded-5" href="#sobreNos">Sobre Nós</a>
+            <a class="border fw-semibold fst-italic border-3 border-black fs-5 py-2 px-3 col-5 text-center rounded-5" href="#contato">Contato</a>
+        </div>
+    </div>
+    <swiper-container 
+        slides-per-view="1" 
+        loop="true" 
+        pagination="true" 
+        speed="1500"
+        navigation="true" 
+        class="swiper-container border border-black rounded-4 position-absolute translate-middle start-50 col-11 mx-auto d-flex justify-content-center align-items-center">
+        <swiper-slide class="p-5 d-flex flex-column justify-content-around text-light">
+            <div class="col-12 d-flex justify-content-around align-items-center pb-4">
+                <div class="col-5">
+                    <p class="fs-1 text-center fw-semibold">Seja Bem-Vindo!</p>
+                    <p class="fs-3 text-center">
+                        Apresentamos a vocês o <strong>CINEMATIC</strong> 
+                        Uma plataforma de compra de ingressos, com diversos estabelecimentos ao redor do Brasil.
+                    </p>
+                    <p class="fs-3 text-center">Conte com recomendações personalizadas de acordo com sua região e desfrute do melhor do entretenimento!</p>
+                </div>
+                <div class="col-4">
+                    <swiper-container slides-per-view="1" navigation="true" loop="true" pagination="true" speed="1000">
+                        <swiper-slide><img class="rounded-3 border border-3 border-black" src="../../../assets/img/Home.png" alt=""></swiper-slide>
+                        <swiper-slide><img class="rounded-3 border border-3 border-black" src="../../../assets/img/Home-HoverFilme.png" alt=""></swiper-slide>
+                        <swiper-slide><img class="rounded-3 border border-3 border-black" src="../../../assets/img/Home-DetalheFilme.png" alt=""></swiper-slide>
+                    </swiper-container>
+                </div>
+            </div>
+            <div class="col-12 d-flex justify-content-around">
+                <div class="col-4">
+                    <swiper-container slides-per-view="1" navigation="true" loop="true" pagination="true" speed="1000">
+                        <swiper-slide><img class="rounded-3 border border-3 border-black" src="../../../assets/img/Sessões.png" alt=""></swiper-slide>
+                        <swiper-slide><img class="rounded-3 border border-3 border-black" src="../../../assets/img/Assentos.png" alt=""></swiper-slide>
+                        <swiper-slide><img class="rounded-3 border border-3 border-black" src="../../../assets/img/Pagamento.png" alt=""></swiper-slide>
+                    </swiper-container>
+                </div>
+                <div class="col-4 d-flex flex-column justify-content-center">
+                    <p class="fs-3 text-center">
+                        Encontre os melhores filmes e escolha o seu assento para estar com a gente nessa.
+                    </p>
+                    <p class="fs-3 text-center">Os nossos filtros irão te ajudar a escolher a melhor sessão para você aproveitar!</p>
+                    <p class="fs-3 text-center">Seu pagamento é seguro conosco, utilizaremos o pag seguro como nosso parceiro na hora de pagar pelo seu ingresso.</p>
+                </div>
+            </div>
+        </swiper-slide>
+        <swiper-slide class="p-5 d-flex justify-content-around flex-column text-light ">
+                <div class="d-flex col-12 justify-content-around align-items-center pb-5">
+                    <div class="col-5">
+                        <p class="fs-3 text-center">
+                            Agora que já conhecem a nossa plataforma, aprensentamos o nosso sistema de gestão e gerenciamento.
+                        </p>
+                        <p class="fs-3 text-center">Ele será integrado com a plataforma quando ela estiver pronta, com isso podemos gerar KPI'S e gráficos relevantes para te ajudar na gestão seu negócio.</p>
+                    </div>
+                    <div class="col-4 d-flex flex-column justify-content-center">
+                        <p class="fs-3 text-center">
+                            Tenha o controle do seu estabelecimento mais acessível e fácil, gerencia seus funcionário e produtos. 
+                        </p>
+                        <p class="fs-3 text-center">
+                            Controle de acesso gerenciada por credenciais de acord com o seu respectivo cargo. 
+                        </p>
+                    </div>
+                </div>
+                <div class="d-flex col-12 justify-content-around align-items-center">
+                    <div class="col-5">
+                        <img src="../../../assets/img/Login Funcionario.png" alt="" class="rounded-3 border border-3 border-black">
+                    </div>
+                    <div class="col-4 d-flex flex-column justify-content-around">
+                        <p class="fs-3 fw-semibold fs-2 text-center">
+                            Faça login e acesse o sistema. 
+                        </p>
+                        <button class="fs-3 p-2 border border-3 border-black rounded-3" routerLink="/sistema/login">Clique aqui e acesse</button>
+                    </div>
+                </div>
+        </swiper-slide>
+    </swiper-container>
+</div>
+<div *ngIf="!this.showInfos" class="col-12 mx-auto d-flex flex-column justify-content-center align-items-center">
+    <div id="sobreNos" class="col-5 d-flex flex-column justify-content-center align-items-center pb-3">
+        <p class="text-amarelo fw-bold fs-3"><strong>Sobre Nós</strong></p>
+        <p class="text-light fs-5">Somos alunos do curso SuperDev da ProWay e promissores no ramo da computação.</p>
+        <p class="text-light text-center fs-5">Nossa ideia com o projeto foi de implementar algo simples mas bem feito, colocamos toda a nossa energia e amor nele!</p>
+    </div>
+    <div id="contato" class="col-5 d-flex flex-column justify-content-center align-items-center pb-4">
+        <p class="text-amarelo fw-bold fs-3"><strong>Contato</strong></p>
+        <div class="d-flex col-10 justify-content-around">
+            <div class="text-light">
+                <p class="fs-4">Mateus Reisdorfer</p>
+                <div class="d-flex justify-content-between col-12">
+                    <a class="limpar" href="https://www.instagram.com/16fts__/">
+                        <img class="limpar" src="../../../assets/img/instagram.png" alt="">
+                    </a>
+                    <a class="limpar" href="https://www.linkedin.com/in/mateus-reisdorfer-a9a38b27a/">
+                        <img class="limpar" src="../../../assets/img/logotipo-do-linkedin.png" alt="">
+                    </a>
+                    <a class="limpar" href="https://github.com/MateusReisdorfer18">
+                        <img class="limpar" src="../../../assets/img/placa-do-github.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="text-light">
+                <p class="fs-4">Arthur Santos Gonçalves</p>
+                <div class="d-flex justify-content-around col-12">
+                    <a class="limpar" href="https://www.instagram.com/arthur_goncalves777/">
+                        <img class="limpar" src="../../../assets/img/instagram.png" alt="">
+                    </a>
+                    <a class="limpar" href="https://www.linkedin.com/in/arthur-goncalves03/">
+                        <img class="limpar" src="../../../assets/img/logotipo-do-linkedin.png" alt="">
+                    </a>
+                    <a class="limpar" href="https://github.com/Thurzin11">
+                        <img class="limpar" src="../../../assets/img/placa-do-github.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="text-light">
+                <p class="fs-4">Ruan Pablo Lana</p>
+                <div class="d-flex justify-content-between col-12">
+                    <a class="limpar" href="https://www.instagram.com/l.ruanpablo/">
+                        <img class="limpar" src="../../../assets/img/instagram.png" alt="">
+                    </a>
+                    <a class="limpar" href="https://www.linkedin.com/in/ruanlana/">
+                        <img class="limpar" src="../../../assets/img/logotipo-do-linkedin.png" alt="">
+                    </a>
+                    <a class="limpar" href="https://github.com/11ruan">
+                        <img class="limpar" src="../../../assets/img/placa-do-github.png" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

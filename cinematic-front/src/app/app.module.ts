@@ -48,6 +48,8 @@ import { CategoriaFormComponent } from './components/sistema/categoria-sistema/c
 import { CategoriaCardComponent } from './components/sistema/categoria-sistema/categoria-card/categoria-card.component';
 import { CategoriaDetalheComponent } from './components/sistema/categoria-sistema/categoria-detalhe/categoria-detalhe.component';
 import { ModalConfirmacaoComponent } from './components/sistema/modal-confirmacao/modal-confirmacao.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { SessaoIngressoComponent } from './components/sistema/ingresso-sistema/sessao-ingresso/sessao-ingresso.component';
 
 register();
 @NgModule({
@@ -93,7 +95,9 @@ register();
     CategoriaFormComponent,
     CategoriaCardComponent,
     CategoriaDetalheComponent,
-    ModalConfirmacaoComponent
+    ModalConfirmacaoComponent,
+    LandingPageComponent,
+    SessaoIngressoComponent
   ],
   imports: [
     BrowserModule,

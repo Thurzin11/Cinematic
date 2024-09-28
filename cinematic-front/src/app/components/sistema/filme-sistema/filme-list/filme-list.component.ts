@@ -46,6 +46,10 @@ export class FilmeListComponent implements OnInit{
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
 
+  constructor() {
+    this.findAllFilmes();
+  }
+
   ngOnInit(): void {
     const id: string | undefined = this.route.snapshot.queryParams['userLogged'];
     const userType: string | undefined = this.route.snapshot.queryParams['userType'];

@@ -42,6 +42,7 @@ export class EstabelecimentoListComponent implements OnInit {
   constructor(){
     this.findAll();
   }
+  
   ngOnInit(): void {
     const idUser: string = this.route.snapshot.queryParams['userLogged'];
     if (idUser) {

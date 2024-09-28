@@ -80,7 +80,6 @@ export class SalaFormComponent implements OnInit{
       return false;
     }
 
-    console.log(this.sala)
     this.canRegister = true;
     return true;
   }

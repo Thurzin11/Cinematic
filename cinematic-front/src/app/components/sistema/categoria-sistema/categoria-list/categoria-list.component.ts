@@ -23,6 +23,10 @@ export class CategoriaListComponent implements OnInit, OnChanges {
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
 
+  constructor() {
+    this.findAll();
+  }
+
   ngOnInit(): void {
     const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
     const userType: string | undefined = this.route.snapshot.queryParams['userType'];

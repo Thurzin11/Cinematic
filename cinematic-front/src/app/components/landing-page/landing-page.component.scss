@@ -1,0 +1,70 @@
+@import '../../style/color';
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+:host {
+    overflow-y: auto;
+}
+
+h1 {
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: .5rem;
+    text-shadow: $SHADOW-MD;
+    font-size: 4.5rem;
+}
+
+a {
+    text-decoration: none;
+    box-shadow: $SHADOW-MD;
+    color: $BRANCO;
+    cursor: pointer;
+}
+
+a:hover {
+    transition: .3s;
+    background-color: $AMARELO;
+    color: $PRETO;
+}
+
+swiper-container {
+    box-shadow: $SHADOW-MD;
+}
+
+.swiper-container {
+    top: 53.5%;
+}
+
+p {
+    text-shadow: $SHADOW-SM;
+}
+
+img {
+    width: 100%;
+    box-shadow: $SHADOW-MD;
+}
+
+button {
+    background-color: transparent;
+    color: $BRANCO;
+    box-shadow: $SHADOW-SM;
+}
+
+button:hover {
+    transition: .2s;
+    background-color: $AMARELO;
+    scale: 105%;
+    box-shadow: $SHADOW-MD;
+    color: $PRETO;
+}
+
+.text-amarelo {
+    color: $AMARELO;
+}
+
+.limpar {
+    box-shadow: none;
+    // width: 25%;
+}
+
+.limpar:hover {
+    background-color: transparent;
+}

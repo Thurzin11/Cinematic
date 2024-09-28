@@ -1,7 +1,11 @@
 <div class="px-2 py-2 d-flex justify-content-between align-items-center">
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column" *ngIf="!isVenda">
         <p class="text-light fs-4 mb-0">{{ this.sessao.estabelecimento.nome }}</p>
-        <p class="text-light fst-italic mb-0">{{ this.sessao.filme.nome }}</p>
+        <p class="text-light fst-italic mb-0">{{ this.sessao.filme.nome }} - sala {{ this.sessao.sala.numero }}</p>
+    </div>
+    <div class="d-flex flex-column" *ngIf="isVenda">
+        <p class="text-light fs-4 mb-0">{{ this.sessao.filme.nome }} - sala {{ this.sessao.sala.numero }}</p>
+        <p class="text-light fst-italic mb-0">{{ this.sessao.estabelecimento.nome }}</p>
     </div>
     <div class="d-flex flex-column align-items-end">
         <p class="text-light fs-4 mb-0">{{ this.sessao.horario.hora }}</p>
@@ -9,8 +13,7 @@
     </div>
 </div>
 <div class="px-2 py-2 d-flex justify-content-between align-items-center pt-3">
-    <div class="col-10 d-flex align-items-center justify-content-between">
-        <p class="text-light mb-0">Sala {{ this.sessao.sala.numero }}</p>
+    <div class="col-6 d-flex align-items-center justify-content-between">
         <p class="idioma text-black fw-semibold mb-0 border border-black rounded-4 p-1 px-4">{{ this.sessao.idioma.toString().toLowerCase() }}</p>
         <p class="tipo text-black fw-semibold mb-0 border border-black rounded-4 p-1 px-4">{{ this.tipo }}</p>
     </div>

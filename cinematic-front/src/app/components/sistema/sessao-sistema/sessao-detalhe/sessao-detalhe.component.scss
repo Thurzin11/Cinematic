@@ -1,5 +1,11 @@
 @import '../../../../style/color';
 
+:host {
+    right: 25%;
+    top: 10%;
+    width: 50%;
+}
+
 .body {
     background-color: $ROXO-ESCURO;
     box-shadow: 0 .4rem .4rem $PRETO;

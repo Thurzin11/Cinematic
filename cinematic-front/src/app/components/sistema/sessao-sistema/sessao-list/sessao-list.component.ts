@@ -72,6 +72,10 @@ export class SessaoListComponent implements OnInit{
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
 
+  constructor() {
+    this.findAllSessoes();
+  }
+
   ngOnInit(): void {
     const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
     const userType: string | undefined = this.route.snapshot.queryParams['userType'];

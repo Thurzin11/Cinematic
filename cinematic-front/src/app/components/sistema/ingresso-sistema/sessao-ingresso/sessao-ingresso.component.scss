@@ -1,4 +1,4 @@
-@import "../../../../style/color";
+@import '../../../../style/color';
 
 h2 {
     text-shadow: $SHADOW-MD;
@@ -12,6 +12,23 @@ h2 {
 .list {
     span {
         cursor: pointer;
+    }
+
+    input {
+        opacity: .7;
+        box-shadow: $SHADOW-SM;
+    }
+
+    input:hover {
+        transition: .2s;
+        scale: 102%;
+        opacity: 1;
+    }
+
+    input:focus {
+        scale: 105%;
+        opacity: 1;
+        outline: 0;
     }
 
     button {
