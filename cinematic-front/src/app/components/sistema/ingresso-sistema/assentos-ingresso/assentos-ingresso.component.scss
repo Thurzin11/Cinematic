@@ -1,0 +1,10 @@
+@import '../../../../style/color';
+
+h2 {
+    text-shadow: $SHADOW-MD;
+}
+
+.body {
+    box-shadow: 0 .4rem .4rem $PRETO;
+    max-height: 650px;
+}

@@ -1,0 +1,48 @@
+@import '../../../../style/color';
+
+.body {
+    background-color: $ROXO-CLARO;
+
+    h3 {
+        text-shadow: $SHADOW-SM;
+    }
+
+    .idioma, .tipo, .classificacao, .banner {
+        box-shadow: $SHADOW-SM;
+    }
+
+    .hover {
+        cursor: pointer;
+    }
+
+    .div-assentos {
+        max-height: 5rem;
+    }
+    
+    .idioma {
+        background-color: $VERDE-IDIOMA;
+    }
+    
+    .tipo {
+        background-color: $AMARELO;
+    }
+
+    .livre {
+        background-color: $VERDE-CLASSIFICACAO-L;
+    }
+    .dez {
+        background-color: $AZUL-CLASSIFICACAO-10;
+    }
+    .doze {
+        background-color: $AMARELO-CLASSIFICACAO-12;
+    }
+    .quatorze {
+        background-color: $LARANJA-CLASSIFICACAO-14;
+    }
+    .dezesseis {
+        background-color: $VERMELHO;
+    }
+    .dezoito {
+        background-color: $PRETO;
+    }
+}
