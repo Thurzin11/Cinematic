@@ -57,7 +57,8 @@ export class SessaoCardComponent implements OnInit{
       cidade: '',
       estado: '',
       cep: ''
-    }
+    },
+    fileiras: []
   };
   tipo: string = '';
   @Input() isVenda: boolean = false;

@@ -60,70 +60,10 @@ export class CardIngressoComponent implements OnInit {
       cidade: '',
       estado: '',
       cep: ''
-    }
+    },
+    fileiras: []
   };
-  @Input() assentos: IAssento[] = [
-    {
-      id: '',
-      nome: 'C1',
-      tipo: '',
-      status: ''
-    },
-    {
-      id: '',
-      nome: 'C2',
-      tipo: '',
-      status: ''
-    },
-    {
-      id: '',
-      nome: 'C3',
-      tipo: '',
-      status: ''
-    },
-    {
-      id: '',
-      nome: 'C1',
-      tipo: '',
-      status: ''
-    },
-    {
-      id: '',
-      nome: 'C2',
-      tipo: '',
-      status: ''
-    },
-    {
-      id: '',
-      nome: 'C3',
-      tipo: '',
-      status: ''
-    },
-    {
-      id: '',
-      nome: 'C1',
-      tipo: '',
-      status: ''
-    },
-    {
-      id: '',
-      nome: 'C2',
-      tipo: '',
-      status: ''
-    },
-    {
-      id: '',
-      nome: 'C3',
-      tipo: '',
-      status: ''
-    },
-    {
-      id: '',
-      nome: 'C3',
-      tipo: '',
-      status: ''
-    },
-  ];
+  @Input() assentos: IAssento[] = [];
   classificacao: string = '';
   classificacaoClass: string = '';
   tipo: string = '';

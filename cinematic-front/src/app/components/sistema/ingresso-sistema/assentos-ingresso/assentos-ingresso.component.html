@@ -3,9 +3,18 @@
     <app-menu-sistema class="position-absolute"></app-menu-sistema>
     <div class="col-10 m-auto">
         <h2 class="text-light fs-1 fw-bold">Assentos</h2>
-        <div class="col-12 body d-flex rounded">
-            <div class="col-9">
-
+        <div class="col-12 body border border-black d-flex rounded">
+            <div class="col-9 py-2">
+                <div class="d-flex justify-content-center align-items-center">
+                    <p class="text-light fw-semibold fs-5">{{sessao.filme.nome}} - sala {{sessao.sala.numero}}</p>
+                    <p class="text-light fw-semibold fs-5 px-5">{{sessao.data}}</p>
+                    <p class="text-light fw-semibold fs-5">{{sessao.horario.hora}}</p>
+                </div>
+                <div class="d-flex">
+                    <div>
+                        <p *ngFor="let filei"></p>
+                    </div>
+                </div>
             </div>
             <app-card-ingresso class="col-3"></app-card-ingresso>
         </div>
