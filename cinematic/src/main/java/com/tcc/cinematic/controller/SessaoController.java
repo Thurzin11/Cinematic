@@ -4,6 +4,8 @@ import com.tcc.cinematic.DTO.SessaoRecordDTO;
 import com.tcc.cinematic.entity.Sessao;
 import com.tcc.cinematic.service.SessaoService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,11 @@ public class SessaoController {
             return ResponseEntity.badRequest().build();
 
         return ResponseEntity.ok(sessaoFound);
+    }
+
+    @GetMapping("/filme/{nome}")
+    public ResponseEntity<List<Sessao>> findSessaoByNome(@PathVariable String nome) {
+        return ResponseEntity.ok(this.service.findByFilme(nome));
     }
 
     @PostMapping

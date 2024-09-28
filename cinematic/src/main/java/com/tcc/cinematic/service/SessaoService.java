@@ -22,6 +22,9 @@ public class SessaoService {
     @Autowired
     private AssentoService assentoService;
 
+    @Autowired
+    private FilmeService filmeService;
+
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -31,6 +34,10 @@ public class SessaoService {
 
     public Sessao findById(UUID id) {
         return this.repository.findById(id).orElse(null);
+    }
+
+    public List<Sessao> findByFilme(String nomeFilme) {
+        return this.repository.findSessaoByNome(nomeFilme);
     }
 
     public List<Sessao> filters(Map<String, List<String>> filter) {
