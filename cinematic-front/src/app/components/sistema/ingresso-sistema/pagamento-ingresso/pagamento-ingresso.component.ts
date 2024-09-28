@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ITipoIngresso } from '../../../../model/ITipoIngresso';
 import { ActivatedRoute } from '@angular/router';
+import { ITipoPagamento } from '../../../../model/ITipoPagamento';
 
 @Component({
   selector: 'app-pagamento-ingresso',
@@ -36,6 +37,21 @@ isPagamento: boolean = false;
     quantidade: 0
   }
 ];
+
+  tipoPagamento: ITipoPagamento [] = [
+    {
+      nome: 'Cartão de Crédito'
+    },
+    {
+      nome: 'Cartão de Débito'
+    },
+    {
+      nome: 'Paypal'
+    },
+    {
+      nome: 'Pix'
+    }
+  ]
 
   private route: ActivatedRoute = inject(ActivatedRoute);
 
