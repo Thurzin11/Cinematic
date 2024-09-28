@@ -59,7 +59,8 @@ export class AssentosIngressoComponent implements OnInit {
       cidade: '',
       estado: '',
       cep: ''
-    }
+    },
+    fileiras: []
   }
 
   private route: ActivatedRoute = inject(ActivatedRoute);

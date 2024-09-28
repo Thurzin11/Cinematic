@@ -59,7 +59,8 @@ export class SessaoDetalheComponent implements OnInit{
       cidade: '',
       estado: '',
       cep: ''
-    }
+    },
+    fileiras: []
   };
   @Input() sessaoId: string = '';
   @Output() onAtivar = new EventEmitter();

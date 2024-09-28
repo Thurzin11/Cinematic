@@ -11,6 +11,7 @@ export interface ISessao {
     filme: IFilme,
     disponibilidade: boolean,
     assentos: IAssento[],
+    fileiras: string[],
     idioma: string,
     tipo: string,
     data: Date | string,
