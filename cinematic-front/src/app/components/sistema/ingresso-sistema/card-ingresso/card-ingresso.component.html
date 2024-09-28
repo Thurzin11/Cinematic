@@ -1,0 +1,50 @@
+<div class="body p-3 rounded-3 border border-black border-3">
+    <div class="d-flex align-items-start justify-content-between">
+        <p class="fs-5 fst-italic text-light">Resumo de pedido</p>
+        <span class="hover">
+            <img src="../../../../../assets/img/lixeira.png" alt="">
+        </span>
+    </div>
+    <div class="d-flex">
+        <div class="col-4">
+            <img [src]="this.sessao.filme.banner" alt="" class="col-12 banner rounded-3 border border-black border-3">
+        </div>
+        <div class="col-8 d-flex flex-column justify-content-between ps-2">
+            <div>
+                <h3 class="text-light fw-bold">{{this.sessao.filme.nome}}</h3>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="classificacao text-light col-2 my-3 p-1 fs-5 border border-black rounded text-center"
+                    [ngClass]="this.classificacaoClass">{{ this.classificacao }}</span>
+                    <p class="idioma text-black fw-semibold mb-0 border border-black rounded-4 p-1 px-4">{{ this.sessao.idioma }}</p>
+                    <p class="tipo text-black fw-semibold mb-0 border border-black rounded-4 p-1 px-4">{{ this.tipo }}</p>
+                </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-center">
+                <span class="hover">
+                    <img src="../../../../../assets/img/sinal-de-informacao.png" alt="">
+                </span>
+                <p class="m-0 hover ps-2 fw-semibold fs-5">ver informações</p>
+            </div>
+        </div>
+    </div>
+    <hr class="col-10 mx-auto">
+    <div class="col-10 mx-auto">
+        <div class="d-flex flex-column justify-content-between div-assentos pb-3">
+            <p class="fs-4 text-light fw-semibold col-8 m-0">Assentos</p>
+            <div class="d-flex flex-wrap ps-2">
+                <p class="fs-5 text-light fw-semibold pe-2 m-0" 
+                    *ngFor="let assento of this.assentos">{{assento.nome}}</p>
+            </div>
+        </div>
+        <div class="d-flex flex-column">
+            <div class="d-flex col-12 align-items-center justify-content-between">
+                <p class="fs-4 text-light fw-semibold">Itens</p>
+                <p class="fs-4 text-light fw-semibold">0</p>
+            </div>
+            <div class="d-flex col-12 align-items-center justify-content-between">
+                <p class="fs-4 text-light fw-semibold">Total</p>
+                <p class="fs-4 text-light fw-semibold">R$ 0.00</p>
+            </div>
+        </div>
+    </div>
+</div>
