@@ -79,6 +79,15 @@ export class CardIngressoComponent implements OnInit {
     const userLogged: string | null = this.route.snapshot.queryParams['userLogged'];
     const userType: string | null = this.route.snapshot.queryParams['userType'];
 
+    this.route.queryParamMap.subscribe((params) =>{
+      let assentos = params.get("assentos");
+      if (assentos!=null) {
+        this.assentos = JSON.parse(assentos);
+        console.log(this.assentos);
+      }
+    })
+
+
     if(userLogged !== null && userType !== null) {
       this.userLogged = userLogged;
       this.userType = userType;
@@ -99,7 +108,7 @@ export class CardIngressoComponent implements OnInit {
       case 'livre': {
         this.classificacao = 'L';
         this.classificacaoClass = 'livre';
-        break; 
+        break;
       };
       case 'dez': {
         this.classificacao = '10';
@@ -155,7 +164,9 @@ export class CardIngressoComponent implements OnInit {
   }
 
   redirect(): void {
-    if(this.sessaoId !== '')
-      this.router.navigate([`sistema/ingresso/${this.sessaoId}`], {queryParams: {userLogged: this.userLogged, userType: this.userType, assentos: this.assentos}});
+    if(this.sessaoId !== ''){
+      const assentosJSON: string = JSON.stringify(this.assentos);
+      this.router.navigate([`sistema/ingresso/${this.sessaoId}`], {queryParams: {userLogged: this.userLogged, userType: this.userType,assentos: assentosJSON}});
+    }
   }
 }

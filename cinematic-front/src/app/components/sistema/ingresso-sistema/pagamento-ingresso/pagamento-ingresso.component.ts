@@ -1,14 +1,15 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ITipoIngresso } from '../../../../model/ITipoIngresso';
 import { ActivatedRoute } from '@angular/router';
 import { ITipoPagamento } from '../../../../model/ITipoPagamento';
+import { IAssento } from '../../../../model/IAssento';
 
 @Component({
   selector: 'app-pagamento-ingresso',
   templateUrl: './pagamento-ingresso.component.html',
   styleUrl: './pagamento-ingresso.component.scss'
 })
-export class PagamentoIngressoComponent {
+export class PagamentoIngressoComponent implements OnInit {
 isPagamento: boolean = false;
   tipoIngresso: ITipoIngresso [] = [
   {
@@ -53,10 +54,20 @@ isPagamento: boolean = false;
     }
   ]
 
+  assentos: IAssento[] = [];
   private route: ActivatedRoute = inject(ActivatedRoute);
 
   constructor(){
   
+  }
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe((params) =>{
+      let assentos = params.get("assentos");
+      if (assentos!=null) {
+        this.assentos = JSON.parse(assentos);
+        console.log(this.assentos);
+      }
+    })
   }
 
   increment(ingresso: ITipoIngresso): void{
