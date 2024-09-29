@@ -1,0 +1,15 @@
+@import '../../../../style/color';
+
+span {
+    text-shadow: $SHADOW-MD;
+}
+
+.apagado {
+    opacity: 25%;
+    color: $PRETO;
+}
+
+.amarelo {
+    color: $AMARELO;
+    border: .1rem solid $AMARELO;
+}

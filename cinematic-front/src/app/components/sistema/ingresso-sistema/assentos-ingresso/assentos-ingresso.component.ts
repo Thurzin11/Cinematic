@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SessaoService } from '../../../../services/sessao/sessao.service';
 import { ISessao } from '../../../../model/ISessao';
+import { IAssento } from '../../../../model/IAssento';
 
 @Component({
   selector: 'app-assentos-ingresso',
@@ -59,8 +60,17 @@ export class AssentosIngressoComponent implements OnInit {
       cidade: '',
       estado: '',
       cep: ''
-    },
-    fileiras: []
+    }
+  }
+  assentosPorFileira: {[key:string]: IAssento[]} = {
+    'A': [],
+    'B': [],
+    'C': [],
+    'D': [],
+    'E': [],
+    'F': [],
+    'G': [],
+    'H': []
   }
 
   private route: ActivatedRoute = inject(ActivatedRoute);
@@ -69,8 +79,68 @@ export class AssentosIngressoComponent implements OnInit {
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get('sessaoId');
     if(id !== null) {
-      this.sessaoService.findById(id).subscribe(sessao => {this.sessao = sessao; console.log(sessao)});
+      this.sessaoService.findById(id).subscribe(sessao => {
+        this.sessao = sessao; 
+        this.separarAssentosPorFileira(this.sessao.assentos);
+      });
+    }
+  }
+
+  private separarAssentosPorFileira(assentos: IAssento[]): void {
+    assentos.forEach(assento => {
+      const fileira: string = assento.nome[0];
+      this.assentosPorFileira[fileira.toUpperCase()].push(assento);
+    })
+  }
+
+  setBackgroundAssento(tipo: string): string {
+    if(tipo.toUpperCase() === 'ACOMPANHANTE')
+      return 'acompanhante';
+
+    if(tipo.toUpperCase() === 'DEFICIENTE')
+      return 'deficiente';
+
+    return '';
+  }
+
+  setAssentoClass(assentoNome: string, tamanhoSala: string): boolean {
+    let numero: string = '';
+    let returnBool: boolean = false;
+
+    if(assentoNome.length === 2)
+      numero = assentoNome[1];
+
+    if(assentoNome.length > 2)
+      numero = assentoNome[1]+assentoNome[2];
+
+    switch(tamanhoSala.toUpperCase()) {
+      case "PEQUENA": {
+        if(numero === '6' || numero === '14')          
+          returnBool = true;
+
+        break;
+      }
+      case "MEDIA": {
+        if(numero === '7' || numero === '16')
+          returnBool = true;
+
+        break;
+      }
+      case "GRANDE": {
+        if(numero === '8' || numero === '18')
+          returnBool = true;
+
+        break;
+      }
+      default: {
+        break;
+      }
     }
 
+    return returnBool;
+  }
+
+  selecionarAssento(): void {
+    
   }
 }

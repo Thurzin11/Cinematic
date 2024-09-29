@@ -24,6 +24,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { SessaoIngressoComponent } from './components/sistema/ingresso-sistema/sessao-ingresso/sessao-ingresso.component';
 import { PagamentoIngressoComponent } from './components/sistema/ingresso-sistema/pagamento-ingresso/pagamento-ingresso.component';
 import { AssentosIngressoComponent } from './components/sistema/ingresso-sistema/assentos-ingresso/assentos-ingresso.component';
+import { CaminhoIngressoComponent } from './components/sistema/ingresso-sistema/caminho-ingresso/caminho-ingresso.component';
 
 const routes: Routes = [
   {path: "sistema/home", component: HomeSistemaComponent},

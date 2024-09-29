@@ -4,19 +4,51 @@
     <div class="col-10 m-auto">
         <h2 class="text-light fs-1 fw-bold">Assentos</h2>
         <div class="col-12 body border border-black d-flex rounded">
-            <div class="col-9 py-2">
+            <div class="col-9 p-3">
                 <div class="d-flex justify-content-center align-items-center">
-                    <p class="text-light fw-semibold fs-5">{{sessao.filme.nome}} - sala {{sessao.sala.numero}}</p>
-                    <p class="text-light fw-semibold fs-5 px-5">{{sessao.data}}</p>
-                    <p class="text-light fw-semibold fs-5">{{sessao.horario.hora}}</p>
+                    <p class="text-light fw-semibold m-0 fs-5">{{sessao.filme.nome}} - sala {{sessao.sala.numero}}</p>
+                    <p class="text-light fw-semibold m-0 fs-5 px-5">{{sessao.data}}</p>
+                    <p class="text-light fw-semibold m-0 fs-5">{{sessao.horario.hora}}</p>
                 </div>
-                <div class="d-flex">
-                    <div>
-                        <p *ngFor="let fileira of this.sessao.fileiras">{{fileira}}</p>
+                <div class="d-flex px-3 py-2 flex-column justify-content-between fileiras">
+                    <div class="d-flex justify-content-around align-items-center py-3" *ngFor="let fileira of this.assentosPorFileira | keyvalue">
+                        <p class="text-light m-0 fs-3 pe-3 fw-medium">{{ fileira.key }}</p>
+                        <span class="text-light text-center" *ngFor="let assento of fileira.value" [ngClass]="setAssentoClass(assento.nome, sessao.sala.tamanho) ? 'pe-5':''">
+                            <p class="assento pt-2 m-0 rounded-circle border border-black"
+                                [ngClass]="assento.status.toUpperCase() === 'DISPONIVEL' ? this.setBackgroundAssento(assento.tipo):'indisponivel'"
+                                (click)="this.selecionarAssento()">{{ assento.nome }}</p>
+                        </span>
                     </div>
+                </div>
+                <div class="pb-3 d-flex flex-column justify-content-center align-items-center">
+                    <p class="m-0 fs-4 text-light">Tela</p>
+                    <div class="border border-white rounded-3 col-7"></div>
+                </div>
+                <div class="d-flex justify-content-around col-10 mx-auto">
+                        <div class="d-flex align-items-center">
+                            <span class="legenda border border-black rounded-circle"></span>
+                            <p class="m-0 ps-2 text-light">Disponível</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="legenda selecionado border border-black rounded-circle"></span>
+                            <p class="m-0 ps-2 text-light">Selecionado</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="legenda indisponivel border border-black rounded-circle"></span>
+                            <p class="m-0 ps-2 text-light">Indisponível</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="legenda acompanhante border border-black rounded-circle"></span>
+                            <p class="m-0 ps-2 text-light">Acompanhante</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="legenda deficiente border border-black rounded-circle"></span>
+                            <p class="m-0 ps-2 text-light">Deficiente</p>
+                        </div>
                 </div>
             </div>
             <app-card-ingresso class="col-3"></app-card-ingresso>
         </div>
     </div>
+    <app-caminho-ingresso [page]="'assento'" class="d-flex justify-content-center mt-5 align-items-center text-light"></app-caminho-ingresso>
 </div>

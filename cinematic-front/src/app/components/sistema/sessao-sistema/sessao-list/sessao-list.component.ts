@@ -62,8 +62,7 @@ export class SessaoListComponent implements OnInit{
       cidade: '',
       estado: '',
       cep: ''
-    },
-    fileiras: []
+    }
   };
   idSessaoDetails: string = '';
   userLogged: string = '';

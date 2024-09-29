@@ -6,5 +6,46 @@ h2 {
 
 .body {
     box-shadow: 0 .4rem .4rem $PRETO;
-    max-height: 650px;
+    // max-height: 1px;
+
+    .assento {
+        font-size: .8rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        box-shadow: $SHADOW-SM;
+        cursor: pointer;
+    }
+
+    .legenda {
+        width: 2rem;
+        height: 2rem;
+        box-shadow: $SHADOW-SM;
+    }
+
+    .acompanhante {
+        background-color: $ROXO-ESCURO;
+    }
+
+    .deficiente {
+        background-color: $AZUL-DEFICIENTE;
+    }
+
+    .selecionado {
+        background-color: $VERDE-CLASSIFICACAO-L;
+    }
+
+    .indisponivel {
+        background-color: $VERMELHO;
+    }
+
+    span:hover {
+        transition: .2s;
+        scale: 105%;
+        
+        .assento {
+            background-color: $ROXO-CLARO;
+            box-shadow: $SHADOW-MD;
+        }
+    }
+
 }

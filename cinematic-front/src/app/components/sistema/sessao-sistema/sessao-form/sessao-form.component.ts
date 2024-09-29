@@ -67,8 +67,7 @@ export class SessaoFormComponent implements OnInit{
       cidade: '',
       estado: '',
       cep: ''
-    },
-    fileiras: []
+    }
   };
   salas: ISala[] = [];
   filmes: IFilme[] = [];

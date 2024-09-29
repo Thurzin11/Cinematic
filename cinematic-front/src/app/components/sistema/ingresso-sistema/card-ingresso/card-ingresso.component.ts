@@ -60,8 +60,7 @@ export class CardIngressoComponent implements OnInit {
       cidade: '',
       estado: '',
       cep: ''
-    },
-    fileiras: []
+    }
   };
   @Input() assentos: IAssento[] = [];
   classificacao: string = '';

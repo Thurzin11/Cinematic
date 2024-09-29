@@ -1,8 +1,8 @@
 @import '../../../../style/color';
+
 .body {
     min-height: 100%;
     background-color: $ROXO-CLARO;
-    min-height: 100%;
 
     h3 {
         text-shadow: $SHADOW-SM;
@@ -17,13 +17,16 @@
     }
 
     .div-assentos {
-        max-height: 5rem;
+        min-height: 20rem;
     }
 
     .idioma {
         background-color: $VERDE-IDIOMA;
     }
 
+    .infos {
+        min-height: 100%;
+    }
     .tipo {
         background-color: $AMARELO;
     }
