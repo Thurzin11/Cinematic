@@ -13,10 +13,8 @@
                 <div class="d-flex px-3 py-2 flex-column justify-content-between fileiras">
                     <div class="d-flex justify-content-around align-items-center py-3" *ngFor="let fileira of this.assentosPorFileira | keyvalue">
                         <p class="text-light m-0 fs-3 pe-3 fw-medium">{{ fileira.key }}</p>
-                        <span class="text-light text-center" *ngFor="let assento of fileira.value" [ngClass]="setAssentoClass(assento.nome, sessao.sala.tamanho) ? 'pe-5':''">
-                            <p class="assento pt-2 m-0 rounded-circle border border-black"
-                                [ngClass]="assento.status.toUpperCase() === 'DISPONIVEL' ? this.setBackgroundAssento(assento.tipo):'indisponivel'"
-                                (click)="this.selecionarAssento()">{{ assento.nome }}</p>
+                        <span class="text-light text-center" *ngFor="let assento of fileira.value" [ngClass]="setAssentoClass(assento.nome, sessao.sala.tamanho) ? 'pe-5' : ''">
+                            <app-assento [assento]="assento" [assentosSelecionados]="this.assentosSelecionados.length" (onSelectAssento)="this.selectAssento($event)" (onRemoveAssento)="this.removeAssento($event)"></app-assento>
                         </span>
                     </div>
                 </div>
@@ -47,7 +45,7 @@
                         </div>
                 </div>
             </div>
-            <app-card-ingresso class="col-3"></app-card-ingresso>
+            <app-card-ingresso class="col-3" [assentos]="this.assentosSelecionados"></app-card-ingresso>
         </div>
     </div>
     <app-caminho-ingresso [page]="'assento'" class="d-flex justify-content-center mt-5 align-items-center text-light"></app-caminho-ingresso>

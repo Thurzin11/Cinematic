@@ -5,16 +5,7 @@ h2 {
 }
 
 .body {
-    box-shadow: 0 .4rem .4rem $PRETO;
-    // max-height: 1px;
-
-    .assento {
-        font-size: .8rem;
-        width: 2.5rem;
-        height: 2.5rem;
-        box-shadow: $SHADOW-SM;
-        cursor: pointer;
-    }
+    box-shadow: $SHADOW-MD;
 
     .legenda {
         width: 2rem;
@@ -25,15 +16,15 @@ h2 {
     .acompanhante {
         background-color: $ROXO-ESCURO;
     }
-
+    
     .deficiente {
         background-color: $AZUL-DEFICIENTE;
     }
-
+    
     .selecionado {
         background-color: $VERDE-CLASSIFICACAO-L;
     }
-
+    
     .indisponivel {
         background-color: $VERMELHO;
     }

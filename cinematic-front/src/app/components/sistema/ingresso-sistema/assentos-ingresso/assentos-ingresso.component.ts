@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SessaoService } from '../../../../services/sessao/sessao.service';
 import { ISessao } from '../../../../model/ISessao';
 import { IAssento } from '../../../../model/IAssento';
@@ -62,6 +62,12 @@ export class AssentosIngressoComponent implements OnInit {
       cep: ''
     }
   }
+  assentoIsSelected: boolean = false;
+  assentosSelecionados: IAssento[] = [];
+  sessaoId: string = '';
+  userLogged: string = '';
+  userType: string = '';
+
   assentosPorFileira: {[key:string]: IAssento[]} = {
     'A': [],
     'B': [],
@@ -78,7 +84,9 @@ export class AssentosIngressoComponent implements OnInit {
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get('sessaoId');
+
     if(id !== null) {
+      this.sessaoId = id;
       this.sessaoService.findById(id).subscribe(sessao => {
         this.sessao = sessao; 
         this.separarAssentosPorFileira(this.sessao.assentos);
@@ -140,7 +148,17 @@ export class AssentosIngressoComponent implements OnInit {
     return returnBool;
   }
 
-  selecionarAssento(): void {
+  selectAssento(assento: IAssento): void {
+    if(this.assentosSelecionados.length >= 10)
+      return;
     
+    this.assentosSelecionados.push(assento);
+  }
+
+  removeAssento(assentoParam: IAssento): void {
+    const index:number = this.assentosSelecionados.findIndex(assento => assento.id === assentoParam.id );
+
+    if(index !== -1)
+      this.assentosSelecionados.splice(index, 1);
   }
 }

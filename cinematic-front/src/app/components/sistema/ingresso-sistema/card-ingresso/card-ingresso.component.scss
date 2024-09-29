@@ -4,6 +4,16 @@
     min-height: 100%;
     background-color: $ROXO-CLARO;
 
+    button {
+        background-color: $AMARELO;
+        opacity: .7;
+    }
+
+    .active:hover {
+        transition: .2s;
+        opacity: 1;
+    }
+
     h3 {
         text-shadow: $SHADOW-SM;
     }
@@ -16,8 +26,12 @@
         cursor: pointer;
     }
 
+    .div-infos {
+        min-height: 19.5rem;
+    }
+
     .div-assentos {
-        min-height: 20rem;
+        max-height: 2rem;
     }
 
     .idioma {

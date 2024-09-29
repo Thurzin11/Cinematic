@@ -1,0 +1,25 @@
+@import '../../../../style/color';
+
+.assento {
+    font-size: .8rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    box-shadow: $SHADOW-SM;
+    cursor: pointer;
+}
+
+.acompanhante {
+    background-color: $ROXO-ESCURO;
+}
+
+.deficiente {
+    background-color: $AZUL-DEFICIENTE;
+}
+
+.selecionado {
+    background-color: $VERDE-CLASSIFICACAO-L;
+}
+
+.indisponivel {
+    background-color: $VERMELHO;
+}

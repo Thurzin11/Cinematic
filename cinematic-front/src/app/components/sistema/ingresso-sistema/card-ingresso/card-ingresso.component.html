@@ -1,11 +1,11 @@
-<div class="body p-3 rounded-end border border-top-0 border-end-0 border-bottom-0 border-black border-2">
-    <div class="d-flex align-items-start justify-content-between">
+<div class="body rounded-end border border-top-0 border-end-0 border-bottom-0 border-black border-2">
+    <div class="p-3 d-flex align-items-start justify-content-between">
         <p class="fs-5 fst-italic text-light">Resumo de pedido</p>
         <span class="hover">
             <img src="../../../../../assets/img/lixeira.png" alt="">
         </span>
     </div>
-    <div class="d-flex">
+    <div class="d-flex p-3">
         <div class="col-4">
             <img [src]="this.sessao.filme.banner" alt="" class="col-12 banner rounded-3 border border-black border-3">
         </div>
@@ -29,22 +29,28 @@
     </div>
     <hr class="col-10 mx-auto">
     <div class="col-10 mx-auto">
-        <div class="d-flex flex-column justify-content-between div-assentos pb-3">
+        <div class="d-flex flex-column justify-content-between pb-3 div-assentos">
             <p class="fs-4 text-light fw-semibold col-8 m-0">Assentos</p>
             <div class="d-flex flex-wrap ps-2">
                 <p class="fs-5 text-light fw-semibold pe-2 m-0" 
                     *ngFor="let assento of this.assentos">{{assento.nome}}</p>
             </div>
         </div>
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column div-infos justify-content-end">
             <div class="d-flex col-12 align-items-center justify-content-between">
                 <p class="fs-4 text-light fw-semibold">Itens</p>
-                <p class="fs-4 text-light fw-semibold">0</p>
+                <p class="fs-4 text-light fw-semibold">{{this.assentos.length}}</p>
             </div>
             <div class="d-flex col-12 align-items-center justify-content-between">
                 <p class="fs-4 text-light fw-semibold">Total</p>
                 <p class="fs-4 text-light fw-semibold">R$ 0.00</p>
             </div>
         </div>
+    </div>
+    <div>
+        <button (click)="this.redirect()" 
+            [disabled]="this.assentos.length === 0" 
+            [ngClass]="this.assentos.length > 0 ? 'active':''" 
+            class="col-12 p-2 fw-bold fs-5 border border-bottom-0 border-end-0 border-start-0 border-black">Escolher ingresso</button>
     </div>
 </div>
