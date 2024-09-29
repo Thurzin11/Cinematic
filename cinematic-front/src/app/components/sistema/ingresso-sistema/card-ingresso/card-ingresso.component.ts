@@ -156,6 +156,6 @@ export class CardIngressoComponent implements OnInit {
 
   redirect(): void {
     if(this.sessaoId !== '')
-      this.router.navigate([`sistema/ingresso/${this.sessaoId}`], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
+      this.router.navigate([`sistema/ingresso/${this.sessaoId}`], {queryParams: {userLogged: this.userLogged, userType: this.userType, assentos: this.assentos}});
   }
 }

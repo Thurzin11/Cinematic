@@ -56,7 +56,7 @@ isPagamento: boolean = false;
   private route: ActivatedRoute = inject(ActivatedRoute);
 
   constructor(){
-
+  
   }
 
   increment(ingresso: ITipoIngresso): void{

@@ -51,7 +51,7 @@ const routes: Routes = [
   {path: "sistema/categoria/cadastro", component: CategoriaFormComponent},
   {path: "sistema/categoria/editar/:id", component: CategoriaFormComponent},
   {path: "sistema/ingresso", component: SessaoIngressoComponent},
-  {path: "sistema/ingresso/:idSessao",component: PagamentoIngressoComponent},
+  {path: "sistema/ingresso/:sessaoId",component: PagamentoIngressoComponent},
   {path: "sistema/ingresso/:sessaoId/assentos", component: AssentosIngressoComponent},
   {path: "cadastro", component: CadastroClienteComponent},
   {path: "home", component: HomeComponent},
