@@ -3,6 +3,7 @@ import { ISessao } from '../../../../model/ISessao';
 import { SessaoService } from '../../../../services/sessao/sessao.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IAssento } from '../../../../model/IAssento';
+import { IIngresso } from '../../../../model/IIngresso';
 
 @Component({
   selector: 'app-card-ingresso',
@@ -63,6 +64,8 @@ export class CardIngressoComponent implements OnInit {
     }
   };
   @Input() assentos: IAssento[] = [];
+  @Input() ingressos: IIngresso[] = [];
+  valorTotal: number = 0;
   classificacao: string = '';
   classificacaoClass: string = '';
   tipo: string = '';
@@ -101,6 +104,8 @@ export class CardIngressoComponent implements OnInit {
         this.setTipo();
       });
     }
+
+    this.ingressos.forEach(ingresso => this.valorTotal+=ingresso.tipo.valor);
   }
 
   setClassificacao(): void {

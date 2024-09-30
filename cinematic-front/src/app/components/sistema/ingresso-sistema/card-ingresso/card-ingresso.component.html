@@ -36,6 +36,21 @@
                     *ngFor="let assento of this.assentos">{{assento.nome}}</p>
             </div>
         </div>
+        <div class="d-flex flex-column justify-content-between pt-5 div-ingressos">
+            <p class="fs-4 text-light fw-semibold col-8 m-0">Ingressos</p>
+            <div class="d-flex flex-wrap ps-2" *ngFor="let ingresso of this.ingressos">
+                <p class="fs-5 text-light fw-semibold pe-2 m-0" 
+                    *ngIf="ingresso.tipo.nome.toUpperCase()==='INTEIRA'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
+                    <p class="fs-5 text-light fw-semibold pe-2 m-0" 
+                        *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA ESTUDANTE'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
+                    <p class="fs-5 text-light fw-semibold pe-2 m-0" 
+                        *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA IDOSO'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
+                    <p class="fs-5 text-light fw-semibold pe-2 m-0" 
+                        *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA CRIANÇA'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
+                    <p class="fs-5 text-light fw-semibold pe-2 m-0" 
+                        *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA ENTRADA - PCD'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
+                </div>
+        </div>
         <div class="d-flex flex-column div-infos justify-content-end">
             <div class="d-flex col-12 align-items-center justify-content-between">
                 <p class="fs-4 text-light fw-semibold">Itens</p>
@@ -43,7 +58,7 @@
             </div>
             <div class="d-flex col-12 align-items-center justify-content-between">
                 <p class="fs-4 text-light fw-semibold">Total</p>
-                <p class="fs-4 text-light fw-semibold">R$ 0.00</p>
+                <p class="fs-4 text-light fw-semibold">R$ {{this.valorTotal.toFixed(2)}}</p>
             </div>
         </div>
     </div>
