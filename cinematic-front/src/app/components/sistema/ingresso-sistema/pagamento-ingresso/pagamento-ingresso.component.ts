@@ -117,7 +117,7 @@ isPagamento: boolean = false;
   private serviceSessao: SessaoService= inject(SessaoService);
 
   constructor(){
-
+  
   }
   ngOnInit(): void {
     let idSessao: string | null = this.route.snapshot.paramMap.get('sessaoId');

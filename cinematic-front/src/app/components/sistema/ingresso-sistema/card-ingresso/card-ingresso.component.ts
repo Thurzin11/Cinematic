@@ -167,7 +167,6 @@ export class CardIngressoComponent implements OnInit {
     if(this.sessaoId !== ''){
       const assentosJSON: string = JSON.stringify(this.assentos);
       this.router.navigate([`sistema/ingresso/${this.sessaoId}`], {queryParams: {userLogged: this.userLogged, userType: this.userType,assentos: assentosJSON}});
-
     }
   }
 }
