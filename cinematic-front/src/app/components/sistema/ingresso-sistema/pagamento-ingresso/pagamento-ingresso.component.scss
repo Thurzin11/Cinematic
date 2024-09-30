@@ -1,9 +1,23 @@
 @import "../../../../style/color";
 .tipo{
   background-color: $ROXO-CLARO;
+  box-shadow: $SHADOW-MD;
 }
 .increment{
   width: 2rem;
   height: 2rem;
   background-color: transparent;
+}
+h2{
+  text-shadow: $SHADOW-MD;
+}
+.main{
+  box-shadow: $SHADOW-MD;
+}
+button{
+  box-shadow: $SHADOW-SM;
+}
+button:hover{
+  background-color: $AMARELO;
+  transition: .2s;
 }
