@@ -1,4 +1,4 @@
-<header class="d-flex position-relative justify-content-between">
+<header class="d-flex position-relative justify-content-between p-3">
     <h1 class="fw-bold col-2 text-center" routerLink="/sistema/home/{{userLogged.id}}">CINEMATIC</h1>
     <div class="d-flex col-2 align-items-center justify-content-end pe-3">
         <h2 class="text-light pt-2 fs-2">{{this.userLogged.nome}}</h2>
@@ -7,7 +7,7 @@
           <img src="../../../../assets/img/sair.png" alt="">
         </span>
     </div>
-    <div *ngIf="openLogout" class="d-flex align-items-center justify-content-around logout border border-black border-top-0 rounded-3 p-2 col-2 position-absolute end-0">
+    <div *ngIf="openLogout" class="d-flex align-items-center justify-content-around logout border border-black border-top-0 rounded-3 p-2 col-2 position-absolute">
       <p class="text-light fw-bold fs-5 m-0">Deseja mesmo sair?</p>
       <div class="d-flex justify-content-around col-6">
         <button class="col-5 p-1 rounded-3 fw-semibold border-0" (click)="openLogout = false">Não</button>
