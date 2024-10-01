@@ -1,5 +1,5 @@
 import { IIngresso } from './../../../../model/IIngresso';
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ITipoIngresso } from '../../../../model/ITipoIngresso';
 import { ActivatedRoute } from '@angular/router';
 import { ITipoPagamento } from '../../../../model/ITipoPagamento';
@@ -14,7 +14,7 @@ import { TransferirIngressosService } from '../../../../services/transferirIngre
   styleUrl: './pagamento-ingresso.component.scss',
 })
 export class PagamentoIngressoComponent implements OnInit {
-isPagamento: boolean = true;
+isPagamento: boolean = false;
   tipoIngresso: ITipoIngresso [] = [
   {
     nome: "Inteira",
