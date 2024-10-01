@@ -2,8 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ISala } from '../../../../model/ISala';
 import { SalaService } from '../../../../services/sala/sala.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IUsuario } from '../../../../model/IUsuario';
-import { UsuarioService } from '../../../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-sala-form',
@@ -24,23 +22,13 @@ export class SalaFormComponent implements OnInit{
   tamanhos: string[] = ['Grande', 'Media', 'Pequena'];
   isEdit: boolean = false;
   canRegister: boolean = false;
-  userLogged: string = '';
-  userType: string = '';
 
   private salaService: SalaService = inject(SalaService);
-  private usuarioService: UsuarioService = inject(UsuarioService);
   private router: Router = inject(Router);
   private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get("id");
-    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
-    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
-
-    if(userLogged && userType) {
-      this.userLogged = userLogged;
-      this.userType = userType;
-    }
 
     if(id) {
       this.salaService.findById(id).subscribe(sala => {
@@ -85,6 +73,6 @@ export class SalaFormComponent implements OnInit{
   }
 
   redirect(): void {
-    this.router.navigate(['sistema/sala'], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
+    this.router.navigate(['sistema/sala']);
   }
 }

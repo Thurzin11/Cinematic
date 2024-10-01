@@ -1,17 +1,17 @@
-<header class="d-flex justify-content-between">
+<header class="d-flex position-relative justify-content-between">
     <img class="logo" src="../../../assets/img/Cinematic-removebg-preview 1.png" alt="" routerLink="/sistema/home/{{userLogged.id}}">
-    <div class="d-flex col-2 align-items-center justify-content-end">
+    <div class="d-flex col-2 align-items-center justify-content-end pe-3">
         <h2 class="text-light pt-2 fs-2">{{this.userLogged.nome}}</h2>
-        <img class="p-4 bg-secondary ms-3 rounded-circle" src="" alt="">
-        <span (click)="this.activateOptions()">
-          <svg xmlns="http://www.w3.org/2000/svg"  width="42" height="42" fill="currentColor" class="text-light bi bi-three-dots-vertical" viewBox="0 0 16 16">
-            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-          </svg>
+        <img class="p-4 mx-3 bg-secondary rounded-circle" src="" alt="">
+        <span (click)="toggleLogoutConfirmation()">
+          <img src="../../../../assets/img/sair.png" alt="">
         </span>
     </div>
+    <div *ngIf="openLogout" class="d-flex align-items-center justify-content-around logout border border-black border-top-0 rounded-3 p-2 col-2 position-absolute end-0">
+      <p class="text-light fw-bold fs-5 m-0">Deseja mesmo sair?</p>
+      <div class="d-flex justify-content-around col-6">
+        <button class="col-5 p-1 rounded-3 fw-semibold border-0" (click)="openLogout = false">Não</button>
+        <button class="col-5 p-1 rounded-3 fw-semibold border-0" (click)="logout()">Sim</button>
+      </div>
+    </div>
 </header>
-<div *ngIf="this.options" class="col-1 text-light d-flex flex-column position-absolute opcoes align-items-end p-2 rounded-bottom-4">
-  <p>Editar</p>
-  <p>Alterar Foto</p>
-  <p>Alterar Senha</p>
-</div>

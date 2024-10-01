@@ -1,7 +1,7 @@
 import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { IFilme } from '../../../../model/IFilme';
 import { FilmeService } from '../../../../services/filme/filme.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-filme-detalhe',
@@ -38,7 +38,6 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
   userType: string = '';
   
   private filmeService: FilmeService = inject(FilmeService);
-  private router: Router = inject(Router);
   private route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
@@ -124,9 +123,5 @@ export class FilmeDetalheComponent implements OnInit, OnChanges{
 
   inativar(id: string): void {
     this.filmeService.inativar(id).subscribe(() => this.onCloseDetails.emit());
-  }
-
-  redirect(): void {
-    this.router.navigate([`sistema/filme/editar/${this.filme.id}`], {queryParams: {userLogged: this.userId, userType: this.userType}});
   }
 }

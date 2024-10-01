@@ -16,11 +16,8 @@ export class CategoriaListComponent implements OnInit, OnChanges {
     id: '',
     nome: ''
   };
-  userLogged: string = '';
-  userType: string = '';
 
   private categoriaService: CategoriaService = inject(CategoriaService);
-  private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
 
   constructor() {
@@ -28,14 +25,6 @@ export class CategoriaListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
-    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
-
-    if(userLogged && userType) {
-      this.userLogged = userLogged;
-      this.userType = userType;
-    }
-
     this.findAll();
   }
 
@@ -69,9 +58,5 @@ export class CategoriaListComponent implements OnInit, OnChanges {
 
   closeDetails(): void {
     this.openCategoriaDetails = false;
-  }
-
-  redirect(): void {
-    this.router.navigate(['sistema/categoria/cadastro'], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
   }
 }

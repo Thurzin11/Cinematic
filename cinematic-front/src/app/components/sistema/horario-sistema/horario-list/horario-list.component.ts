@@ -8,56 +8,42 @@ import { UsuarioService } from '../../../../services/usuario/usuario.service';
 @Component({
   selector: 'app-horario-list',
   templateUrl: './horario-list.component.html',
-  styleUrl: './horario-list.component.scss'
+  styleUrl: './horario-list.component.scss',
 })
-export class HorarioListComponent implements OnInit{
-
-  detalheIsOpen: boolean= false;
-  filtroIsOpen: boolean= false;
-  horarioDetalhe: IHorario= {
+export class HorarioListComponent implements OnInit {
+  detalheIsOpen: boolean = false;
+  filtroIsOpen: boolean = false;
+  horarioDetalhe: IHorario = {
     id: '',
     hora: '',
     status: false,
-    periodo: ''
-  }
-  userLogged: IUsuario ={
-    id: '',
-    nome: '',
-    email: '',
-    senha: '',
-    status: false,
-    tipoUsuario: ''
-  }
+    periodo: '',
+  };
   listaHorarios: IHorario[] = [];
 
   private horarioService: HorarioService = inject(HorarioService);
-  private usuarioService: UsuarioService = inject(UsuarioService);
-  private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
 
   constructor() {
-      this.findAllHorario();
-    }
-
-    ngOnInit(): void {
-      this.findAllHorario()
-      const idUser: string = this.route.snapshot.queryParams['userLogged'];
-    if (idUser) {
-      this.usuarioService.findById(idUser).subscribe(usuario => {this.userLogged = usuario; console.log(this.userLogged);
-      })
-    }
+    this.findAllHorario();
   }
 
-  findAllHorario(): void{
-    this.horarioService.findAll().subscribe(listaHorarios=> this.listaHorarios = listaHorarios)
+  ngOnInit(): void {
+    this.findAllHorario();
   }
 
-  fecharFiltro(): void{
-    this.filtroIsOpen=!this.filtroIsOpen;
+  findAllHorario(): void {
+    this.horarioService
+      .findAll()
+      .subscribe((listaHorarios) => (this.listaHorarios = listaHorarios));
   }
 
-  abrirDetalhe(id: string): void{
-    let horario=this.listaHorarios.find(horario=> horario.id==id)
+  fecharFiltro(): void {
+    this.filtroIsOpen = !this.filtroIsOpen;
+  }
+
+  abrirDetalhe(id: string): void {
+    let horario = this.listaHorarios.find((horario) => horario.id == id);
 
     if (horario) {
       this.horarioDetalhe = horario;
@@ -69,20 +55,17 @@ export class HorarioListComponent implements OnInit{
     this.detalheIsOpen = false;
   }
 
-  inativar(id:string):void {
-    this.horarioService.inativar(id).subscribe(()=>{
+  inativar(id: string): void {
+    this.horarioService.inativar(id).subscribe(() => {
       this.findAllHorario();
       this.fecharDetalhe();
     });
   }
 
-  ativar(id:string):void {
-    this.horarioService.ativar(id).subscribe(()=>{
+  ativar(id: string): void {
+    this.horarioService.ativar(id).subscribe(() => {
       this.findAllHorario();
       this.fecharDetalhe();
     });
-  }
-  redirect(): void{
-    this.router.navigate(['sistema/horario/cadastro'],{queryParams: {userLogged: this.userLogged.id, userType: this.userLogged.tipoUsuario}})
   }
 }

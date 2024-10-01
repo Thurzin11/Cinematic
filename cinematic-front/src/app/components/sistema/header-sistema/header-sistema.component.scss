@@ -1,14 +1,40 @@
 @import "../../../style/color";
+:host {
+  position: relative;
+}
+
 h2{
     font-size: 1.6rem;
 }
+
 .logo{
     width: 15%;
 }
-.opcoes{
-  right: .1rem;
-  background-color: $ROXO-CLARO;
-}
-svg{
+
+span {
   cursor: pointer;
+}
+
+.logout {
+  top: 5.5rem;
+  box-shadow: $SHADOW-SM;
+
+  button {
+    box-shadow: $SHADOW-SM;
+    opacity: .7;
+  }
+
+  button:hover {
+    transition: .2s;
+    scale: 105%;
+    opacity: 1;
+  }
+
+  button:first-child {
+    background-color: $VERMELHO;
+  }
+
+  button:last-child {
+    background-color: $VERDE-CLASSIFICACAO-L;
+  }
 }

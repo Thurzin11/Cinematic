@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IAssento } from '../../../../model/IAssento';
 import { IIngresso } from '../../../../model/IIngresso';
 import { TransferirIngressosService } from '../../../../services/transferirIngressos/transferir-ingressos.service';
+import { AssentoService } from '../../../../services/assento/assento.service';
 
 @Component({
   selector: 'app-card-ingresso',
@@ -72,19 +73,17 @@ export class CardIngressoComponent implements OnInit {
   classificacao: string = '';
   classificacaoClass: string = '';
   tipo: string = '';
-  userLogged: string = '';
-  userType: string = '';
   sessaoId: string = '';
 
   private sessaoService: SessaoService = inject(SessaoService);
+  private assentoService: AssentoService = inject(AssentoService);
   private transferirIngressos: TransferirIngressosService = inject(TransferirIngressosService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get('sessaoId');
-    const userLogged: string | null = this.route.snapshot.queryParams['userLogged'];
-    const userType: string | null = this.route.snapshot.queryParams['userType'];
+    
     this.route.queryParamMap.subscribe((params) =>{
       let assentos = params.get("assentos");
       if (assentos!=null) {
@@ -95,14 +94,13 @@ export class CardIngressoComponent implements OnInit {
     this.route.queryParamMap.subscribe((params) =>{
       let assentos = params.get("assentos");
       if (assentos!=null) {
-        this.assentos = JSON.parse(assentos);
+        let ids: string[] = [];
+        ids = JSON.parse(assentos);
+        ids.forEach(id => {
+          this.assentoService.findById(id).subscribe(assento => this.assentos.push(assento));
+        })
       }
     })
-
-    if(userLogged !== null && userType !== null) {
-      this.userLogged = userLogged;
-      this.userType = userType;
-    }
 
     if(id !== null) {
       this.sessaoId = id;
@@ -195,8 +193,14 @@ export class CardIngressoComponent implements OnInit {
 
   redirect(): void {
     if(this.sessaoId !== ''){
-      const assentosJSON: string = JSON.stringify(this.assentos);
-      this.router.navigate([`sistema/ingresso/${this.sessaoId}`], {queryParams: {userLogged: this.userLogged, userType: this.userType,assentos: assentosJSON}});
+      const ids: string[] = [];
+      this.assentos.forEach(assento => {
+        ids.push(assento.id);
+      })
+
+      const assentosJSON: string = JSON.stringify(ids);
+
+      this.router.navigate([`sistema/ingresso/${this.sessaoId}`], {queryParams: {assentos: assentosJSON}});
     }
   }
 }

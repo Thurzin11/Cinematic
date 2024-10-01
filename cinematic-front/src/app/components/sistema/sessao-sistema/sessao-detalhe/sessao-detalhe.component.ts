@@ -1,6 +1,6 @@
-import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { ISessao } from '../../../../model/ISessao';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { SessaoService } from '../../../../services/sessao/sessao.service';
 
 @Component({
@@ -67,22 +67,11 @@ export class SessaoDetalheComponent implements OnInit{
   @Output() onCloseDetails = new EventEmitter();
   tipo: string = '';
   showModal: boolean = false;
-  userLogged: string = '';
-  userType: string = '';
 
   private router: Router = inject(Router);
-  private route: ActivatedRoute = inject(ActivatedRoute);
   private sessaoService: SessaoService = inject(SessaoService);
 
   ngOnInit(): void {
-    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
-    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
-
-    if(userLogged && userType) {
-      this.userLogged = userLogged;
-      this.userType = userType;
-    }
-
     if(this.sessaoId !== '') {
       this.sessaoService.findById(this.sessaoId).subscribe(sessao => {
         this.sessao = sessao;
@@ -123,9 +112,5 @@ export class SessaoDetalheComponent implements OnInit{
       }
       default: break;
     }
-  }
-
-  redirect(): void {
-    this.router.navigate([`sistema/sessao/editar/${this.sessao.id}`], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
   }
 }

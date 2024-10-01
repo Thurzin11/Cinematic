@@ -20,7 +20,7 @@
   </div>
   <div class="d-flex justify-content-center col-12">
     <button class="editar col-5 p-2 fs-4 fw-semibold rounded-3 border border-black "
-      (click)="this.redirect(this.estabelecimentoDetails.id)">Editar <svg
+      routerLink="editar/{{estabelecimentoDetails.id}}">Editar <svg
         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="ms-2 bi bi-pencil"
         viewBox="0 0 16 16">
         <path

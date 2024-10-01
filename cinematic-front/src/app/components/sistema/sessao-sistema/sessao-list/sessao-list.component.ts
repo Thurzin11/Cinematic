@@ -65,11 +65,8 @@ export class SessaoListComponent implements OnInit{
     }
   };
   idSessaoDetails: string = '';
-  userLogged: string = '';
-  userType: string = '';
 
   private sessaoService: SessaoService = inject(SessaoService);
-  private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
 
   constructor() {
@@ -77,14 +74,6 @@ export class SessaoListComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
-    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
-
-    if(userLogged && userType) {
-      this.userLogged = userLogged;
-      this.userType = userType;
-    }
-    
     this.findAllSessoes();
   }
 
@@ -121,9 +110,5 @@ export class SessaoListComponent implements OnInit{
       this.closeDetails();
       this.findAllSessoes();
     })
-  }
-
-  redirect(): void {
-    this.router.navigate(['sistema/sessao/cadastro'], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
   }
 }

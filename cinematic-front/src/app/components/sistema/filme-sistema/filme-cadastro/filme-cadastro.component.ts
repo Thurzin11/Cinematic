@@ -1,4 +1,4 @@
-import { Component, inject, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ICategoria } from '../../../../model/ICategoria';
 import { CategoriaService } from '../../../../services/categoria/categoria.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -52,8 +52,6 @@ export class FilmeCadastroComponent implements OnInit {
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get("id");
-    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
-    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
     if(id != null) {
       this.filmeService.findById(id).subscribe(filme => {
         this.filme = filme
@@ -83,11 +81,6 @@ export class FilmeCadastroComponent implements OnInit {
       });
       this.isEdit = true;
       return;
-    }
-
-    if(userLogged && userType) {
-      this.userLogged = userLogged;
-      this.userType = userType;
     }
 
     this.categoriaService.findAll().subscribe(categoriaList => {
@@ -171,6 +164,6 @@ export class FilmeCadastroComponent implements OnInit {
   }
 
   redirect(): void {
-    this.router.navigate(['sistema/filme'], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
+    this.router.navigate(['sistema/filme']);
   }
 }

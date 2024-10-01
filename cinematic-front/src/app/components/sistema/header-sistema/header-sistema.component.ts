@@ -1,7 +1,7 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { IUsuario } from '../../../model/IUsuario';
-import { ActivatedRoute } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-sistema',
@@ -9,7 +9,7 @@ import { UsuarioService } from '../../../services/usuario/usuario.service';
   styleUrl: './header-sistema.component.scss'
 })
 export class HeaderSistemaComponent implements OnInit{
-  @Input() userLogged: IUsuario = {
+  userLogged: IUsuario = {
     id: '',
     nome: '',
     email: '',
@@ -17,19 +17,24 @@ export class HeaderSistemaComponent implements OnInit{
     status: false,
     tipoUsuario: ''
   };
-  options: boolean = false;
-  private route: ActivatedRoute = inject(ActivatedRoute);
+  openLogout: boolean = false;
+
   private usuarioService: UsuarioService = inject(UsuarioService);
+  private router: Router = inject(Router);
 
   ngOnInit(): void {
-    const id: string | undefined = this.route.snapshot.queryParams['userLogged'];
-    if(id) {
+    const id: string | null = sessionStorage.getItem('usuarioId');
+    if(id != null) {
       this.usuarioService.findById(id).subscribe(usuario => this.userLogged = usuario);
     }
   }
 
-  activateOptions(){
-    this.options =! this.options;
-    console.log(this.options);
+  toggleLogoutConfirmation(): void {
+    this.openLogout = !this.openLogout;
+  }
+
+  logout(): void {
+    sessionStorage.clear();
+    this.router.navigate(['sistema/login']);
   }
 }

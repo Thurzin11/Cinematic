@@ -11,26 +11,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SessaoIngressoComponent implements OnInit {
   filterIsOpen: boolean = false;
   sessoes: ISessao[] = [];
-  userLogged: string = '';
-  userType: string = '';
 
   private sessaoService: SessaoService = inject(SessaoService);
   private router: Router = inject(Router);
-  private route: ActivatedRoute = inject(ActivatedRoute);
 
   constructor() {
     this.findAllSessoes();
   }
 
   ngOnInit(): void {
-    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
-    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
-
-    if(userLogged && userType) {
-      this.userLogged = userLogged;
-      this.userType = userType;
-    }
-
     this.findAllSessoes();
   }
 
@@ -47,7 +36,7 @@ export class SessaoIngressoComponent implements OnInit {
   }
 
   redirect(sessaoId: string): void {
-    this.router.navigate([`sistema/ingresso/${sessaoId}/assentos`], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
+    this.router.navigate([`sistema/ingresso/${sessaoId}/assentos`]);
   }
 
   findByNomeFilmeIlike(nome: string): void {

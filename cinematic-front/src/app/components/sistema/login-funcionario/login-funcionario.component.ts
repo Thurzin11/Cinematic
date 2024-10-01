@@ -1,6 +1,7 @@
 import { UsuarioService } from './../../../services/usuario/usuario.service';
-import { Component, inject, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ILoginFuncionario } from '../../../model/ILoginFuncionario';
+import { IUsuario } from '../../../model/IUsuario';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,9 +21,10 @@ export class LoginFuncionarioComponent {
   private service: UsuarioService = inject(UsuarioService);
   private router: Router = inject(Router);
 
-  logar(login: ILoginFuncionario): void{
-    this.service.loginFuncionario(login).subscribe((usuario)=>{
-      this.router.navigate([`/sistema/home`], {queryParams: {userLogged: usuario.id, userType: usuario.tipoUsuario}});
+  logar(): void{
+    this.service.loginFuncionario(this.login).subscribe((usuario)=>{
+      this.salvarSessao(usuario);
+      this.router.navigate(['sistema/home']);
     },
     erro=>{
       if(erro.status==400){
@@ -47,5 +49,11 @@ export class LoginFuncionarioComponent {
     }else{
       this.camposIsValid = true;
     }
+  }
+
+  private salvarSessao(usuario: IUsuario): void {
+    sessionStorage.setItem('usuarioId', usuario.id);
+    sessionStorage.setItem('usuarioNome', usuario.nome);
+    sessionStorage.setItem('usuarioTipo', usuario.tipoUsuario);
   }
 }
