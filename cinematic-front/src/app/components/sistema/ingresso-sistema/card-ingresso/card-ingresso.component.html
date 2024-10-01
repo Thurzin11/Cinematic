@@ -30,7 +30,8 @@
     <hr class="col-10 mx-auto">
     <div class="col-10 mx-auto">
         <div class="d-flex flex-column justify-content-between pb-3 div-assentos">
-            <p class="fs-4 text-light fw-semibold col-8 m-0">Assentos</p>
+            <p class="fs-4 text-light fw-semibold col-
+            8 m-0">Assentos</p>
             <div class="d-flex flex-wrap ps-2">
                 <p class="fs-5 text-light fw-semibold pe-2 m-0" 
                     *ngFor="let assento of this.assentos">{{assento.nome}}</p>
@@ -41,31 +42,37 @@
             <div class="d-flex flex-wrap ps-2" *ngFor="let ingresso of this.ingressos">
                 <p class="fs-5 text-light fw-semibold pe-2 m-0" 
                     *ngIf="ingresso.tipo.nome.toUpperCase()==='INTEIRA'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
-                    <p class="fs-5 text-light fw-semibold pe-2 m-0" 
-                        *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA ESTUDANTE'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
-                    <p class="fs-5 text-light fw-semibold pe-2 m-0" 
-                        *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA IDOSO'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
-                    <p class="fs-5 text-light fw-semibold pe-2 m-0" 
-                        *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA CRIANÇA'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
-                    <p class="fs-5 text-light fw-semibold pe-2 m-0" 
-                        *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA ENTRADA - PCD'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
-                </div>
+                <p class="fs-5 text-light fw-semibold pe-2 m-0" 
+                    *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA ESTUDANTE'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
+                <p class="fs-5 text-light fw-semibold pe-2 m-0" 
+                    *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA IDOSO'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
+                <p class="fs-5 text-light fw-semibold pe-2 m-0" 
+                    *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA CRIANÇA'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
+                <p class="fs-5 text-light fw-semibold pe-2 m-0" 
+                    *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA ENTRADA - PCD'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
+            </div>
         </div>
         <div class="d-flex flex-column div-infos justify-content-end">
             <div class="d-flex col-12 align-items-center justify-content-between">
                 <p class="fs-4 text-light fw-semibold">Itens</p>
-                <p class="fs-4 text-light fw-semibold">{{this.assentos.length}}</p>
+                <p class="fs-4 text-light fw-semibold">{{this.ingressos.length}}</p>
             </div>
             <div class="d-flex col-12 align-items-center justify-content-between">
                 <p class="fs-4 text-light fw-semibold">Total</p>
-                <p class="fs-4 text-light fw-semibold">R$ {{this.valorTotal.toFixed(2)}}</p>
+                <p class="fs-4 text-light fw-semibold">R$ {{this.valorTotal.toFixed(2) || 0.00}}</p>
             </div>
         </div>
     </div>
     <div>
-        <button (click)="this.redirect()" 
+        <button *ngIf="!this.assentoRotasExist" 
+            (click)="this.redirect()" 
             [disabled]="this.assentos.length === 0" 
             [ngClass]="this.assentos.length > 0 ? 'active':''" 
             class="col-12 p-2 fw-bold fs-5 border border-bottom-0 border-end-0 border-start-0 border-black">Escolher ingresso</button>
+        <button *ngIf="this.assentoRotasExist"
+            (click)="this.redirect()" 
+            [disabled]="this.ingressos.length === 0" 
+            [ngClass]="this.ingressos.length > 0 ? 'active':''" 
+            class="col-12 p-2 fw-bold fs-5 border border-bottom-0 border-end-0 border-start-0 border-black">Ir para o Pagamento</button>
     </div>
 </div>

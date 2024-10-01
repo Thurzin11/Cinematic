@@ -24,18 +24,9 @@ export class EstabelecimentoListComponent implements OnInit {
     estado: '',
     cep: ''
   };
-  userLogged: IUsuario = {
-    id: '',
-    nome: '',
-    email: '',
-    senha: '',
-    status: false,
-    tipoUsuario: ''
-  }
   estabelecimentos: IEstabelecimento[]=[];
 
   private service: EstabelecimentoService = inject(EstabelecimentoService);
-  private usuarioService: UsuarioService = inject(UsuarioService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
 
@@ -44,11 +35,7 @@ export class EstabelecimentoListComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    const idUser: string = this.route.snapshot.queryParams['userLogged'];
-    if (idUser) {
-      this.usuarioService.findById(idUser).subscribe(usuario => {this.userLogged = usuario; console.log(this.userLogged);
-      })
-    }
+    this.findAll();
   }
 
   toggleFiltro(): void{
@@ -81,10 +68,4 @@ export class EstabelecimentoListComponent implements OnInit {
     this.detalheIsOpen = false;
     this.findAll();
   }
-
-  redirect(): void{
-    this.router.navigate(['sistema/estabelecimento/cadastro'],{queryParams: {userLogged: this.userLogged.id, userType: this.userLogged.tipoUsuario}})
-  }
-
-
 }

@@ -17,25 +17,14 @@ export class SalaDetalheComponent implements OnInit {
     tamanho: '',
     disponibilidade: false
   };
-  @Input() idUserLogged: string = '';
   @Output() onCloseDetails = new EventEmitter();
   @Output() onAtivar = new EventEmitter();
   @Output() onInativar = new EventEmitter();
   showModal: boolean = false;
-  userLogged: string = '';
-  userType: string = '';
 
-  private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
 
   ngOnInit(): void {
-    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
-    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
-
-    if(userLogged && userType) {
-      this.userLogged = userLogged;
-      this.userType = userType;
-    }
   }
 
   close(): void {
@@ -48,9 +37,5 @@ export class SalaDetalheComponent implements OnInit {
 
   ativar(salaId: string): void {
     this.onAtivar.emit(salaId);
-  }
-
-  redirect(): void {
-    this.router.navigate([`sistema/sala/editar/${this.sala.id}`], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
   }
 }

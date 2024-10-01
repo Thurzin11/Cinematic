@@ -1,9 +1,11 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ISessao } from '../../../../model/ISessao';
 import { SessaoService } from '../../../../services/sessao/sessao.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IAssento } from '../../../../model/IAssento';
 import { IIngresso } from '../../../../model/IIngresso';
+import { TransferirIngressosService } from '../../../../services/transferirIngressos/transferir-ingressos.service';
+import { AssentoService } from '../../../../services/assento/assento.service';
 
 @Component({
   selector: 'app-card-ingresso',
@@ -11,6 +13,10 @@ import { IIngresso } from '../../../../model/IIngresso';
   styleUrl: './card-ingresso.component.scss'
 })
 export class CardIngressoComponent implements OnInit {
+  @Input() assentos: IAssento[] = [];
+  @Input() ingressos: IIngresso[] = [];
+  assentoRotasExist: boolean = false;
+
   sessao: ISessao = {
     id: '',
     sala: {
@@ -63,37 +69,37 @@ export class CardIngressoComponent implements OnInit {
       cep: ''
     }
   };
-  @Input() assentos: IAssento[] = [];
-  @Input() ingressos: IIngresso[] = [];
   valorTotal: number = 0;
   classificacao: string = '';
   classificacaoClass: string = '';
   tipo: string = '';
-  userLogged: string = '';
-  userType: string = '';
   sessaoId: string = '';
 
   private sessaoService: SessaoService = inject(SessaoService);
+  private assentoService: AssentoService = inject(AssentoService);
+  private transferirIngressos: TransferirIngressosService = inject(TransferirIngressosService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get('sessaoId');
-    const userLogged: string | null = this.route.snapshot.queryParams['userLogged'];
-    const userType: string | null = this.route.snapshot.queryParams['userType'];
+
     this.route.queryParamMap.subscribe((params) =>{
       let assentos = params.get("assentos");
       if (assentos!=null) {
-        this.assentos = JSON.parse(assentos);
-        console.log(this.assentos);
+        this.assentoRotasExist = true;
       }
     })
-
-
-    if(userLogged !== null && userType !== null) {
-      this.userLogged = userLogged;
-      this.userType = userType;
-    }
+    this.route.queryParamMap.subscribe((params) =>{
+      let assentos = params.get("assentos");
+      if (assentos!=null) {
+        let ids: string[] = [];
+        ids = JSON.parse(assentos);
+        ids.forEach(id => {
+          this.assentoService.findById(id).subscribe(assento => this.assentos.push(assento));
+        })
+      }
+    })
 
     if(id !== null) {
       this.sessaoId = id;
@@ -104,7 +110,24 @@ export class CardIngressoComponent implements OnInit {
       });
     }
 
-    this.ingressos.forEach(ingresso => this.valorTotal+=ingresso.tipo.valor);
+    this.transferirIngressos.ingressos$.subscribe(ingressos => {
+      if(this.ingressos.length === 0)
+        this.valorTotal = 0;
+
+      if(ingressos.acao === '+') {
+        this.valorTotal += ingressos.ingresso.valor;
+        this.ingressos.push(ingressos.ingresso);
+      }
+
+      if(ingressos.acao === '-') {
+        this.valorTotal -= ingressos.ingresso.valor;
+        const index: number = this.ingressos.findIndex(ingresso => ingresso === ingressos.ingresso);
+
+        if(index !== -1)
+          this.ingressos.splice(index, 1);
+      }
+
+    });
   }
 
   setClassificacao(): void {
@@ -169,8 +192,14 @@ export class CardIngressoComponent implements OnInit {
 
   redirect(): void {
     if(this.sessaoId !== ''){
-      const assentosJSON: string = JSON.stringify(this.assentos);
-      this.router.navigate([`sistema/ingresso/${this.sessaoId}`], {queryParams: {userLogged: this.userLogged, userType: this.userType,assentos: assentosJSON}});
+      const ids: string[] = [];
+      this.assentos.forEach(assento => {
+        ids.push(assento.id);
+      })
+
+      const assentosJSON: string = JSON.stringify(ids);
+
+      this.router.navigate([`sistema/ingresso/${this.sessaoId}`], {queryParams: {assentos: assentosJSON}});
     }
   }
 }

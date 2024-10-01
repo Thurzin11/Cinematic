@@ -77,8 +77,6 @@ export class SessaoFormComponent implements OnInit{
   estabelecimentos: IEstabelecimento[] = [];
   isEdit: boolean = false;
   canRegister: boolean = false;
-  userLogged: string = '';
-  userType: string = '';
 
   private salaService: SalaService = inject(SalaService);
   private filmeService: FilmeService = inject(FilmeService);
@@ -90,13 +88,6 @@ export class SessaoFormComponent implements OnInit{
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get("id");
-    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
-    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
-
-    if(userLogged && userType) {
-      this.userLogged = userLogged;
-      this.userType = userType;
-    }
 
     if(id) {
       this.sessaoService.findById(id).subscribe(sessao => {
@@ -215,6 +206,6 @@ export class SessaoFormComponent implements OnInit{
   }
 
   redirect(): void {
-    this.router.navigate(['sistema/sessao'], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
+    this.router.navigate(['sistema/sessao']);
   }
 }

@@ -14,8 +14,6 @@ export class CategoriaFormComponent implements OnInit {
     nome: ''
   }
   canRegister: boolean = false;
-  userLogged: string = '';
-  userType: string = '';
 
   private categoriaService: CategoriaService = inject(CategoriaService);
   private router: Router = inject(Router);
@@ -23,13 +21,6 @@ export class CategoriaFormComponent implements OnInit {
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get('id');
-    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
-    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
-
-    if(userLogged && userType) {
-      this.userLogged = userLogged;
-      this.userType = userType;
-    }
 
     if(id)
       this.categoriaService.findById(id).subscribe(categoria => this.categoria = categoria);
@@ -51,6 +42,6 @@ export class CategoriaFormComponent implements OnInit {
   }
 
   redirect(): void {
-    this.router.navigate(['sistema/categoria'], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
+    this.router.navigate(['sistema/categoria']);
   }
 }

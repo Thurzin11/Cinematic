@@ -1,5 +1,7 @@
 <app-header-sistema></app-header-sistema>
-<div class="d-flex flex-column align-items-center col-12" *ngIf="!this.isPagamento">
+<div class="position-relative">
+  <app-menu-sistema class="position-absolute"></app-menu-sistema>
+  <div class="d-flex flex-column align-items-center col-12" *ngIf="!this.isPagamento">
   <h2 class="text-light col-10 fw-bold fs-1">Ingressos</h2>
   <div class="col-10 d-flex justify-content-between border border-black rounded-3 main">
     <div class="col-8 p-5 d-flex flex-column justify-content-around">
@@ -45,3 +47,5 @@
   </div>
 </div>
 
+
+</div>

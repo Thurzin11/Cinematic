@@ -1,5 +1,4 @@
-import { Component, inject , OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component , OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-menu-sistema',
@@ -8,27 +7,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class MenuSistemaComponent implements OnInit{
   menuIsOpen = false;
-  userId: string = '';
   userIsGerente: boolean = false;
 
-  private router: Router = inject(Router);
-  private route: ActivatedRoute = inject(ActivatedRoute);
-
   ngOnInit(): void {
-    const id: string | undefined = this.route.snapshot.queryParams['userLogged'];
-    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
-    if(id) {
-      this.userId = id;
-    }
-
-    if(userType) {
-      if(userType.toLowerCase() === 'funcionario') {
-        this.userIsGerente = false;
-        return;
-      }
-
+    const userType: string | null = sessionStorage.getItem("usuarioTipo");
+    if(userType !== null && userType.toUpperCase() === 'GERENTE')
       this.userIsGerente = true;
-    }
   }
 
   closeMenu(): void {
@@ -38,9 +22,4 @@ export class MenuSistemaComponent implements OnInit{
   openMenu(): void {
     this.menuIsOpen = true;
   }
-
-  redirect(path: string): void {
-    this.router.navigate([`/sistema/${path}`], {queryParams: {userLogged: this.userId, userType: this.userIsGerente ? 'GERENTE':'FUNCIONARIO'}});
-  }
-
 }

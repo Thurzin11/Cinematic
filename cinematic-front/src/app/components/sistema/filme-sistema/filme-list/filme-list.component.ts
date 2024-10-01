@@ -3,7 +3,6 @@ import { ICategoria } from '../../../../model/ICategoria';
 import { CategoriaService } from '../../../../services/categoria/categoria.service';
 import { FilmeService } from '../../../../services/filme/filme.service';
 import { IFilme } from '../../../../model/IFilme';
-import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 
 
 @Component({
@@ -43,21 +42,12 @@ export class FilmeListComponent implements OnInit{
   
   private categoriaService: CategoriaService = inject(CategoriaService);
   private filmeService: FilmeService = inject(FilmeService);
-  private route: ActivatedRoute = inject(ActivatedRoute);
-  private router: Router = inject(Router);
 
   constructor() {
     this.findAllFilmes();
   }
 
   ngOnInit(): void {
-    const id: string | undefined = this.route.snapshot.queryParams['userLogged'];
-    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
-    if(id && userType) {
-      this.userId = id;
-      this.userType = userType;
-    }
-
     this.categoriaService.findAll().subscribe(categoriaList => this.categoriaList = categoriaList); 
     this.findAllFilmes();
   }
@@ -92,9 +82,5 @@ export class FilmeListComponent implements OnInit{
   closeDetails(): void {
     this.openFilmeDetailes = false;
     this.findAllFilmes();
-  }
-
-  redirect(): void {
-    this.router.navigate(['sistema/filme/cadastro'], {queryParams: {userLogged: this.userId, userType: this.userType}});
   }
 }

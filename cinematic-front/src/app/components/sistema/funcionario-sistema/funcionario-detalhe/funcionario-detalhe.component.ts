@@ -1,6 +1,5 @@
-import { UsuarioService } from '../../../../services/usuario/usuario.service';
 import { IUsuario } from '../../../../model/IUsuario';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,14 +12,6 @@ export class FuncionarioDetalheComponent{
   @Output() onEditar = new EventEmitter();
   @Output() onInativarUsuario = new EventEmitter();
   @Output() onAtivarUsuario = new EventEmitter();
-  @Input() userLogged: IUsuario = {
-    id: '',
-    nome: '',
-    email: '',
-    senha: '',
-    status: false,
-    tipoUsuario: ''
-  };
   @Input() funcionario: IUsuario = {
     id: '',
     nome: '',
@@ -30,7 +21,7 @@ export class FuncionarioDetalheComponent{
     tipoUsuario: ''
   };
   confirmacao: boolean = false;
-  constructor(private usuarioService: UsuarioService,private router: Router){}
+  constructor(private router: Router){}
 
   close():void{
     this.onClose.emit();
@@ -50,7 +41,7 @@ export class FuncionarioDetalheComponent{
     this.confirmacao = !this.confirmacao;
   }
   redirect(usuario: IUsuario): void{
-    this.router.navigate([`sistema/funcionario/editar/${usuario.id}`],{queryParams: {userLogged: this.userLogged.id, userType: this.userLogged.tipoUsuario ? 'GERENTE':'FUNCIONARIO'}})
+    this.router.navigate([`sistema/funcionario/editar/${usuario.id}`])
   }
 
 }

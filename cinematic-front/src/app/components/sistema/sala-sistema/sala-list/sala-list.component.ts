@@ -21,25 +21,14 @@ export class SalaListComponent implements OnInit{
     tamanho: '',
     disponibilidade: false
   };
-  userLogged: string = '';
-  userType: string = '';
 
   private salaService: SalaService = inject(SalaService);
-  private router: Router = inject(Router);
-  private route: ActivatedRoute = inject(ActivatedRoute);
 
   constructor() {
     this.findAllSala();
   }
 
   ngOnInit(): void {
-    const userLogged: string | undefined = this.route.snapshot.queryParams['userLogged'];
-    const userType: string | undefined = this.route.snapshot.queryParams['userType'];
-
-    if(userLogged && userType) {
-      this.userLogged = userLogged;
-      this.userType = userType;
-    }
 
     this.findAllSala();
   }
@@ -80,8 +69,5 @@ export class SalaListComponent implements OnInit{
       this.findAllSala();
       this.openSalaDetails = false;
     });
-  }
-  redirect(): void {
-    this.router.navigate(['sistema/sala/cadastro'], {queryParams: {userLogged: this.userLogged, userType: this.userType}});
   }
 }

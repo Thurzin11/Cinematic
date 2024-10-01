@@ -1,16 +1,17 @@
 import { IIngresso } from './../../../../model/IIngresso';
-import { Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { ITipoIngresso } from '../../../../model/ITipoIngresso';
 import { ActivatedRoute } from '@angular/router';
 import { ITipoPagamento } from '../../../../model/ITipoPagamento';
 import { IAssento } from '../../../../model/IAssento';
 import { SessaoService } from '../../../../services/sessao/sessao.service';
 import { ISessao } from '../../../../model/ISessao';
+import { TransferirIngressosService } from '../../../../services/transferirIngressos/transferir-ingressos.service';
 
 @Component({
   selector: 'app-pagamento-ingresso',
   templateUrl: './pagamento-ingresso.component.html',
-  styleUrl: './pagamento-ingresso.component.scss'
+  styleUrl: './pagamento-ingresso.component.scss',
 })
 export class PagamentoIngressoComponent implements OnInit {
 isPagamento: boolean = true;
@@ -121,8 +122,10 @@ isPagamento: boolean = true;
 
   assentos: IAssento[] = [];
   quantidadeIngressos: number = 0;
+
   private route: ActivatedRoute = inject(ActivatedRoute);
   private serviceSessao: SessaoService= inject(SessaoService);
+  private transferirIngressos: TransferirIngressosService = inject(TransferirIngressosService);
 
   constructor(){
 
@@ -146,23 +149,18 @@ isPagamento: boolean = true;
         this.quantidadeIngressos++;
         ingresso.quantidade++;
     }
-    console.log(this.quantidadeIngressos);
-
   }
+
   decrement(ingresso: ITipoIngresso): void{
     if (this.quantidadeIngressos>0 && ingresso.quantidade>0) {
       this.quantidadeIngressos--;
       ingresso.quantidade--;
       this.removeIngresso(ingresso);
-      console.log(this.quantidadeIngressos);
-      console.log(this.ingressos);
-
     }
   }
 
   gerarIngresso(tipo: ITipoIngresso){
         let assento = this.assentos[this.ingressos.length];
-        console.log(assento);
         let ingresso: IIngresso = {
           id: '',
           sessao: this.sessao,
@@ -175,15 +173,14 @@ isPagamento: boolean = true;
           tipo: tipo,
           valor: tipo.valor
         };
-        // Adiciona o ingresso à lista
         this.ingressos.push(ingresso);
-        console.log(ingresso);
-    console.log(this.ingressos);
+        this.transferirIngressos.atualizarIngressos('+', ingresso);
   }
+
   removeIngresso(tipo: ITipoIngresso){
     let indexIngresso: number = this.ingressos.findIndex(ingresso=>ingresso.tipo.nome === tipo.nome);
-    console.log(indexIngresso);
     if (indexIngresso!=-1) {
+      this.transferirIngressos.atualizarIngressos('-', this.ingressos[indexIngresso]);
       this.ingressos.splice(indexIngresso,1);
     }
   }

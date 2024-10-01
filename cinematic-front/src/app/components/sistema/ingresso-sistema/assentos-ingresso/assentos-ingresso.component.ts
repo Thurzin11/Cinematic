@@ -65,8 +65,6 @@ export class AssentosIngressoComponent implements OnInit {
   assentoIsSelected: boolean = false;
   assentosSelecionados: IAssento[] = [];
   sessaoId: string = '';
-  userLogged: string = '';
-  userType: string = '';
 
   assentosPorFileira: {[key:string]: IAssento[]} = {
     'A': [],

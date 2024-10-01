@@ -5,7 +5,7 @@ app-menu-sistema{
 }
 
 .body-bottom{
-  max-height: 33rem;
+  max-height: 650px;
   box-shadow: 0 .4rem .4rem $PRETO;
 }
 
@@ -55,7 +55,7 @@ app-estebelecimento-card:hover{
   cursor: pointer;
 }
 .listBottom{
-  max-height: 94%rem;
+  max-height: 93%;
 }
 ::-webkit-scrollbar{
   background-color: $PRETO;
