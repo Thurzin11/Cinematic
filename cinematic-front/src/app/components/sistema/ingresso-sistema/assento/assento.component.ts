@@ -17,7 +17,7 @@ export class AssentoComponent {
   @Output() onSelectAssento = new EventEmitter();
   @Output() onRemoveAssento = new EventEmitter();
 
-  assentoIsSelected: boolean = false;
+  @Input() assentoIsSelected: boolean = false;
 
   setBackgroundAssento(tipo: string): string {
     if(tipo.toUpperCase() === 'ACOMPANHANTE')

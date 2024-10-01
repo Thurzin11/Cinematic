@@ -159,4 +159,8 @@ export class AssentosIngressoComponent implements OnInit {
     if(index !== -1)
       this.assentosSelecionados.splice(index, 1);
   }
+
+  reiniciar(): void {
+    this.assentoIsSelected = false;
+  }
 }

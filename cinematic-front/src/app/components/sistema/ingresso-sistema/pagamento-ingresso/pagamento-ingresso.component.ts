@@ -14,7 +14,7 @@ import { TransferirIngressosService } from '../../../../services/transferirIngre
   styleUrl: './pagamento-ingresso.component.scss',
 })
 export class PagamentoIngressoComponent implements OnInit {
-  isPagamento: boolean = false;
+    isPagamento: boolean = false;
     tipoIngresso: ITipoIngresso [] = [
     {
       nome: "Inteira",
@@ -49,9 +49,6 @@ export class PagamentoIngressoComponent implements OnInit {
     },
     {
       nome: 'Cartão de Débito'
-    },
-    {
-      nome: 'Paypal'
     },
     {
       nome: 'Pix'
@@ -175,5 +172,10 @@ export class PagamentoIngressoComponent implements OnInit {
       this.transferirIngressos.atualizarIngressos('-', this.ingressos[indexIngresso]);
       this.ingressos.splice(indexIngresso,1);
     }
+  }
+
+  irParaPagamento(): void {
+    this.isPagamento = true;
+    console.log(this.isPagamento)
   }
 }

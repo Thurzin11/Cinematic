@@ -20,32 +20,16 @@
         </div>
       </div>
     </div>
-    <app-card-ingresso class="col-3"></app-card-ingresso>
+    <app-card-ingresso (onIrParaPagamento)="irParaPagamento()" class="col-3"></app-card-ingresso>
   </div>
 </div>
-<!-- Pagamento -->
 <div class="d-flex flex-column align-items-center col-12" *ngIf="this.isPagamento">
-  <h1 class="text-light col-10">Pagamento</h1>
-  <div class="col-10 d-flex justify-content-between border border-black rounded-3">
-    <div class="col-8 p-5">
-      <div class="border border-black rounded-3 col-12 d-flex mb-3 tipo" *ngFor="let tipo of this.tipoIngresso">
-        <div class="col-1 d-flex align-items-center justify-content-center">
-          <img src="../../../../../assets/img/ingressos.png" alt="img-ingresso">
-        </div>
-        <div class="d-flex flex-column justify-content-center p-1 col-9">
-          <p class="text-light m-0">{{tipo.nome}}</p>
-          <p class="text-light m-0">R${{tipo.valor.toFixed(2)}}</p>
-        </div>
-        <div class="d-flex align-items-center justify-content-around col-2">
-          <button class="rounded-circle border border-black increment" (click)="this.decrement(tipo)">-</button>
-          <p class="text-light m-0 align-self-center">{{tipo.quantidade}}</p>
-          <button class="rounded-circle border border-black increment" (click)="this.increment(tipo)">+</button>
-        </div>
-      </div>
+  <h2 class="text-light col-10">Pagamento</h2>
+  <div class="d-flex border col-10 border border-black rounded-3 main">
+    <div class="col-9 p-5 d-flex flex-column justify-content-start">
+      <app-pagamento-card class="mb-3" *ngFor="let pagamento of tipoPagamento"  [tipoPagamento]="pagamento"></app-pagamento-card>
     </div>
-    <app-card-ingresso class="col-3" [ingressos]="this.ingressos" [assentos]="this.assentos"></app-card-ingresso>
+    <app-card-ingresso class="col-3" (onIrParaPagamento)="irParaPagamento()" [ingressos]="this.ingressos" [assentos]="this.assentos"></app-card-ingresso>
   </div>
-</div>
-
-
+  </div>
 </div>
