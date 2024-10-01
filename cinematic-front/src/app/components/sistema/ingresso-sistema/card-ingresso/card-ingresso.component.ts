@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { ISessao } from '../../../../model/ISessao';
 import { SessaoService } from '../../../../services/sessao/sessao.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,6 +15,7 @@ import { AssentoService } from '../../../../services/assento/assento.service';
 export class CardIngressoComponent implements OnInit {
   @Input() assentos: IAssento[] = [];
   @Input() ingressos: IIngresso[] = [];
+  @Output() onIrParaPagamento = new EventEmitter();
   assentoRotasExist: boolean = false;
 
   sessao: ISessao = {
@@ -83,16 +84,11 @@ export class CardIngressoComponent implements OnInit {
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get('sessaoId');
-
+    
     this.route.queryParamMap.subscribe((params) =>{
       let assentos = params.get("assentos");
       if (assentos!=null) {
         this.assentoRotasExist = true;
-      }
-    })
-    this.route.queryParamMap.subscribe((params) =>{
-      let assentos = params.get("assentos");
-      if (assentos!=null) {
         let ids: string[] = [];
         ids = JSON.parse(assentos);
         ids.forEach(id => {
@@ -199,7 +195,18 @@ export class CardIngressoComponent implements OnInit {
 
       const assentosJSON: string = JSON.stringify(ids);
 
+      if(this.assentoRotasExist) {
+        this.onIrParaPagamento.emit();
+        return;
+      }
+
       this.router.navigate([`sistema/ingresso/${this.sessaoId}`], {queryParams: {assentos: assentosJSON}});
     }
+  }
+
+  reiniciar(): void {
+    this.ingressos = [];
+    this.assentos = [];
+    this.router.navigate(['sistema/ingresso'])
   }
 }

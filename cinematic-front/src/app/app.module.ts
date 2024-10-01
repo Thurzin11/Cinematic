@@ -55,6 +55,7 @@ import { AssentosIngressoComponent } from './components/sistema/ingresso-sistema
 import { CardIngressoComponent } from './components/sistema/ingresso-sistema/card-ingresso/card-ingresso.component';
 import { CaminhoIngressoComponent } from './components/sistema/ingresso-sistema/caminho-ingresso/caminho-ingresso.component';
 import { AssentoComponent } from './components/sistema/ingresso-sistema/assento/assento.component';
+import { PagamentoCardComponent } from './components/sistema/ingresso-sistema/pagamento-card/pagamento-card.component';
 register();
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ register();
     AssentosIngressoComponent,
     CardIngressoComponent,
     CaminhoIngressoComponent,
-    AssentoComponent
+    AssentoComponent,
+    PagamentoCardComponent
   ],
   imports: [
     BrowserModule,

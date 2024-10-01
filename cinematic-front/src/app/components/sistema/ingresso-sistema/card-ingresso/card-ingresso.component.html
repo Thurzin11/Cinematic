@@ -1,7 +1,7 @@
 <div class="body rounded-end border border-top-0 border-end-0 border-bottom-0 border-black border-2">
     <div class="p-3 d-flex align-items-start justify-content-between">
         <p class="fs-5 fst-italic text-light">Resumo de pedido</p>
-        <span class="hover">
+        <span class="hover" (click)="reiniciar()">
             <img src="../../../../../assets/img/lixeira.png" alt="">
         </span>
     </div>
@@ -71,7 +71,7 @@
             class="col-12 p-2 fw-bold fs-5 border border-bottom-0 border-end-0 border-start-0 border-black">Escolher ingresso</button>
         <button *ngIf="this.assentoRotasExist"
             (click)="this.redirect()" 
-            [disabled]="this.ingressos.length === 0" 
+            [disabled]="this.ingressos.length !== this.assentos.length" 
             [ngClass]="this.ingressos.length > 0 ? 'active':''" 
             class="col-12 p-2 fw-bold fs-5 border border-bottom-0 border-end-0 border-start-0 border-black">Ir para o Pagamento</button>
     </div>

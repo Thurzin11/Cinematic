@@ -1,4 +1,4 @@
-<p [ngClass]="this.assentoIsSelected ? 'selecionado':''" 
+<p  [ngClass]="this.assentoIsSelected ? 'selecionado':''" 
     class="assento pt-2 m-0 rounded-circle border border-black"
     [ngClass]="assento.status.toUpperCase() === 'DISPONIVEL' ? this.setBackgroundAssento(assento.tipo):'indisponivel'"
     (click)="this.toggleAssento()">{{ assento.nome }}</p>

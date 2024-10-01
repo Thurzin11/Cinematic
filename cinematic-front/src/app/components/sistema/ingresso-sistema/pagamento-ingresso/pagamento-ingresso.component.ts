@@ -55,11 +55,6 @@ isPagamento: boolean = true;
       label: ['Número do cartão','Data de validade','Código de Segurança','Nome no cartão']
     },
     {
-      nome: 'Paypal',
-      img: '../../../../../assets/img/paypal.png',
-      label: []
-    },
-    {
       nome: 'Pix',
       img: '../../../../../assets/img/pix.png',
       label: []
@@ -185,7 +180,8 @@ isPagamento: boolean = true;
     }
   }
 
-  choosePayment(): void{
-    this.dadosPagamento = !this.dadosPagamento;
+  irParaPagamento(): void {
+    this.isPagamento = true;
+    console.log(this.isPagamento)
   }
 }
