@@ -13,7 +13,7 @@ import { ISessao } from '../../../../model/ISessao';
   styleUrl: './pagamento-ingresso.component.scss'
 })
 export class PagamentoIngressoComponent implements OnInit {
-isPagamento: boolean = false;
+isPagamento: boolean = true;
   tipoIngresso: ITipoIngresso [] = [
   {
     nome: "Inteira",
@@ -21,7 +21,7 @@ isPagamento: boolean = false;
     quantidade: 0
   },
   {
-    nome: "Meia-Estudante",
+    nome: "Meia Estudante",
     valor: 10,
     quantidade: 0
   },
@@ -41,19 +41,27 @@ isPagamento: boolean = false;
     quantidade: 0
   }
 ];
-
+  dadosPagamento: boolean = false;
   tipoPagamento: ITipoPagamento [] = [
     {
-      nome: 'Cartão de Crédito'
+      nome: 'Cartão de Crédito',
+      img: '../../../../../assets/img/cartao-de-credito.png',
+      label: ['Número do cartão','Data de validade','Código de Segurança','Nome no cartão']
     },
     {
-      nome: 'Cartão de Débito'
+      nome: 'Cartão de Débito',
+      img: '../../../../../assets/img/cartao-de-credito.png',
+      label: ['Número do cartão','Data de validade','Código de Segurança','Nome no cartão']
     },
     {
-      nome: 'Paypal'
+      nome: 'Paypal',
+      img: '../../../../../assets/img/paypal.png',
+      label: []
     },
     {
-      nome: 'Pix'
+      nome: 'Pix',
+      img: '../../../../../assets/img/pix.png',
+      label: []
     }
   ]
 
@@ -117,7 +125,7 @@ isPagamento: boolean = false;
   private serviceSessao: SessaoService= inject(SessaoService);
 
   constructor(){
-  
+
   }
   ngOnInit(): void {
     let idSessao: string | null = this.route.snapshot.paramMap.get('sessaoId');
@@ -178,5 +186,9 @@ isPagamento: boolean = false;
     if (indexIngresso!=-1) {
       this.ingressos.splice(indexIngresso,1);
     }
+  }
+
+  choosePayment(): void{
+    this.dadosPagamento = !this.dadosPagamento;
   }
 }

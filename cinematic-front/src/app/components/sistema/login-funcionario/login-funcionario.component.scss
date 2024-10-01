@@ -26,3 +26,10 @@ button{
   transition: .2s;
   opacity: 1;
 }
+h1{
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: .2rem;
+  text-shadow: $SHADOW-MD;
+  font-size: 3rem;
+  color: $BRANCO;
+}

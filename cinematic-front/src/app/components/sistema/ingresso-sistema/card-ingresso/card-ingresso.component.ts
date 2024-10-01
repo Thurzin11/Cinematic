@@ -81,7 +81,6 @@ export class CardIngressoComponent implements OnInit {
     const id: string | null = this.route.snapshot.paramMap.get('sessaoId');
     const userLogged: string | null = this.route.snapshot.queryParams['userLogged'];
     const userType: string | null = this.route.snapshot.queryParams['userType'];
-
     this.route.queryParamMap.subscribe((params) =>{
       let assentos = params.get("assentos");
       if (assentos!=null) {

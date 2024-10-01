@@ -9,7 +9,7 @@ import { UsuarioService } from '../../../services/usuario/usuario.service';
   styleUrl: './header-sistema.component.scss'
 })
 export class HeaderSistemaComponent implements OnInit{
-  @Input() userLogged: IUsuario = {
+  userLogged: IUsuario = {
     id: '',
     nome: '',
     email: '',
