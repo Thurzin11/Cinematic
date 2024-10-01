@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { ILoginClient } from '../../../model/ILoginClient';
 import { ElementOptionsByType } from 'chart.js';
+import { IUsuario } from '../../../model/IUsuario';
 
 @Component({
   selector: 'app-login-cliente',
@@ -26,10 +27,8 @@ export class LoginClienteComponent {
 
   logar(): void{
     this.service.loginClient(this.login).subscribe((usuario)=>{
-      console.log(usuario);
-      if (usuario!=null) {
-        this.router.navigate([`home`],{queryParams: {id: usuario.id}});
-      }
+      this.salvarSessao(usuario);
+        this.router.navigate([`home`]);
     },
     erro=>{
       if(erro.status==400){
@@ -53,6 +52,11 @@ export class LoginClienteComponent {
     }else{
       this.camposIsValid = true;
     }
+  }
+  private salvarSessao(usuario: IUsuario): void {
+    sessionStorage.setItem('usuarioId', usuario.id);
+    sessionStorage.setItem('usuarioNome', usuario.nome);
+    sessionStorage.setItem('usuarioTipo', usuario.tipoUsuario);
   }
 
 }
