@@ -5,12 +5,11 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './caminho-ingresso.component.html',
   styleUrl: './caminho-ingresso.component.scss'
 })
-export class CaminhoIngressoComponent {
+export class CaminhoIngressoComponent{
   @Input() page: string = '';
 
   setClass(): void {
     const spanClasses: string[] = [];
-    const divClasses: string[] = [];
 
     switch(this.page.toUpperCase()) {
       case "INGRESSO": {

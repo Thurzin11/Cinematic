@@ -6,6 +6,7 @@ import { IAssento } from '../../../../model/IAssento';
 import { IIngresso } from '../../../../model/IIngresso';
 import { TransferirIngressosService } from '../../../../services/transferirIngressos/transferir-ingressos.service';
 import { AssentoService } from '../../../../services/assento/assento.service';
+import { ITipoIngresso } from '../../../../model/ITipoIngresso';
 
 @Component({
   selector: 'app-card-ingresso',
@@ -14,10 +15,16 @@ import { AssentoService } from '../../../../services/assento/assento.service';
 })
 export class CardIngressoComponent implements OnInit {
   @Input() assentos: IAssento[] = [];
-  @Input() ingressos: IIngresso[] = [];
+  ingressos: IIngresso[] = [];
+  @Input() isPagamento: boolean = false;
   @Output() onIrParaPagamento = new EventEmitter();
-  assentoRotasExist: boolean = false;
 
+  assentoRotasExist: boolean = false;
+  valorTotal: number = 0;
+  classificacao: string = '';
+  classificacaoClass: string = '';
+  tipo: string = '';
+  sessaoId: string = '';
   sessao: ISessao = {
     id: '',
     sala: {
@@ -70,11 +77,7 @@ export class CardIngressoComponent implements OnInit {
       cep: ''
     }
   };
-  valorTotal: number = 0;
-  classificacao: string = '';
-  classificacaoClass: string = '';
-  tipo: string = '';
-  sessaoId: string = '';
+  tipoIngresso: ITipoIngresso [] = [];
 
   private sessaoService: SessaoService = inject(SessaoService);
   private assentoService: AssentoService = inject(AssentoService);
@@ -107,22 +110,30 @@ export class CardIngressoComponent implements OnInit {
     }
 
     this.transferirIngressos.ingressos$.subscribe(ingressos => {
-      if(this.ingressos.length === 0)
-        this.valorTotal = 0;
-
-      if(ingressos.acao === '+') {
-        this.valorTotal += ingressos.ingresso.valor;
-        this.ingressos.push(ingressos.ingresso);
+      if(ingressos.restart) {
+        this.ingressos = [];
+        return;
       }
 
-      if(ingressos.acao === '-') {
-        this.valorTotal -= ingressos.ingresso.valor;
-        const index: number = this.ingressos.findIndex(ingresso => ingresso === ingressos.ingresso);
-
-        if(index !== -1)
-          this.ingressos.splice(index, 1);
+      if(ingressos.ingresso) {
+        if(this.ingressos.length === 0)
+          this.valorTotal = 0;
+        
+        if(ingressos.acao === '+') {
+          this.valorTotal += ingressos.ingresso.valor;
+          this.ingressos.push(ingressos.ingresso);
+          this.adicionarTipoIngresso(ingressos.ingresso.tipo);
+        }
+        
+        if(ingressos.acao === '-') {
+          this.valorTotal -= ingressos.ingresso.valor;
+          this.removerTipoIngresso(ingressos.ingresso);
+          const index: number = this.ingressos.findIndex(ingresso => ingresso === ingressos.ingresso);
+          
+          if(index !== -1)
+            this.ingressos.splice(index, 1);
+        }
       }
-
     });
   }
 
@@ -205,8 +216,72 @@ export class CardIngressoComponent implements OnInit {
   }
 
   reiniciar(): void {
-    this.ingressos = [];
     this.assentos = [];
+    this.transferirIngressos.atualizarIngressos('', true);
     this.router.navigate(['sistema/ingresso'])
+  }
+
+  private adicionarTipoIngresso(tipo: ITipoIngresso): void {
+    if(this.tipoIngresso.length === 0) {
+      this.tipoIngresso.push({
+        nome: tipo.nome,
+        quantidade: tipo.quantidade+1,
+        valor: tipo.valor,
+      })
+    
+      return;
+    }
+
+    const tipoIngresso: ITipoIngresso | undefined = this.tipoIngresso.find(tipoIngresso => tipoIngresso.nome.toLowerCase() === tipo.nome.toLowerCase());
+    if(tipoIngresso) {
+      this.tipoIngresso.forEach(tipoIngressoParam => {
+        if(tipoIngressoParam.nome.toLowerCase() === tipoIngresso.nome.toLowerCase())
+          tipoIngresso.quantidade++;
+      });
+      return;
+    }
+    
+    this.tipoIngresso.push({
+      nome: tipo.nome,
+      quantidade: tipo.quantidade+1,
+      valor: tipo.valor,
+    });
+  }
+
+  private removerTipoIngresso(ingresso: IIngresso): void {
+    if(this.tipoIngresso.length === 1) {
+      this.tipoIngresso.forEach(tipoIngresso => {
+        if(tipoIngresso.quantidade === 1) {
+          const index: number = this.tipoIngresso.findIndex(tipoIngressoParam => tipoIngresso.nome.toLowerCase() === tipoIngressoParam.nome.toLowerCase());
+          
+          if(index !== -1)
+            this.tipoIngresso.splice(index, 1);
+          
+          return;
+        }
+
+        tipoIngresso.quantidade--;
+      });
+
+      return;
+    }
+
+    const tipoIngresso: ITipoIngresso | undefined = this.tipoIngresso.find(tipoIngressoParams => tipoIngressoParams.nome.toLowerCase() === ingresso.tipo.nome.toLowerCase());
+    if(tipoIngresso) {
+      this.tipoIngresso.forEach(tipoIngressoParam => {
+        if(tipoIngressoParam.quantidade === 1) {
+          const index: number = this.tipoIngresso.findIndex(tipoIngressoParam => tipoIngresso.nome.toLowerCase() === tipoIngressoParam.nome.toLowerCase());
+          
+          if(index !== -1)
+            this.tipoIngresso.splice(index, 1);
+          
+          return;
+        }
+
+        if(tipoIngressoParam.nome.toLowerCase() === tipoIngresso.nome.toLowerCase())
+          tipoIngresso.quantidade--;
+      });
+    }
+
   }
 }

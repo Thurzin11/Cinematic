@@ -8,7 +8,9 @@ import { ITipoPagamento } from '../../../../model/ITipoPagamento';
 })
 export class PagamentoCardComponent {
   @Input() tipoPagamento: ITipoPagamento = {
-    nome: ''
+    nome: '',
+    img: '',
+    label: []
   };
 
   showInfosCartao: boolean = false;

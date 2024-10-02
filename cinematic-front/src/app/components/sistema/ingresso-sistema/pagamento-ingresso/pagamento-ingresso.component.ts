@@ -7,6 +7,7 @@ import { IAssento } from '../../../../model/IAssento';
 import { SessaoService } from '../../../../services/sessao/sessao.service';
 import { ISessao } from '../../../../model/ISessao';
 import { TransferirIngressosService } from '../../../../services/transferirIngressos/transferir-ingressos.service';
+import { AssentoService } from '../../../../services/assento/assento.service';
 
 @Component({
   selector: 'app-pagamento-ingresso',
@@ -14,7 +15,7 @@ import { TransferirIngressosService } from '../../../../services/transferirIngre
   styleUrl: './pagamento-ingresso.component.scss',
 })
 export class PagamentoIngressoComponent implements OnInit {
-isPagamento: boolean = false;
+  isPagamento: boolean = false;
   tipoIngresso: ITipoIngresso [] = [
   {
     nome: "Inteira",
@@ -41,7 +42,7 @@ isPagamento: boolean = false;
     valor: 10,
     quantidade: 0
   }
-];
+  ];
   dadosPagamento: boolean = false;
   tipoPagamento: ITipoPagamento [] = [
     {
@@ -121,10 +122,8 @@ isPagamento: boolean = false;
   private route: ActivatedRoute = inject(ActivatedRoute);
   private serviceSessao: SessaoService= inject(SessaoService);
   private transferirIngressos: TransferirIngressosService = inject(TransferirIngressosService);
+  private assentoService: AssentoService = inject(AssentoService);
 
-  constructor(){
-
-  }
   ngOnInit(): void {
     let idSessao: string | null = this.route.snapshot.paramMap.get('sessaoId');
     if (idSessao!=null) {
@@ -133,14 +132,17 @@ isPagamento: boolean = false;
     this.route.queryParamMap.subscribe((params) =>{
       let assentos = params.get("assentos");
       if (assentos!=null) {
-        this.assentos = JSON.parse(assentos);
+        let ids: string[] = JSON.parse(assentos);
+        ids.forEach(id => {
+          this.assentoService.findById(id).subscribe(assento => this.assentos.push(assento));
+        })
       }
     })
   }
 
   increment(ingresso: ITipoIngresso): void{
     if (this.quantidadeIngressos<this.assentos.length && ingresso.quantidade<this.assentos.length) {
-      this.gerarIngresso(ingresso);
+        this.gerarIngresso(ingresso);
         this.quantidadeIngressos++;
         ingresso.quantidade++;
     }
@@ -169,13 +171,13 @@ isPagamento: boolean = false;
           valor: tipo.valor
         };
         this.ingressos.push(ingresso);
-        this.transferirIngressos.atualizarIngressos('+', ingresso);
+        this.transferirIngressos.atualizarIngressos('+', false, ingresso);
   }
 
   removeIngresso(tipo: ITipoIngresso){
     let indexIngresso: number = this.ingressos.findIndex(ingresso=>ingresso.tipo.nome === tipo.nome);
     if (indexIngresso!=-1) {
-      this.transferirIngressos.atualizarIngressos('-', this.ingressos[indexIngresso]);
+      this.transferirIngressos.atualizarIngressos('-', false, this.ingressos[indexIngresso]);
       this.ingressos.splice(indexIngresso,1);
     }
   }

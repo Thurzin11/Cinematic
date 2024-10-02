@@ -39,17 +39,8 @@
         </div>
         <div class="d-flex flex-column justify-content-between pt-5 div-ingressos">
             <p class="fs-4 text-light fw-semibold col-8 m-0">Ingressos</p>
-            <div class="d-flex flex-wrap ps-2" *ngFor="let ingresso of this.ingressos">
-                <p class="fs-5 text-light fw-semibold pe-2 m-0" 
-                    *ngIf="ingresso.tipo.nome.toUpperCase()==='INTEIRA'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
-                <p class="fs-5 text-light fw-semibold pe-2 m-0" 
-                    *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA ESTUDANTE'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
-                <p class="fs-5 text-light fw-semibold pe-2 m-0" 
-                    *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA IDOSO'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
-                <p class="fs-5 text-light fw-semibold pe-2 m-0" 
-                    *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA CRIANÇA'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
-                <p class="fs-5 text-light fw-semibold pe-2 m-0" 
-                    *ngIf="ingresso.tipo.nome.toUpperCase()==='MEIA ENTRADA - PCD'">{{ingresso.tipo.quantidade}}x {{ingresso.tipo.nome}}</p>
+            <div class="d-flex flex-wrap ps-2" *ngFor="let tipo of this.tipoIngresso">
+                <p class="fs-5 text-light fw-semibold pe-2 m-0">{{tipo.quantidade}}x {{tipo.nome}}</p>
             </div>
         </div>
         <div class="d-flex flex-column div-infos justify-content-end">
@@ -69,10 +60,15 @@
             [disabled]="this.assentos.length === 0" 
             [ngClass]="this.assentos.length > 0 ? 'active':''" 
             class="col-12 p-2 fw-bold fs-5 border border-bottom-0 border-end-0 border-start-0 border-black">Escolher ingresso</button>
-        <button *ngIf="this.assentoRotasExist"
+        <button *ngIf="this.assentoRotasExist && !isPagamento"
             (click)="this.redirect()" 
             [disabled]="this.ingressos.length !== this.assentos.length" 
             [ngClass]="this.ingressos.length > 0 ? 'active':''" 
             class="col-12 p-2 fw-bold fs-5 border border-bottom-0 border-end-0 border-start-0 border-black">Ir para o Pagamento</button>
+        <button *ngIf="isPagamento"
+            (click)="this.redirect()" 
+            [disabled]="this.ingressos.length !== this.assentos.length" 
+            [ngClass]="this.ingressos.length > 0 ? 'active':''" 
+            class="col-12 p-2 fw-bold fs-5 border border-bottom-0 border-end-0 border-start-0 border-black">Finalizar Compra</button>
     </div>
 </div>

@@ -1,5 +1,7 @@
-<span class="material-symbols-outlined fs-1 pe-2" [ngClass]="page.toUpperCase() === 'ASSENTO' ? '':'apagado'">chair</span>
+<span class="material-symbols-outlined fs-1 pe-2"
+    [ngClass]="page.toUpperCase() === 'INGRESSO' || page.toUpperCase() === 'PAGAMENTO' ? 'amarelo':''">chair</span>
 <div class="col-3 rounded-3 border border-white opacity-50"></div>
-<span class="material-symbols-outlined fs-1 px-2" [ngClass]="page.toUpperCase() === 'INGRESSO' ? '':'apagado'">local_activity</span>
+<span class="material-symbols-outlined fs-1 px-2"
+    [ngClass]="(page.toUpperCase() === 'PAGAMENTO' ? 'amarelo':'') || (page.toUpperCase() === 'INGRESSO' ? '':'apagado')">local_activity</span>
 <div class="col-3 rounded-3 border border-white opacity-50"></div>
 <span class="material-symbols-outlined fs-1 ps-2" [ngClass]="page.toUpperCase() === 'PAGAMENTO' ? '':'apagado'">payments</span>
