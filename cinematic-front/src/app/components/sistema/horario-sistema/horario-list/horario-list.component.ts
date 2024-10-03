@@ -22,7 +22,6 @@ export class HorarioListComponent implements OnInit {
   listaHorarios: IHorario[] = [];
 
   private horarioService: HorarioService = inject(HorarioService);
-  private router: Router = inject(Router);
 
   constructor() {
     this.findAllHorario();

@@ -1,8 +1,5 @@
 @import "../../../style/color";
 
-h2{
-    font-size: 1.6rem;
-}
 
 .logo{
     width: 15%;
@@ -17,7 +14,9 @@ h1{
     text-shadow: $SHADOW-MD;
     font-size: 3rem;
     color: $BRANCO;
+    cursor: pointer;
 }
+
 .logout {
   right: 1rem;
   top: 4.6rem;

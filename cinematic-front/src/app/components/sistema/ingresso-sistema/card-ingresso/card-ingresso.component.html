@@ -66,7 +66,7 @@
             [ngClass]="this.ingressos.length > 0 ? 'active':''" 
             class="col-12 p-2 fw-bold fs-5 border border-bottom-0 border-end-0 border-start-0 border-black">Ir para o Pagamento</button>
         <button *ngIf="isPagamento"
-            (click)="this.redirect()" 
+            (click)="this.finalizar()" 
             [disabled]="this.ingressos.length !== this.assentos.length" 
             [ngClass]="this.ingressos.length > 0 ? 'active':''" 
             class="col-12 p-2 fw-bold fs-5 border border-bottom-0 border-end-0 border-start-0 border-black">Finalizar Compra</button>

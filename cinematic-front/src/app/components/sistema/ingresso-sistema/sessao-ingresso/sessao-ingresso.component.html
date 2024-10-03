@@ -2,7 +2,7 @@
 <div class="position-relative">
     <app-menu-sistema class="position-absolute"></app-menu-sistema>
     <div class="col-10 m-auto">
-        <h2 class="text-light fs-1 fw-bold">Ingressos</h2>
+        <h2 class="text-light fs-1 fw-bold">Sessões</h2>
         <div class="col-12 body d-flex rounded">
             <app-filtro-sistema *ngIf="this.filterIsOpen" (onFilter)="this.sessoes = $event" class="col-2 col-sm-2 overflow-y-auto" [tipo]="'sessao'" (onCloseFilter)="this.closeFiltro()"></app-filtro-sistema>
             <div class="list border border-black p-3 position-relative" [ngClass]="this.filterIsOpen ? 'col-10 rounded-end border-start-0':'col-12 col-sm-12 rounded'">

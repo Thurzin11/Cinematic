@@ -8,6 +8,11 @@
     cursor: pointer;
 }
 
+.assento:hover {
+    background-color: $ROXO-CLARO;
+    box-shadow: $SHADOW-MD;
+}
+
 .acompanhante {
     background-color: $ROXO-ESCURO;
 }

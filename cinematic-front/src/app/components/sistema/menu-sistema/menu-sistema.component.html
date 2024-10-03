@@ -3,20 +3,20 @@
     [ngClass]="this.menuIsOpen ? '' : 'leave'">
     <div class="d-flex align-items-center col-sm-12 px-2" routerLink="/sistema/ingresso">
         <img class="py-3" src="../../../../assets/img/ingressos.png" alt="">
-        <p class="fs-4 ps-3 fw-bold">Ingresso</p>
+        <p class="fs-4 ps-3 fw-bold">Vendas</p>
     </div>
     <div class="d-flex align-items-center col-sm-12 px-2" routerLink="/sistema/filme">
         <img class="py-3" src="../../../../assets/img/claquete.png" alt="">
         <p class="fs-4 ps-3 fw-bold">Filmes</p>
     </div>
-    <div class="d-flex align-items-center col-sm-12 ps-2 pe-4" >
-        <img class="py-3" src="../../../../assets/img/mascara-de-teatro (1).png" alt="">
-        <p class="fs-4 ps-3 fw-bold">Teatro</p>
-    </div>
-    <div class="d-flex align-items-center col-sm-12 ps-2 pe-4">
-        <img class="py-3" src="../../../../assets/img/calendario.png" alt="">
-        <p class="fs-4 ps-3 fw-bold">Evento</p>
-    </div>
+        <!-- <div class="d-flex align-items-center col-sm-12 ps-2 pe-4" >
+            <img class="py-3" src="../../../../assets/img/mascara-de-teatro (1).png" alt="">
+            <p class="fs-4 ps-3 fw-bold">Teatro</p>
+        </div>
+        <div class="d-flex align-items-center col-sm-12 ps-2 pe-4">
+            <img class="py-3" src="../../../../assets/img/calendario.png" alt="">
+            <p class="fs-4 ps-3 fw-bold">Evento</p>
+        </div> -->
     <div *ngIf="userIsGerente" class="d-flex align-items-center col-sm-12 ps-2 pe-4" routerLink="/sistema/funcionario">
         <img class="py-3" src="../../../../assets/img/funcionarios.png" alt="">
         <p class="fs-4 ps-3 fw-bold">Funcionários</p>

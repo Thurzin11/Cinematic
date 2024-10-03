@@ -4,9 +4,9 @@ import { SessaoService } from '../../../../services/sessao/sessao.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IAssento } from '../../../../model/IAssento';
 import { IIngresso } from '../../../../model/IIngresso';
-import { TransferirIngressosService } from '../../../../services/transferirIngressos/transferir-ingressos.service';
 import { AssentoService } from '../../../../services/assento/assento.service';
 import { ITipoIngresso } from '../../../../model/ITipoIngresso';
+import { IngressoService } from '../../../../services/ingresso/ingresso.service';
 
 @Component({
   selector: 'app-card-ingresso',
@@ -18,6 +18,7 @@ export class CardIngressoComponent implements OnInit {
   ingressos: IIngresso[] = [];
   @Input() isPagamento: boolean = false;
   @Output() onIrParaPagamento = new EventEmitter();
+  @Output() onFinalizar = new EventEmitter();
 
   assentoRotasExist: boolean = false;
   valorTotal: number = 0;
@@ -81,7 +82,7 @@ export class CardIngressoComponent implements OnInit {
 
   private sessaoService: SessaoService = inject(SessaoService);
   private assentoService: AssentoService = inject(AssentoService);
-  private transferirIngressos: TransferirIngressosService = inject(TransferirIngressosService);
+  private ingressoService: IngressoService = inject(IngressoService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
 
@@ -100,6 +101,17 @@ export class CardIngressoComponent implements OnInit {
       }
     })
 
+    this.route.queryParamMap.subscribe(params => {
+      let ingressos = params.get('ingressos')
+      if(ingressos !== null) {
+        let ids : string[] = [];
+        ids = JSON.parse(ingressos);
+        ids.forEach(id => {
+          this.ingressoService.findById(id).subscribe(ingresso => this.ingressos.push(ingresso));
+        })
+      }
+    })
+
     if(id !== null) {
       this.sessaoId = id;
       this.sessaoService.findById(id).subscribe(sessao => {
@@ -109,7 +121,10 @@ export class CardIngressoComponent implements OnInit {
       });
     }
 
-    this.transferirIngressos.ingressos$.subscribe(ingressos => {
+    if(this.ingressos.length !== 0)
+      return;
+
+    this.ingressoService.ingressos$.subscribe(ingressos => {
       if(ingressos.restart) {
         this.ingressos = [];
         return;
@@ -199,12 +214,7 @@ export class CardIngressoComponent implements OnInit {
 
   redirect(): void {
     if(this.sessaoId !== ''){
-      const ids: string[] = [];
-      this.assentos.forEach(assento => {
-        ids.push(assento.id);
-      })
-
-      const assentosJSON: string = JSON.stringify(ids);
+      const assentosJSON: string = this.transformToJSON();
 
       if(this.assentoRotasExist) {
         this.onIrParaPagamento.emit();
@@ -217,8 +227,27 @@ export class CardIngressoComponent implements OnInit {
 
   reiniciar(): void {
     this.assentos = [];
-    this.transferirIngressos.atualizarIngressos('', true);
+    this.ingressoService.atualizarIngressos('', true);
     this.router.navigate(['sistema/ingresso'])
+  }
+
+  finalizar(): void {
+    if(this.sessaoId !== '') {
+      this.ingressos.forEach(ingresso => {
+        this.ingressoService.create({sessao: ingresso.sessao, assento: ingresso.assento, tipo: ingresso.tipo.nome, valor: ingresso.valor}).subscribe();
+      })
+
+      this.router.navigate([`sistema/home`]);
+    }
+  }
+
+  private transformToJSON(): string {
+      const ids: string[] = [];
+      this.assentos.forEach(assento => {
+        ids.push(assento.id);
+      })
+
+      return JSON.stringify(ids);
   }
 
   private adicionarTipoIngresso(tipo: ITipoIngresso): void {

@@ -1,0 +1,16 @@
+@import '../../../../style/color';
+
+.main{
+    box-shadow: $SHADOW-MD;
+}
+
+button {
+    background-color: $ROXO-CLARO;
+    color: #FFF;
+    box-shadow: $SHADOW-SM;
+}
+
+button:hover {
+    transition: .2s;
+    scale: 105%;
+}

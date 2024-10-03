@@ -10,7 +10,7 @@
       </div>
       <div class="inputEmail col-11 d-flex flex-column mt-3">
         <label for="email" class="fs-3 fw-semibold text-light">Email</label>
-        <input type="text" id="email" class="rounded-3 border border-black p-2" [(ngModel)]="usuario.email" name="email" placeholder="Digite o email do funcionário">
+        <input type="text" id="email" class="rounded-3 border border-black p-2" [validation]="true" mask="A*@A*.com" [(ngModel)]="usuario.email" name="email" placeholder="Digite o email do funcionário">
       </div>
       <div class="last col-11 d-flex mt-3">
         <div class="status d-flex flex-column col-6">

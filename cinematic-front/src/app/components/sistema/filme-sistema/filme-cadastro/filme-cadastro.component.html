@@ -18,8 +18,8 @@
                 </div>
                 <div class="d-flex flex-column col-3">
                     <label class="text-light fw-semibold fs-3">Duração</label>
-                    <input id="duracao" type="number" min="0" placeholder="Digite o duração do filme"
-                        class="p-2 rounded mt-2 border border-black" [(ngModel)]="filme.duracao" name="duracao" (ngModelChange)="validaCampos()">
+                    <input id="duracao" type="string" min="0" placeholder="Digite o duração do filme"
+                        class="p-2 rounded mt-2 border border-black" mask="000" suffix=" min" [(ngModel)]="filme.duracao" name="duracao" (ngModelChange)="validaCampos()">
                 </div>
             </div>
             <div class="col-12 d-flex justify-content-around py-2">

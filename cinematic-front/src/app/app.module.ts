@@ -5,7 +5,7 @@ import { register } from 'swiper/element/bundle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuSistemaComponent } from './components/sistema/menu-sistema/menu-sistema.component';
 import { HomeSistemaComponent } from './components/sistema/home-sistema/home-sistema.component';
@@ -56,7 +56,11 @@ import { CardIngressoComponent } from './components/sistema/ingresso-sistema/car
 import { CaminhoIngressoComponent } from './components/sistema/ingresso-sistema/caminho-ingresso/caminho-ingresso.component';
 import { AssentoComponent } from './components/sistema/ingresso-sistema/assento/assento.component';
 import { PagamentoCardComponent } from './components/sistema/ingresso-sistema/pagamento-card/pagamento-card.component';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { IngressoComponent } from './components/sistema/ingresso-sistema/ingresso/ingresso.component';
+
 register();
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,15 +112,20 @@ register();
     CardIngressoComponent,
     CaminhoIngressoComponent,
     AssentoComponent,
-    PagamentoCardComponent
+    PagamentoCardComponent,
+    IngressoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgxMaskDirective,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    provideNgxMask()
+  ],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

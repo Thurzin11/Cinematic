@@ -1,13 +1,13 @@
 import { IIngresso } from './../../../../model/IIngresso';
 import { Component, inject, OnInit } from '@angular/core';
 import { ITipoIngresso } from '../../../../model/ITipoIngresso';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ITipoPagamento } from '../../../../model/ITipoPagamento';
 import { IAssento } from '../../../../model/IAssento';
 import { SessaoService } from '../../../../services/sessao/sessao.service';
 import { ISessao } from '../../../../model/ISessao';
-import { TransferirIngressosService } from '../../../../services/transferirIngressos/transferir-ingressos.service';
 import { AssentoService } from '../../../../services/assento/assento.service';
+import { IngressoService } from '../../../../services/ingresso/ingresso.service';
 
 @Component({
   selector: 'app-pagamento-ingresso',
@@ -120,8 +120,9 @@ export class PagamentoIngressoComponent implements OnInit {
   quantidadeIngressos: number = 0;
 
   private route: ActivatedRoute = inject(ActivatedRoute);
+  private router: Router = inject(Router);
   private serviceSessao: SessaoService= inject(SessaoService);
-  private transferirIngressos: TransferirIngressosService = inject(TransferirIngressosService);
+  private ingressoService: IngressoService = inject(IngressoService);
   private assentoService: AssentoService = inject(AssentoService);
 
   ngOnInit(): void {
@@ -158,32 +159,33 @@ export class PagamentoIngressoComponent implements OnInit {
 
   gerarIngresso(tipo: ITipoIngresso){
         let assento = this.assentos[this.ingressos.length];
-        let ingresso: IIngresso = {
-          id: '',
-          sessao: this.sessao,
-          assento: {
-            id: assento.id,
-            nome: assento.nome,
-            tipo: assento.tipo,
-            status: assento.status
-          },
-          tipo: tipo,
-          valor: tipo.valor
-        };
-        this.ingressos.push(ingresso);
-        this.transferirIngressos.atualizarIngressos('+', false, ingresso);
+          let ingresso: IIngresso = {
+            id: '',
+            sessao: this.sessao,
+            assento: {
+              id: assento.id,
+              nome: assento.nome,
+              tipo: assento.tipo,
+              status: assento.status
+            },
+            tipo: tipo,
+            valor: tipo.valor
+          };
+          
+          this.ingressos.push(ingresso);
+          this.ingressoService.atualizarIngressos('+', false, ingresso);
+        
   }
 
   removeIngresso(tipo: ITipoIngresso){
     let indexIngresso: number = this.ingressos.findIndex(ingresso=>ingresso.tipo.nome === tipo.nome);
     if (indexIngresso!=-1) {
-      this.transferirIngressos.atualizarIngressos('-', false, this.ingressos[indexIngresso]);
+      this.ingressoService.atualizarIngressos('-', false, this.ingressos[indexIngresso]);
       this.ingressos.splice(indexIngresso,1);
     }
   }
 
   irParaPagamento(): void {
     this.isPagamento = true;
-    console.log(this.isPagamento)
   }
 }

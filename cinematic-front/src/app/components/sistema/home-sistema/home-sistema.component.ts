@@ -32,7 +32,6 @@ export class HomeSistemaComponent implements OnInit {
     const idUser: string = this.route.snapshot.queryParams['userLogged'];
     if (idUser) {
       this.userLogged.id = idUser;
-      console.log(idUser);
       this.service.findById(idUser).subscribe((usuario)=>{this.userLogged = usuario});
     }
     this.generateChartRendimento();
@@ -44,7 +43,7 @@ export class HomeSistemaComponent implements OnInit {
     this.filtro = !this.filtro;
   }
 
-  private generateChartRendimento(): void{
+  private generateChartRendimento(): void{ 
     new Chart(this.rendimento.nativeElement,{
       type: 'bar',
       data: {
@@ -70,35 +69,46 @@ export class HomeSistemaComponent implements OnInit {
           y: {
             beginAtZero: true,
             title: {
-              color: '#000'
+              color: '#fff',
+              font: {
+                size: 16,
+                weight: 400
+              }
             },
             ticks:{
-              color: "#000"
+              color: '#fff',
+              font: {
+                size: 16,
+                weight: 400
+              }
             }
           },
           x: {
             beginAtZero: true,
             ticks:{
-              color: "#000"
+              color: '#fff',
+              font: {
+                size: 16,
+                weight: 400
+              }
             }
           }
         },
         plugins: {
           legend: {
             labels: {
-              color: '#000',
+              color: '#fff',
+              font: {
+                size: 16,
+                weight: 400
+              }
             }
-          },
-          subtitle: {
-            color: '#FFF'
-          },
-          tooltip: {
-            titleColor: '#FFF'
-          },
+          }
         }
       },
     });
   }
+
   private generateChartIngresso(){
     new Chart(this.ingresso.nativeElement,{
       type: 'bar',
@@ -107,28 +117,28 @@ export class HomeSistemaComponent implements OnInit {
         datasets: [
           {
             label: 'Inteira',
-            data: [100],
-            backgroundColor: '#3104fb',
+            data: [10000],
+            backgroundColor: '#5b9c11',
           },
           {
             label: 'Meia Crianca',
-            backgroundColor: '#ffa930',
-            data: [400],
+            backgroundColor: '#bf450d',
+            data: [3400],
           },
           {
             label: 'Meia Idoso',
-            backgroundColor: '#1a1424',
-            data: [800],
+            backgroundColor: '#c4b20e',
+            data: [1200],
           },
           {
             label: 'Meia Deficiente',
-            backgroundColor: '#55a762',
-            data: [2000],
+            backgroundColor: '#c40e0e',
+            data: [1000],
           },
           {
             label: 'Meia Estudante',
-            backgroundColor: '#7e2323',
-            data: [900],
+            backgroundColor: '#0d3dbf',
+            data: [8500],
           }
         ]
       },
@@ -139,20 +149,32 @@ export class HomeSistemaComponent implements OnInit {
           y: {
             beginAtZero: true,
             ticks:{
-              color: "#000"
+              color: '#fff',
+              font: {
+                size: 16,
+                weight: 400
+              }
             }
           },
           x: {
             beginAtZero: true,
             ticks:{
-              color: "#000"
+              color: '#fff',
+              font: {
+                size: 16,
+                weight: 400
+              }
             }
           }
         },
         plugins: {
           legend: {
             labels: {
-              color: '#000'
+              color: '#fff',
+              font: {
+                size: 18,
+                weight: 400
+              }
             }
           },
           subtitle: {
@@ -162,30 +184,41 @@ export class HomeSistemaComponent implements OnInit {
       }
     });
   }
+
   private generateChartGeneros(){
     new Chart(this.genero.nativeElement,{
       type: 'pie',
       data: {
-        labels: ['Acão', 'Aventura', 'Drama', 'Comedia', 'Ficcao','Terror'],
+        labels: ['Terror', 'Suspense', 'Drama', 'Comedia', 'Ficcao', 'Romance'],
         datasets: [
           {
             label: 'Generos',
-            data: [100, 399, 800, 2000, 900,400]
+            borderRadius: 8,
+            data: [100, 399, 800, 2000, 900,400],
+            backgroundColor: [
+              '#0d3dbf',
+              '#ad0c0c',
+              '#ad320c',
+              '#ab8b0c',
+              '#0e7b87',
+              '#ad2f7f'
+            ]
           }
         ]
       },
       options: {
         responsive: true,
         maintainAspectRatio: true,
-
+        borderColor: 'transparent',
         plugins: {
           legend: {
             labels: {
-              color: '#000'
+              color: '#fff',
+              font: {
+                size: 18,
+                weight: 500
+              }
             }
-          },
-          subtitle: {
-            color: '#000'
           }
         }
       },

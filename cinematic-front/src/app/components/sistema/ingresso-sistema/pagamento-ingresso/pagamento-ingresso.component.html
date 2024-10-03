@@ -21,9 +21,9 @@
         </div>
       </div>
       <div class="col-9 p-5 d-flex flex-column justify-content-start" *ngIf="isPagamento">
-        <app-pagamento-card class="mb-3" *ngFor="let pagamento of tipoPagamento"  [tipoPagamento]="pagamento"></app-pagamento-card>
+        <app-pagamento-card  class="mb-3" *ngFor="let pagamento of tipoPagamento"  [tipoPagamento]="pagamento"></app-pagamento-card>
       </div>
-      <app-card-ingresso (onIrParaPagamento)="irParaPagamento()" class="col-3"></app-card-ingresso>
+      <app-card-ingresso [isPagamento]="isPagamento ? true : false" (onIrParaPagamento)="irParaPagamento()" class="col-3"></app-card-ingresso>
     </div>
   </div>
 </div>

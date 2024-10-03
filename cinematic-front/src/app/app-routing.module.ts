@@ -25,6 +25,7 @@ import { SessaoIngressoComponent } from './components/sistema/ingresso-sistema/s
 import { PagamentoIngressoComponent } from './components/sistema/ingresso-sistema/pagamento-ingresso/pagamento-ingresso.component';
 import { AssentosIngressoComponent } from './components/sistema/ingresso-sistema/assentos-ingresso/assentos-ingresso.component';
 import { CaminhoIngressoComponent } from './components/sistema/ingresso-sistema/caminho-ingresso/caminho-ingresso.component';
+import { IngressoComponent } from './components/sistema/ingresso-sistema/ingresso/ingresso.component';
 
 const routes: Routes = [
   {path: "sistema/home", component: HomeSistemaComponent},
@@ -53,6 +54,7 @@ const routes: Routes = [
   {path: "sistema/ingresso", component: SessaoIngressoComponent},
   {path: "sistema/ingresso/:sessaoId",component: PagamentoIngressoComponent},
   {path: "sistema/ingresso/:sessaoId/assentos", component: AssentosIngressoComponent},
+  {path: "sistema/ingresso/:sessaoId/finalizar", component: IngressoComponent},
   {path: "cadastro", component: CadastroClienteComponent},
   {path: "home", component: HomeComponent},
   {path: "filme/carrossel", component: DestaqueCarroselComponent},

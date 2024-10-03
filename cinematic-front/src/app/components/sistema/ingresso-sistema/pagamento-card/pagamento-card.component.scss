@@ -14,3 +14,7 @@
 input {
     box-shadow: $SHADOW-SM;
 }
+
+input:focus, input:active {
+    outline: 0;
+}

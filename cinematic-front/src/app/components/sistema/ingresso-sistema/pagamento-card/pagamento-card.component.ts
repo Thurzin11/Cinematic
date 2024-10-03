@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ITipoPagamento } from '../../../../model/ITipoPagamento';
 
 @Component({
@@ -12,6 +12,13 @@ export class PagamentoCardComponent {
     img: '',
     label: []
   };
+
+  infosPagamentos: {nome: string, numero: string, validade: string, cvv: number} = {
+    nome: '',
+    numero: '',
+    validade: '',
+    cvv: 0
+  }
 
   showInfosCartao: boolean = false;
   showInfosOthersPayment: boolean = false;
