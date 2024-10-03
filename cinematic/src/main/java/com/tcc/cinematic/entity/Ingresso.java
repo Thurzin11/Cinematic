@@ -22,11 +22,10 @@ public class Ingresso {
     @NotNull
     @ManyToOne
     private Sessao sessao;
-    private LocalDate Horario = LocalDate.now();
+    private LocalDate horario;
     @NotNull
     @ManyToOne
     private Assento assento;
-    @NotNull
     @ManyToOne
     private Usuario cliente;
     @NotNull

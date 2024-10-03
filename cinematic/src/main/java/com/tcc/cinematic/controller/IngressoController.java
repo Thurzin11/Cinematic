@@ -1,5 +1,6 @@
 package com.tcc.cinematic.controller;
 
+import com.tcc.cinematic.DTO.IngressoRegisterDTO;
 import com.tcc.cinematic.entity.Ingresso;
 import com.tcc.cinematic.service.IngressoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class IngressoController {
     }
 
     @PostMapping
-    public ResponseEntity<Ingresso> create(@RequestBody Ingresso ingresso){
+    public ResponseEntity<Ingresso> create(@RequestBody IngressoRegisterDTO ingresso){
         var retorno = this.service.create(ingresso);
         if (retorno==null)
             return ResponseEntity.badRequest().build();
