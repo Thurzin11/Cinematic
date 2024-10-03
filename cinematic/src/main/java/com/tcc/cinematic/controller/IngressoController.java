@@ -1,6 +1,5 @@
 package com.tcc.cinematic.controller;
 
-import com.tcc.cinematic.DTO.IngressoRegisterDTO;
 import com.tcc.cinematic.entity.Ingresso;
 import com.tcc.cinematic.service.IngressoService;
 import org.springframework.beans.factory.annotation.Autowired;
