@@ -5,18 +5,30 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './caminho-ingresso.component.html',
   styleUrl: './caminho-ingresso.component.scss'
 })
-export class CaminhoIngressoComponent{
+export class CaminhoIngressoComponent implements OnInit{
   @Input() page: string = '';
+  sessaoClasses: string[] = [];
+  assentoClasses: string[] = [];
+  ingressoClasses: string[] = [];
 
-  setClass(): void {
-    const spanClasses: string[] = [];
+  ngOnInit(): void {
+    this.setClass();
+  }
 
+  private setClass(): void {
     switch(this.page.toUpperCase()) {
-      case "INGRESSO": {
-        spanClasses.push("APAGADO")
+      case "SESSAO": {
+        this.ingressoClasses.push('apagado');
+        this.assentoClasses.push('apagado');
+        break;
+      }
+      case "ASSENTO": {
+        this.sessaoClasses.push('amarelo');
+        this.assentoClasses.splice(0, 1);
         break;
       }
       case "PAGAMENTO": {
+        this.assentoClasses.push('amarelo');
         break;
       }
     }

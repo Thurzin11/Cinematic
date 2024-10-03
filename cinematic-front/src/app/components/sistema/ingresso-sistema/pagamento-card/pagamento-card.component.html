@@ -3,29 +3,32 @@
         <img src="../../../../../assets/img/ingressos.png" alt="img-ingresso">
         <p class="text-light m-0 fs-5 ps-2">{{tipoPagamento.nome}}</p>
     </div>
-    <div class="col-10 mx-auto pt-3" *ngIf="showInfosCartao">
-        <div class="d-flex flex-column pb-2">
-            <label class="fw-semibold text-light pb-1">Nome do Cartão</label>
-            <input type="text" class="p-1 rounded-3" mask="A* A*" [(ngModel)]="infosPagamentos.nome" placeholder="Mateus Reisdorfer">
-        </div>
-        <div class="d-flex flex-column pb-2">
-            <label class="fw-semibold text-light pb-1">Número do Cartão</label>
-            <input type="text" class="p-1 rounded-3" mask="0000 0000 0000 0000" [(ngModel)]="infosPagamentos.numero" placeholder="0000 0000 0000 0000">
-        </div>
-        <div class="d-flex justify-content-between">
-            <div class="col-5 d-flex flex-column">
-                <label class="fw-semibold text-light pb-1">Data de validade</label>
-                <input type="text" class="p-1 rounded-3" mask="M0/A0" placeholder="08/29" [(ngModel)]="infosPagamentos.validade">
+    <form autocomplete="off">
+        <div class="col-10 mx-auto pt-3" *ngIf="showInfosCartao">
+            <div class="d-flex flex-column pb-2">
+                <label class="fw-semibold text-light pb-1">Nome do Cartão</label>
+                <input type="text" class="p-1 rounded-3" mask="A* A*" [(ngModel)]="infosPagamentos.nome" placeholder="Mateus Reisdorfer">
             </div>
-            <div class="col-5 d-flex flex-column">
-                <label class="fw-semibold text-light pb-1">CVV</label>
-                <input type="text" class="p-1 rounded-3" mask="000" placeholder="123" [(ngModel)]="infosPagamentos.cvv">
+            <div class="d-flex flex-column pb-2">
+                <label class="fw-semibold text-light pb-1">Número do Cartão</label>
+                <input type="text" class="p-1 rounded-3" mask="0000 0000 0000 0000" [(ngModel)]="infosPagamentos.numero" placeholder="0000 0000 0000 0000">
+            </div>
+            <div class="d-flex justify-content-between">
+                <div class="col-5 d-flex flex-column">
+                    <label class="fw-semibold text-light pb-1">Data de validade</label>
+                    <input type="text" class="p-1 rounded-3" mask="M0/A0" placeholder="08/29" [(ngModel)]="infosPagamentos.validade">
+                </div>
+                <div class="col-5 d-flex flex-column">
+                    <label class="fw-semibold text-light pb-1">CVV</label>
+                    <input type="text" class="p-1 rounded-3" mask="000" placeholder="123" [(ngModel)]="infosPagamentos.cvv">
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-10 mx-auto pt-3" *ngIf="showInfosOthersPayment">
-        <div class="d-flex flex-column pb-2">
-            <p class="fw-semibold text-light pb-1 m-0">Antes de realizar o pagamento, confira se o CNPJ é 00860640*******.
-                Quando o pagamento for validado, você será automaticamente redirecionado para a tela com as informações de sua compra.</p>
+        <div class="col-10 mx-auto pt-3" *ngIf="showInfosOthersPayment">
+            <div class="d-flex flex-column pb-2">
+                <p class="fw-semibold text-light pb-1 m-0">Antes de realizar o pagamento, confira se o CNPJ é 00860640*******.
+                    Quando o pagamento for validado, você será automaticamente redirecionado para a tela com as informações de sua compra.</p>
+            </div>
         </div>
+    </form>
 </div>

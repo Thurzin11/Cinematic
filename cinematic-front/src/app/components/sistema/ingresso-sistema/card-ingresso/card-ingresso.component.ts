@@ -237,6 +237,7 @@ export class CardIngressoComponent implements OnInit {
         this.ingressoService.create({sessao: ingresso.sessao, assento: ingresso.assento, tipo: ingresso.tipo.nome, valor: ingresso.valor}).subscribe();
       })
 
+      this.ingressoService.atualizarIngressos('', true);
       this.router.navigate([`sistema/home`]);
     }
   }

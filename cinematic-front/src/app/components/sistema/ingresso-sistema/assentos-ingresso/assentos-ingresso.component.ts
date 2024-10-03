@@ -89,6 +89,7 @@ export class AssentosIngressoComponent implements OnInit {
         this.sessao = sessao; 
         this.separarAssentosPorFileira(this.sessao.assentos);
       });
+      
     }
   }
 
@@ -97,33 +98,29 @@ export class AssentosIngressoComponent implements OnInit {
       const fileira: string = assento.nome[0];
       this.assentosPorFileira[fileira.toUpperCase()].push(assento);
 
-      if(assento.nome.length === 3) {
-        this.assentosPorFileira[fileira.toUpperCase()] = this.assentosPorFileira[fileira.toUpperCase()].sort((a, b) => {
-          const comparacao = a.nome[0].localeCompare(b.nome[0]);
 
-          if(comparacao === 0) {
-            return Number(a.nome[1]+a.nome[2]) - Number(b.nome[1]+b.nome[2]);
-          } else {
-            return comparacao;
-          }
-        })
-
-        return;
-      }
-      
       if(assento.nome.length === 2) {
         this.assentosPorFileira[fileira.toUpperCase()] = this.assentosPorFileira[fileira.toUpperCase()].sort((a, b) => {
           const comparacao = a.nome[0].localeCompare(b.nome[0]);
 
-          if(comparacao === 0) {
+          if(comparacao === 0)
             return Number(a.nome[1]) - Number(b.nome[1]);
-          } else {
-            return comparacao;
-          }
+          
+          return comparacao;
         })
-
-        return;
       }
+
+      if(assento.nome.length === 3) {
+        this.assentosPorFileira[fileira.toUpperCase()] = this.assentosPorFileira[fileira.toUpperCase()].sort((a, b) => {
+          const comparacao = a.nome[0].localeCompare(b.nome[0]);
+
+          if(comparacao === 0)
+            return Number(a.nome[1]+a.nome[2]) - Number(b.nome[1]+b.nome[2]);
+            
+          return comparacao;
+        })
+      }
+      
     })
   }
 
