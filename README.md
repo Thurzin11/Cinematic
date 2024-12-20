@@ -1,14 +1,13 @@
 # 🎥 Cinematic
 
-Este repositório contém o projeto **Cinematic**, uma aplicação para **gerenciamento de ingressos de cinema**. O objetivo é facilitar o controle de vendas de ingressos, exibindo informações de filmes, horários, assentos e gerando ingressos em PDF com QR Code.  
+Este repositório contém o projeto **Cinematic**, uma aplicação para **gerenciamento de ingressos de cinema**. O objetivo é facilitar o controle de vendas de ingressos, exibindo informações de filmes, horários, assentos.  
 
 ## 🚀 Funcionalidades
 
 - **Login e Autenticação**: Controle de acesso seguro para os usuários.  
 - **Cadastro de Filmes e Sessões**: Adição de filmes, horários de exibição e salas.  
 - **Seleção de Assentos**: Escolha de assentos disponíveis para cada sessão.  
-- **Gerenciamento de Pedidos**: Controle de pedidos, incluindo status e histórico de compras.  
-- **Geração de Ingressos PDF**: Geração de ingressos em formato PDF com QR Code, valor, data do filme e hora da sessão.  
+- **Gerenciamento de Pedidos**: Controle de pedidos, incluindo status.
 
 ## 💠 Tecnologias Utilizadas
 
